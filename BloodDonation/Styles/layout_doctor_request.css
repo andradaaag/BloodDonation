@@ -1,0 +1,375 @@
+/*
+Responsive Template Name: RS-MQF 940 V.2
+File: Layout CSS
+Author: OS Templates
+Author URI: http://www.os-templates.com/
+Licence: <a href="http://www.os-templates.com/template-terms">Website Template Licence</a>
+*/
+@import url(framework.css);
+@import url(navi.css);
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    color: #919191;
+    background-color: #232323;
+}
+
+.justify {
+    text-align: justify;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.nostart {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.clear {
+    display: block;
+    clear: both;
+}
+
+.clear:after {
+    display: block;
+    visibility: hidden;
+    height: 0;
+    clear: both;
+    font-size: 0;
+    content: "";
+}
+
+a {
+    outline: none;
+    text-decoration: none;
+}
+
+.fl_left {
+    float: left;
+}
+
+.fl_right {
+    float: right;
+}
+
+img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+    line-height: normal;
+    vertical-align: middle;
+}
+
+.imgholder, .imgl, .imgr {
+    padding: 4px;
+    border: 1px solid #D6D6D6;
+    text-align: center;
+}
+
+.imgl {
+    float: left;
+    margin: 0 15px 15px 0;
+    clear: left;
+}
+
+.imgr {
+    float: right;
+    margin: 0 0 15px 15px;
+    clear: right;
+}
+
+/*----------------------------------------------HTML 5 Overrides-------------------------------------*/
+
+address, article, aside, figcaption, figure, footer, header, nav, section {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+/*----------------------------------------------Responsive Videos-------------------------------------*/
+
+.video {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 0;
+    margin: 0;
+    padding: 0 0 56.25% 0; /* using a 16:9 aspect ratio, the height is 56.25% of the width (9/16=0.5625) */
+}
+
+.video iframe {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* ----------------------------------------------Wrapper-------------------------------------*/
+
+div.wrapper {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.row1, .row1 a {
+    color: #C0BAB6;
+    background-color: #333333;
+}
+
+.row2 {
+    color: #919191;
+    background-color: #232323;
+}
+
+.row3 {
+    color: #979797;
+    background-color: #FFFFFF;
+}
+
+.row3 a {
+    color: #780000;
+    background-color: #FFFFFF;
+}
+
+.row4, .row4 a {
+    color: #919191;
+    background-color: #232323;
+}
+
+/*----------------------------------------------Generalise-------------------------------------*/
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 8px 0;
+    padding: 0;
+    font-size: 1.6em;
+    font-weight: normal;
+    line-height: normal;
+}
+
+address {
+    font-style: normal;
+}
+
+blockquote, q {
+    display: block;
+    padding: 8px 10px;
+    color: #979797;
+    background-color: #ECECEC;
+    font-style: italic;
+    line-height: normal;
+}
+
+blockquote:before, q:before {
+    content: '� ';
+    font-size: 26px;
+}
+
+blockquote:after, q:after {
+    content: ' �';
+    font-size: 26px;
+    line-height: 0;
+}
+
+#header, #topnav, #container, #footer, #copyright {
+    margin: 0 auto;
+    font-size: .8em;
+}
+
+#header {
+    padding: 20px 0;
+}
+
+#header #hgroup {
+    float: left;
+    margin: 0 0 20px 0;
+}
+
+#header #hgroup h1, #header #hgroup h2 {
+    font-weight: normal;
+    font-style: normal;
+    text-transform: none;
+}
+
+#header #hgroup h1 {
+    font-size: 36px;
+}
+
+#header #hgroup h2 {
+    font-size: 13px;
+}
+
+#header form {
+    display: block;
+    width: 290px;
+    float: right;
+    margin: 20px 0;
+    padding: 0;
+}
+
+#header form input {
+    display: block;
+    float: left;
+    width: 100px;
+    margin: 5px;
+    padding: 5px;
+    color: #C0BAB6;
+    background-color: #232323;
+    border: 1px solid #666666;
+}
+
+#header form .sf_submit {
+    display: block;
+    float: right;
+    width: 110px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #780000;
+    border: none;
+    cursor: pointer;
+}
+
+#header nav {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 20px 0;
+    color: #C0BAB6;
+    background-color: #232323;
+    clear: both;
+}
+
+#header nav ul {
+    padding: 0 20px;
+}
+
+#header nav li {
+    display: inline;
+    margin-right: 25px;
+    text-transform: uppercase;
+}
+
+#header nav li.last {
+    margin-right: 0;
+}
+
+#header nav li a {
+    color: #C0BAB6;
+    background-color: #232323;
+}
+
+#header nav li a:hover {
+    color: #780000;
+    background-color: #232323;
+}
+
+/*----------------------------------------------Content Area-------------------------------------*/
+
+/* Style inputs, select elements and textareas */
+input[type=text], [type = number], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+/* Style the label to display next to the inputs */
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+/* Style the submit button */
+input[type=submit] {
+    background-color: #780000;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+/* Style the container */
+.container {
+    display: block;
+    width: 800px;
+    min-height: 500px;
+    margin: 0 auto;
+    padding: 30px 0;
+    clear: both;
+}
+
+/* Floating column for labels: 25% width */
+.col-25 {
+    float: left;
+    width: 20%;
+    margin-top: 6px;
+}
+
+/* Floating column for inputs: 75% width */
+.col-75 {
+    float: left;
+    width: 80%;
+    margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+
+/*----------------------------------------------Footer-------------------------------------*/
+
+#footer {
+    padding: 20px 0;
+}
+
+#footer p {
+    margin: 0;
+    padding: 0;
+}
+
