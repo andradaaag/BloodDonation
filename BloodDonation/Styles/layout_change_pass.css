@@ -236,6 +236,14 @@ blockquote:after, q:after {
     padding: 0;
 }
 
+.header {
+    display: block;
+    width: 290px;
+    float: right;
+    margin: 20px 0;
+    padding: 0;
+}
+
 #header form input {
     display: block;
     float: left;
@@ -247,7 +255,30 @@ blockquote:after, q:after {
     border: 1px solid #666666;
 }
 
+.input {
+    display: block;
+    float: left;
+    width: 100px;
+    margin: 5px;
+    padding: 5px;
+    color: #C0BAB6;
+    background-color: #232323;
+    border: 1px solid #666666;
+}
+
 #header form .sf_submit {
+    display: block;
+    float: right;
+    width: 110px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #780000;
+    border: none;
+    cursor: pointer;
+}
+
+.sf_submit {
     display: block;
     float: right;
     width: 110px;

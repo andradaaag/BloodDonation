@@ -24,6 +24,7 @@
             <form action="login.html" method="post">
                 <input type="submit" class="sf_submit" value="Log in">
             </form>
+            @Html.ActionLink("Log in", "Index", "Login", null, new { @class = "sf_submit header input" })
 
         </header>
     </div>
@@ -32,52 +33,116 @@
         <div class="container">
             @using (Html.BeginForm("SignUp", "Login", FormMethod.Post))
             {
-            <div class="row">
-                <div class="col-25">
-                    <label>Sign up as</label>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Sign up as</label>
+                    </div>
+                    @Html.RadioButtonFor(model => model.UserType, 0) Master <br />
+                    @Html.RadioButtonFor(model => model.UserType, 1) Donor <br />
+                    @Html.RadioButtonFor(model => model.UserType, 2) Doctor <br />
+                    @Html.RadioButtonFor(model => model.UserType, 3) Personnel <br />
                 </div>
-                    <input id="signup_doctor" type="radio" name="type" value="male"> Doctor <br>
-                    <input id="signup_personnel" type="radio" name="type" value="female"> Personnel <br>
-                    <input id="signup_donor" type="radio" name="type" value="other"> Donor
-            </div>
-            <p></p>
-            <div class="row">
-                <div class="col-25">
-                    <label>First Name</label>
+                <p></p>
+                <div class="row">
+                    <div class="col-25">
+                        <label>First Name*</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBoxFor(model => model.FirstName, new {@required = "required"})
+                    </div>
                 </div>
-                <div class="col-75">
-                    @Html.TextBoxFor(model => model.FirstName)
-                    <!--<input type="text" id="mail" name="mail" placeholder="Your name..">-->
+                <div class="row">
+                    <div class="col-25">
+                        <label>Last Name*</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBoxFor(model => model.LastName, new { @required = "required" })
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label>Mail Address</label>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Email Address*</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBoxFor(model => model.Email, new { @required = "required" })
+                    </div>
                 </div>
-                <div class="col-75">
-                    <input type="text" id="mail" name="mail" placeholder="Your mail address..">
+                <div class="row">
+                    <div class="col-25">
+                        <label>Password*</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.PasswordFor(model => model.Password, new { @required = "required" })
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label>Password</label>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Confirm Password*</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.PasswordFor(model => model.Password, new { @required = "required" })
+                    </div>
                 </div>
-                <div class="col-75">
-                    <input type="text" id="mail" name="mail" placeholder="Your password..">
+                <div class="row">
+                    <div class="col-25">
+                        <label>Date of Birth*</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBox("DOB", DateTime.Today, new { @type = "date", @required = "required" })
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label>Confirm Password</label>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Address* (as in your ID)</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBoxFor(model => model.Address, new { @required = "required" })
+                    </div>
                 </div>
-                <div class="col-75">
-                    <input type="text" id="mail" name="mail" placeholder="Confirm password..">
+                <div class="row">
+                    <div class="col-25">
+                        <label>City* (as in your ID)</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBoxFor(model => model.City, new { @required = "required" })
+                    </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Country* (as in your ID)</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBoxFor(model => model.Country, new { @required = "required" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Current Address (if differs from ID)</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBoxFor(model => model.OtherAddress)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Current City (if differs from ID)</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBoxFor(model => model.OtherCity)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Current Country (if differs from ID)</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBoxFor(model => model.OtherCountry)
+                    </div>
+                </div>
 
-            <div class="row">
-                <input type="submit" value="Submit" />
-            </div>
+                <div class="row">
+                    <input type="submit" value="Submit" />
+                </div>
             }
         </div>
     </div>
