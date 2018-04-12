@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Antlr.Runtime.Tree;
+﻿using System.Web.Mvc;
+using BloodDonation.Logic.Services;
+using BloodDonation.Mappers;
 using BloodDonation.Models;
 
 namespace BloodDonation.Controllers
 {
     public class LoginController : Controller
     {
+        private readonly PresentationToLogicMapper presentationToLogicMapper = new PresentationToLogicMapper();
+        private readonly DonorService donorService = new DonorService();
+
         public ActionResult Index()
         {
             return View("LoginHomePage");
@@ -23,7 +23,8 @@ namespace BloodDonation.Controllers
         [HttpPost]
         public ActionResult SignUp(SignUpForm form)
         {
-            var firstName = form.FirstName;
+            var donationForm = presentationToLogicMapper.MapDonationForm(form);
+            donorService.AddDonationForm(donationForm);
             return View("LoginHomePage");
         }
     }
