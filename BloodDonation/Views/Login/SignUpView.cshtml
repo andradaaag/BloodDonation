@@ -1,0 +1,91 @@
+﻿@model BloodDonation.Models.SignUpForm
+
+@{
+    ViewBag.Title = "Sign Up";
+}
+
+<html lang="en" dir="ltr">
+<head>
+    <title>Sign up</title>
+    <meta charset="iso-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Styles/layout_change_pass.css");
+    @Styles.Render("~/Styles/mediaqueries.css");
+    <script src="~/Scripts/jquery.1.9.0.min.js"></script>
+    <script src="~/Scripts/jquery-mobilemenu.min.js"></script>
+</head>
+<body>
+
+    <div class="wrapper row1">
+        <header id="header" class="clear">
+            <div id="hgroup">
+                <h1><a href="#">Sign up</a></h1>
+            </div>
+            <form action="login.html" method="post">
+                <input type="submit" class="sf_submit" value="Log in">
+            </form>
+
+        </header>
+    </div>
+    <!-- content -->
+    <div class="wrapper row3">
+        <div class="container">
+            @using (Html.BeginForm("SignUp", "Login", FormMethod.Post))
+            {
+            <div class="row">
+                <div class="col-25">
+                    <label>Sign up as</label>
+                </div>
+                    <input id="signup_doctor" type="radio" name="type" value="male"> Doctor <br>
+                    <input id="signup_personnel" type="radio" name="type" value="female"> Personnel <br>
+                    <input id="signup_donor" type="radio" name="type" value="other"> Donor
+            </div>
+            <p></p>
+            <div class="row">
+                <div class="col-25">
+                    <label>First Name</label>
+                </div>
+                <div class="col-75">
+                    @Html.TextBoxFor(model => model.FirstName)
+                    <!--<input type="text" id="mail" name="mail" placeholder="Your name..">-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label>Mail Address</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="mail" name="mail" placeholder="Your mail address..">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label>Password</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="mail" name="mail" placeholder="Your password..">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label>Confirm Password</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="mail" name="mail" placeholder="Confirm password..">
+                </div>
+            </div>
+
+            <div class="row">
+                <input type="submit" value="Submit" />
+            </div>
+            }
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="wrapper row4">
+        <footer id="footer" class="clear">
+            <p class="fl_left">Copyright &copy; 2013 - All Rights Reserved - <a href="#">Domain Name</a></p>
+        </footer>
+    </div>
+</body>
+</html>

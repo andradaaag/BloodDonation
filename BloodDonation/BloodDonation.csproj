@@ -201,6 +201,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\SignUpForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -227,6 +228,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-mobilemenu.min.js" />
+    <Content Include="Scripts\jquery.1.9.0.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -236,7 +239,17 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Styles\framework.css" />
     <Content Include="Styles\layout.css" />
+    <Content Include="Styles\layout_change_pass.css" />
+    <Content Include="Styles\layout_doctor_my_requests.css" />
+    <Content Include="Styles\layout_doctor_request.css" />
+    <Content Include="Styles\layout_home_page.css" />
+    <Content Include="Styles\layout_perosnel_edit_blood.css" />
+    <Content Include="Styles\layout_personel_add_blood.css" />
+    <Content Include="Styles\layout_user_details.css" />
+    <Content Include="Styles\mediaqueries.css" />
+    <Content Include="Styles\navi.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -250,6 +263,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Login\LoginHomePage.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Login\SignUpView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

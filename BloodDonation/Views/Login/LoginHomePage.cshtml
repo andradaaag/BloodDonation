@@ -50,7 +50,8 @@
                             <input type="password" placeholder="Password" id="password"
                                    onFocus="this.value = (this.value == 'Search Our Website&hellip;') ? '' : this.value;">
                             <input class="sf_submit" value="Log in" onclick="login();">
-                            <input class="sf_submit" value="Sign up" onclick="register();">
+                            <!--<input class="sf_submit" value="Sign up" onclick="">-->
+                            @Html.ActionLink("Sign up", "ShowSignUpPage", "Login", null, new { @class="sf_submit input"})
                             <input type="submit" class="forget_pass" placeholder="Forgot password?">
                         </fieldset>
                     </form>
