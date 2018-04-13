@@ -11,8 +11,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @Styles.Render("~/Styles/layout_change_pass.css");
     @Styles.Render("~/Styles/mediaqueries.css");
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="~/Scripts/jquery.1.9.0.min.js"></script>
     <script src="~/Scripts/jquery-mobilemenu.min.js"></script>
+    <script src="~/Scripts/signUp.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script src="~/Scripts/login-register.js"></script>
 </head>
 <body>
 
@@ -37,10 +41,10 @@
                     <div class="col-25">
                         <label>Sign up as</label>
                     </div>
-                    @Html.RadioButtonFor(model => model.UserType, 0) Admin <br />
-                    @Html.RadioButtonFor(model => model.UserType, 1) Donor <br />
-                    @Html.RadioButtonFor(model => model.UserType, 2) Doctor <br />
-                    @Html.RadioButtonFor(model => model.UserType, 3) Personnel <br />
+                    @Html.RadioButtonFor(model => model.UserType, 0, new { @onclick = "handleRadioClick1(this);" }) Admin <br />
+                    @Html.RadioButtonFor(model => model.UserType, 2, new { @onclick = "handleRadioClick1(this);" }) Doctor <br />
+                    @Html.RadioButtonFor(model => model.UserType, 3, new { @onclick = "handleRadioClick1(this);" }) Personnel <br />
+                    @Html.RadioButtonFor(model => model.UserType, 1, new { @checked = "checked", @onclick = "handleRadioClick1(this);" }) Donor <br />
                 </div>
                 <p></p>
                 <div class="row">
@@ -48,7 +52,7 @@
                         <label>First Name*</label>
                     </div>
                     <div class="col-75">
-                        @Html.TextBoxFor(model => model.FirstName, new {@required = "required"})
+                        @Html.TextBoxFor(model => model.FirstName, new { @required = "required" })
                     </div>
                 </div>
                 <div class="row">
@@ -139,9 +143,25 @@
                         @Html.TextBoxFor(model => model.OtherCountry)
                     </div>
                 </div>
+                <div class="row" id="hospital" hidden>
+                    <div class="col-25">
+                        <label>Hospital</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBoxFor(model => model.Hospital)
+                    </div>
+                </div>
+                <div class="row" id="donationCenter" hidden="true">
+                    <div class="col-25">
+                        <label>Donation Center</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBoxFor(model => model.DonationCenter)
+                    </div>
+                </div>
 
                 <div class="row">
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Submit" onclick="register();"/>
                 </div>
             }
         </div>

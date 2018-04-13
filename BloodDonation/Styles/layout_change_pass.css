@@ -368,7 +368,7 @@ input[type=submit] {
 .col-25 {
     float: left;
     width: 30%;
-    margin-top: 6px;
+    margin-top: 20px;
 }
 
 /* Floating column for inputs: 75% width */

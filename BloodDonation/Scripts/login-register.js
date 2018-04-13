@@ -10,12 +10,12 @@ var config = {
 firebase.initializeApp(config);
 
 function register() {
-    var email = document.getElementById("username").value;
+    var email = document.getElementById("email").value;
     var password = document.getElementById('password').value;
 
     alert(email + " " + password);
 
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -25,12 +25,12 @@ function register() {
 }
 
 function login() {
-    var email = document.getElementById("username").value;
+    var email = document.getElementById("email").value;
     var password = document.getElementById('password').value;
 
     alert(email + " " + password);
 
-    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -38,7 +38,7 @@ function login() {
     });
 }
 
-firebase.auth().onAuthStateChanged(function(user) {
+firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         alert("Logged in as " + firebase.auth().currentUser.email);
     } else {
