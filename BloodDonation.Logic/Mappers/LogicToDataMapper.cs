@@ -1,7 +1,7 @@
 ﻿using BloodDonation.Data.Models;
-using BloodDonation.Logic.Models;
+using BloodDonation.Business.Models;
 
-namespace BloodDonation.Logic.Mappers
+namespace BloodDonation.Business.Mappers
 {
     public class LogicToDataMapper
     {

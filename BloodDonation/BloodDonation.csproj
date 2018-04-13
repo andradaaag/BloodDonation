@@ -200,7 +200,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Mappers\PresentationToLogicMapper.cs" />
+    <Compile Include="Mappers\PresentationToBusinessMapper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\SignUpForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -279,9 +279,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BloodDonation.Logic\BloodDonation.Logic.csproj">
+    <ProjectReference Include="..\BloodDonation.Logic\BloodDonation.Business.csproj">
       <Project>{19780FBF-06AC-471E-B5E8-DECE641BFBE3}</Project>
-      <Name>BloodDonation.Logic</Name>
+      <Name>BloodDonation.Business</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

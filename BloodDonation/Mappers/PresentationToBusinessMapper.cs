@@ -1,9 +1,9 @@
-﻿using BloodDonation.Logic.Models;
+﻿using BloodDonation.Business.Models;
 using BloodDonation.Models;
 
 namespace BloodDonation.Mappers
 {
-    public class PresentationToLogicMapper
+    public class PresentationToBusinessMapper
     {
         public DonationForm MapDonationForm(SignUpForm form)
         {

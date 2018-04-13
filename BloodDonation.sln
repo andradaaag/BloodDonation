@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodDonation.Tests", "Bloo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodDonation.Utils", "BloodDonation.Utils\BloodDonation.Utils.csproj", "{B4C4D092-9274-490A-81B6-08155457BA4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodDonation.Logic", "BloodDonation.Logic\BloodDonation.Logic.csproj", "{19780FBF-06AC-471E-B5E8-DECE641BFBE3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodDonation.Business", "BloodDonation.Logic\BloodDonation.Business.csproj", "{19780FBF-06AC-471E-B5E8-DECE641BFBE3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodDonation.Data", "BloodDonation.Data\BloodDonation.Data.csproj", "{2BE91C7B-1AF7-4DEA-9274-7E9051967385}"
 EndProject

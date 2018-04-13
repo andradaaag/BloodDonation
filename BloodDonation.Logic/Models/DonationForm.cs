@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BloodDonation.Logic.Models
+namespace BloodDonation.Business.Models
 {
     public class DonationForm
     {

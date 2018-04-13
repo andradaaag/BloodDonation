@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using BloodDonation.Logic.Services;
+using BloodDonation.Business.Services;
 using BloodDonation.Mappers;
 using BloodDonation.Models;
 
@@ -7,8 +7,8 @@ namespace BloodDonation.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly PresentationToLogicMapper presentationToLogicMapper = new PresentationToLogicMapper();
-        private readonly DonorService donorService = new DonorService();
+        private readonly PresentationToBusinessMapper _presentationToBusinessMapper = new PresentationToBusinessMapper();
+        private readonly DonorService _donorService = new DonorService();
 
         public ActionResult Index()
         {
@@ -23,8 +23,8 @@ namespace BloodDonation.Controllers
         [HttpPost]
         public ActionResult SignUp(SignUpForm form)
         {
-            var donationForm = presentationToLogicMapper.MapDonationForm(form);
-            donorService.AddDonationForm(donationForm);
+            var donationForm = _presentationToBusinessMapper.MapDonationForm(form);
+            _donorService.AddDonationForm(donationForm);
             return View("LoginHomePage");
         }
     }

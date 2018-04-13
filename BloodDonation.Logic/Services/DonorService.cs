@@ -1,8 +1,8 @@
 ﻿using BloodDonation.Data.Repositories;
-using BloodDonation.Logic.Mappers;
-using BloodDonation.Logic.Models;
+using BloodDonation.Business.Mappers;
+using BloodDonation.Business.Models;
 
-namespace BloodDonation.Logic.Services
+namespace BloodDonation.Business.Services
 {
     public class DonorService
     {
