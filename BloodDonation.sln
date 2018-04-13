@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodDonation.Utils", "Bloo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodDonation.Logic", "BloodDonation.Logic\BloodDonation.Logic.csproj", "{19780FBF-06AC-471E-B5E8-DECE641BFBE3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodDonation.Data", "BloodDonation.Data\BloodDonation.Data.csproj", "{2BE91C7B-1AF7-4DEA-9274-7E9051967385}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{19780FBF-06AC-471E-B5E8-DECE641BFBE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19780FBF-06AC-471E-B5E8-DECE641BFBE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19780FBF-06AC-471E-B5E8-DECE641BFBE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BE91C7B-1AF7-4DEA-9274-7E9051967385}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BE91C7B-1AF7-4DEA-9274-7E9051967385}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BE91C7B-1AF7-4DEA-9274-7E9051967385}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BE91C7B-1AF7-4DEA-9274-7E9051967385}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
