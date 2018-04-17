@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<html lang="en" dir="ltr">
+<head>
+    <title>Blood Donation</title>
+    <meta charset="iso-8859-1">
+    @Styles.Render("~/Styles/layout.css");
+    <!--[if lt IE 9]>
+        <script src="scripts/html5shiv.js"></script><![endif]-->
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script src="~/Scripts/login-register.js"></script>
+</head>
+<body>
+    <div class="wrapper row1">
+        <header id="header" class="clear">
+            <div id="hgroup">
+                <h1><a href="#">Blood donation</a></h1>
+                <h2>HOMEPAGE</h2>
+            </div>
+
+        </header>
+    </div>
+    <!-- content -->
+    <div class="wrapper row2">
+        <div id="container" class="clear">
+            <!-- Slider -->
+            <section id="slider" class="clear">
+                <figure>
+                    <img src="../../Images/red_blood_cells.jpg" alt="">
+                    <figcaption>
+                        <h2>Why should I donate blood?</h2>
+                        <p>
+                            Blood is needed to save lives in times of emergencies and to sustain the lives of those with medical conditions, like leukemia, thalassaemia and bleeding disorders, as well as patients who are undergoing major surgeries.
+                            <br /><br />
+                            For many patients, blood donors are their lifeline. One unit of blood can save three lives!
+                        </p>
+                    </figcaption>
+                </figure>
+            </section>
+            <!-- main content -->
+            <div id="intro">
+                <section class="clear">
+                    <form action="#" method="post">
+                        <fieldset>
+                            <legend>Search:</legend>
+                            <input type="text" placeholder="User name" id="username"
+                                   onFocus="this.value = (this.value == 'Search Our Website&hellip;') ? '' : this.value;">
+                            <input type="password" placeholder="Password" id="password"
+                                   onFocus="this.value = (this.value == 'Search Our Website&hellip;') ? '' : this.value;">
+                            <input class="sf_submit" value="Log in" onclick="login();">
+                            <!--<input class="sf_submit" value="Sign up" onclick="">-->
+                            @Html.ActionLink("Sign up", "ShowSignUpPage", "Login", null, new { @class="sf_submit input"})
+                            <input type="submit" class="forget_pass" value="Forgot password?">
+                        </fieldset>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="wrapper row3">
+        <footer id="footer" class="clear">
+            <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="#">Domain Name</a></p>
+        </footer>
+    </div>
+</body>
+</html>
