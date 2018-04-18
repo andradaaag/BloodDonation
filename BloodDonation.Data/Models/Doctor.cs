@@ -9,20 +9,21 @@ namespace BloodDonation.Data.Models
 /**
  * 
  */
-	public class Doctor : Donor
+	public class Doctor : User
 	{
 
-		/**
-		 * 
-		 */
-		public Doctor()
-		{
-		}
 
-		/**
+        public Doctor(string firstName, string lastName, string emailAddress, DateTime DOB, string address, string cityTown, string country) 
+            : base(firstName, lastName, emailAddress, DOB, address, cityTown, country)
+        {
+        }
+
+        public bool isApproved = false;
+
+        /**
 		 * 
 		 */
-		public HashSet<Hospital> Doctors;
+        public HashSet<Hospital> Hospitals;
 
 		/**
 		 * 

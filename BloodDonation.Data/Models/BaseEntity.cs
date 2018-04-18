@@ -22,7 +22,7 @@ namespace BloodDonation.Data.Models
 		/**
 		 * 
 		 */
-		protected string ID;
+		public string ID { get; set;}
 
 	}
 }

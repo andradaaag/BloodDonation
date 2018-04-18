@@ -9,7 +9,7 @@ namespace BloodDonation.Data.Models
 /**
  * 
  */
-	public class SysAdmin : Donor
+	public class SysAdmin : User
 	{
 
 		/**

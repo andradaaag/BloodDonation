@@ -9,7 +9,7 @@ namespace BloodDonation.Data.Models
 /**
  * 
  */
-	public class Donor
+	public class Donor : User
 	{
 
 		/**
@@ -27,56 +27,6 @@ namespace BloodDonation.Data.Models
 		 * 
 		 */
 		public DateTime lastDonation;
-
-		/**
-		 * 
-		 */
-		public string UID;
-
-		/**
-		 * 
-		 */
-		public string firstName;
-
-		/**
-		 * 
-		 */
-		public string lastName;
-
-		/**
-		 * 
-		 */
-		public DateTime DOB;
-
-		/**
-		 * 
-		 */
-		public string Address;
-
-		/**
-		 * 
-		 */
-		public string CityTown;
-
-		/**
-		 * 
-		 */
-		public string Country;
-
-		/**
-		 * 
-		 */
-		public string Residence;
-
-		/**
-		 * 
-		 */
-		public string ResCityTown;
-
-		/**
-		 * 
-		 */
-		public string ResCountry;
 
 		/**
 		 * 

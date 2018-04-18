@@ -9,7 +9,7 @@ namespace BloodDonation.Data.Models
 /**
  * 
  */
-	public class DonationCenterPersonnel : Donor
+	public class DonationCenterPersonnel : User
 	{
 
 		/**
@@ -19,12 +19,12 @@ namespace BloodDonation.Data.Models
 		{
 		}
 
-		/**
+
+        public bool isApproved = false;
+        /**
 		 * 
 		 */
-		public HashSet<DonationCenter> DonationCenter;
-
-
+        public HashSet<DonationCenter> DonationCenter;
 
 	}
 }
