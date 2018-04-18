@@ -23,7 +23,6 @@ namespace BloodDonation.Data.Models
 		 * 
 		 */
 		public bool canDonate;
-
 		/**
 		 * 
 		 */
@@ -82,7 +81,7 @@ namespace BloodDonation.Data.Models
 		/**
 		 * 
 		 */
-		public DonationFormEntity DonationForm;
+		public DonationFormEntity DonationFormEntity;
 
 	}
 }
