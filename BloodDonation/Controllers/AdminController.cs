@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BloodDonation.Mappers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,9 @@ namespace BloodDonation.Controllers
 {
     public class AdminController : Controller
     {
+
+        private readonly PresentationToBusinessMapper _presentationToBusinessMapper = new PresentationToBusinessMapper();
+
         // GET: Admin
         public ActionResult Index()
         {

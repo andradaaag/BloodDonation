@@ -49,6 +49,8 @@
     <Compile Include="Mappers\LogicToDataMapper.cs" />
     <Compile Include="Models\DonationForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DoctorService.cs" />
+    <Compile Include="Services\DonationCenterPersonnelService.cs" />
     <Compile Include="Services\DonorService.cs" />
   </ItemGroup>
   <ItemGroup>
