@@ -249,6 +249,7 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Styles\framework.css" />
     <Content Include="Styles\layout.css" />
+    <Content Include="Styles\layout_admin_requests.css" />
     <Content Include="Styles\layout_change_pass.css" />
     <Content Include="Styles\layout_doctor_my_requests.css" />
     <Content Include="Styles\layout_doctor_request.css" />
@@ -272,7 +273,14 @@
     <Content Include="Views\Login\LoginHomePage.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Login\SignUpView.cshtml" />
-    <Content Include="Views\Admin\ManageRequestsView.cshtml" />
+    <Content Include="Views\Admin\ManageDoctorRequestsView.cshtml" />
+    <Content Include="Views\Admin\ManagePersonnelRequestsView.cshtml" />
+    <Content Include="Views\Admin\ManageDoctorsView.cshtml" />
+    <Content Include="Views\Admin\ManagePersonnelView.cshtml" />
+    <Content Include="Views\Admin\ManageHospitalsView.cshtml" />
+    <Content Include="Views\Admin\ManageDonationCentersView.cshtml" />
+    <Content Include="Views\Admin\CreateAdminView.cshtml" />
+    <Content Include="Views\Admin\PersonalDataView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

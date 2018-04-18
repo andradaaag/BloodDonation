@@ -16,7 +16,7 @@ Licence: <a href="http://www.os-templates.com/template-terms">Website Template L
 
 @media screen and (min-width: 240px) and (max-width: 360px) {
     #header, #topnav, #container, #footer {
-        max-width: 95%;
+        max-width: 100%;
         margin: 0 auto;
     }
 
@@ -91,7 +91,7 @@ Licence: <a href="http://www.os-templates.com/template-terms">Website Template L
 
 @media screen and (min-width: 940px) {
     #header, #topnav, #container, #footer {
-        max-width: 940px;
+        max-width: 1400px;
         margin: 0 auto;
     }
 }

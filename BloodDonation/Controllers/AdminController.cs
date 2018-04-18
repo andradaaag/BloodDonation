@@ -20,13 +20,53 @@ namespace BloodDonation.Controllers
         // GET: Admin
         public ActionResult Index()
         {
+            return GetDoctorAccountRequestsPage();
+        }
+
+        public ActionResult GetPersonnelAccountRequestsPage()
+        {
+            return View("ManagePersonnelRequestsView");
+        }
+
+        public ActionResult GetDoctorAccountRequestsPage()
+        {
             List<AccountRequest> doctorAccountRequests = doctorService.GetDoctorAccountRequests();
             ManageRequestsModel manageRequestsModel = new ManageRequestsModel();
-            foreach(AccountRequest ar in doctorAccountRequests)
+            foreach (AccountRequest ar in doctorAccountRequests)
             {
                 manageRequestsModel.AddDoctorAccountRequest(_businessToPresentationMapper.MapDoctorAccountRequest(ar));
             }
-            return View("ManageRequestsView", manageRequestsModel);
+            return View("ManageDoctorRequestsView", manageRequestsModel);
+        }
+
+        public ActionResult GetDoctorsPage()
+        {
+            return View("ManageDoctorsView");
+        }
+
+        public ActionResult GetPersonnelPage()
+        {
+            return View("ManagePersonnelView");
+        }
+
+        public ActionResult GetHospitalsPage()
+        {
+            return View("ManageHospitalsView");
+        }
+
+        public ActionResult GetDonationCentersPage()
+        {
+            return View("ManageDonationCentersView");
+        }
+
+        public ActionResult GetCreateAdminPage()
+        {
+            return View("CreateAdminView");
+        }
+
+        public ActionResult GetPersonalDataPage()
+        {
+            return View("PersonalDataView");
         }
     }
 }
