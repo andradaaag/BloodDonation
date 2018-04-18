@@ -82,7 +82,7 @@ namespace BloodDonation.Data.Models
 		/**
 		 * 
 		 */
-		public DonationForm DonationForm;
+		public DonationFormEntity DonationForm;
 
 	}
 }

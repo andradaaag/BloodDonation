@@ -9,13 +9,13 @@ namespace BloodDonation.Data.Models
 /**
  * 
  */
-	public class DonationForm : BaseEntity
+	public class DonationFormEntity : BaseEntity
 	{
 
 		/**
 		 * 
 		 */
-		public DonationForm()
+		public DonationFormEntity()
 		{
 		}
 
