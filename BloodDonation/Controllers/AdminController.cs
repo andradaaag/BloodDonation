@@ -1,4 +1,7 @@
-﻿using BloodDonation.Mappers;
+﻿using BloodDonation.Logic.Models;
+using BloodDonation.Logic.Services;
+using BloodDonation.Mappers;
+using BloodDonation.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +14,19 @@ namespace BloodDonation.Controllers
     {
 
         private readonly PresentationToBusinessMapper _presentationToBusinessMapper = new PresentationToBusinessMapper();
+        private readonly BusinessToPresentationMapper _businessToPresentationMapper = new BusinessToPresentationMapper();
+        private readonly DoctorService doctorService = new DoctorService();
 
         // GET: Admin
         public ActionResult Index()
         {
-            return View("ManageRequestsView");
+            List<AccountRequest> doctorAccountRequests = doctorService.GetDoctorAccountRequests();
+            ManageRequestsModel manageRequestsModel = new ManageRequestsModel();
+            foreach(AccountRequest ar in doctorAccountRequests)
+            {
+                manageRequestsModel.AddDoctorAccountRequest(_businessToPresentationMapper.MapDoctorAccountRequest(ar));
+            }
+            return View("ManageRequestsView", manageRequestsModel);
         }
     }
 }

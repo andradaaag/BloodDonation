@@ -202,8 +202,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mappers\BusinessToPresentationMapper.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapper.cs" />
+    <Compile Include="Models\DoctorAccountRequest.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageRequestsModel.cs" />
     <Compile Include="Models\SearchEntityModel.cs" />
     <Compile Include="Models\SignUpForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
