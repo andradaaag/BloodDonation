@@ -16,6 +16,7 @@ namespace BloodDonation.Controllers
         private readonly PresentationToBusinessMapper _presentationToBusinessMapper = new PresentationToBusinessMapper();
         private readonly BusinessToPresentationMapper _businessToPresentationMapper = new BusinessToPresentationMapper();
         private readonly DoctorService doctorService = new DoctorService();
+        private readonly DonationCenterPersonnelService donationCenterPersonnelService = new DonationCenterPersonnelService();
 
         // GET: Admin
         public ActionResult Index()
@@ -25,7 +26,14 @@ namespace BloodDonation.Controllers
 
         public ActionResult GetPersonnelAccountRequestsPage()
         {
-            return View("ManagePersonnelRequestsView");
+
+            List<AccountRequest> donationCenterPersonnelAccountRequests = donationCenterPersonnelService.GetDonationCenterPersonnelAccountRequests();
+            ManageRequestsModel manageRequestsModel = new ManageRequestsModel();
+            foreach (AccountRequest ar in donationCenterPersonnelAccountRequests)
+            {
+                manageRequestsModel.AddDonationCenterPersonnelAccountRequest(_businessToPresentationMapper.MapDonationCenterPersonnelAccountRequest(ar));
+            }
+            return View("ManagePersonnelRequestsView", manageRequestsModel);
         }
 
         public ActionResult GetDoctorAccountRequestsPage()

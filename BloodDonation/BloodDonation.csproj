@@ -205,6 +205,7 @@
     <Compile Include="Mappers\BusinessToPresentationMapper.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapper.cs" />
     <Compile Include="Models\DoctorAccountRequest.cs" />
+    <Compile Include="Models\DonationCenterPersonnelAccountRequest.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageRequestsModel.cs" />
     <Compile Include="Models\SearchEntityModel.cs" />

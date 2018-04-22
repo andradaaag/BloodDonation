@@ -25,5 +25,22 @@ namespace BloodDonation.Mappers
             };
         }
 
+
+        public DonationCenterPersonnelAccountRequest MapDonationCenterPersonnelAccountRequest(AccountRequest accountRequest)
+        {
+            return new DonationCenterPersonnelAccountRequest()
+            {
+                ID = accountRequest.ID,
+                FirstName = accountRequest.FirstName,
+                LastName = accountRequest.LastName,
+                EmailAddress = accountRequest.EmailAddress,
+                City = accountRequest.City,
+                Country = accountRequest.Country,
+                HospitalName = accountRequest.InstituteName,
+                RequestType = accountRequest.RequestType
+
+            };
+        }
+
     }
 }
