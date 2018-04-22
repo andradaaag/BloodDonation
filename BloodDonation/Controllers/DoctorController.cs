@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace BloodDonation.Controllers
 {
@@ -12,6 +8,31 @@ namespace BloodDonation.Controllers
         public ActionResult Index()
         {
             return View("DoctorHomeView");
+        }
+
+        public ActionResult DoctorHome()
+        {
+            return View("DoctorHomeView");
+        }
+
+        public ActionResult RequestBlood()
+        {
+            return View("RequestBloodView");
+        }
+
+        public ActionResult MyRequests()
+        {
+            return View("MyRequestsView");
+        }
+
+        public ActionResult PersonalDetails()
+        {
+            return View("DoctorPersonalDetailsView");
+        }
+
+        public ActionResult AccountSettings()
+        {
+            return View("DoctorAccountSettingsView");
         }
     }
 }

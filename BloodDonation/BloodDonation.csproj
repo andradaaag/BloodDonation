@@ -275,6 +275,10 @@
     <Content Include="Views\Login\SignUpView.cshtml" />
     <Content Include="Views\Admin\ManageRequestsView.cshtml" />
     <Content Include="Views\Doctor\DoctorHomeView.cshtml" />
+    <Content Include="Views\Doctor\RequestBloodView.cshtml" />
+    <Content Include="Views\Doctor\MyRequestsView.cshtml" />
+    <Content Include="Views\Doctor\DoctorPersonalDetailsView.cshtml" />
+    <Content Include="Views\Doctor\DoctorAccountSettingsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

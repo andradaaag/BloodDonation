@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <title>Request Blood</title>
+    <meta charset="iso-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Styles/layout_doctor_request.css" type="text/css" media="all">
+    <link rel="stylesheet" href="~/Styles/mediaqueries.css" type="text/css" media="all">
+    <script src="~/Scripts/jquery.1.9.0.min.js"></script>
+    <script src="~/Scripts/jquery-mobilemenu.min.js"></script>
+</head>
+<body>
+
+<div class="wrapper row1">
+    <header id="header" class="clear">
+        <div id="hgroup">
+            <h1>
+                <a href="#">Request blood</a>
+            </h1>
+            <h2>
+                <a href="#">Doctor</a>
+            </h2>
+        </div>
+        <form action="#" method="post">
+            <input type="submit" class="sf_submit" value="Log out">
+        </form>
+        <nav>
+            <ul>
+                <li>
+                    <a href="@Url.Action("DoctorHome")">Home</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("PersonalDetails")">Personal Details</a>
+                </li>
+                <li>
+                    <a href="#">Request blood</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("MyRequests")">My requests</a>
+                </li>
+                <li class="last">
+                    <a href="@Url.Action("AccountSettings")">Account Settings</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+</div>
+<!-- content -->
+<div class="wrapper row3">
+    <div class="container">
+        <form action="#">
+            <div class="row">
+                <div class="col-25">
+                    <label>Urgency Level</label>
+                </div>
+                <form action="#">
+                    <input id="high" type="radio" name="gender" value="male"> High <br>
+                    <input id="medium" type="radio" name="gender" value="female"> Medium <br>
+                    <input id="low" type="radio" name="gender" value="other"> Low
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label>Blood Group</label>
+                </div>
+                <form action="">
+                    <br>
+                    <input id="A" type="radio" name="BloodGroup" value="A"> A
+                    <input id="B" type="radio" name="BloodGroup" value="B"> B
+
+                    <input id="AB" type="radio" name="BloodGroup" value="AB"> AB
+                    <input id="O" type="radio" name="BloodGroup" value="O"> O
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label>RH Type</label>
+                </div>
+                <form action="">
+                    <br>
+                    <input id="RHpoz" type="radio" name="BloodType" value="Pos"> Positive <br>
+                    <input id="RHneg" type="radio" name="BloodType" value="Neg"> Negative
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label>Location</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="location" name="location" placeholder="Address of delivery..">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label>Quantity (ml)</label>
+                </div>
+                <div class="col-75">
+                    <input type="number" id="quantity" name="quanity" value="100">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="subject">Additional commentary</label>
+                </div>
+                <div class="col-75">
+                    <textarea id="subject" name="subject"
+                                  style="height: 100px"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Footer -->
+<div class="wrapper row4">
+    <footer id="footer" class="clear">
+        <p class="fl_left">Copyright &copy; 2013 - All Rights Reserved - <a href="#">Domain Name</a></p>
+    </footer>
+</div>
+</body>
+</html>

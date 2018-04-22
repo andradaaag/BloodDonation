@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <title>Personal Details</title>
+    <meta charset="iso-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Styles/layout_user_details.css" type="text/css" media="all">
+    <link rel="stylesheet" href="~/Styles/mediaqueries.css" type="text/css" media="all">
+    <script src="~/Scripts/jquery.1.9.0.min.js"></script>
+    <script src="~/Scripts/jquery-mobilemenu.min.js"></script>
+</head>
+<body>
+
+    <div class="wrapper row1">
+        <header id="header" class="clear">
+            <div id="hgroup">
+                <h1><a href="#">Personal Details</a></h1>
+                <h2><a href="#">Doctor</a></h2>
+            </div>
+            <form action="#" method="post">
+                <input type="submit" class="sf_submit" value="Log out">
+            </form>
+            <nav>
+                <ul>
+                    <li><a href="@Url.Action("DoctorHome")">Home</a></li>
+                    <li><a href="#">Personal Details</a></li>
+                    <li><a href="@Url.Action("RequestBlood")">Request blood</a></li>
+                    <li><a href="@Url.Action("MyRequests")">My requests</a></li>
+                    <li class="last"><a href="@Url.Action("AccountSettings")">Account Settings</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <!-- content -->
+    <div class="wrapper row3">
+        <div class="container">
+            <form action="#">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="fname">First Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="lname">Last Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="fname">Date of birth</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="dob" name="dob" placeholder="Your date of birth..">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="address">Address</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="address" name="address" placeholder="Your address..">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Height</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="Height" name="height" placeholder="Your height..">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Hospital</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="Hospital" name="hospital" placeholder="Your workplace..">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Address of Hospital</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="addrHospital" name="AddressHospital" placeholder="Hospital address..">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="subject">Additional commentary</label>
+                    </div>
+                    <div class="col-75">
+                        <textarea id="subject" name="subject"
+                                  style="height:100px"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="wrapper row4">
+        <footer id="footer" class="clear">
+            <p class="fl_left">Copyright &copy; 2013 - All Rights Reserved - <a href="#">Domain Name</a></p>
+        </footer>
+    </div>
+</body>
+</html>
