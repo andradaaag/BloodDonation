@@ -40,5 +40,19 @@ namespace BloodDonation.Logic.Mappers
                 RequestType = "Personnel"
             };
         }
+
+        public DoctorTransferObject MapDoctorTransferObject(Doctor doctor)
+        {
+            return new DoctorTransferObject()
+            {
+                ID = doctor.ID,
+                FirstName = doctor.firstName,
+                LastName = doctor.lastName,
+                EmailAddress = doctor.emailAddress,
+                City = doctor.CityTown,
+                Country = doctor.Country,
+                InstituteName = "unknown"
+            };
+        }
     }
 }

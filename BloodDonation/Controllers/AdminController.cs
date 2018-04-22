@@ -49,7 +49,14 @@ namespace BloodDonation.Controllers
 
         public ActionResult GetDoctorsPage()
         {
-            return View("ManageDoctorsView");
+
+            List<DoctorTransferObject> doctorTransferObjects = doctorService.GetValidDoctors();
+            ManageAccountsModel manageAccountsModel = new ManageAccountsModel();
+            foreach(DoctorTransferObject dto in doctorTransferObjects)
+            {
+                manageAccountsModel.AddDoctorAccount(_businessToPresentationMapper.MapDoctorDisplayData(dto));
+            }
+            return View("ManageDoctorsView", manageAccountsModel);
         }
 
         public ActionResult GetPersonnelPage()

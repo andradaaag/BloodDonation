@@ -18,7 +18,22 @@ namespace BloodDonation.Data.Models
         {
         }
 
-        public bool isApproved = false;
+        private bool isApproved = false;
+
+        public bool isValidAccount()
+        {
+            return this.isApproved;
+        }
+
+        public void validateAccount()
+        {
+            this.isApproved = true;
+        }
+
+        public void invalidateAccount()
+        {
+            this.isApproved = false;
+        }
 
         /**
 		 * 
