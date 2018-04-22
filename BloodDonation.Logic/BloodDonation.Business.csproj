@@ -50,6 +50,7 @@
     <Compile Include="Mappers\LogicToDataMapper.cs" />
     <Compile Include="Models\AccountRequest.cs" />
     <Compile Include="Models\DoctorTransferObject.cs" />
+    <Compile Include="Models\DonationCenterPersonnelTransferObject.cs" />
     <Compile Include="Models\DonationForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DoctorService.cs" />

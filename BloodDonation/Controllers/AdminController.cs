@@ -61,7 +61,13 @@ namespace BloodDonation.Controllers
 
         public ActionResult GetPersonnelPage()
         {
-            return View("ManagePersonnelView");
+            List<DonationCenterPersonnelTransferObject> donationCenterPersonnelTransferObjects = donationCenterPersonnelService.GetValidDonationCenterPersonnel();
+            ManageAccountsModel manageAccountsModel = new ManageAccountsModel();
+            foreach(DonationCenterPersonnelTransferObject dcpto in donationCenterPersonnelTransferObjects)
+            {
+                manageAccountsModel.AddDonationCenterPersonnelAccount(_businessToPresentationMapper.MapDonationCenterPersonnelDisplayData(dcpto));
+            }
+            return View("ManagePersonnelView", manageAccountsModel);
         }
 
         public ActionResult GetHospitalsPage()

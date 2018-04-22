@@ -56,5 +56,19 @@ namespace BloodDonation.Mappers
             };
         }
 
+        public DonationCenterPersonnelDisplayData MapDonationCenterPersonnelDisplayData(DonationCenterPersonnelTransferObject dcpto)
+        {
+            return new DonationCenterPersonnelDisplayData()
+            {
+                ID = dcpto.ID,
+                FirstName = dcpto.FirstName,
+                LastName = dcpto.LastName,
+                EmailAddress = dcpto.EmailAddress,
+                City = dcpto.City,
+                Country = dcpto.Country,
+                CenterName = dcpto.InstituteName
+            };
+
+        }
     }
 }

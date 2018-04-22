@@ -207,6 +207,7 @@
     <Compile Include="Models\DoctorAccountRequest.cs" />
     <Compile Include="Models\DoctorDisplayData.cs" />
     <Compile Include="Models\DonationCenterPersonnelAccountRequest.cs" />
+    <Compile Include="Models\DonationCenterPersonnelDisplayData.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageAccountsModel.cs" />
     <Compile Include="Models\ManageRequestsModel.cs" />

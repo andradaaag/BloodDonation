@@ -25,12 +25,27 @@ namespace BloodDonation.Logic.Services
 
             foreach(DonationCenterPersonnel dcp in myDonationCenterPersonnel)
             {
-                myDonationCenterPersonnelAccountRequests.Add(dataToLogicMapper.MapDonationCenterPersonnelToAccountRequest(dcp));
-
+                if (!dcp.isValidAccount())
+                {
+                    myDonationCenterPersonnelAccountRequests.Add(dataToLogicMapper.MapDonationCenterPersonnelToAccountRequest(dcp));
+                }
             }
-
             return myDonationCenterPersonnelAccountRequests;
         }
 
+        public List<DonationCenterPersonnelTransferObject> GetValidDonationCenterPersonnel()
+        {
+            List<DonationCenterPersonnel> donationCenterPersonnels = donationCenterPersonnelRepository.findAll();
+            List<DonationCenterPersonnelTransferObject> donationCenterPersonnelTransferObjects = new List<DonationCenterPersonnelTransferObject>();
+
+            foreach (DonationCenterPersonnel dcp in donationCenterPersonnels)
+            {
+                if (dcp.isValidAccount())
+                {
+                    donationCenterPersonnelTransferObjects.Add(dataToLogicMapper.MapDonationCenterPersonnelTransferObject(dcp));
+                }
+            }
+            return donationCenterPersonnelTransferObjects;
+        }
     }
 }

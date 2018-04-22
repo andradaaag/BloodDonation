@@ -25,6 +25,15 @@ namespace BloodDonation.Data.Repositories
             newDcP.ID = "3";
             this.myDonationCenterPersonnel.Add(newDcP);
 
+            newDcP = new DonationCenterPersonnel("Mihoc", "Balaur", "micky@dhcp.com", new DateTime(), "N/A", "Timisoara", "Romania");
+            newDcP.ID = "4";
+            newDcP.validateAccount();
+            this.myDonationCenterPersonnel.Add(newDcP);
+            newDcP = new DonationCenterPersonnel("Aurelianus", "Maximus", "latinoBabe@dausange.com", new DateTime(), "N/A", "Vaslui", "Romania");
+            newDcP.ID = "5";
+            newDcP.validateAccount();
+            this.myDonationCenterPersonnel.Add(newDcP);
+
         }
 
         public List<DonationCenterPersonnel> findAll()

@@ -9,12 +9,12 @@ namespace BloodDonation.Models
     public class ManageAccountsModel
     {
         private List<DoctorDisplayData> doctorAccountRequests;
-        //private List<DonationCenterPersonnelAccountRequest> donationCenterPersonnelAccountRequests;
+        private List<DonationCenterPersonnelDisplayData> donationCenterPersonnelAccountRequests;
 
         public ManageAccountsModel()
         {
             this.doctorAccountRequests = new List<DoctorDisplayData>();
-            //this.donationCenterPersonnelAccountRequests = new List<DonationCenterPersonnelAccountRequest>();
+            this.donationCenterPersonnelAccountRequests = new List<DonationCenterPersonnelDisplayData>();
         }
 
         public void AddDoctorAccount(DoctorDisplayData newDoctor)
@@ -27,14 +27,14 @@ namespace BloodDonation.Models
             return this.doctorAccountRequests;
         }
 
-        //public void AddDonationCenterPersonnelAccountRequest(DonationCenterPersonnelAccountRequest newRequest)
-        //{
-        //    this.donationCenterPersonnelAccountRequests.Add(newRequest);
-        //}
+        public void AddDonationCenterPersonnelAccount(DonationCenterPersonnelDisplayData newRequest)
+        {
+            this.donationCenterPersonnelAccountRequests.Add(newRequest);
+        }
 
-        //public List<DonationCenterPersonnelAccountRequest> GetDonationCenterPersonnelAccountRequests()
-        //{
-        //    return this.donationCenterPersonnelAccountRequests;
-        //}
+        public List<DonationCenterPersonnelDisplayData> GetDonationCenterPersonnelAccounts()
+        {
+            return this.donationCenterPersonnelAccountRequests;
+        }
     }
 }

@@ -54,5 +54,19 @@ namespace BloodDonation.Logic.Mappers
                 InstituteName = "unknown"
             };
         }
+
+        public DonationCenterPersonnelTransferObject MapDonationCenterPersonnelTransferObject(DonationCenterPersonnel dcp)
+        {
+            return new DonationCenterPersonnelTransferObject()
+            {
+                ID = dcp.ID,
+                FirstName = dcp.firstName,
+                LastName = dcp.lastName,
+                EmailAddress = dcp.emailAddress,
+                City = dcp.CityTown,
+                Country = dcp.Country,
+                InstituteName = "unknown"
+            };
+        }
     }
 }
