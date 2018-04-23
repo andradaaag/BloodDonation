@@ -65,7 +65,7 @@
                         <!-- Add informations in table -->
                      
                         @foreach (var req in Model.GetDonationCenterPersonnelAccountRequests())
-    {
+                         {
                     <tr>
                         <td>@req.ID</td>
                         <td>@req.FirstName @req.LastName</td>
@@ -77,13 +77,14 @@
                             <button> Decline</button>
                         </td>
                     </tr>
-}
+                            }
 
 
                     </table>
                 </form>
             </div>
         </div>
+    </div>
         <!-- Footer -->
         <div class="wrapper row4">
             <footer id="footer" class="clear">
