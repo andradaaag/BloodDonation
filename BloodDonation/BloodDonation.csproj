@@ -208,8 +208,10 @@
     <Compile Include="Models\DoctorDisplayData.cs" />
     <Compile Include="Models\DonationCenterPersonnelAccountRequest.cs" />
     <Compile Include="Models\DonationCenterPersonnelDisplayData.cs" />
+    <Compile Include="Models\HospitalDisplayData.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageAccountsModel.cs" />
+    <Compile Include="Models\ManageHospitalsModel.cs" />
     <Compile Include="Models\ManageRequestsModel.cs" />
     <Compile Include="Models\SearchEntityModel.cs" />
     <Compile Include="Models\SignUpForm.cs" />

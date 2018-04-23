@@ -68,5 +68,15 @@ namespace BloodDonation.Logic.Mappers
                 InstituteName = "unknown"
             };
         }
+
+        public HospitalTransferObject MapHospitalTransferObject(Hospital hospital)
+        {
+            return new HospitalTransferObject()
+            {
+                ID = hospital.ID,
+                Name = hospital.name,
+                Location = hospital.location
+            };
+        }
     }
 }

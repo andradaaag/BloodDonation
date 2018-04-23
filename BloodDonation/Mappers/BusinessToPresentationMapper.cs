@@ -70,5 +70,15 @@ namespace BloodDonation.Mappers
             };
 
         }
+
+        public HospitalDisplayData MapHospitalDisplayData(HospitalTransferObject hto)
+        {
+            return new HospitalDisplayData()
+            {
+                ID = hto.ID,
+                Location = hto.Location,
+                Name = hto.Name
+            };
+        }
     }
 }
