@@ -18,6 +18,7 @@ namespace BloodDonation.Controllers
         private readonly DoctorService doctorService = new DoctorService();
         private readonly DonationCenterPersonnelService donationCenterPersonnelService = new DonationCenterPersonnelService();
         private readonly HospitalService hospitalService = new HospitalService();
+        private readonly DonationCenterService donationCenterService = new DonationCenterService();
 
         // GET: Admin
         public ActionResult Index()
@@ -85,7 +86,13 @@ namespace BloodDonation.Controllers
 
         public ActionResult GetDonationCentersPage()
         {
-            return View("ManageDonationCentersView");
+            List<DonationCenterTransferObject> donationCenterTransferObjects = donationCenterService.GetAllDonationCenters();
+            ManageDonationCentersModel manageDonationCentersModel = new ManageDonationCentersModel();
+            foreach(DonationCenterTransferObject dcto in donationCenterTransferObjects)
+            {
+                manageDonationCentersModel.AddDonationCenter(_businessToPresentationMapper.MapDonationCenterDisplayData(dcto));
+            }
+            return View("ManageDonationCentersView", manageDonationCentersModel);
         }
 
         public ActionResult GetCreateAdminPage()

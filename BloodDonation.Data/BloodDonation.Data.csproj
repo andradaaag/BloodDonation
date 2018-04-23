@@ -60,6 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DoctorRepository.cs" />
     <Compile Include="Repositories\DonationCenterPersonnelRepository.cs" />
+    <Compile Include="Repositories\DonationCenterRepository.cs" />
     <Compile Include="Repositories\DonorRepository.cs" />
     <Compile Include="Repositories\HospitalRepository.cs" />
   </ItemGroup>

@@ -80,5 +80,15 @@ namespace BloodDonation.Mappers
                 Name = hto.Name
             };
         }
+
+        public DonationCenterDisplayData MapDonationCenterDisplayData(DonationCenterTransferObject dcto)
+        {
+            return new DonationCenterDisplayData()
+            {
+                ID = dcto.ID,
+                Location = dcto.Location,
+                Name = dcto.Name
+            };
+        }
     }
 }

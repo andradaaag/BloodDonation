@@ -1,4 +1,4 @@
-﻿
+﻿@model BloodDonation.Models.ManageDonationCentersModel
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -16,7 +16,7 @@
     <div class="wrapper row1">
         <header id="header" class="clear">
             <div id="hgroup">
-                <h1><a href="#">Approve Donation Center Personnel Requests</a></h1>
+                <h1><a href="#">Manage Donation Centers</a></h1>
                 <h2><a href="#">Admin</a></h2>
             </div>
             <form action="login.html" method="post">
@@ -38,7 +38,35 @@
     </div>
     <!-- content -->
     <div class="wrapper row3">
-        Manage Donation centers View
+        <div class="row">
+            <div class="container">
+                <form action="#">
+                    <table style="width:100%">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Action</th>
+                        </tr>
+                        <!-- Add informations in table -->
+
+                        @foreach (var req in Model.GetDonationCenters())
+                    {
+                        <tr>
+                            <td>@req.ID</td>
+                            <td>@req.Name</td>
+                            <td>@req.Location</td>
+                            <td>
+                                <button> Edit</button>
+                                <button> Delete</button>
+                            </td>
+                        </tr>
+                }
+
+                    </table>
+                </form>
+            </div>
+        </div>
 
     </div>
 

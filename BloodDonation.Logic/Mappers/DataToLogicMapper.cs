@@ -78,5 +78,15 @@ namespace BloodDonation.Logic.Mappers
                 Location = hospital.location
             };
         }
+
+        public DonationCenterTransferObject MapDonationCenterTransferObject(DonationCenter dc)
+        {
+            return new DonationCenterTransferObject()
+            {
+                ID = dc.ID,
+                Name = dc.name,
+                Location = dc.location
+            };
+        }
     }
 }
