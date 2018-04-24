@@ -26,5 +26,20 @@ namespace BloodDonation.Logic.Mappers
             };
         }
 
+        public AccountRequest MapDCPersonnelToAccountRequest(DonationCenterPersonnel personnel)
+        {
+            return new AccountRequest()
+            {
+                ID = personnel.ID,
+                FirstName = personnel.firstName,
+                LastName = personnel.lastName,
+                EmailAddress = personnel.emailAddress,
+                City = personnel.CityTown,
+                Country = personnel.Country,
+                InstituteName = "unknown",
+                RequestType = "DonationCenterPersonnel"
+            };
+        }
+
     }
 }

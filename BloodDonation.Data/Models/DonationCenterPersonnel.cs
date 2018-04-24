@@ -15,10 +15,10 @@ namespace BloodDonation.Data.Models
 		/**
 		 * 
 		 */
-		public DonationCenterPersonnel()
-		{
+		public DonationCenterPersonnel(string firstName, string lastName, string emailAddress, DateTime DOB, string address, string cityTown, string country)
+            : base(firstName, lastName, emailAddress, DOB, address, cityTown, country)
+        {
 		}
-
 
         public bool isApproved = false;
         /**

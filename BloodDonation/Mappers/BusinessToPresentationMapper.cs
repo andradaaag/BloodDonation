@@ -25,5 +25,20 @@ namespace BloodDonation.Mappers
             };
         }
 
+        public PersonnelAccountRequest MapDCPersonnelToAccountRequest(AccountRequest personnel)
+        {
+            return new PersonnelAccountRequest()
+            {
+                ID = personnel.ID,
+                FirstName = personnel.FirstName,
+                LastName = personnel.LastName,
+                EmailAddress = personnel.EmailAddress,
+                City = personnel.City,
+                Country = personnel.Country,
+                DonationCenterName = personnel.InstituteName,
+                RequestType = personnel.RequestType
+            };
+
+        }
     }
 }

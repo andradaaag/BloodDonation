@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <title>Blood Donation</title>
+    <meta charset="iso-8859-1">
+    <link rel="stylesheet" href="~/Styles/layout_home_page.css" type="text/css">
+</head>
+<body>
+<div class="wrapper row1">
+    <header id="header" class="clear">
+        <div id="hgroup">
+            <h1>
+                <a href="#">Home</a>
+            </h1>
+            <h2>
+                <a href="#">Doctor</a>
+            </h2>
+        </div>
+        <form action="#" method="post">
+            <fieldset>
+                <input type="submit" class="sf_submit" value="Log out">
+            </fieldset>
+        </form>
+        <nav>
+            <ul>
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("PersonalDetails")">Personal Details</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("RequestBlood")">Request blood</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("MyRequests")">My requests</a>
+                </li>
+                <li class="last">
+                    <a href="@Url.Action("AccountSettings")">Account Setting</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+</div>
+<!-- content -->
+<div class="wrapper row2">
+    <div id="container" class="clear">
+        <!-- Slider -->
+        <section id="slider" class="clear">
+            <figure>
+                <img src="~/Images/red_blood_cells.jpg" alt="">
+                <figcaption>
+                    <h2>The journey of a blood donation</h2>
+                    <p>
+                        Blood donation is a voluntary procedure that can help save the lives of others. There are several
+                        types of blood donation, which help meet different medical needs.
+                    </p>
+                    <footer class="more">
+                        <a href="https://www.pentruviata.com">Read More &raquo;</a>
+                    </footer>
+                </figcaption>
+            </figure>
+        </section>
+        <!-- main content -->
+        <div id="intro">
+            <section class="clear">
+                <!-- article 1 -->
+                <article class="two_quarter">
+                    <h2>Why it's done</h2>
+                    <p>
+                        You agree to have blood drawn so that it can be given to someone who needs a blood transfusion.
+                        <a href="https://www.pentruviata.com" title="Read More.">Info</a>.
+                    </p>
+                    <p>
+                        Millions of people need blood transfusions each year. Some may need blood during surgery. Others
+                        depend on it after an accident or because they have a disease that requires blood components.
+                        Blood donation makes all of this possible. There is no substitute for human blood — all
+                        transfusions use blood from a donor. <a href="https://www.pentruviata.com"></a>.
+                    </p>
+                </article>
+                <!-- article 2 -->
+                <article class="two_quarter lastbox">
+                    <figure>
+                        <ul class="clear">
+                            <li>
+                                <a href="#">
+                                    <img src="~/Images/heart.jpg" width="130" height="130" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="~/Images/inspirational.jpg" width="130" height="130" alt="">
+                                </a>
+                            </li>
+                            <li class="last">
+                                <a href="#">
+                                    <img src="~/Images/exemple.jpg" width="130" height="130" alt="">
+                                </a>
+                            </li>
+                        </ul>
+                        <figcaption>
+                            <a href="#">View Our Image Gallery Here &raquo;</a>
+                        </figcaption>
+                    </figure>
+                </article>
+            </section>
+        </div>
+        <!-- ########################################################################################## -->
+        <div id="homepage" class="last clear">
+            <section class="one_quarter">
+                <h2 class="title">Quick Links</h2>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="#">About blood</a>
+                        </li>
+                        <li>
+                            <a href="#">Blood blabla</a>
+                        </li>
+                        <li>
+                            <a href="#">Transfusion</a>
+                        </li>
+                        <li>
+                            <a href="#">Smth</a>
+                        </li>
+                        <li class="last">
+                            <a href="#">Blabla</a>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+            <section class="two_quarter lastbox">
+                <h2 class="title">About US</h2>
+                <img class="imgl" src="~/Images/bloodTransfusion.jpg" width="130" height="130" alt="">
+                <p>
+                    Smth about us/ about team.
+                    Gae Andrada.Nacu Cristian.Grigorovic Monica. Moldovan Ioan. Georgescu Stefan. Fratila Nicolae.
+                    Dumitrascu Razvan. Grigor Sebastian
+                </p>
+                <footer class="more">
+                    <a href="#">Read More &raquo;</a>
+                </footer>
+            </section>
+        </div>
+    </div>
+</div>
+<!-- Footer -->
+<div class="wrapper row3">
+    <footer id="footer" class="clear">
+        <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="#">Domain Name</a></p>
+    </footer>
+</div>
+</body>
+</html>
