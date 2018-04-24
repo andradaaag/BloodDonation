@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <title>Approve Personnel Requests - Admin</title>
+    <title>Personal Data</title>
     <meta charset="iso-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @Styles.Render("~/Styles/layout_admin_requests.css")
@@ -16,7 +16,7 @@
     <div class="wrapper row1">
         <header id="header" class="clear">
             <div id="hgroup">
-                <h1><a href="#">Approve Donation Center Personnel Requests</a></h1>
+                <h1><a href="#">Personal Data</a></h1>
                 <h2><a href="#">Admin</a></h2>
             </div>
             <form action="login.html" method="post">
@@ -39,8 +39,45 @@
     <!-- content -->
 
     <div class="wrapper row3">
-        Manage personal data
-
+        <div class="container">
+            <form action="#">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="fname">First Name</label>
+                    </div>
+                    <div class="col-75">
+                        <h5>Your first name</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="lname">Last Name</label>
+                    </div>
+                    <div class="col-75">
+                        <h5>Your last name</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="fname">Date of birth</label>
+                    </div>
+                    <div class="col-75">
+                        <h5>Your DoB</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="address">Address</label>
+                    </div>
+                    <div class="col-75">
+                        <h5>Your address name</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.ActionLink("Edit", "GetEditPersonalDataPage", "Admin", null, new { @class = "button" })
+                </div>
+            </form>
+        </div>
     </div>
     <!-- Footer -->
     <div class="wrapper row4">

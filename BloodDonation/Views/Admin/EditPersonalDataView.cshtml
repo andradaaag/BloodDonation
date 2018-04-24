@@ -1,9 +1,9 @@
-﻿@model BloodDonation.Models.CreateAdminForm
+﻿@model BloodDonation.Models.ChangeAdminPersonalDataForm
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <title>Create Admin</title>
+    <title>Personal Data</title>
     <meta charset="iso-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @Styles.Render("~/Styles/layout_admin_requests.css")
@@ -16,7 +16,7 @@
     <div class="wrapper row1">
         <header id="header" class="clear">
             <div id="hgroup">
-                <h1><a href="#">Create Admin</a></h1>
+                <h1><a href="#">Personal Data</a></h1>
                 <h2><a href="#">Admin</a></h2>
             </div>
             <form action="login.html" method="post">
@@ -40,7 +40,7 @@
 
     <div class="wrapper row3">
         <div class="container">
-            @using (Html.BeginForm("CreateAdmin", "Admin", FormMethod.Post))
+            @using (Html.BeginForm("UpdatePersonalData", "Admin", FormMethod.Post))
             {
                 <div class="row">
                     <div class="col-25">
@@ -50,25 +50,33 @@
                         @Html.TextBoxFor(model => model.FirstName, new { @required = "required" })
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="lname">Last Name</label>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="lname">Last Name</label>
+                        </div>
+                        <div class="col-75">
+                            @Html.TextBoxFor(model => model.LastName, new { @required = "required" })
+                        </div>
                     </div>
-                    <div class="col-75">
-                        @Html.TextBoxFor(model => model.LastName, new { @required = "required" })
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="fname">Date of birth</label>
+                        </div>
+                        <div class="col-75">
+                            @Html.TextBox("DOB", DateTime.Today, new { @type = "date", @required = "required" })
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="address">Email Address</label>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="address">Address</label>
+                        </div>
+                        <div class="col-75">
+                            @Html.TextBoxFor(model => model.Address, new { @required = "required" })
+                        </div>
                     </div>
-                    <div class="col-75">
-                        @Html.TextBoxFor(model => model.EmailAddress, new { @required = "required" })
+                    <div class="row">
+                        <input type="submit" value="Save">
                     </div>
-                </div>
-                <div class="row">
-                    <input type="submit" value="Save">
-                </div>
             }
         </div>
     </div>

@@ -5,6 +5,7 @@ using BloodDonation.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -97,12 +98,58 @@ namespace BloodDonation.Controllers
 
         public ActionResult GetCreateAdminPage()
         {
-            return View("CreateAdminView");
+            return View("CreateAdminView", new CreateAdminForm());
         }
 
         public ActionResult GetPersonalDataPage()
         {
             return View("PersonalDataView");
+        }
+
+        public ActionResult GetEditPersonalDataPage()
+        {
+            return View("EditPersonalDataView", new ChangeAdminPersonalDataForm());
+        }
+
+        public ActionResult GetAdminCreatedPage()
+        {
+            return View("AdminCreatedView");
+        }
+
+        [HttpPost]
+        public ActionResult UpdatePersonalData(ChangeAdminPersonalDataForm form)
+        {
+            // TODO - somehow update personal data
+            return GetPersonalDataPage();
+        }
+
+        [HttpPost]
+        public ActionResult CreateAdmin(CreateAdminForm form)
+        {
+          
+            MailMessage message = new System.Net.Mail.MailMessage();
+            message.From = new MailAddress("blooddonationiss@gmail.com", "from Name");
+            message.To.Add(new MailAddress(form.EmailAddress));
+            message.Subject = "this is a test email.";
+            message.Priority = System.Net.Mail.MailPriority.High;
+            message.IsBodyHtml = false;
+            message.Sender = new MailAddress("blooddonationiss@gmail.com", "Sender Name");
+            message.Body = "this is my test email body for " + form.FirstName + " " + form.LastName;
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.EnableSsl = true;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.UseDefaultCredentials = false;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.Credentials = new System.Net.NetworkCredential("blooddonationiss@gmail.com", "bdisspass8");
+
+            smtp.Send(message);
+
+
+
+            return GetAdminCreatedPage();
         }
     }
 }

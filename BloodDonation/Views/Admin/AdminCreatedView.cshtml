@@ -1,5 +1,4 @@
-﻿@model BloodDonation.Models.CreateAdminForm
-
+﻿
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -16,7 +15,7 @@
     <div class="wrapper row1">
         <header id="header" class="clear">
             <div id="hgroup">
-                <h1><a href="#">Create Admin</a></h1>
+                <h1><a href="#">Admin Created</a></h1>
                 <h2><a href="#">Admin</a></h2>
             </div>
             <form action="login.html" method="post">
@@ -40,36 +39,12 @@
 
     <div class="wrapper row3">
         <div class="container">
-            @using (Html.BeginForm("CreateAdmin", "Admin", FormMethod.Post))
-            {
-                <div class="row">
-                    <div class="col-25">
-                        <label for="fname">First Name</label>
-                    </div>
-                    <div class="col-75">
-                        @Html.TextBoxFor(model => model.FirstName, new { @required = "required" })
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="lname">Last Name</label>
-                    </div>
-                    <div class="col-75">
-                        @Html.TextBoxFor(model => model.LastName, new { @required = "required" })
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="address">Email Address</label>
-                    </div>
-                    <div class="col-75">
-                        @Html.TextBoxFor(model => model.EmailAddress, new { @required = "required" })
-                    </div>
-                </div>
-                <div class="row">
-                    <input type="submit" value="Save">
-                </div>
-            }
+            <div class="row">
+                <h3>Email Sent to Admin</h3>
+            </div>
+            <div class="row">
+                @Html.ActionLink("Return Home", "Index", "Admin", null, new { @class = "button" })
+            </div>
         </div>
     </div>
     <!-- Footer -->
@@ -80,6 +55,7 @@
     </div>
 </body>
 </html>
+
 
 
 

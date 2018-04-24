@@ -204,6 +204,8 @@
     </Compile>
     <Compile Include="Mappers\BusinessToPresentationMapper.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapper.cs" />
+    <Compile Include="Models\ChangeAdminPersonalDataForm.cs" />
+    <Compile Include="Models\CreateAdminForm.cs" />
     <Compile Include="Models\DoctorAccountRequest.cs" />
     <Compile Include="Models\DoctorDisplayData.cs" />
     <Compile Include="Models\DonationCenterDisplayData.cs" />
@@ -289,6 +291,8 @@
     <Content Include="Views\Admin\ManageDonationCentersView.cshtml" />
     <Content Include="Views\Admin\CreateAdminView.cshtml" />
     <Content Include="Views\Admin\PersonalDataView.cshtml" />
+    <Content Include="Views\Admin\EditPersonalDataView.cshtml" />
+    <Content Include="Views\Admin\AdminCreatedView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
