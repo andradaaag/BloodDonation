@@ -49,13 +49,14 @@
     <Compile Include="Mappers\DataToLogicMapper.cs" />
     <Compile Include="Mappers\LogicToDataMapper.cs" />
     <Compile Include="Models\AccountRequest.cs" />
-<<<<<<< HEAD
+
+    <Compile Include="Models\DonationDetails.cs" />
+
     <Compile Include="Models\DoctorTransferObject.cs" />
     <Compile Include="Models\DonationCenterPersonnelTransferObject.cs" />
     <Compile Include="Models\DonationCenterTransferObject.cs" />
-=======
     <Compile Include="Models\DonationDetails.cs" />
->>>>>>> BDISS_Donor_see_donations_Adi
+
     <Compile Include="Models\DonationForm.cs" />
     <Compile Include="Models\HospitalTransferObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

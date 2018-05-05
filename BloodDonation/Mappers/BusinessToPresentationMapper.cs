@@ -25,8 +25,6 @@ namespace BloodDonation.Mappers
             };
         }
 
-<<<<<<< HEAD
-
         public DonationCenterPersonnelAccountRequest MapDonationCenterPersonnelAccountRequest(AccountRequest accountRequest)
         {
             return new DonationCenterPersonnelAccountRequest()
@@ -91,7 +89,7 @@ namespace BloodDonation.Mappers
                 Name = dcto.Name
             };
         }
-=======
+
         public DonorDonationDetails MapDonorDonationDetails(DonationDetails donationDetails)
         {
          return   new DonorDonationDetails()
@@ -103,7 +101,5 @@ namespace BloodDonation.Mappers
              DonationDate = donationDetails.DonationDate
          };
         }
-
->>>>>>> BDISS_Donor_see_donations_Adi
     }
 }

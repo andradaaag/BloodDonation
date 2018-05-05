@@ -208,15 +208,13 @@
     <Compile Include="Models\ChangeAdminPersonalDataForm.cs" />
     <Compile Include="Models\CreateAdminForm.cs" />
     <Compile Include="Models\DoctorAccountRequest.cs" />
-<<<<<<< HEAD
+    <Compile Include="Models\DonorDonationDetails.cs" />
     <Compile Include="Models\DoctorDisplayData.cs" />
     <Compile Include="Models\DonationCenterDisplayData.cs" />
     <Compile Include="Models\DonationCenterPersonnelAccountRequest.cs" />
     <Compile Include="Models\DonationCenterPersonnelDisplayData.cs" />
     <Compile Include="Models\HospitalDisplayData.cs" />
-=======
     <Compile Include="Models\DonorDonationDetails.cs" />
->>>>>>> BDISS_Donor_see_donations_Adi
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageAccountsModel.cs" />
     <Compile Include="Models\ManageDonationCentersModel.cs" />
