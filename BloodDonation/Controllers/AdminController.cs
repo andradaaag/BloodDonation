@@ -124,6 +124,24 @@ namespace BloodDonation.Controllers
         }
 
         [HttpPost]
+        public ActionResult SearchDoctors(ManageAccountsModel model)
+        {
+            string searchQuery = model.SearchQuery;
+
+            List<DoctorTransferObject> doctorTransferObjects = doctorService.FilterDoctorsBySearchQuery(searchQuery.Replace(" ", ""));
+
+            model.ResetDoctorAccounts();
+            model.IsViewingSearchResults = true;
+
+            foreach (DoctorTransferObject dto in doctorTransferObjects)
+            {
+                model.AddDoctorAccount(_businessToPresentationMapper.MapDoctorDisplayData(dto));
+            }
+
+            return View("ManageDoctorsView", model);
+        }
+
+        [HttpPost]
         public ActionResult CreateAdmin(CreateAdminForm form)
         {
             MailMessage message = new System.Net.Mail.MailMessage();

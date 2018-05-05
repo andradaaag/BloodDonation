@@ -8,13 +8,19 @@ namespace BloodDonation.Models
 {
     public class ManageAccountsModel
     {
-        private List<DoctorDisplayData> doctorAccountRequests;
+        //SEARCHING PART
+        public string SearchQuery { get; set; }
+        public bool IsViewingSearchResults { get; set; }
+
+        //LISTING PART
+        private List<DoctorDisplayData> doctorAccountRequests; // also used for valid accounts - TODO rename
         private List<DonationCenterPersonnelDisplayData> donationCenterPersonnelAccountRequests;
 
         public ManageAccountsModel()
         {
             this.doctorAccountRequests = new List<DoctorDisplayData>();
             this.donationCenterPersonnelAccountRequests = new List<DonationCenterPersonnelDisplayData>();
+            this.IsViewingSearchResults = false;
         }
 
         public void AddDoctorAccount(DoctorDisplayData newDoctor)
@@ -35,6 +41,11 @@ namespace BloodDonation.Models
         public List<DonationCenterPersonnelDisplayData> GetDonationCenterPersonnelAccounts()
         {
             return this.donationCenterPersonnelAccountRequests;
+        }
+
+        public void ResetDoctorAccounts()
+        {
+            this.doctorAccountRequests.Clear();
         }
     }
 }

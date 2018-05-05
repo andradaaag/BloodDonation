@@ -40,8 +40,38 @@
 
     <div class="wrapper row3">
         <div class="row">
-            <div class="container">
-                <form action="#">
+            <div class="container-small">
+                        @using (Html.BeginForm("SearchDoctors", "Admin", FormMethod.Post))
+            {
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="fname">Search for: </label>
+                        </div>
+                        <div class="col-75">
+                            @Html.TextBoxFor(model => model.SearchQuery, new { @required = "required" })
+                        </div>
+                    </div>
+            
+                    <div class="row">
+
+                       
+
+                            <input type="submit" value="Search">
+
+                            @if (Model.IsViewingSearchResults)
+    {
+                        @Html.ActionLink("Clear", "GetDoctorsPage", "Admin", null, new { @class = "clear-button" })
+
+}
+
+                     
+                    </div>
+                        }
+
+            </div>
+
+                <div class="container">
+
                     <table style="width:100%">
                         <tr>
                             <th>ID</th>
@@ -53,25 +83,24 @@
                         <!-- Add informations in table -->
 
                         @foreach (var req in Model.GetDoctorAccounts())
-                        {
-                            <tr>
-                                <td>@req.ID</td>
-                                <td>@req.FirstName @req.LastName</td>
-                                <td>@req.EmailAddress</td>
-                                <td>@req.HospitalName</td>
-                                <td>
-                                    <button> Edit</button>
-                                    <button> Delete</button>
-                                </td>
-                            </tr>
-                        }
+                {
+                    <tr>
+                        <td>@req.ID</td>
+                        <td>@req.FirstName @req.LastName</td>
+                        <td>@req.EmailAddress</td>
+                        <td>@req.HospitalName</td>
+                        <td>
+                            <button> Edit</button>
+                            <button> Delete</button>
+                        </td>
+                    </tr>
+        }
 
                     </table>
-                </form>
+                </div>
             </div>
-        </div>
 
-    </div>
+        </div>
 
         <!-- Footer -->
         <div class="wrapper row4">

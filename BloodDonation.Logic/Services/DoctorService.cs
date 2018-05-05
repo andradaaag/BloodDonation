@@ -46,5 +46,22 @@ namespace BloodDonation.Logic.Services
             }
             return doctorTransferObjects;
         }
+
+        public List<DoctorTransferObject> FilterDoctorsBySearchQuery(string searchQuery)
+        {
+            if (searchQuery.Length == 0)
+                return GetValidDoctors();
+
+            List<DoctorTransferObject> doctorTransferObjects = GetValidDoctors();
+            List<DoctorTransferObject> respone = new List<DoctorTransferObject>();
+
+            foreach(DoctorTransferObject dto in doctorTransferObjects)
+            {
+                if (dto.FirstName.Contains(searchQuery) || dto.LastName.Contains(searchQuery))
+                    respone.Add(dto);
+            }
+
+            return respone;
+        }
     }
 }
