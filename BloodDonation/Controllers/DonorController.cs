@@ -26,5 +26,12 @@ namespace BloodDonation.Controllers
 
             return View("ShowDonorDonationsView", details);
         }
+
+        public ActionResult DonorPersonalDetailsView()
+        {
+            throw new System.NotImplementedException();
+        }
+
+  
     }
 }

@@ -105,6 +105,7 @@
             <e p="ManageRequestsView.cshtml" t="Include" />
           </e>
           <e p="Donor" t="Include">
+            <e p="DonorPersonalDetailsView.cshtml" t="Include" />
             <e p="ShowDonorDonationsView.cshtml" t="Include" />
           </e>
           <e p="Error" t="Include">

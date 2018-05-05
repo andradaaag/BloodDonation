@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <title>Approve requests - master</title>
+    <title>See donations </title>
     <meta charset="iso-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @Styles.Render("~/Styles/layout_doctor_my_requests.css");
@@ -26,6 +26,15 @@
         <form action="login.html" method="post">
             <input type="submit" class="sf_submit" value="Log out">
         </form>
+        <nav>
+            <ul>
+                <li>@Html.ActionLink("Personal Details", "DonorPersonalDetailsView", "Donor", null, new { @class = "header nav li" })</li>
+                <li>@Html.ActionLink("My Donations", "Index", "Donor", null, new { @class = "header nav li" })</li>
+                <li>@Html.ActionLink("Book Donation", "DonorPersonalDetailsView", "Donor", null, new { @class = "header nav li" })</li>
+                <li>@Html.ActionLink("Account Settings", "DonorPersonalDetailsView", "Donor", null, new { @class = "header nav li" })</li>
+               
+            </ul>
+        </nav>
     </header>
 </div>
 <!-- content -->
