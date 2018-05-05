@@ -35,5 +35,31 @@ namespace BloodDonation.Logic.Services
         {
             hospitalRepository.save(logicToDataMapper.MapHospital(newHospital));
         }
+
+        public List<HospitalTransferObject> FilterHospitalsByNameAndLocation(string nameQuery, string locationQuery)
+        {
+            List<Hospital> hospitals = hospitalRepository.findAll();
+            List<HospitalTransferObject> hospitalTransferObjects = new List<HospitalTransferObject>();
+
+            foreach(Hospital hospital in hospitals)
+            {
+                if(nameQuery != null && locationQuery != null)
+                {
+                    if (hospital.name.Contains(nameQuery) && hospital.location.Contains(locationQuery))
+                        hospitalTransferObjects.Add(dataToLogicMapper.MapHospitalTransferObject(hospital));
+                } else if (nameQuery != null)
+                {
+                    if(hospital.name.Contains(nameQuery))
+                        hospitalTransferObjects.Add(dataToLogicMapper.MapHospitalTransferObject(hospital));
+                } else
+                {
+                    if(hospital.location.Contains(locationQuery))
+                        hospitalTransferObjects.Add(dataToLogicMapper.MapHospitalTransferObject(hospital));
+                }
+            }
+
+            return hospitalTransferObjects;
+
+        }
     }
 }

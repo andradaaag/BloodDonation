@@ -191,6 +191,25 @@ namespace BloodDonation.Controllers
         }
 
         [HttpPost]
+        public ActionResult SearchHospitals(ManageHospitalsModel model)
+        {
+            string nameSearchQuery = model.SearchName;
+            string locationSearchQuery = model.SearchLocation;
+
+            List<HospitalTransferObject> hospitalTransferObjects = hospitalService.FilterHospitalsByNameAndLocation(nameSearchQuery, locationSearchQuery);
+
+            model.ResetHospitals();
+            model.IsViewingSearchResults = true;
+
+            foreach(HospitalTransferObject hto in hospitalTransferObjects)
+            {
+                model.AddHospital(_businessToPresentationMapper.MapHospitalDisplayData(hto));
+            }
+
+            return View("ManageHospitalsView", model);
+        }
+
+        [HttpPost]
         public ActionResult CreateAdmin(CreateAdminForm form)
         {
             MailMessage message = new System.Net.Mail.MailMessage();
