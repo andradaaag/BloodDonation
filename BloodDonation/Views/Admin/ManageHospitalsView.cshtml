@@ -40,8 +40,39 @@
 
     <div class="wrapper row3">
         <div class="row">
+
+            <div class="container-small">
+
+                <h2> Add new hospital:</h2>
+
+                        @using (Html.BeginForm("AddNewHospital", "Admin", FormMethod.Post))
+                    {
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="fname">Name:  </label>
+                        </div>
+                        <div class="col-75">
+                            @Html.TextBoxFor(model => model.Name, new { @required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="fname">Location: </label>
+                        </div>
+                        <div class="col-75">
+                            @Html.TextBoxFor(model => model.Location, new { @required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <input type="submit" value="Add">
+                    </div>
+                    }
+
+            </div>
+
             <div class="container">
-                <form action="#">
                     <table style="width:100%">
                         <tr>
                             <th>ID</th>
@@ -65,7 +96,6 @@
                 }
 
                     </table>
-                </form>
             </div>
         </div>
 

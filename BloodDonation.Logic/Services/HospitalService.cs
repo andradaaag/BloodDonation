@@ -30,5 +30,10 @@ namespace BloodDonation.Logic.Services
 
             return hospitalTransferObjects;
         }
+
+        public void AddNewHospital(HospitalTransferObject newHospital)
+        {
+            hospitalRepository.save(logicToDataMapper.MapHospital(newHospital));
+        }
     }
 }

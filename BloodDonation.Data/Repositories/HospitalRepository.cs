@@ -36,5 +36,10 @@ namespace BloodDonation.Data.Repositories
         {
             return this.hospitals;
         }
+
+        public void save(Hospital hospital)
+        {
+            this.hospitals.Add(hospital);
+        }
     }
 }

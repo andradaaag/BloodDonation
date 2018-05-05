@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using System.Diagnostics;
 
 namespace BloodDonation.Controllers
 {
@@ -159,6 +160,20 @@ namespace BloodDonation.Controllers
 
             return View("ManagePersonnelView", model);
 
+        }
+
+        [HttpPost]
+        public ActionResult AddNewHospital(ManageHospitalsModel model)
+        {
+            HospitalTransferObject newHospital = new HospitalTransferObject
+            {
+                Location = model.Location,
+                Name = model.Name
+            };
+
+            hospitalService.AddNewHospital(newHospital);
+
+            return GetHospitalsPage();
         }
 
         [HttpPost]
