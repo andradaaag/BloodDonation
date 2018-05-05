@@ -82,7 +82,7 @@ Licence: <a href="http://www.os-templates.com/template-terms">Website Template L
 
 @media screen and (min-width: 601px) and (max-width: 800px) {
     #header, #topnav, #container, #footer {
-        max-width: 95%;
+        max-width: 80%;
         margin: 0 auto;
     }
 }
