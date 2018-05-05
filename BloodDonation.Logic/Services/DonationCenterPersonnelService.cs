@@ -47,5 +47,22 @@ namespace BloodDonation.Logic.Services
             }
             return donationCenterPersonnelTransferObjects;
         }
+
+        public List<DonationCenterPersonnelTransferObject> FilterDonationCenterPersonnelBySearchQuery(string searchQuery)
+        {
+            if (searchQuery.Length == 0)
+                return GetValidDonationCenterPersonnel();
+
+            List<DonationCenterPersonnelTransferObject> donationCenterPersonnelTransferObjects = GetValidDonationCenterPersonnel();
+            List<DonationCenterPersonnelTransferObject> respone = new List<DonationCenterPersonnelTransferObject>();
+
+            foreach (DonationCenterPersonnelTransferObject dto in donationCenterPersonnelTransferObjects)
+            {
+                if (dto.FirstName.Contains(searchQuery) || dto.LastName.Contains(searchQuery))
+                    respone.Add(dto);
+            }
+
+            return respone;
+        }
     }
 }

@@ -47,5 +47,10 @@ namespace BloodDonation.Models
         {
             this.doctorAccountRequests.Clear();
         }
+
+        public void ResetDonationCenterPersonnelAccounts()
+        {
+            this.donationCenterPersonnelAccountRequests.Clear();
+        }
     }
 }

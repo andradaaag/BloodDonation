@@ -40,33 +40,65 @@
 
     <div class="wrapper row3">
         <div class="row">
+
+
+            <div class="container-small">
+                @using (Html.BeginForm("SearchDonationCenterPersonnel", "Admin", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-25">
+                    <label for="fname">Search for: </label>
+                </div>
+                <div class="col-75">
+                    @Html.TextBoxFor(model => model.SearchQuery, new { @required = "required" })
+                </div>
+            </div>
+
+            <div class="row">
+
+
+
+                <input type="submit" value="Search">
+
+                @if (Model.IsViewingSearchResults)
+                    {
+                         @Html.ActionLink("Clear", "GetPersonnelPage", "Admin", null, new { @class = "clear-button" })
+
+                    }
+
+
+            </div>
+}
+
+            </div>
+
+
+
             <div class="container">
-                <form action="#">
-                    <table style="width:100%">
-                        <tr>
-                            <th>ID</th>
-                            <th>Full Name</th>
-                            <th>Mail</th>
-                            <th>Hospital</th>
-                            <th>Action</th>
-                        </tr>
-                        <!-- Add informations in table -->
+                <table style="width:100%">
+                    <tr>
+                        <th>ID</th>
+                        <th>Full Name</th>
+                        <th>Mail</th>
+                        <th>Hospital</th>
+                        <th>Action</th>
+                    </tr>
+                    <!-- Add informations in table -->
 
-                        @foreach (var req in Model.GetDonationCenterPersonnelAccounts())
-                        {
-                            <tr>
-                                <td>@req.ID</td>
-                                <td>@req.FirstName @req.LastName</td>
-                                <td>@req.EmailAddress</td>
-                                <td>@req.CenterName</td>
-                                <td>
-                                    <button> Delete</button>
-                                </td>
-                            </tr>
-                        }
+                    @foreach (var req in Model.GetDonationCenterPersonnelAccounts())
+            {
+                <tr>
+                    <td>@req.ID</td>
+                    <td>@req.FirstName @req.LastName</td>
+                    <td>@req.EmailAddress</td>
+                    <td>@req.CenterName</td>
+                    <td>
+                        <button> Delete</button>
+                    </td>
+                </tr>
+    }
 
-                    </table>
-                </form>
+                </table>
             </div>
         </div>
     </div>
