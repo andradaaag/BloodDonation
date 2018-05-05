@@ -25,5 +25,17 @@ namespace BloodDonation.Mappers
             };
         }
 
+        public DonorDonationDetails MapDonorDonationDetails(DonationDetails donationDetails)
+        {
+         return   new DonorDonationDetails()
+         {
+             ID = donationDetails.ID,
+             CenterLocation = donationDetails.CenterLocation,
+             Quantity = donationDetails.Quantity,
+             TestResult = donationDetails.TestResult,
+             DonationDate = donationDetails.DonationDate
+         };
+        }
+
     }
 }
