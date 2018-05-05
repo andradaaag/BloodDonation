@@ -36,5 +36,10 @@ namespace BloodDonation.Data.Repositories
         {
             return this.donationCenters;
         }
+
+        public void save(DonationCenter dc)
+        {
+            this.donationCenters.Add(dc);
+        }
     }
 }

@@ -7,6 +7,13 @@ namespace BloodDonation.Models
 {
     public class ManageDonationCentersModel
     {
+        //Creating part
+
+        public string Name { get; set; }
+        public string Location { get; set; }
+
+
+        //Listing part
         private List<DonationCenterDisplayData> donationCenterDisplayDatas;
 
         public ManageDonationCentersModel()

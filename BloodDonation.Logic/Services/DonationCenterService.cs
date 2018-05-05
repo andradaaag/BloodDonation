@@ -30,5 +30,10 @@ namespace BloodDonation.Logic.Services
             return donationCenterTransferObjects;
         }
 
+        public void AddNewDonationCenter(DonationCenterTransferObject dcto)
+        {
+            donationCenterRepository.save(logicToDataMapper.MapDonationCenter(dcto));
+        }
+
     }
 }

@@ -15,5 +15,10 @@ namespace BloodDonation.Business.Mappers
         {
             return new Hospital(hto.Location, hto.Name);
         }
+
+        public DonationCenter MapDonationCenter(DonationCenterTransferObject dcto)
+        {
+            return new DonationCenter(dcto.Location, dcto.Name);
+        }
     }
 }

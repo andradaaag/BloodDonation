@@ -177,6 +177,20 @@ namespace BloodDonation.Controllers
         }
 
         [HttpPost]
+        public ActionResult AddNewDonationCenter(ManageDonationCentersModel model)
+        {
+            DonationCenterTransferObject newDC = new DonationCenterTransferObject
+            {
+                Location = model.Location,
+                Name = model.Name
+            };
+
+            donationCenterService.AddNewDonationCenter(newDC);
+
+            return GetDonationCentersPage();
+        }
+
+        [HttpPost]
         public ActionResult CreateAdmin(CreateAdminForm form)
         {
             MailMessage message = new System.Net.Mail.MailMessage();

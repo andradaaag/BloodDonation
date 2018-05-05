@@ -39,32 +39,63 @@
     <!-- content -->
     <div class="wrapper row3">
         <div class="row">
+
+            <div class="container-small">
+
+                <h2> Add new donation center:</h2>
+
+                @using (Html.BeginForm("AddNewDonationCenter", "Admin", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-25">
+                    <label for="fname">Name:  </label>
+                </div>
+                <div class="col-75">
+                    @Html.TextBoxFor(model => model.Name, new { @required = "required" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="fname">Location: </label>
+                </div>
+                <div class="col-75">
+                    @Html.TextBoxFor(model => model.Location, new { @required = "required" })
+                </div>
+            </div>
+
+            <div class="row">
+                <input type="submit" value="Add">
+            </div>
+}
+
+            </div>
+
+
             <div class="container">
-                <form action="#">
-                    <table style="width:100%">
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Location</th>
-                            <th>Action</th>
-                        </tr>
-                        <!-- Add informations in table -->
+                <table style="width:100%">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Action</th>
+                    </tr>
+                    <!-- Add informations in table -->
 
-                        @foreach (var req in Model.GetDonationCenters())
-                    {
-                        <tr>
-                            <td>@req.ID</td>
-                            <td>@req.Name</td>
-                            <td>@req.Location</td>
-                            <td>
-                                <button> Edit</button>
-                                <button> Delete</button>
-                            </td>
-                        </tr>
-                }
+                    @foreach (var req in Model.GetDonationCenters())
+            {
+                <tr>
+                    <td>@req.ID</td>
+                    <td>@req.Name</td>
+                    <td>@req.Location</td>
+                    <td>
+                        <button> Edit</button>
+                        <button> Delete</button>
+                    </td>
+                </tr>
+    }
 
-                    </table>
-                </form>
+                </table>
             </div>
         </div>
 
