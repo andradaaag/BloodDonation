@@ -10,13 +10,9 @@ namespace BloodDonation.Data.Repositories
 
         public DonorRepository()
         {
-            myDonations = new List<Donation>();
-//            BloodType bloodType = new BloodType("A");
-//            Donor donor = new Donor();
-//            Donation donation = new Donation(bloodType, donor, Stage.Unprocessed, 200, "positive");
-//            
+            myDonations = new List<Donation>();       
             Donation donation= new Donation();
-            DonationCenter center = new DonationCenter();
+            DonationCenter center = new DonationCenter("cluj", "test");
             center.location = "Cluj";
             donation.center = center;
             donation.donationDate = "11/2/2011";

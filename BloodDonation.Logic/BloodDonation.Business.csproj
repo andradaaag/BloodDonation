@@ -49,8 +49,7 @@
     <Compile Include="Mappers\DataToLogicMapper.cs" />
     <Compile Include="Mappers\LogicToDataMapper.cs" />
     <Compile Include="Models\AccountRequest.cs" />
-
-    <Compile Include="Models\DonationDetails.cs" />
+    
 
     <Compile Include="Models\DoctorTransferObject.cs" />
     <Compile Include="Models\DonationCenterPersonnelTransferObject.cs" />

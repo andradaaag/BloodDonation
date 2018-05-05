@@ -208,7 +208,6 @@
     <Compile Include="Models\ChangeAdminPersonalDataForm.cs" />
     <Compile Include="Models\CreateAdminForm.cs" />
     <Compile Include="Models\DoctorAccountRequest.cs" />
-    <Compile Include="Models\DonorDonationDetails.cs" />
     <Compile Include="Models\DoctorDisplayData.cs" />
     <Compile Include="Models\DonationCenterDisplayData.cs" />
     <Compile Include="Models\DonationCenterPersonnelAccountRequest.cs" />
