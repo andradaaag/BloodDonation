@@ -10,7 +10,6 @@ namespace BloodDonation.Logic.Mappers
 {
     public class DataToLogicMapper
     {
-
         public AccountRequest MapDoctorToAccountRequest(Doctor doctor)
         {
             return new AccountRequest()
@@ -26,6 +25,7 @@ namespace BloodDonation.Logic.Mappers
             };
         }
 
+<<<<<<< HEAD
         public AccountRequest MapDonationCenterPersonnelToAccountRequest(DonationCenterPersonnel doctor)
         {
             return new AccountRequest()
@@ -86,6 +86,17 @@ namespace BloodDonation.Logic.Mappers
                 ID = dc.ID,
                 Name = dc.name,
                 Location = dc.location
+=======
+        public DonationDetails MapDonationToDonationDetails(Donation donation)
+        {
+            return new DonationDetails()
+            {
+                ID = donation.ID,
+                CenterLocation = donation.center.location,
+                Quantity = donation.quantity,
+                TestResult = donation.testResult,
+                DonationDate = donation.donationDate
+>>>>>>> BDISS_Donor_see_donations_Adi
             };
         }
     }

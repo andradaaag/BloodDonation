@@ -197,6 +197,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DonorController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
@@ -207,17 +208,22 @@
     <Compile Include="Models\ChangeAdminPersonalDataForm.cs" />
     <Compile Include="Models\CreateAdminForm.cs" />
     <Compile Include="Models\DoctorAccountRequest.cs" />
+<<<<<<< HEAD
     <Compile Include="Models\DoctorDisplayData.cs" />
     <Compile Include="Models\DonationCenterDisplayData.cs" />
     <Compile Include="Models\DonationCenterPersonnelAccountRequest.cs" />
     <Compile Include="Models\DonationCenterPersonnelDisplayData.cs" />
     <Compile Include="Models\HospitalDisplayData.cs" />
+=======
+    <Compile Include="Models\DonorDonationDetails.cs" />
+>>>>>>> BDISS_Donor_see_donations_Adi
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageAccountsModel.cs" />
     <Compile Include="Models\ManageDonationCentersModel.cs" />
     <Compile Include="Models\ManageHospitalsModel.cs" />
     <Compile Include="Models\ManageRequestsModel.cs" />
     <Compile Include="Models\SearchEntityModel.cs" />
+    <Compile Include="Models\ShowDonorDonations.cs" />
     <Compile Include="Models\SignUpForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -269,6 +275,8 @@
     <Content Include="Styles\layout_user_details.css" />
     <Content Include="Styles\mediaqueries.css" />
     <Content Include="Styles\navi.css" />
+    <Content Include="Views\Donor\DonorPersonalDetailsView.cshtml" />
+    <Content Include="Views\Donor\ShowDonorDonationsView.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
