@@ -72,6 +72,44 @@
             </div>
 
 
+            <div class="container-small">
+                @using (Html.BeginForm("SearchDonationCenters", "Admin", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-25">
+                    <label for="fname">Search by name: </label>
+                </div>
+                <div class="col-75">
+                    @Html.TextBoxFor(model => model.SearchName, new { })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="fname">Search by location: </label>
+                </div>
+                <div class="col-75">
+                    @Html.TextBoxFor(model => model.SearchLocation, new { })
+                </div>
+            </div>
+
+            <div class="row">
+
+                <input type="submit" value="Search">
+
+                @if (Model.IsViewingSearchResults)
+        {
+            @Html.ActionLink("Clear", "GetDonationCentersPage", "Admin", null, new { @class = "clear-button" })
+}
+
+
+            </div>
+}
+
+            </div>
+
+
+
             <div class="container">
                 <table style="width:100%">
                     <tr>

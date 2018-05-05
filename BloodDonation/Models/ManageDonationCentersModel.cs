@@ -12,6 +12,11 @@ namespace BloodDonation.Models
         public string Name { get; set; }
         public string Location { get; set; }
 
+        //Searching part
+
+        public string SearchName { get; set; }
+        public string SearchLocation { get; set; }
+        public bool IsViewingSearchResults { get; set; }
 
         //Listing part
         private List<DonationCenterDisplayData> donationCenterDisplayDatas;
@@ -19,6 +24,7 @@ namespace BloodDonation.Models
         public ManageDonationCentersModel()
         {
             this.donationCenterDisplayDatas = new List<DonationCenterDisplayData>();
+            this.IsViewingSearchResults = false;
         }
 
         public void AddDonationCenter(DonationCenterDisplayData dcdd)
@@ -29,6 +35,11 @@ namespace BloodDonation.Models
         public List<DonationCenterDisplayData> GetDonationCenters()
         {
             return this.donationCenterDisplayDatas;
+        }
+
+        public void ResetDonationCenters()
+        {
+
         }
     }
 }

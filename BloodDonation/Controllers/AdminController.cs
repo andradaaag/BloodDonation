@@ -210,6 +210,25 @@ namespace BloodDonation.Controllers
         }
 
         [HttpPost]
+        public ActionResult SearchDonationCenters(ManageDonationCentersModel model)
+        {
+            string nameSearchQuery = model.SearchName;
+            string locationSearchQuery = model.SearchLocation;
+
+            List<DonationCenterTransferObject> donationCenterTransferObjects = donationCenterService.FilterDonationCentersByNameAndLocation(nameSearchQuery, locationSearchQuery);
+
+            model.ResetDonationCenters();
+            model.IsViewingSearchResults = true;
+
+            foreach(DonationCenterTransferObject dcto in donationCenterTransferObjects)
+            {
+                model.AddDonationCenter(_businessToPresentationMapper.MapDonationCenterDisplayData(dcto));
+            }
+
+            return View("ManageDonationCentersView", model);
+        }
+
+        [HttpPost]
         public ActionResult CreateAdmin(CreateAdminForm form)
         {
             MailMessage message = new System.Net.Mail.MailMessage();

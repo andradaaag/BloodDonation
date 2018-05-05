@@ -35,5 +35,32 @@ namespace BloodDonation.Logic.Services
             donationCenterRepository.save(logicToDataMapper.MapDonationCenter(dcto));
         }
 
+        public List<DonationCenterTransferObject> FilterDonationCentersByNameAndLocation(string nameQuery, string locationQuery)
+        {
+            List<DonationCenter> donationCenters = donationCenterRepository.findAll();
+            List<DonationCenterTransferObject> donationCenterTransferObjects = new List<DonationCenterTransferObject>();
+
+            foreach(DonationCenter donationCenter in donationCenters)
+            {
+                if (nameQuery != null && locationQuery != null)
+                {
+                    if (donationCenter.name.Contains(nameQuery) && donationCenter.location.Contains(locationQuery))
+                        donationCenterTransferObjects.Add(dataToLogicMapper.MapDonationCenterTransferObject(donationCenter));
+                }
+                else if (nameQuery != null)
+                {
+                    if (donationCenter.name.Contains(nameQuery))
+                        donationCenterTransferObjects.Add(dataToLogicMapper.MapDonationCenterTransferObject(donationCenter));
+                }
+                else
+                {
+                    if (donationCenter.location.Contains(locationQuery))
+                        donationCenterTransferObjects.Add(dataToLogicMapper.MapDonationCenterTransferObject(donationCenter));
+                }
+            }
+
+            return donationCenterTransferObjects;
+
+        }
     }
 }
