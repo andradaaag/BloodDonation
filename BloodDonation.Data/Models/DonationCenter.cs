@@ -15,19 +15,22 @@ namespace BloodDonation.Data.Models
 		/**
 		 * 
 		 */
-		public DonationCenter()
+		public DonationCenter(string location, string name)
 		{
+            this.location = location;
+            this.name = name;
 		}
 
 		/**
 		 * 
 		 */
-		public string location;
+		public string location { get; set; }
+
 
 		/**
 		 * 
 		 */
-		public string name;
+		public string name { get; set; }
 
 		/**
 		 * 

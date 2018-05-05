@@ -25,6 +25,71 @@ namespace BloodDonation.Mappers
             };
         }
 
+        public DonationCenterPersonnelAccountRequest MapDonationCenterPersonnelAccountRequest(AccountRequest accountRequest)
+        {
+            return new DonationCenterPersonnelAccountRequest()
+            {
+                ID = accountRequest.ID,
+                FirstName = accountRequest.FirstName,
+                LastName = accountRequest.LastName,
+                EmailAddress = accountRequest.EmailAddress,
+                City = accountRequest.City,
+                Country = accountRequest.Country,
+                HospitalName = accountRequest.InstituteName,
+                RequestType = accountRequest.RequestType
+
+            };
+        }
+
+        public DoctorDisplayData MapDoctorDisplayData(DoctorTransferObject doctor)
+        {
+            return new DoctorDisplayData()
+            {
+                ID = doctor.ID,
+                FirstName = doctor.FirstName,
+                LastName = doctor.LastName,
+                EmailAddress = doctor.EmailAddress,
+                City = doctor.City,
+                Country = doctor.Country,
+                HospitalName = doctor.InstituteName,
+            };
+        }
+
+        public DonationCenterPersonnelDisplayData MapDonationCenterPersonnelDisplayData(DonationCenterPersonnelTransferObject dcpto)
+        {
+            return new DonationCenterPersonnelDisplayData()
+            {
+                ID = dcpto.ID,
+                FirstName = dcpto.FirstName,
+                LastName = dcpto.LastName,
+                EmailAddress = dcpto.EmailAddress,
+                City = dcpto.City,
+                Country = dcpto.Country,
+                CenterName = dcpto.InstituteName
+            };
+
+        }
+
+        public HospitalDisplayData MapHospitalDisplayData(HospitalTransferObject hto)
+        {
+            return new HospitalDisplayData()
+            {
+                ID = hto.ID,
+                Location = hto.Location,
+                Name = hto.Name
+            };
+        }
+
+        public DonationCenterDisplayData MapDonationCenterDisplayData(DonationCenterTransferObject dcto)
+        {
+            return new DonationCenterDisplayData()
+            {
+                ID = dcto.ID,
+                Location = dcto.Location,
+                Name = dcto.Name
+            };
+        }
+
         public DonorDonationDetails MapDonorDonationDetails(DonationDetails donationDetails)
         {
          return   new DonorDonationDetails()
@@ -36,6 +101,5 @@ namespace BloodDonation.Mappers
              DonationDate = donationDetails.DonationDate
          };
         }
-
     }
 }
