@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using System.Web.Mvc;
 using BloodDonation.Business.Services;
 using BloodDonation.Logic.Models;
@@ -9,8 +10,8 @@ namespace BloodDonation.Controllers
 {
     public class DonorController : Controller
     {
-        private readonly BusinessToPresentationMapper
-            _businessToPresentationMapper = new BusinessToPresentationMapper();
+        private readonly BusinessToPresentationMapperDonor
+            _businessToPresentationMapper = new BusinessToPresentationMapperDonor();
 
         private readonly DonorService donorService = new DonorService();
 
@@ -29,9 +30,11 @@ namespace BloodDonation.Controllers
 
         public ActionResult DonorPersonalDetailsView()
         {
-            throw new System.NotImplementedException();
+            DonorDetailsTransferObject donorDetailsTransferObject = donorService.GetDonorDetailsById("id");
+            DonorAccountRequest donorAccountRequest =
+                _businessToPresentationMapper.MapDonorAccountRequest(donorDetailsTransferObject);
+            
+            return View("DonorPersonalDetailsView", donorAccountRequest);
         }
-
-  
     }
 }

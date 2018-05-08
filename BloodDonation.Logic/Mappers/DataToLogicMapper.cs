@@ -88,16 +88,6 @@ namespace BloodDonation.Logic.Mappers
             };
         }
 
-        public DonationDetails MapDonationToDonationDetails(Donation donation)
-        {
-            return new DonationDetails()
-            {
-                ID = donation.ID,
-                CenterLocation = donation.center.location,
-                Quantity = donation.quantity,
-                TestResult = donation.testResult,
-                DonationDate = donation.donationDate
-            };
-        }
+
     }
 }

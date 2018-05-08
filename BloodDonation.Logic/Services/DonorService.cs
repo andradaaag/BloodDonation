@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BloodDonation.Data.Repositories;
 using BloodDonation.Business.Mappers;
 using BloodDonation.Business.Models;
@@ -12,7 +13,7 @@ namespace BloodDonation.Business.Services
     {
         private readonly DonorRepository donorRepository = new DonorRepository();
         private readonly LogicToDataMapper logicToDataMapper = new LogicToDataMapper();
-        private readonly DataToLogicMapper dataToLogicMapper = new DataToLogicMapper();
+        private readonly DataToLogicMapperDonor dataToLogicMapper = new DataToLogicMapperDonor();
 
 
         public void AddDonationForm(DonationForm form)
@@ -32,5 +33,31 @@ namespace BloodDonation.Business.Services
 
             return donationDetails;
         }
+
+        public List<DonorDetailsTransferObject> GetDonorList()
+        {
+            List<DonorDetailsTransferObject> donorsTransferObject = new List<DonorDetailsTransferObject>();
+            List<Donor> donors = donorRepository.GetDonors();
+            foreach (Donor donor in donors)
+            {
+                donorsTransferObject.Add(dataToLogicMapper.MapDonorDetailsTransferObject(donor));
+            }
+
+            return donorsTransferObject;
+        }
+
+        public DonorDetailsTransferObject GetDonorDetailsById(String ID)
+        {
+            List<Donor> donors = donorRepository.GetDonors();
+            foreach (Donor donor in donors)
+            {
+                if (donor.ID == ID)
+                {
+                    return dataToLogicMapper.MapDonorDetailsTransferObject(donor);
+                }
+            }
+            return null;
+        }
+
     }
 }

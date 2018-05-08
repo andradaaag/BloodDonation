@@ -45,6 +45,7 @@
         </e>
         <e p="Mappers" t="Include">
           <e p="BusinessToPresentationMapper.cs" t="Include" />
+          <e p="BusinessToPresentationMapperDonor.cs" t="Include" />
           <e p="PresentationToBusinessMapper.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
@@ -55,6 +56,7 @@
           <e p="DonationCenterDisplayData.cs" t="Include" />
           <e p="DonationCenterPersonnelAccountRequest.cs" t="Include" />
           <e p="DonationCenterPersonnelDisplayData.cs" t="Include" />
+          <e p="DonorAccountRequest.cs" t="Include" />
           <e p="DonorDonationDetails.cs" t="Include" />
           <e p="HospitalDisplayData.cs" t="Include" />
           <e p="IdentityModels.cs" t="Include" />
@@ -185,6 +187,7 @@
         <e p="BloodDonation.Business.csproj" t="IncludeRecursive" />
         <e p="Mappers" t="Include">
           <e p="DataToLogicMapper.cs" t="Include" />
+          <e p="DataToLogicMapperDonor.cs" t="Include" />
           <e p="LogicToDataMapper.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
@@ -194,6 +197,7 @@
           <e p="DonationCenterTransferObject.cs" t="Include" />
           <e p="DonationDetails.cs" t="Include" />
           <e p="DonationForm.cs" t="Include" />
+          <e p="DonorDetailsTransferObject.cs" t="Include" />
           <e p="HospitalTransferObject.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive" />

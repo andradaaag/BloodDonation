@@ -1,14 +1,112 @@
-﻿@model BloodDonation.Models.ShowDonorDonations
+﻿@model BloodDonation.Models.DonorAccountRequest
 
 <!DOCTYPE html>
-
-<html>
+<html lang="en" dir="ltr">
 <head>
-    <title>title</title>
+    <title>Personal Data</title>
+    <meta charset="iso-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Styles/layout_admin_requests.css")
+    @Styles.Render("~/Styles/mediaqueries.css")
+    <script src="scripts/jquery.1.9.0.min.js"></script>
+    <script src="scripts/jquery-mobilemenu.min.js"></script>
 </head>
 <body>
-<div>
-      
-</div>
+
+    <div class="wrapper row1">
+        <header id="header" class="clear">
+            <div id="hgroup">
+                <h1><a href="#">Personal Data</a></h1>
+                <h2><a href="#">Donor</a></h2>
+            </div>
+            <form action="login.html" method="post">
+                <input type="submit" class="sf_submit" value="Log out">
+            </form>
+            <nav>
+                <ul>
+                    <li>@Html.ActionLink("Personal Details", "DonorPersonalDetailsView", "Donor", null, new { @class = "header nav li" })</li>
+                    <li>@Html.ActionLink("My Donations", "Index", "Donor", null, new { @class = "header nav li" })</li>
+                    <li>@Html.ActionLink("Book Donation", "DonorPersonalDetailsView", "Donor", null, new { @class = "header nav li" })</li>
+                    <li>@Html.ActionLink("Account Settings", "DonorPersonalDetailsView", "Donor", null, new { @class = "header nav li" })</li>
+                </ul> 
+            </nav>
+        </header>
+    </div>
+    <!-- content -->
+
+    <div class="wrapper row3">
+        <div class="container">
+            <form action="#">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="fname">First Name</label>
+                    </div>
+                    <div class="col-75">
+                        <h5>@Model.FirstName</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="lname">Last Name</label>
+                    </div>
+                    <div class="col-75">
+                        <h5>@Model.LastName</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="fname">Date of birth</label>
+                    </div>
+                    <div class="col-75">
+                        <h5>@Model.DateOfBirth</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="address">Address</label>
+                    </div>
+                    <div class="col-75">
+                        <h5>@Model.Address</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="address">Country</label>
+                    </div>
+                    <div class="col-75">
+                        <h5>@Model.Country</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="address">Email</label>
+                    </div>
+                    <div class="col-75">
+                        <h5>@Model.Email</h5>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-25">
+                        <label for="address">Additional Commentaries</label>
+                    </div>
+                    <div class="col-75">
+                        <h5>@Model.Commentaries</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.ActionLink("Edit", "GetEditPersonalDataPage", "Admin", null, new { @class = "button" })
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="wrapper row4">
+        <footer id="footer" class="clear">
+            <p class="fl_left">Copyright &copy; 2013 - All Rights Reserved - <a href="#">Domain Name</a></p>
+        </footer>
+    </div>
 </body>
 </html>
+
+

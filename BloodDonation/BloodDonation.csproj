@@ -204,6 +204,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Mappers\BusinessToPresentationMapper.cs" />
+    <Compile Include="Mappers\BusinessToPresentationMapperDonor.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapper.cs" />
     <Compile Include="Models\ChangeAdminPersonalDataForm.cs" />
     <Compile Include="Models\CreateAdminForm.cs" />
@@ -212,6 +213,7 @@
     <Compile Include="Models\DonationCenterDisplayData.cs" />
     <Compile Include="Models\DonationCenterPersonnelAccountRequest.cs" />
     <Compile Include="Models\DonationCenterPersonnelDisplayData.cs" />
+    <Compile Include="Models\DonorAccountRequest.cs" />
     <Compile Include="Models\HospitalDisplayData.cs" />
     <Compile Include="Models\DonorDonationDetails.cs" />
     <Compile Include="Models\IdentityModels.cs" />

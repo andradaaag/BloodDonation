@@ -47,16 +47,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mappers\DataToLogicMapper.cs" />
+    <Compile Include="Mappers\DataToLogicMapperDonor.cs" />
     <Compile Include="Mappers\LogicToDataMapper.cs" />
     <Compile Include="Models\AccountRequest.cs" />
-    
-
     <Compile Include="Models\DoctorTransferObject.cs" />
     <Compile Include="Models\DonationCenterPersonnelTransferObject.cs" />
     <Compile Include="Models\DonationCenterTransferObject.cs" />
     <Compile Include="Models\DonationDetails.cs" />
-
     <Compile Include="Models\DonationForm.cs" />
+    <Compile Include="Models\DonorDetailsTransferObject.cs" />
     <Compile Include="Models\HospitalTransferObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DoctorService.cs" />
