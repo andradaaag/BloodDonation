@@ -25,7 +25,7 @@ namespace BloodDonation.Controllers
                 details.AddDonationDetails(_businessToPresentationMapper.MapDonorDonationDetails(detail));
             }
 
-            return View("ShowDonorDonationsView", details);
+            return View("ShowDonorDonationsView", details);   
         }
 
         public ActionResult DonorPersonalDetailsView()
