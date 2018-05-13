@@ -80,6 +80,9 @@ function cFunction(a) {
         case "personnel":
             Redirect("/login/personnel");
             break;
+        case "unapproved":
+            alert("Your account has not yet been approved.");
+            break;
 
     }
 

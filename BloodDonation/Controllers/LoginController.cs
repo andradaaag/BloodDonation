@@ -40,7 +40,10 @@ namespace BloodDonation.Controllers
 
             //TODO: add proper pages
             //Roles.AddUserToRole(uid, role);
-            return role;
+
+            if (ud.isApproved || ud.role =="donor" || ud.role == "admin")
+                return role;
+            return "unapproved";
             //switch (role)
             //{
             //    case "admin":
