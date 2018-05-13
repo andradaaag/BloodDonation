@@ -1,4 +1,6 @@
-﻿@{
+﻿@model BloodDonation.Models.UserData
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -7,6 +9,11 @@
     <title>Blood Donation</title>
     <meta charset="iso-8859-1">
     @Styles.Render("~/Styles/layout.css");
+
+    <script src="~/Scripts/jquery.1.9.0.min.js"></script>
+    <script src="~/Scripts/jquery-mobilemenu.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <!--[if lt IE 9]>
         <script src="scripts/html5shiv.js"></script><![endif]-->
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
@@ -19,7 +26,7 @@
                 <h1><a href="#">Blood donation</a></h1>
                 <h2>HOMEPAGE</h2>
             </div>
-
+            @Html.ActionLink("Log out", "Index", "Login", null, new {@class = "sf_submit input", onclick=""})
         </header>
     </div>
     <!-- content -->
@@ -42,19 +49,29 @@
             <!-- main content -->
             <div id="intro">
                 <section class="clear">
-                    <form action="#" method="post">
-                        <fieldset>
-                            <legend>Search:</legend>
-                            <input type="text" placeholder="User name" id="username"
-                                   onFocus="this.value = (this.value == 'Search Our Website&hellip;') ? '' : this.value;">
-                            <input type="password" placeholder="Password" id="password"
-                                   onFocus="this.value = (this.value == 'Search Our Website&hellip;') ? '' : this.value;">
-                            <input class="sf_submit" value="Log in" onclick="login();">
-                            <!--<input class="sf_submit" value="Sign up" onclick="">-->
-                            @Html.ActionLink("Sign up", "ShowSignUpPage", "Login", null, new { @class="sf_submit input"})
-                            <input type="submit" class="forget_pass" value="Forgot password?">
-                        </fieldset>
-                    </form>
+                @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                {
+
+                    <fieldset>
+                        <legend>Search:</legend>
+                        <input type="text" placeholder="Email" id="email"
+                               onFocus="this.value = (this.value == 'Search Our Website&hellip;') ? '' : this.value;">
+                        <input type="password" placeholder="Password" id="password"
+                               onFocus="this.value = (this.value == 'Search Our Website&hellip;') ? '' : this.value;">
+                        @*<input id ="UID" type="hidden">*@
+                        @*@Html.TextBoxFor(m => m.UID, new { type = "input",  placeholder = "Email", id = "email" })
+
+                        @Html.TextBoxFor(m => m.UID, new { type = "password",  placeholder = "Password", id = "password" })*@
+
+                       
+                        <div class ="sf_submit input" onclick="login();"></div>
+                        <!--<input class="sf_submit" value="Sign up" onclick="">-->
+                        <input @*type="submit"*@ class="sf_submit" value="Log-in" onclick="login();">
+                        @*@Html.ActionLink("Login", "Login", "Login", @Model, new {@class = "sf_submit input", onclick="login();"})*@
+                        @Html.ActionLink("Sign up", "ShowSignUpPage", "Login", null, new {@class = "sf_submit input"})
+                        <input class="forget_pass" value="Forgot password?">
+                    </fieldset>
+                }
                 </section>
             </div>
         </div>

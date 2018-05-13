@@ -1,4 +1,5 @@
-﻿@model BloodDonation.Models.SignUpForm
+﻿@using BloodDonation.Utils.Enums
+@model BloodDonation.Models.SignUpForm
 
 @{
     ViewBag.Title = "Sign Up";
@@ -41,10 +42,10 @@
                     <div class="col-25">
                         <label>Sign up as</label>
                     </div>
-                    @Html.RadioButtonFor(model => model.UserType, 0, new { @onclick = "handleRadioClick1(this);" }) Admin <br />
-                    @Html.RadioButtonFor(model => model.UserType, 2, new { @onclick = "handleRadioClick1(this);" }) Doctor <br />
-                    @Html.RadioButtonFor(model => model.UserType, 3, new { @onclick = "handleRadioClick1(this);" }) Personnel <br />
-                    @Html.RadioButtonFor(model => model.UserType, 1, new { @checked = "checked", @onclick = "handleRadioClick1(this);" }) Donor <br />
+                    @Html.RadioButtonFor(model => model.UserType, UserTypeEnum.Admin, new { @onclick = "handleRadioClick1(this);" }) Admin <br />
+                    @Html.RadioButtonFor(model => model.UserType, UserTypeEnum.Doctor, new { @onclick = "handleRadioClick1(this);" }) Doctor <br />
+                    @Html.RadioButtonFor(model => model.UserType, UserTypeEnum.Personnel, new { @onclick = "handleRadioClick1(this);" }) Personnel <br />
+                    @Html.RadioButtonFor(model => model.UserType, UserTypeEnum.Donor, new { @checked = "checked", @onclick = "handleRadioClick1(this);" }) Donor <br />
                 </div>
                 <p></p>
                 <div class="row">
@@ -68,7 +69,7 @@
                         <label>Email Address*</label>
                     </div>
                     <div class="col-75">
-                        @Html.TextBoxFor(model => model.Email, new { @required = "required" })
+                        @Html.TextBoxFor(model => model.Email, new { @required = "required", id="email"})
                     </div>
                 </div>
                 <div class="row">
@@ -76,7 +77,7 @@
                         <label>Password*</label>
                     </div>
                     <div class="col-75">
-                        @Html.PasswordFor(model => model.Password, new { @required = "required" })
+                        @Html.PasswordFor(model => model.Password, new { @required = "required", id = "password" })
                     </div>
                 </div>
                 <div class="row">

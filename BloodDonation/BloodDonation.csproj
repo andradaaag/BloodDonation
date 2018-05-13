@@ -203,6 +203,7 @@
     <Compile Include="Mappers\PresentationToBusinessMapper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\SignUpForm.cs" />
+    <Compile Include="Models\UserData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -266,6 +267,10 @@
     <Content Include="Views\Login\LoginHomePage.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Login\SignUpView.cshtml" />
+    <Content Include="Views\Login\Authenticated.cshtml" />
+    <Content Include="Views\Login\Doctor.cshtml" />
+    <Content Include="Views\Login\Donor.cshtml" />
+    <Content Include="Views\Login\Personnel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -282,6 +287,10 @@
     <ProjectReference Include="..\BloodDonation.Logic\BloodDonation.Business.csproj">
       <Project>{19780FBF-06AC-471E-B5E8-DECE641BFBE3}</Project>
       <Name>BloodDonation.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BloodDonation.Utils\BloodDonation.Utils.csproj">
+      <Project>{B4C4D092-9274-490A-81B6-08155457BA4B}</Project>
+      <Name>BloodDonation.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
