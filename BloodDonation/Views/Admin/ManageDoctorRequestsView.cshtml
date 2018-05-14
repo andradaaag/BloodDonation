@@ -10,6 +10,7 @@
     @Styles.Render("~/Styles/mediaqueries.css")
     <script src="scripts/jquery.1.9.0.min.js"></script>
     <script src="scripts/jquery-mobilemenu.min.js"></script>
+
 </head>
 <body>
 
@@ -62,9 +63,12 @@
                             <th>Approve/Decline</th>
                         </tr>
                         <!-- Add informations in table -->
+                        
+                        
 
                         @foreach (var req in Model.GetDoctorAccountRequests())
                         {
+
                            <tr>
                                 <td>@req.ID</td>
                                 <td>@req.FirstName @req.LastName</td>

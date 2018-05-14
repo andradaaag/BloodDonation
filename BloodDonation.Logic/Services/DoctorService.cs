@@ -18,9 +18,9 @@ namespace BloodDonation.Logic.Services
         private readonly LogicToDataMapper logicToDataMapper = new LogicToDataMapper();
         private readonly DataToLogicMapper dataToLogicMapper = new DataToLogicMapper();
 
-        public List<AccountRequest> GetDoctorAccountRequests()
+        public async Task<List<AccountRequest>> GetDoctorAccountRequests()
         {
-            List<Doctor> myDoctors =  doctorRepository.findAll();
+            List<Doctor> myDoctors =  await doctorRepository.FindAll();
             List<AccountRequest> myDoctorAccountRequests = new List<AccountRequest>();
             
             foreach(Doctor doctor in myDoctors){
@@ -32,9 +32,9 @@ namespace BloodDonation.Logic.Services
             return myDoctorAccountRequests;
         } 
 
-        public List<DoctorTransferObject> GetValidDoctors()
+        public async Task<List<DoctorTransferObject>> GetValidDoctors()
         {
-            List<Doctor> myDoctors = doctorRepository.findAll();
+            List<Doctor> myDoctors = await doctorRepository.FindAll();
             List<DoctorTransferObject> doctorTransferObjects = new List<DoctorTransferObject>();
 
             foreach(Doctor doctor in myDoctors)
@@ -47,12 +47,12 @@ namespace BloodDonation.Logic.Services
             return doctorTransferObjects;
         }
 
-        public List<DoctorTransferObject> FilterDoctorsBySearchQuery(string searchQuery)
+        public async Task<List<DoctorTransferObject>> FilterDoctorsBySearchQuery(string searchQuery)
         {
             if (searchQuery.Length == 0)
-                return GetValidDoctors();
+                return await GetValidDoctors();
 
-            List<DoctorTransferObject> doctorTransferObjects = GetValidDoctors();
+            List<DoctorTransferObject> doctorTransferObjects = await GetValidDoctors();
             List<DoctorTransferObject> respone = new List<DoctorTransferObject>();
 
             foreach(DoctorTransferObject dto in doctorTransferObjects)

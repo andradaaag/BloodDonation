@@ -4,43 +4,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BloodDonation.Data.Models;
+using Firebase.Database;
+using Firebase.Database.Query;
 
 namespace BloodDonation.Data.Repositories
 {
     public class DoctorRepository
     {
-        //TODO - here it will be linked with firebase, rn just a mock repo
-
         private List<Doctor> myDoctors;
 
         public DoctorRepository()
         {
-            this.myDoctors = new List<Doctor>();
-            Doctor newDoc = new Doctor("Popescu", "Marta", "martap@cjHospital.com", new DateTime(), "N/A", "Cluj", "Romania");
-            newDoc.ID = "1";
-            this.myDoctors.Add(newDoc);
-            newDoc = new Doctor("Grigorescu", "Mihail", "mihailGrig@docts.com", new DateTime(), "N/A", "Cluj", "Romania");
-            newDoc.ID = "2";
-            this.myDoctors.Add(newDoc);
-            newDoc = new Doctor("Mihailescu", "Ounicea", "ouniceaMih@doctorlife.com", new DateTime(), "N/A", "Cluj", "Albania");
-            newDoc.ID = "3";
-            this.myDoctors.Add(newDoc);
-            newDoc = new Doctor("Doctorescu", "Doc", "docty@cjHospital.com", new DateTime(), "N/A", "Cluj", "Romania");
-            newDoc.ID = "4";
-            newDoc.validateAccount();
-            this.myDoctors.Add(newDoc);
-            newDoc = new Doctor("Stirbu", "Claudia", "claudiaStb@docts.com", new DateTime(), "N/A", "Sibiu", "Romania");
-            newDoc.ID = "5";
-            newDoc.validateAccount();
-            this.myDoctors.Add(newDoc);
+            myDoctors = new List<Doctor>();
         }
 
-
-        public List<Doctor> findAll()
+        private async Task<List<Doctor>> GetData()
         {
-            return this.myDoctors;
+            var firebaseClient = new FirebaseClient("https://blooddonation-bc0b9.firebaseio.com/");
+
+            var docs = await firebaseClient.Child("doctors")
+                .OrderByKey()
+                .LimitToFirst(3)
+                .OnceAsync<Doctor>();
+
+            var l = new List<Doctor>();
+            
+            foreach (var d in docs)
+            {
+                l.Add(d.Object);
+            }
+
+            return l;
         }
 
 
+        public async Task<List<Doctor>> FindAll()
+        {
+            return await GetData();
+        }
     }
 }

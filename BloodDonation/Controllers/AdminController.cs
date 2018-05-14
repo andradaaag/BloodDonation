@@ -9,6 +9,7 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace BloodDonation.Controllers
 {
@@ -23,9 +24,9 @@ namespace BloodDonation.Controllers
         private readonly DonationCenterService donationCenterService = new DonationCenterService();
 
         // GET: Admin
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return GetDoctorAccountRequestsPage();
+            return await GetDoctorAccountRequestsPage();
         }
 
         public ActionResult GetPersonnelAccountRequestsPage()
@@ -40,9 +41,9 @@ namespace BloodDonation.Controllers
             return View("ManagePersonnelRequestsView", manageRequestsModel);
         }
 
-        public ActionResult GetDoctorAccountRequestsPage()
+        public async Task<ActionResult> GetDoctorAccountRequestsPage()
         {
-            List<AccountRequest> doctorAccountRequests = doctorService.GetDoctorAccountRequests();
+            List<AccountRequest> doctorAccountRequests = await doctorService.GetDoctorAccountRequests();
             ManageRequestsModel manageRequestsModel = new ManageRequestsModel();
             foreach (AccountRequest ar in doctorAccountRequests)
             {
@@ -51,10 +52,10 @@ namespace BloodDonation.Controllers
             return View("ManageDoctorRequestsView", manageRequestsModel);
         }
 
-        public ActionResult GetDoctorsPage()
+        public async Task<ActionResult> GetDoctorsPage()
         {
 
-            List<DoctorTransferObject> doctorTransferObjects = doctorService.GetValidDoctors();
+            List<DoctorTransferObject> doctorTransferObjects = await doctorService.GetValidDoctors();
             ManageAccountsModel manageAccountsModel = new ManageAccountsModel();
             foreach(DoctorTransferObject dto in doctorTransferObjects)
             {
@@ -125,11 +126,11 @@ namespace BloodDonation.Controllers
         }
 
         [HttpPost]
-        public ActionResult SearchDoctors(ManageAccountsModel model)
+        public async Task<ActionResult> SearchDoctors(ManageAccountsModel model)
         {
             string searchQuery = model.SearchQuery;
 
-            List<DoctorTransferObject> doctorTransferObjects = doctorService.FilterDoctorsBySearchQuery(searchQuery.Replace(" ", ""));
+            List<DoctorTransferObject> doctorTransferObjects = await doctorService.FilterDoctorsBySearchQuery(searchQuery.Replace(" ", ""));
 
             model.ResetDoctorAccounts();
             model.IsViewingSearchResults = true;
