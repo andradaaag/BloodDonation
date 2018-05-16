@@ -33,9 +33,18 @@ namespace BloodDonation.Controllers
             //TODO : add the database part (aka: actually do something)
             return Index();
         }
-        public ActionResult Test()
+
+        public ActionResult EditDonationSeparation(DonationModel donation)
         {
-            return View("Test");
+            return View("EditDonationSeparation", donation);
         }
+
+        [HttpPost]
+        public ActionResult SeparateComponentsToDB(DonationModel donation)
+        {
+            //TODO : add the database part (aka: actually do something)
+            return Index();
+        }
+
     }
 }

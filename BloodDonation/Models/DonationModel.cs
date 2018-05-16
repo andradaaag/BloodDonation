@@ -27,7 +27,7 @@ namespace BloodDonation.Models
         public int Plasma { get; set; }
 
         //red blood cells (about 40-45%)
-        public int RBS { get; set; }
+        public int RBC { get; set; }
 
         //couldn't find them, they seem to be under 1% tho
         public int Thrombocytes { get; set; }
