@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BloodType.cs" />
+    <Compile Include="Models\Component.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Donation.cs" />
     <Compile Include="Models\DonationCenter.cs" />

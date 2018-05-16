@@ -1,0 +1,107 @@
+﻿@model BloodDonation.Models.DonationModel
+
+@{
+    ViewBag.Title = "AddDonationView";
+}
+
+
+<html lang="en" dir="ltr">
+<head>
+    <title>Add blood</title>
+    <meta charset="iso-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Styles/layout_personel_add_blood.css")
+    @Styles.Render("~/Styles/mediaqueries.css")
+    <script src="scripts/jquery.1.9.0.min.js"></script>
+    <script src="scripts/jquery-mobilemenu.min.js"></script>
+</head>
+<body>
+
+    @Html.Partial("NavigationBannerView", null)
+
+    <!-- content -->
+    <div class="wrapper row3">
+        <div class="container">
+            Html.BeginForm(){
+            @*TODO:currently shows in the page, is there any way to avoid that? Do I actually need it?*@
+
+            <form action="#">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="lname">Blood Group</label>
+                    </div>
+                    <form action="">
+                        <div>
+                            @Html.RadioButtonFor(model => model.BloodType.group, new { id = "A", value = "A" }) A
+
+                            @Html.RadioButtonFor(model => model.BloodType.group, new { id = "AB", value = "AB" }) AB
+                        </div>
+                        <div>
+                            @Html.RadioButtonFor(model => model.BloodType.group, new { id = "B", value = "B" }) B
+
+                            @Html.RadioButtonFor(model => model.BloodType.group, new { id = "0", value = "0" }) O
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="lname">RH Type</label>
+                    </div>
+                    <form action="">
+                        <div>
+                            @Html.RadioButtonFor(model => model.BloodType.ph, new { id = "pos", value = true }) Positive
+                        </div>
+                        <div>
+                            @Html.RadioButtonFor(model => model.BloodType.ph, new { id = "neg", value = false }) Negative
+                        </div>
+                    </form>
+                </div>
+
+                <div class="row">
+                    <div class="col-25">
+                        <label for="donor">Donor</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBoxFor(model => model.DonorId, new { @required = "required", placeholder = "Donor id..." })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="quantity">Quantity(in #bags)</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBoxFor(model => model.Quantity, new { @required = "required", placeholder = "Quantity numeric..." })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="cnd">Donating for (leave empty if N/A)</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBoxFor(model => model.DonorId, new { placeholder = "CNP..." })
+                    </div>
+                </div>
+
+                @*TODO: for some reason, the donation sent is empty, solve that
+                TODO2: make the button look like a button*@
+                <div class="row">
+                    @Html.ActionLink("Add donation", "WooAddDonation", "Personnel", @Model, new { @class = "submit input", type = "submit"})
+                </div>
+       
+
+        <div class="row">
+            <input type="submit" value="Submit">
+        </div>
+        </form>
+        }
+    </div>
+    </div>
+    <!-- Footer -->
+    <div class="wrapper row4">
+        <footer id="footer" class="clear">
+            <p class="fl_left">Copyright &copy; 2013 - All Rights Reserved - <a href="#">Domain Name</a></p>
+        </footer>
+    </div>
+</body>
+</html>
+
