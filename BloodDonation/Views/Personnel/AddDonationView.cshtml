@@ -31,7 +31,7 @@
                     </div>
 
                     <div>
-                        @Html.RadioButtonFor(model => model.BloodType.Group, "A", new { id = "A", @required = "required" })
+                        @Html.RadioButtonFor(model => model.BloodType.Group, "A", new { id = "A" })
                         @Html.Label("A", "A")
 
                         @Html.RadioButtonFor(model => model.BloodType.Group, "AB", new { id = "AB" })
@@ -53,7 +53,7 @@
                     </div>
 
                     <div>
-                        @Html.RadioButtonFor(model => model.BloodType.PH, "Positive", new { id = "positive", @required = "required" })
+                        @Html.RadioButtonFor(model => model.BloodType.PH, "Positive", new { id = "positive" })
                         @Html.Label("positive", "Positive")
                     </div>
                     <div>
