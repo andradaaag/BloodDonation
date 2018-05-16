@@ -1,6 +1,7 @@
-﻿using BloodDonation.Data.Models;
+﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -8,6 +9,8 @@ namespace BloodDonation.Models
 {
     public class DonationModel
     {
+
+        [Required(ErrorMessage = "Blood type must be selected")]
         public BloodType BloodType { get; set; }
 
         //  TODO: find a way to get this in the interface

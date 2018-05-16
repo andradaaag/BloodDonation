@@ -19,18 +19,23 @@ namespace BloodDonation.Controllers
 
         public ActionResult AddDonation()
         {
-            donationModel = new DonationModel();
-            donationModel.BloodType = new Data.Models.BloodType();
-            
+            donationModel = new DonationModel
+            {
+                BloodType = new BloodType()
+            };
+
             return View("AddDonationView",donationModel);
         }
 
-        //[HttpPost]
-        public ActionResult WooAddDonation(DonationModel donation)
+        [HttpPost]
+        public ActionResult AddDonationInDb(DonationModel donation)
         {
-            Console.WriteLine("WOOOOO");
-            //TODO: for some reason I get an empty donation
-            return View("AddDonationView");
+            //TODO : add the database part (aka: actually do something)
+            return Index();
+        }
+        public ActionResult Test()
+        {
+            return View("Test");
         }
     }
 }
