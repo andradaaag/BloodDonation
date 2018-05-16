@@ -34,7 +34,7 @@ namespace BloodDonation.Controllers
         public async Task<ActionResult> AddDonationInDb(DonationModel donation)
         {
             donation.Stage = "Sampling";
-            //TODO: add donation time EVERYWHERE
+            donation.DonationTime = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
 
             await donationService.Add(PresentationToBusiness.Donation(donation));
             

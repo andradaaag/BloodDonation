@@ -14,22 +14,23 @@ namespace BloodDonation.Mappers
             Logic.Models.Donation don = new Logic.Models.Donation
             {
                 Alt = donation.Alt,
-                bloodType = new Logic.Models.BloodType
+                BloodType = new Logic.Models.BloodType
                 {
-                    group = donation.BloodType.Group,
-                    ph = donation.BloodType.PH == "Positive"
+                    Group = donation.BloodType.Group,
+                    PH = donation.BloodType.PH == "Positive"
                 },
-                donorId = donation.DonorId,
+                DonorId = donation.DonorId,
                 HepatitisB = donation.HepatitisB,
                 HepatitisC = donation.HepatitisC,
                 Hiv = donation.Hiv,
                 Htlv = donation.Htlv,
-                plasma = donation.Plasma,
-                quantity = donation.Quantity,
+                Plasma = donation.Plasma,
+                Quantity = donation.Quantity,
                 RBC = donation.RBC,
-                stage = (Data.Models.Stage)Enum.Parse(typeof(Data.Models.Stage), donation.Stage),
+                Stage = (Data.Models.Stage)Enum.Parse(typeof(Data.Models.Stage), donation.Stage),
                 Syphilis = donation.Syphilis,
-                Thrombocytes = donation.Thrombocytes
+                Thrombocytes = donation.Thrombocytes,
+                DonationTime = donation.DonationTime
             };
             return don;
 

@@ -14,22 +14,23 @@ namespace BloodDonation.Logic.Mappers
             Donation don = new Donation
             {
                 Alt = donation.Alt,
-                bloodType = new BloodType
+                BloodType = new BloodType
                 {
-                    group = donation.bloodType.group,
-                    ph = donation.bloodType.ph
+                    Group = donation.BloodType.Group,
+                    PH = donation.BloodType.PH
                 },
-                donorId = donation.donorId,
+                DonorId = donation.DonorId,
                 HepatitisB = donation.HepatitisB,
                 HepatitisC = donation.HepatitisC,
                 Hiv = donation.Hiv,
                 Htlv = donation.Htlv,
-                plasma = donation.plasma,
-                quantity = donation.quantity,
+                Plasma = donation.Plasma,
+                Quantity = donation.Quantity,
                 RBC = donation.RBC,
-                stage = donation.stage,
+                Stage = donation.Stage,
                 Syphilis = donation.Syphilis,
-                Thrombocytes = donation.Thrombocytes
+                Thrombocytes = donation.Thrombocytes,
+                DonationTime = donation.DonationTime
             };
             return don;
 

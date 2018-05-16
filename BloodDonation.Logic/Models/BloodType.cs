@@ -2,7 +2,7 @@
 {
     public class BloodType
     {
-        public string group;
-        public bool ph;
+        public string Group;
+        public bool PH;
     }
 }

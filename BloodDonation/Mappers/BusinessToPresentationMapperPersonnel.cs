@@ -16,20 +16,21 @@ namespace BloodDonation.Mappers
                 Alt = donation.Alt,
                 BloodType = new BloodType
                 {
-                    Group = donation.bloodType.group,
-                    PH = donation.bloodType.ph ? "Positive" : "Negative"
+                    Group = donation.BloodType.Group,
+                    PH = donation.BloodType.PH ? "Positive" : "Negative"
                 },
-                DonorId = donation.donorId,
+                DonorId = donation.DonorId,
                 HepatitisB = donation.HepatitisB,
                 HepatitisC = donation.HepatitisC,
                 Hiv = donation.Hiv,
                 Htlv = donation.Htlv,
-                Plasma = donation.plasma,
-                Quantity = donation.quantity,
+                Plasma = donation.Plasma,
+                Quantity = donation.Quantity,
                 RBC = donation.RBC,
-                Stage = donation.stage.ToString(),
+                Stage = donation.Stage.ToString(),
                 Syphilis = donation.Syphilis,
-                Thrombocytes = donation.Thrombocytes
+                Thrombocytes = donation.Thrombocytes,
+                DonationTime = donation.DonationTime
             };
             return don;
         }

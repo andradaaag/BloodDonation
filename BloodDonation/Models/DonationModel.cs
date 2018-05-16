@@ -36,6 +36,9 @@ namespace BloodDonation.Models
         //  for who you want to donate
         public string Cnp { get; set; }
 
+        //empoch time
+        public long DonationTime { get; set; }
+
         //  reasons why the blood might not be accepted
         //  HIV/AIDS, hepatitis B, hepatitis C, syphilis, HTLV, ALT
         public bool Hiv { get; set; }

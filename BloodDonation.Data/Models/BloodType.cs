@@ -22,12 +22,12 @@ namespace BloodDonation.Data.Models
 		/**
 		 * 
 		 */
-		public string group;
+		public string Group;
 
 		/**
 		 * 
 		 */
-		public bool ph;
+		public bool PH;
 
 		/**
 		 * @param blood

@@ -16,15 +16,15 @@ namespace BloodDonation.Data.Models
 		{
 		}
 
-		public BloodType bloodType;
+		public BloodType BloodType;
 
-		public string donorId;
+		public string DonorId;
 
-		public Stage stage;
+		public Stage Stage;
 
-		public int quantity;
+		public int Quantity;
 
-        public int plasma;
+        public int Plasma;
         public int RBC;
         public int Thrombocytes;
 
@@ -34,6 +34,8 @@ namespace BloodDonation.Data.Models
         public bool Syphilis { get; set; }
         public bool Htlv { get; set; }
         public bool Alt { get; set; }
+
+        public long DonationTime { get; set; }
       
     }
 }
