@@ -1,28 +1,25 @@
-
+﻿using BloodDonation.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace BloodDonation.Data.Models
+namespace BloodDonation.Logic.Models
 {
-/**
- * 
- */
-	public class Donation : BaseEntity
-	{
+    public class Donation
+    {
+        public Donation()
+        {
+        }
 
-		public Donation()
-		{
-		}
+        public BloodType bloodType;
 
-		public BloodType bloodType;
+        public string donorId;
 
-		public string donorId;
+        public Stage stage;
 
-		public Stage stage;
-
-		public int quantity;
+        public int quantity;
 
         public int plasma;
         public int RBC;
@@ -34,7 +31,6 @@ namespace BloodDonation.Data.Models
         public bool Syphilis { get; set; }
         public bool Htlv { get; set; }
         public bool Alt { get; set; }
-      
+
     }
 }
- 
