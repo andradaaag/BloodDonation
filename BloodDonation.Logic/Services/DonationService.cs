@@ -15,21 +15,40 @@ namespace BloodDonation.Logic.Services
         private LogicToDataMapperPersonnel LogicToData = new LogicToDataMapperPersonnel();
         private DataToLogicMapperPersonnel DataToLogic = new DataToLogicMapperPersonnel();
 
-        public async Task<List<Donation>> FindAll()
+        public List<Donation> FindAll()
         {
-            List<Data.Models.Donation> l = await Repository.FindAll();
-            List<Donation> l2 = new List<Donation>();
-            foreach(var i in l)
-            {
-                l2.Add(DataToLogic.Donation(i));
-            }
-            return l2;
+            return Repository
+                .FindAll()
+                .AsEnumerable()
+                .Select(i => DataToLogic.Donation(i))
+                .ToList();
         }
 
-        public async Task Add(Donation d)
+        public void Add(Donation d)
         {
-            await Repository.Add(LogicToData.Donation(d));
+            Repository
+                .Add(LogicToData.Donation(d));
 
+        }
+
+        public void Edit(Donation d)
+        {
+            Repository
+                .Edit(LogicToData.Donation(d));
+        }
+
+        public Donation GetOne(string id)
+        {
+            return DataToLogic.Donation(Repository.GetOne(id));
+        }
+
+        public  List<Donation> FindUnsolved()
+        {
+            return Repository
+                .FindUnresolved()
+                .AsEnumerable()
+                .Select(i=>DataToLogic.Donation(i))
+                .ToList();
         }
     }
 }

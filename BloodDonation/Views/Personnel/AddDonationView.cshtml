@@ -17,8 +17,15 @@
     <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 </head>
 <body>
-
-    @Html.Partial("NavigationBannerView", null)
+    <div class="wrapper row1">
+        <header id="header" class="clear">
+            <div id="hgroup">
+                <h1><a href="#">Add blood</a></h1>
+                <h2><a href="#">Donation center personnel</a></h2>
+            </div>
+            @Html.Partial("NavigationBannerView", null)
+        </header>
+    </div>
 
     <div class="wrapper row3">
         <div class="container">
@@ -31,20 +38,19 @@
                     </div>
 
                     <div>
-                        @Html.RadioButtonFor(model => model.BloodType.Group, "A", new { id = "A" })
+                        @Html.RadioButtonFor(model => model.BloodTypeGroup, "A", new { id = "A" })
                         @Html.Label("A", "A")
 
-                        @Html.RadioButtonFor(model => model.BloodType.Group, "AB", new { id = "AB" })
+                        @Html.RadioButtonFor(model => model.BloodTypeGroup, "AB", new { id = "AB" })
                         @Html.Label("AB", "AB")
                     </div>
                     <div>
-                        @Html.RadioButtonFor(model => model.BloodType.Group, new { id = "B" })
+                        @Html.RadioButtonFor(model => model.BloodTypeGroup, new { id = "B" })
                         @Html.Label("B", "B")
-                        @Html.RadioButtonFor(model => model.BloodType.Group, new { id = "O" })
+                        @Html.RadioButtonFor(model => model.BloodTypeGroup, new { id = "O" })
                         @Html.Label("O", "O")
                     </div>
 
-                    @Html.ValidationMessageFor(model => model.BloodType.Group)
                 </div>
 
                 <div class="row">
@@ -53,16 +59,15 @@
                     </div>
 
                     <div>
-                        @Html.RadioButtonFor(model => model.BloodType.PH, "Positive", new { id = "positive" })
+                        @Html.RadioButtonFor(model => model.BloodTypePH, "Positive", new { id = "positive" })
                         @Html.Label("positive", "Positive")
                     </div>
                     <div>
-                        @Html.RadioButtonFor(model => model.BloodType.PH, "Negative", new { id = "negative" })
+                        @Html.RadioButtonFor(model => model.BloodTypePH, "Negative", new { id = "negative" })
                         @Html.Label("negative", "Negative")
                     </div>
 
 
-                    @*@Html.ValidationMessageFor(model => model.BloodType.PH)*@
                 </div>
 
                 <div class="row">

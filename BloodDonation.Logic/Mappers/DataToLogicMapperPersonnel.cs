@@ -1,4 +1,5 @@
-﻿using BloodDonation.Logic.Models;
+﻿
+using BloodDonation.Logic.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,9 @@ namespace BloodDonation.Logic.Mappers
     {
         public Donation Donation(Data.Models.Donation donation)
         {
-            Donation don = new Donation
+            return new Donation
             {
+                ID = donation.ID,
                 Alt = donation.Alt,
                 BloodType = new BloodType
                 {
@@ -32,9 +34,24 @@ namespace BloodDonation.Logic.Mappers
                 Thrombocytes = donation.Thrombocytes,
                 DonationTime = donation.DonationTime
             };
-            return don;
+            
+        }
 
-
+        internal StoredBlood StoredBlood(Data.Models.StoredBlood i)
+        {
+            return new StoredBlood
+            {
+                ID = i.ID,
+                BloodType = new BloodType
+                {
+                    Group = i.BloodType.Group,
+                    PH = i.BloodType.PH
+                },
+                Component = i.Component,
+                CollectionDate = i.CollectionDate,
+                Amount = i.Amount
+            };
+            
         }
     }
 }

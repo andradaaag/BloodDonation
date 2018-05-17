@@ -233,8 +233,8 @@
     <Compile Include="Mappers\BusinessToPresentationMapperPersonnel.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapper.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapperPersonnel.cs" />
-    <Compile Include="Models\BloodType.cs" />
     <Compile Include="Models\DoctorAccountRequest.cs" />
+    <Compile Include="Models\DonationListModel.cs" />
     <Compile Include="Models\DonationModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageRequestsModel.cs" />
@@ -308,6 +308,9 @@
     <Content Include="Views\Personnel\AddDonationView.cshtml" />
     <Content Include="Views\Personnel\NavigationBannerView.cshtml" />
     <Content Include="Views\Personnel\EditDonationSeparation.cshtml" />
+    <Content Include="Views\SetLabResults.cshtml" />
+    <Content Include="Views\Personnel\SeparateComponentsView.cshtml" />
+    <Content Include="Views\Personnel\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

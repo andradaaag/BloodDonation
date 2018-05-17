@@ -11,8 +11,9 @@ namespace BloodDonation.Logic.Mappers
     {
         public Data.Models.Donation Donation(Donation donation)
         {
-            Data.Models.Donation don = new Data.Models.Donation
+            return new Data.Models.Donation
             {
+                ID = donation.ID,
                 Alt = donation.Alt,
                 BloodType = new Data.Models.BloodType
                 {
@@ -32,9 +33,22 @@ namespace BloodDonation.Logic.Mappers
                 Thrombocytes = donation.Thrombocytes,
                 DonationTime = donation.DonationTime
             };
-            return don;
+        }
 
-
+        internal Data.Models.StoredBlood StoredBlood(StoredBlood storedBlood)
+        {
+            return new Data.Models.StoredBlood
+            {
+                ID = storedBlood.ID,
+                BloodType = new Data.Models.BloodType
+                {
+                    Group = storedBlood.BloodType.Group,
+                    PH = storedBlood.BloodType.PH
+                },
+                Component = storedBlood.Component,
+                CollectionDate = storedBlood.CollectionDate,
+                Amount = storedBlood.Amount
+            };
         }
     }
 }

@@ -10,8 +10,11 @@ namespace BloodDonation.Models
     public class DonationModel
     {
 
-        [Required(ErrorMessage = "Blood type must be selected")]
-        public BloodType BloodType { get; set; }
+        public string ID { get; set; }
+
+
+        public string BloodTypeGroup { get; set; }
+        public string BloodTypePH { get; set; }
 
         //  TODO: find a way to get this in the interface
         public string DonorId { get; set; }
@@ -47,5 +50,10 @@ namespace BloodDonation.Models
         public bool Syphilis { get; set; }
         public bool Htlv { get; set; }
         public bool Alt { get; set; }
+
+        public bool isAccepted()
+        {
+            return !(Hiv || HepatitisB || HepatitisC || Syphilis || Htlv || Alt);
+        }
     }
 }

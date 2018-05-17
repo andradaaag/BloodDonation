@@ -13,6 +13,7 @@ namespace BloodDonation.Logic.Models
         {
         }
 
+        public string ID { get; set; }
         public BloodType BloodType;
 
         public string DonorId;

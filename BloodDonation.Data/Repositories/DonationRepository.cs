@@ -1,4 +1,5 @@
-﻿using BloodDonation.Data.Models;
+﻿using BloodDonation.Data.Mapper;
+using BloodDonation.Data.Models;
 using Firebase.Database;
 using Firebase.Database.Query;
 using System;
@@ -12,26 +13,57 @@ namespace BloodDonation.Data.Repositories
     public class DonationRepository
     {
         private FirebaseClient firebaseClient = new FirebaseClient("https://blooddonation-bc0b9.firebaseio.com/");
-        public async Task<List<Donation>> FindAll()
+        private FirebaseToObject FirebaseToObject = new FirebaseToObject();
+
+
+        public List<Donation> FindUnresolved()
         {
-            var dons = await firebaseClient.Child("donations")
-                .OrderByKey()
-                .OnceAsync<Donation>();
-
-            var l = new List<Donation>();
-
-            foreach (var d in dons)
-            {
-                l.Add(d.Object);
-            }
-
-            return l;
+            return firebaseClient
+                .Child("donations")
+                .OrderBy("Stage")
+                .StartAt(0)
+                .EndAt(2)
+                .OnceAsync<Donation>()
+                .Result
+                .AsEnumerable()
+                .Select(i=>FirebaseToObject.Donation(i))
+                .ToList();
         }
-        public async Task Add(Donation d)
+        
+        public List<Donation> FindAll()
         {
-           
-            var id = await firebaseClient.Child("donations").PostAsync(d);
-
+            return firebaseClient
+                .Child("donations")
+                .OrderByKey()
+                .OnceAsync<Donation>()
+                .Result
+                .AsEnumerable()
+                .Select(i => FirebaseToObject.Donation(i))
+                .ToList();
+        }
+        public void Add(Donation d)
+        {
+            firebaseClient
+               .Child("donations")
+               .PostAsync(d);
+        }
+        public void Edit(Donation d)
+        {
+            firebaseClient
+                .Child("donations")
+                .Child(d.ID)
+                .PutAsync(d);
+        }
+        public Donation GetOne(string id)
+        {
+            return FirebaseToObject.Donation(firebaseClient
+             .Child("donations")
+             .OrderByKey()
+             .StartAt(id)
+             .LimitToFirst(1)
+             .OnceAsync<Donation>()
+             .Result
+             .First());
         }
     }
 }

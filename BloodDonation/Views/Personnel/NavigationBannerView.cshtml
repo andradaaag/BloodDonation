@@ -1,30 +1,14 @@
 ﻿
 
-<div class="wrapper row1">
-    <header id="header" class="clear">
-        <div id="hgroup">
-            <h1><a href="#">Add blood</a></h1>
-            <h2><a href="#">Donation center personnel</a></h2>
-        </div>
-        <form action="login.html" method="post">
-            <input type="submit" class="sf_submit" value="Log out">
-        </form>
-        <nav>
-            <ul>
-                <li>@Html.ActionLink("Add donation", "AddDonation", "Personnel", null, new { @class = "header nav li" })</li>
-                <li>@Html.ActionLink("Edit components", "EditDonationSeparation", "Personnel", null, new { @class = "header nav li" })</li>
-                <li>@Html.ActionLink("Add donation", "AddDonation", "Personnel", null, new { @class = "header nav li" })</li>
-                <li>@Html.ActionLink("Add donation", "AddDonation", "Personnel", null, new { @class = "header nav li" })</li>
-                <li>@Html.ActionLink("Add donation", "AddDonation", "Personnel", null, new { @class = "header nav li" })</li>
-
-
-
-                @*<li><a href="personel_page.html">Home</a></li>
-                <li><a href="personel_personal_details.html">Personal Details</a></li>
-                <li><a href="#">Add blood donation</a></li>
-                <li><a href="personel_edit_blood.html">Edit blood donation</a></li>
-                <li class="last"><a href="change_pass_email.html">Account Settings</a></li>*@
-            </ul>
-        </nav>
-    </header>
-</div>
+<form action="login.html" method="post">
+    <input type="submit" class="sf_submit" value="Log out">
+</form>
+<nav>
+    <ul>
+        <li>@Html.ActionLink("Add donation", "AddDonation", "Personnel", null, new { @class = "header nav li" })</li>
+        <li>@Html.ActionLink("Separate components", "SeparateComponents", "Personnel", null, new { @class = "header nav li" })</li>
+        <li>@Html.ActionLink("Add donation", "AddDonation", "Personnel", null, new { @class = "header nav li" })</li>
+        <li>@Html.ActionLink("Add donation", "AddDonation", "Personnel", null, new { @class = "header nav li" })</li>
+        <li>@Html.ActionLink("Add donation", "AddDonation", "Personnel", null, new { @class = "header nav li" })</li>
+    </ul>
+</nav>

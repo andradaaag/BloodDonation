@@ -1,18 +1,14 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace BloodDonation.Data.Models
+namespace BloodDonation.Logic.Models
 {
-/**
- * 
- */
-    public class StoredBlood : BaseEntity
+    public class StoredBlood
     {
-        public StoredBlood()
-        {
-        }
+        public string ID;
 
         public BloodType BloodType;
 

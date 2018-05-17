@@ -69,6 +69,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mapper\FirebaseToObject.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BloodType.cs" />
     <Compile Include="Models\Component.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Repositories\DoctorRepository.cs" />
     <Compile Include="Repositories\DonationRepository.cs" />
     <Compile Include="Repositories\DonorRepository.cs" />
+    <Compile Include="Repositories\StoredBloodRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

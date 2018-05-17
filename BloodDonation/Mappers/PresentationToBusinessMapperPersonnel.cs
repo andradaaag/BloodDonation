@@ -11,13 +11,14 @@ namespace BloodDonation.Mappers
 
         public Logic.Models.Donation Donation(DonationModel donation)
         {
-            Logic.Models.Donation don = new Logic.Models.Donation
+            return new Logic.Models.Donation
             {
+                ID = donation.ID,
                 Alt = donation.Alt,
                 BloodType = new Logic.Models.BloodType
                 {
-                    Group = donation.BloodType.Group,
-                    PH = donation.BloodType.PH == "Positive"
+                    Group = donation.BloodTypeGroup,
+                    PH = donation.BloodTypePH == "Positive"
                 },
                 DonorId = donation.DonorId,
                 HepatitisB = donation.HepatitisB,
@@ -32,9 +33,21 @@ namespace BloodDonation.Mappers
                 Thrombocytes = donation.Thrombocytes,
                 DonationTime = donation.DonationTime
             };
-            return don;
-
-
+        }
+        public Logic.Models.StoredBlood StoredBlood(StoredBloodModel b)
+        {
+            return new Logic.Models.StoredBlood
+            {
+                BloodType = new Logic.Models.BloodType
+                {
+                    Group = b.BloodTypeGroup,
+                    PH = b.BloodTypePH == "Positive"
+                },
+                Component = (Data.Models.Component)Enum.Parse(typeof(Data.Models.Component), b.Component),
+                CollectionDate = b.CollectionDate,
+                Amount = b.Amount,
+                ID = b.ID
+            };
         }
     }
 }
