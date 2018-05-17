@@ -77,37 +77,7 @@ namespace BloodDonation.Controllers
                 original.Stage = "Preparation";
             else
             {
-                if (donation.isAccepted())
-                {
-                    original.Stage = "Redistribution";
-                    StoredBloodModel RBC = new StoredBloodModel
-                    {
-                        Amount = original.RBC,
-                        CollectionDate = original.DonationTime,
-                        Component = "RedBloodCells",
-                        BloodTypeGroup = original.BloodTypeGroup,
-                        BloodTypePH = original.BloodTypePH
-                    };
-                    StoredBloodModel Plasma = new StoredBloodModel
-                    {
-                        Amount = original.Plasma,
-                        CollectionDate = original.DonationTime,
-                        Component = "Plasma",
-                        BloodTypeGroup = original.BloodTypeGroup,
-                        BloodTypePH = original.BloodTypePH
-                    };
-                    StoredBloodModel Thrombocytes = new StoredBloodModel
-                    {
-                        Amount = original.Thrombocytes,
-                        CollectionDate = original.DonationTime,
-                        Component = "Thrombocytes",
-                        BloodTypeGroup = original.BloodTypeGroup,
-                        BloodTypePH = original.BloodTypePH
-                    };
-                    storedBloodService.Add(PresentationToBusiness.StoredBlood(RBC));
-                    storedBloodService.Add(PresentationToBusiness.StoredBlood(Plasma));
-                    storedBloodService.Add(PresentationToBusiness.StoredBlood(Thrombocytes));
-                }
+                AddComponents(original);
             }
 
             donationService.Edit(PresentationToBusiness.Donation(original));
@@ -116,8 +86,89 @@ namespace BloodDonation.Controllers
         }
         //END SEPARATE COMPONENTS
 
-        
+
+        //START LAB RESULTS
+        public ActionResult LabResults()
+        {
+            DonationListModel dlm = new DonationListModel
+            {
+                Donations = GetUnsolvelDonations()
+                .AsEnumerable()
+                .Where(i => i.Stage == "Sampling" || i.Stage == "Preparation")
+                .ToList()
+            };
+            return View("LabResultsView", dlm);
+        }
+
+        //TODO: find a way to make this post
+        public ActionResult EditDonationLab(DonationModel donation)
+        {
+            return View("EditDonationLabView", donation);
+        }
+
+        [HttpPost]
+        public ActionResult LabResultsToDB(DonationModel donation)
+        {
+            DonationModel original = GetOne(donation.ID);
+            original.Alt = donation.Alt;
+            original.HepatitisB = donation.HepatitisB;
+            original.HepatitisC = donation.HepatitisC;
+            original.Hiv = donation.Hiv;
+            original.Htlv = donation.Htlv;
+            original.Syphilis = donation.Syphilis;
+            if (original.Stage == "Sampling")
+                original.Stage = "BiologicalQualityControl";
+            else
+            {
+                AddComponents(original);
+            }
+
+            donationService.Edit(PresentationToBusiness.Donation(original));
+            Thread.Sleep(1000);
+            return LabResults();
+        }
+        //END LAB RESULTS
+
         //UTIL
+        public void AddComponents(DonationModel donation)
+        {
+            if (donation.isAccepted())
+            {
+                donation.Stage = "Redistribution";
+                StoredBloodModel RBC = new StoredBloodModel
+                {
+                    Amount = donation.RBC,
+                    CollectionDate = donation.DonationTime,
+                    Component = "RedBloodCells",
+                    BloodTypeGroup = donation.BloodTypeGroup,
+                    BloodTypePH = donation.BloodTypePH
+                };
+                StoredBloodModel Plasma = new StoredBloodModel
+                {
+                    Amount = donation.Plasma,
+                    CollectionDate = donation.DonationTime,
+                    Component = "Plasma",
+                    BloodTypeGroup = donation.BloodTypeGroup,
+                    BloodTypePH = donation.BloodTypePH
+                };
+                StoredBloodModel Thrombocytes = new StoredBloodModel
+                {
+                    Amount = donation.Thrombocytes,
+                    CollectionDate = donation.DonationTime,
+                    Component = "Thrombocytes",
+                    BloodTypeGroup = donation.BloodTypeGroup,
+                    BloodTypePH = donation.BloodTypePH
+                };
+                storedBloodService.Add(PresentationToBusiness.StoredBlood(RBC));
+                storedBloodService.Add(PresentationToBusiness.StoredBlood(Plasma));
+                storedBloodService.Add(PresentationToBusiness.StoredBlood(Thrombocytes));
+            }
+            else
+            {
+               donation.Stage = "Failed";
+            }
+        }
+
         public List<DonationModel> GetAllDonations()
         {
             return donationService

@@ -310,7 +310,8 @@
     <Content Include="Views\Personnel\EditDonationSeparation.cshtml" />
     <Content Include="Views\SetLabResults.cshtml" />
     <Content Include="Views\Personnel\SeparateComponentsView.cshtml" />
-    <Content Include="Views\Personnel\View.cshtml" />
+    <Content Include="Views\Personnel\LabResultsView.cshtml" />
+    <Content Include="Views\Personnel\EditDonationLabView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

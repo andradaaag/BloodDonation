@@ -19,12 +19,14 @@ namespace BloodDonation.Data.Models
         //Each sample is tested on two fronts: Immuno-Hematology and blood transmissible 
         //diseases (HIV / AIDS, hepatitis B, hepatitis C, syphilis, HTLV, ALT). If any 
         //sample fails a test it is marked unusable and the donor is privately notified.
-        Redistribution
+        Redistribution,
         //The containers are redistributed among the hospitals and clinics that need them 
         //with each part having the following shelf life:
         //•	Thrombocytes – 5 days
         //•	Red blood cells – 42 days
         //•	Plasma – several months
+        Failed
+        //Failed any of the tests
             
 
     }
