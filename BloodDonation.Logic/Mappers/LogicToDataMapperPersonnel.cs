@@ -50,5 +50,29 @@ namespace BloodDonation.Logic.Mappers
                 Amount = storedBlood.Amount
             };
         }
+
+        public Data.Models.Personnel Personnel(Personnel p)
+        {
+            return new Data.Models.Personnel
+            {
+                ID = p.ID,
+                isApproved = p.isApproved,
+                firstName = p.firstName,
+                lastName = p.lastName,
+                emailAddress = p.emailAddress,
+                DOB = p.DOB,
+                Address = p.Address,
+                CityTown = p.CityTown,
+                Country = p.Country,
+                Residence = p.Residence,
+                ResCityTown = p.ResCityTown,
+                ResCountry = p.ResCountry,
+            };
+        }
+
+        public Data.Models.Status Status(Status s)
+        {
+            return (Data.Models.Status)s;
+        }
     }
 }

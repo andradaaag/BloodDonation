@@ -13,26 +13,49 @@ namespace BloodDonation.Controllers
 {
     public class PersonnelController : Controller
     {
-
-        
-
         private DonationService donationService = new DonationService();
+        private PersonnelService personnelService = new PersonnelService();
+        private RequestService requestService = new RequestService();
         private StoredBloodService storedBloodService = new StoredBloodService();
 
         private BusinessToPresentationMapperPersonnel BusinessToPresentation = new BusinessToPresentationMapperPersonnel();
         private PresentationToBusinessMapperPersonnel PresentationToBusiness = new PresentationToBusinessMapperPersonnel();
 
+
+        public PersonnelController()
+        {
+        }
+
+        public Personnel getLoggedPersonnel()
+        {
+            // TODO GET CURRENT LOGGED USER
+            return BusinessToPresentation.Personnel(personnelService.GetOne("1"));
+        }
+
         public ActionResult Index()
         {
             //List<Logic.Models.Donation> l = donationService.FindUnsolved();
-            return View("AddDonationView");
+            return View("HomeView", getLoggedPersonnel());
         }
 
-        //START ADD DONATION
+        public ActionResult Success()
+        {
+            return View("SuccessView");
+        }
 
         public ActionResult AddDonation()
         {
             return View("AddDonationView");
+        }
+
+        public ActionResult Home()
+        {
+            return Index();
+        }
+
+        public ActionResult PersonalDetails()
+        {
+            return View("PersonalDetailsView", getLoggedPersonnel());
         }
 
         [HttpPost]
@@ -43,9 +66,12 @@ namespace BloodDonation.Controllers
 
             donationService.Add(PresentationToBusiness.Donation(donation));
             
-            return Index();
+            return Success();
         }
         //END ADD DONATION
+
+
+
 
         //START SEPARATE COMPONENTS
         public ActionResult SeparateComponents()
@@ -87,6 +113,7 @@ namespace BloodDonation.Controllers
         //END SEPARATE COMPONENTS
 
 
+
         //START LAB RESULTS
         public ActionResult LabResults()
         {
@@ -100,10 +127,59 @@ namespace BloodDonation.Controllers
             return View("LabResultsView", dlm);
         }
 
+        public ActionResult Requests()
+        {
+            RequestList rl = new RequestList
+            {
+                Requests = GetAllRequests()
+                .AsEnumerable()
+                .ToList()
+            };
+            return View("RequestsView", rl);
+        }
+
         //TODO: find a way to make this post
         public ActionResult EditDonationLab(DonationModel donation)
         {
             return View("EditDonationLabView", donation);
+        }
+
+        public ActionResult AcceptRequest(string id)
+        {
+            RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(id));
+            return View("AcceptRequestView", r);
+        }
+
+        public ActionResult ConfirmAcceptRequest(string id)
+        {
+            requestService.EditStatus(id, PresentationToBusiness.Status(Status.Accepted));
+            return Success();
+        }
+
+        public ActionResult EditRequest(string id)
+        {
+            RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(id));
+            NewStatus ns = new NewStatus();
+            ns.ID = r.ID;
+            ns.status = r.status.ToString();
+            return View("EditRequestView",ns);
+        }
+
+
+        [HttpPost]
+        public ActionResult RequestToDb(NewStatus ns)
+        {
+            Status s = (Status)Enum.Parse(typeof(Status), ns.status);
+            requestService.EditStatus(ns.ID, PresentationToBusiness.Status(s));
+            return Success();
+
+        }
+
+        [HttpPost]
+        public ActionResult UpdatePersonnel(Personnel p)
+        {
+            personnelService.Edit(PresentationToBusiness.Personnel(p));
+            return Success();
         }
 
         [HttpPost]
@@ -128,6 +204,9 @@ namespace BloodDonation.Controllers
             return LabResults();
         }
         //END LAB RESULTS
+
+        
+
 
         //UTIL
         public void AddComponents(DonationModel donation)
@@ -169,6 +248,15 @@ namespace BloodDonation.Controllers
             }
         }
 
+        public List<RequestPersonnel> GetAllRequests()
+        {
+            return requestService
+                .FindAll()
+                .AsEnumerable()
+                .Select(i => BusinessToPresentation.Request(i))
+                .ToList();
+        }
+
         public List<DonationModel> GetAllDonations()
         {
             return donationService
@@ -191,6 +279,10 @@ namespace BloodDonation.Controllers
         {
             return BusinessToPresentation.Donation(donationService.GetOne(id));
         }
+
+
+        
+
 
     }
 }

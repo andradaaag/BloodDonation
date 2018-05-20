@@ -1,13 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9e5b41ee-a0f0-475e-9203-dd85b92e1093" name="Default" comment="" />
+    <list default="true" id="9e5b41ee-a0f0-475e-9203-dd85b92e1093" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BloodDonation/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BloodDonation/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BloodDonation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BloodDonation/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/config/applicationhost.config" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/config/applicationhost.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BloodDonation.Data/BloodDonation.Data.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BloodDonation.Data/BloodDonation.Data.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BloodDonation.Data/Models/DonationCenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BloodDonation.Data/Models/DonationCenter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BloodDonation.Data/Models/DonationCenterPersonnel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BloodDonation.Logic/BloodDonation.Business.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BloodDonation.Logic/BloodDonation.Business.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BloodDonation.Logic/Services/DonationCenterPersonnelService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BloodDonation/BloodDonation.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BloodDonation/BloodDonation.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BloodDonation/Views/Personnel/AddDonationView.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BloodDonation/Views/Personnel/AddDonationView.cshtml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="ManageRequestsView.cshtml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BloodDonation/Views/Admin/ManageRequestsView.cshtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="130" column="12" selection-start-line="130" selection-start-column="12" selection-end-line="130" selection-end-column="12" />
+              <folding>
+                <marker date="1526583382529" expanded="true" signature="65:5506" ph="&lt;html.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="92:486" ph="&lt;head.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="487:5498" ph="&lt;body.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="499:898" ph="&lt;div.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="534:887" ph="&lt;header.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="581:723" ph="&lt;div.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="736:868" ph="&lt;form.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="925:5490" ph="&lt;div.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="960:5234" ph="&lt;div.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="1002:5219" ph="&lt;div.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="1042:5200" ph="&lt;form.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="1080:5176" ph="&lt;table.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="1131:1444" ph="&lt;tr.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="1528:1990" ph="&lt;tr.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="1806:1960" ph="&lt;td.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="2015:2479" ph="&lt;tr.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="2295:2449" ph="&lt;td.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="2504:2974" ph="&lt;tr.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="2790:2944" ph="&lt;td.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="2999:3460" ph="&lt;tr.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="3276:3430" ph="&lt;td.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="3485:3959" ph="&lt;tr.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="3775:3929" ph="&lt;td.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="3984:4451" ph="&lt;tr.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="4267:4421" ph="&lt;td.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="4477:5146" ph="@..." />
+                <marker date="1526583382529" expanded="true" signature="4531:5146" ph="{...}" />
+                <marker date="1526583382529" expanded="true" signature="4585:5119" ph="&lt;tr.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="4919:5085" ph="&lt;td.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="5267:5490" ph="&lt;div.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="5306:5475" ph="&lt;footer.../&gt;" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SetLabResults.cshtml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BloodDonation/Views/SetLabResults.cshtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-90">
+              <folding>
+                <marker date="1526583382529" expanded="true" signature="43:84" ph="@..." />
+                <marker date="1526583382529" expanded="true" signature="86:993" ph="&lt;html.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="113:585" ph="&lt;head.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="586:985" ph="&lt;body.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="647:745" ph="&lt;div.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="682:734" ph="&lt;div.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="770:977" ph="&lt;div.../&gt;" />
+                <marker date="1526583382529" expanded="true" signature="805:966" ph="&lt;footer.../&gt;" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Startup.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/BloodDonation/Startup.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <marker date="1526583345349" expanded="false" signature="6:33" ph="..." />
+                <marker date="1526583345349" expanded="true" signature="122:274" ph="{...}" />
+                <marker date="1526583345349" expanded="true" signature="157:272" ph="{...}" />
+                <marker date="1526583345349" expanded="true" signature="214:266" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -37,30 +126,31 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/Status.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/Doctor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/User.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/Donation.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/Patient.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/Stage.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BloodDonation/App_Start/Startup.Auth.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BloodDonation/packages.config" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/Status.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BloodDonation/Startup.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/User.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/Doctor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BloodDonation.Logic/Mappers/LogicToDataMapper.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BloodDonation/Models/IdentityModels.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Repositories/DonorRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Properties/AssemblyInfo.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/FirebaseDonationForm.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/DonationForm.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation/Views/SetLabResults.cshtml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/Request.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/Donor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/DonationCenterPersonnel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/StoredBlood.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/SysAdmin.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/DonationCenter.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/Hospital.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/BaseEntity.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/BloodType.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/Patient.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/SysAdmin.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation/Views/Admin/ManageRequestsView.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/FirebaseDonationForm.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/BaseEntity.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/DonationCenter.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/Donor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/Hospital.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/Donation.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/Stage.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Models/StoredBlood.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation/App_Start/Startup.Auth.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Properties/AssemblyInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation/Views/Personnel/AddDonationView.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation.Data/Repositories/DonorRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BloodDonation/Models/IdentityModels.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -104,28 +194,17 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
     <option name="y" value="20" />
-    <option name="width" value="1346" />
-    <option name="height" value="728" />
+    <option name="width" value="1347" />
+    <option name="height" value="729" />
   </component>
   <component name="ProjectView">
     <navigator currentView="SolutionExplorer" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="SolutionExplorer">
         <subPane>
           <expand>
@@ -136,30 +215,20 @@
             <path>
               <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
               <item name="BloodDonation (5 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="BloodDonation.Business" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="BloodDonation" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
             <path>
               <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
               <item name="BloodDonation (5 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="BloodDonation.Data" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="BloodDonation" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Views" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
             <path>
               <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
               <item name="BloodDonation (5 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="BloodDonation.Data" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Models" type="977d5f41:SolutionExplorerNodeRider" />
-            </path>
-            <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="BloodDonation (5 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="BloodDonation.Data" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Properties" type="977d5f41:SolutionExplorerNodeRider" />
-            </path>
-            <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="BloodDonation (5 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="BloodDonation.Data" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Repositories" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="BloodDonation" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Views" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Admin" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
           </expand>
           <select />
@@ -167,11 +236,13 @@
         <option name="show-file-system" value="false" />
         <option name="show-all-items" value="false" />
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/BloodDonation.Data/Models/User.cs" />
   </component>
   <component name="RunDashboard">
@@ -188,24 +259,20 @@
   </component>
   <component name="RunManager">
     <configuration name="Default" type="DotNetProject" factoryName=".NET Project">
-      <option name="EXE_PATH" value="C:/Program Files/IIS Express/iisexpress.exe" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;/config:$PROJECT_DIR$/.idea/config/applicationhost.config&quot; /site:BloodDonation /apppool:Clr4IntegratedAppPool" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BloodDonation" />
+      <option name="EXE_PATH" value="C:/Program Files (x86)/IIS Express/iisexpress.exe" />
+      <option name="PROGRAM_PARAMETERS" value="/config:$PROJECT_DIR$/.idea/config/applicationhost.config /site:BloodDonation /apppool:Clr4IntegratedAppPool /trace:error" />
+      <option name="WORKING_DIRECTORY" value="C:/Program Files (x86)/IIS Express" />
       <option name="PASS_PARENT_ENVS" value="1" />
-      <envs />
-      <option name="USE_MONO" value="0" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/BloodDonation/BloodDonation.csproj" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
-      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="0" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
       <option name="PROJECT_KIND" value="Web" />
       <option name="PROJECT_TFM" value=".NETFramework,Version=v4.5.2" />
-      <browser name="16bf23d4-93e0-4ffc-bfd6-cb13575177b0" url="http://localhost:53719/" />
+      <browser name="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" start="true" url="http://localhost:53719/" />
     </configuration>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -225,11 +292,12 @@
       <workItem from="1523402310342" duration="2457000" />
       <workItem from="1523944440280" duration="30000" />
       <workItem from="1524044779497" duration="3221000" />
+      <workItem from="1526586903876" duration="778000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11737000" />
+    <option name="totallyTimeSpent" value="12515000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -241,36 +309,39 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30246913" sideWeight="0.5060514" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Unit Tests" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30246913" sideWeight="0.49394855" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="NuGet" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27836612" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.49092284" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Errors In Solution" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5060514" side_tool="true" weight="0.30246913" />
+      <window_info anchor="bottom" id="Unit Tests" order="7" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="REST Client" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.3287037" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49394855" weight="0.3022599" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="NuGet" order="7" sideWeight="0.4969743" weight="0.3287037" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19395973" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49092284" weight="0.3287037" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Messages" order="7" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="UnityProjectConfiguration" isUnityUI="false" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -300,8 +371,74 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager />
-    <watches-manager />
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/BloodDonation/Views/Admin/ManageRequestsView.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="130" column="12" selection-start-line="130" selection-start-column="12" selection-end-line="130" selection-end-column="12" />
+          <folding>
+            <marker date="1526583382529" expanded="true" signature="65:5506" ph="&lt;html.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="92:486" ph="&lt;head.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="487:5498" ph="&lt;body.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="499:898" ph="&lt;div.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="534:887" ph="&lt;header.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="581:723" ph="&lt;div.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="736:868" ph="&lt;form.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="925:5490" ph="&lt;div.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="960:5234" ph="&lt;div.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="1002:5219" ph="&lt;div.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="1042:5200" ph="&lt;form.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="1080:5176" ph="&lt;table.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="1131:1444" ph="&lt;tr.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="1528:1990" ph="&lt;tr.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="1806:1960" ph="&lt;td.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="2015:2479" ph="&lt;tr.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="2295:2449" ph="&lt;td.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="2504:2974" ph="&lt;tr.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="2790:2944" ph="&lt;td.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="2999:3460" ph="&lt;tr.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="3276:3430" ph="&lt;td.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="3485:3959" ph="&lt;tr.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="3775:3929" ph="&lt;td.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="3984:4451" ph="&lt;tr.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="4267:4421" ph="&lt;td.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="4477:5146" ph="@..." />
+            <marker date="1526583382529" expanded="true" signature="4531:5146" ph="{...}" />
+            <marker date="1526583382529" expanded="true" signature="4585:5119" ph="&lt;tr.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="4919:5085" ph="&lt;td.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="5267:5490" ph="&lt;div.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="5306:5475" ph="&lt;footer.../&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BloodDonation/Views/SetLabResults.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-90">
+          <folding>
+            <marker date="1526583382529" expanded="true" signature="43:84" ph="@..." />
+            <marker date="1526583382529" expanded="true" signature="86:993" ph="&lt;html.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="113:585" ph="&lt;head.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="586:985" ph="&lt;body.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="647:745" ph="&lt;div.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="682:734" ph="&lt;div.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="770:977" ph="&lt;div.../&gt;" />
+            <marker date="1526583382529" expanded="true" signature="805:966" ph="&lt;footer.../&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BloodDonation/Startup.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <marker date="1526583345349" expanded="false" signature="6:33" ph="..." />
+            <marker date="1526583345349" expanded="true" signature="122:274" ph="{...}" />
+            <marker date="1526583345349" expanded="true" signature="157:272" ph="{...}" />
+            <marker date="1526583345349" expanded="true" signature="214:266" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

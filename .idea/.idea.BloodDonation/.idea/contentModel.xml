@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Nicu\.Rider2017.3\system\resharper-host\local\Transient\ReSharperHost\v11\SolutionCaches\_BloodDonation.-1024735193.00" t="ExcludeRecursive" />
-    <e p="D:\Common\Collage\semester 4\iss\BloodDonation" t="IncludeFlat">
+    <e p="C:\Users\Razvan\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_BloodDonation.-1700943854.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Razvan\Desktop\iss\BloodDonation" t="IncludeFlat">
       <e p="BloodDonation" t="IncludeRecursive">
         <e p="App_Data" t="Include" />
         <e p="App_Start" t="Include">
@@ -21,8 +21,10 @@
           <e p="Site.css" t="Include" />
         </e>
         <e p="Controllers" t="Include">
+          <e p="AdminController.cs" t="Include" />
           <e p="ErrorController.cs" t="Include" />
           <e p="LoginController.cs" t="Include" />
+          <e p="PersonnelController.cs" t="Include" />
         </e>
         <e p="favicon.ico" t="Include" />
         <e p="fonts" t="Include">
@@ -42,11 +44,20 @@
           <e p="red_blood_cells.jpg" t="Include" />
         </e>
         <e p="Mappers" t="Include">
+          <e p="BusinessToPresentationMapper.cs" t="Include" />
+          <e p="BusinessToPresentationMapperPersonnel.cs" t="Include" />
           <e p="PresentationToBusinessMapper.cs" t="Include" />
+          <e p="PresentationToBusinessMapperPersonnel.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
+          <e p="DoctorAccountRequest.cs" t="Include" />
+          <e p="DonationListModel.cs" t="Include" />
+          <e p="DonationModel.cs" t="Include" />
           <e p="IdentityModels.cs" t="Include" />
+          <e p="ManageRequestsModel.cs" t="Include" />
+          <e p="SearchEntityModel.cs" t="Include" />
           <e p="SignUpForm.cs" t="Include" />
+          <e p="StoredBloodModel.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive" />
         <e p="packages.config" t="Include" />
@@ -93,6 +104,9 @@
         </e>
         <e p="Views" t="Include">
           <e p="_ViewStart.cshtml" t="Include" />
+          <e p="Admin" t="Include">
+            <e p="ManageRequestsView.cshtml" t="Include" />
+          </e>
           <e p="Error" t="Include">
             <e p="NotFound.cshtml" t="Include" />
           </e>
@@ -100,6 +114,17 @@
             <e p="LoginHomePage.cshtml" t="Include" />
             <e p="SignUpView.cshtml" t="Include" />
           </e>
+          <e p="Personnel" t="Include">
+            <e p="0Home.cshtml" t="Include" />
+            <e p="AddDonationView.cshtml" t="Include" />
+            <e p="EditDonationLabView.cshtml" t="Include" />
+            <e p="EditDonationSeparation.cshtml" t="Include" />
+            <e p="LabResultsView.cshtml" t="Include" />
+            <e p="ManageBloodRequests - Copy.cshtml" t="Include" />
+            <e p="NavigationBannerView.cshtml" t="Include" />
+            <e p="SeparateComponentsView.cshtml" t="Include" />
+          </e>
+          <e p="SetLabResults.cshtml" t="Include" />
           <e p="Shared" t="Include">
             <e p="_Layout.cshtml" t="Include" />
             <e p="Error.cshtml" t="Include" />
@@ -111,32 +136,43 @@
         <e p="Web.Release.config" t="Include" />
       </e>
       <e p="BloodDonation.Data" t="IncludeRecursive">
+        <e p="App.config" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="BloodDonation.Data.csproj" t="IncludeRecursive" />
+        <e p="Mapper" t="Include">
+          <e p="FirebaseToObject.cs" t="Include" />
+        </e>
         <e p="Models" t="Include">
           <e p="BaseEntity.cs" t="Include" />
           <e p="BloodType.cs" t="Include" />
+          <e p="Component.cs" t="Include" />
           <e p="Doctor.cs" t="Include" />
           <e p="Donation.cs" t="Include" />
           <e p="DonationCenter.cs" t="Include" />
-          <e p="DonationCenterPersonnel.cs" t="Include" />
-          <e p="DonationForm.cs" t="Include" />
+          <e p="DonationFormEntity.cs" t="Include" />
           <e p="Donor.cs" t="Include" />
           <e p="FirebaseDonationForm.cs" t="Include" />
           <e p="Hospital.cs" t="Include" />
           <e p="Patient.cs" t="Include" />
+          <e p="Personnel.cs" t="Include" />
           <e p="Request.cs" t="Include" />
           <e p="Stage.cs" t="Include" />
           <e p="Status.cs" t="Include" />
           <e p="StoredBlood.cs" t="Include" />
           <e p="SysAdmin.cs" t="Include" />
+          <e p="User.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
         <e p="Properties" t="Include">
           <e p="AssemblyInfo.cs" t="Include" />
         </e>
         <e p="Repositories" t="Include">
+          <e p="DoctorRepository.cs" t="Include" />
+          <e p="DonationRepository.cs" t="Include" />
           <e p="DonorRepository.cs" t="Include" />
+          <e p="PersonnelRepository.cs" t="Include" />
+          <e p="StoredBloodRepository.cs" t="Include" />
         </e>
       </e>
       <e p="BloodDonation.Logic" t="IncludeRecursive">
@@ -144,17 +180,28 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="BloodDonation.Business.csproj" t="IncludeRecursive" />
         <e p="Mappers" t="Include">
+          <e p="DataToLogicMapper.cs" t="Include" />
+          <e p="DataToLogicMapperPersonnel.cs" t="Include" />
           <e p="LogicToDataMapper.cs" t="Include" />
+          <e p="LogicToDataMapperPersonnel.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
+          <e p="AccountRequest.cs" t="Include" />
+          <e p="BloodType.cs" t="Include" />
+          <e p="Donation.cs" t="Include" />
           <e p="DonationForm.cs" t="Include" />
+          <e p="StoredBlood.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive" />
         <e p="Properties" t="Include">
           <e p="AssemblyInfo.cs" t="Include" />
         </e>
         <e p="Services" t="Include">
+          <e p="DoctorService.cs" t="Include" />
+          <e p="DonationService.cs" t="Include" />
           <e p="DonorService.cs" t="Include" />
+          <e p="PersonnelService.cs" t="Include" />
+          <e p="StoredBloodService.cs" t="Include" />
         </e>
       </e>
       <e p="BloodDonation.sln" t="IncludeFlat" />

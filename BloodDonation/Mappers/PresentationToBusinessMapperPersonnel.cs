@@ -49,5 +49,29 @@ namespace BloodDonation.Mappers
                 ID = b.ID
             };
         }
+
+        public Logic.Models.Personnel Personnel(Personnel p)
+        {
+            return new Logic.Models.Personnel
+            {
+                ID = p.ID,
+                isApproved = p.isApproved,
+                firstName = p.firstName,
+                lastName = p.lastName,
+                emailAddress = p.emailAddress,
+                DOB = p.DOB,
+                Address = p.Address,
+                CityTown = p.CityTown,
+                Country = p.Country,
+                Residence = p.Residence,
+                ResCityTown = p.ResCityTown,
+                ResCountry = p.ResCountry
+            };
+        }
+
+        public Logic.Models.Status Status(Status s)
+        {
+            return (Logic.Models.Status)s;
+        }
     }
 }

@@ -5,10 +5,11 @@
 </form>
 <nav>
     <ul>
+        <li>@Html.ActionLink("Home","Home","Personnel", null, new { @class = "header nav li"})</li>
         <li>@Html.ActionLink("Add donation", "AddDonation", "Personnel", null, new { @class = "header nav li" })</li>
         <li>@Html.ActionLink("Separate components", "SeparateComponents", "Personnel", null, new { @class = "header nav li" })</li>
         <li>@Html.ActionLink("Lab results", "LabResults", "Personnel", null, new { @class = "header nav li" })</li>
-        <li>@Html.ActionLink("Add donation", "AddDonation", "Personnel", null, new { @class = "header nav li" })</li>
-        <li>@Html.ActionLink("Add donation", "AddDonation", "Personnel", null, new { @class = "header nav li" })</li>
+        <li>@Html.ActionLink("Account settings", "PersonalDetails", "Personnel", null, new { @class = "header nav li"})</li>
+        <li>@Html.ActionLink("View requests", "Requests", "Personnel", null, new { @class = "header nav li"})</li>
     </ul>
 </nav>

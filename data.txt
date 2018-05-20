@@ -1,0 +1,2 @@
+1,Johns,Smith,email1@email.com,some str,Cluj-Napoca,Romania
+2,John,Smith,email1@email.com,some str,Cluj-Napoca,Romania

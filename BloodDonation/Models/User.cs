@@ -1,13 +1,9 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-
-namespace BloodDonation.Data.Models
+namespace BloodDonation.Models
 {
-    public abstract class User : BaseEntity
+    public class User : BaseEntity
     {
         public string firstName { get; set; }
         public string lastName { get; set; }
@@ -20,7 +16,7 @@ namespace BloodDonation.Data.Models
         public string ResCityTown { get; set; }
         public string ResCountry { get; set; }
 
-        public User(){}
+        public User() { }
 
         public User(string firstName, string lastName, string emailAddress, DateTime dOB, string address, string cityTown, string country)
         {

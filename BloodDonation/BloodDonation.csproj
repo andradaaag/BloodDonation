@@ -233,12 +233,22 @@
     <Compile Include="Mappers\BusinessToPresentationMapperPersonnel.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapper.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapperPersonnel.cs" />
+    <Compile Include="Models\BloodType.cs" />
     <Compile Include="Models\DoctorAccountRequest.cs" />
+    <Compile Include="Models\DonationCenter.cs" />
     <Compile Include="Models\DonationListModel.cs" />
     <Compile Include="Models\DonationModel.cs" />
+    <Compile Include="Models\Hospital.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageRequestsModel.cs" />
+    <Compile Include="Models\NewStatus.cs" />
+    <Compile Include="Models\RequestList.cs" />
+    <Compile Include="Models\RequestPersonnel.cs" />
     <Compile Include="Models\SearchEntityModel.cs" />
+    <Compile Include="Models\Personnel.cs" />
+    <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\SignUpForm.cs" />
     <Compile Include="Models\StoredBloodModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -312,6 +322,12 @@
     <Content Include="Views\Personnel\SeparateComponentsView.cshtml" />
     <Content Include="Views\Personnel\LabResultsView.cshtml" />
     <Content Include="Views\Personnel\EditDonationLabView.cshtml" />
+    <Content Include="Views\Personnel\HomeView.cshtml" />
+    <Content Include="Views\Personnel\PersonalDetailsView.cshtml" />
+    <Content Include="Views\Personnel\RequestsView.cshtml" />
+    <Content Include="Views\Personnel\AcceptRequestView.cshtml" />
+    <Content Include="Views\Personnel\EditRequestView.cshtml" />
+    <Content Include="Views\Personnel\SuccessView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
