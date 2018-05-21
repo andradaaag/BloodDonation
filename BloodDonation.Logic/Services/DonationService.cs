@@ -23,6 +23,26 @@ namespace BloodDonation.Logic.Services
                 .Select(i => DataToLogic.Donation(i))
                 .ToList();
         }
+        public List<Donation> FindByDonationCenter(string donationCenterID)
+        {
+            return Repository
+                .FindByDonationCenter(donationCenterID)
+                .AsEnumerable()
+                .Select(i => DataToLogic.Donation(i))
+                .ToList();
+        }
+
+        public List<Donation> FindUnsolvedByDonationCenter(string donationCenterID)
+        {
+            return Repository
+               .FindByDonationCenter(donationCenterID)
+               .AsEnumerable()
+               .Select(i => DataToLogic.Donation(i))
+               .Where( i=> i.Stage != Data.Models.Stage.Redistribution && i.Stage != Data.Models.Stage.Failed)
+               .ToList();
+        }
+
+
 
         public void Add(Donation d)
         {

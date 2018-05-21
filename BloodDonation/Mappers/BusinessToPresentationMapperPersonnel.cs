@@ -28,7 +28,8 @@ namespace BloodDonation.Mappers
                 Stage = donation.Stage.ToString(),
                 Syphilis = donation.Syphilis,
                 Thrombocytes = donation.Thrombocytes,
-                DonationTime = donation.DonationTime
+                DonationTime = donation.DonationTime,
+                DonationCenterId = donation.DonationCenterId
             };
         }
         public StoredBloodModel StoredBlood(Logic.Models.StoredBlood  b)
@@ -40,7 +41,8 @@ namespace BloodDonation.Mappers
                 Component = b.Component.ToString(),
                 CollectionDate = b.CollectionDate,
                 Amount = b.Amount,
-                ID = b.ID
+                ID = b.ID,
+                DonationCenterID = b.DonationCenterID
             };
         }
 
@@ -59,7 +61,8 @@ namespace BloodDonation.Mappers
                 Country = p.Country,
                 Residence = p.Residence,
                 ResCityTown = p.ResCityTown,
-                ResCountry = p.ResCountry
+                ResCountry = p.ResCountry,
+                DonationCenterID = p.DonationCenterID
             };
         }
 

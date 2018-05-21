@@ -26,17 +26,28 @@ namespace BloodDonation.Controllers
 
         public ActionResult Index()
         {
+            //Logic.Models.DonationCenterPersonnel p = new Logic.Models.DonationCenterPersonnel();
+            //p.ID = "-LCmdpPObpuHY0Hp0VNH";
+            //p.firstName = "First";
+            //p.lastName = "Last";
+            //p.Address = "N/A";
+            //p.CityTown = "N/A";
+            //p.Country = "N/A";
+            //p.DOB = DateTime.Parse("10.10.1980");
+            //p.DonationCenterID = "-LCnZC29CZNHVfs9XTtI";
+            //p.emailAddress = "First.Last@mail.com";
+            //p.isApproved = true;
+            //p.ResCityTown = "N/A";
+            //p.ResCountry = "N/A";
+            //p.Residence = "N/A";
+            //personnelService.Edit(p);
             if (IsNotPersonnel())
                 return errorController.Error();
             return View("AddDonationView");
         }
 
 
-        public Personnel getLoggedPersonnel()
-        {
-            // TODO GET CURRENT LOGGED USER
-            return BusinessToPresentation.Personnel(personnelService.GetOne("1"));
-        }
+        
         
 
         public ActionResult Success()
@@ -58,7 +69,7 @@ namespace BloodDonation.Controllers
 
         public ActionResult PersonalDetails()
         {
-            return View("PersonalDetailsView", getLoggedPersonnel());
+            return View("PersonalDetailsView", GetLoggedPersonnel());
         }
 
         [HttpPost]
@@ -67,6 +78,7 @@ namespace BloodDonation.Controllers
             if (IsNotPersonnel())
                 return errorController.Error();
             donation.Stage = "Sampling";
+            donation.DonationCenterId = GetLoggedPersonnel().DonationCenterID;
             donation.DonationTime = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
 
             donationService.Add(PresentationToBusiness.Donation(donation));
@@ -233,6 +245,7 @@ namespace BloodDonation.Controllers
         {
             if (donation.isAccepted())
             {
+                string centerId = personnelService.GetOne(GetUid()).DonationCenterID;
                 donation.Stage = "Redistribution";
                 StoredBloodModel RBC = new StoredBloodModel
                 {
@@ -240,7 +253,8 @@ namespace BloodDonation.Controllers
                     CollectionDate = donation.DonationTime,
                     Component = "RedBloodCells",
                     BloodTypeGroup = donation.BloodTypeGroup,
-                    BloodTypePH = donation.BloodTypeRH
+                    BloodTypePH = donation.BloodTypeRH,
+                    DonationCenterID = centerId
                 };
                 StoredBloodModel Plasma = new StoredBloodModel
                 {
@@ -248,7 +262,8 @@ namespace BloodDonation.Controllers
                     CollectionDate = donation.DonationTime,
                     Component = "Plasma",
                     BloodTypeGroup = donation.BloodTypeGroup,
-                    BloodTypePH = donation.BloodTypeRH
+                    BloodTypePH = donation.BloodTypeRH,
+                    DonationCenterID = centerId
                 };
                 StoredBloodModel Thrombocytes = new StoredBloodModel
                 {
@@ -256,7 +271,8 @@ namespace BloodDonation.Controllers
                     CollectionDate = donation.DonationTime,
                     Component = "Thrombocytes",
                     BloodTypeGroup = donation.BloodTypeGroup,
-                    BloodTypePH = donation.BloodTypeRH
+                    BloodTypePH = donation.BloodTypeRH,
+                    DonationCenterID = centerId
                 };
                 storedBloodService.Add(PresentationToBusiness.StoredBlood(RBC));
                 storedBloodService.Add(PresentationToBusiness.StoredBlood(Plasma));
@@ -289,7 +305,7 @@ namespace BloodDonation.Controllers
         public List<DonationModel> GetUnsolvelDonations()
         {
             return donationService
-                .FindUnsolved()
+                .FindUnsolvedByDonationCenter(GetLoggedPersonnel().DonationCenterID)
                 .AsEnumerable()
                 .Select(i => BusinessToPresentation.Donation(i))
                 .ToList();
@@ -307,5 +323,11 @@ namespace BloodDonation.Controllers
 
         public bool IsNotPersonnel() => userService.GetRole(GetUid()) != "personnel";
 
+
+        public Personnel GetLoggedPersonnel()
+        {
+            // TODO GET CURRENT LOGGED USER
+            return BusinessToPresentation.Personnel(personnelService.GetOne(GetUid()));
+        }
     }
 }

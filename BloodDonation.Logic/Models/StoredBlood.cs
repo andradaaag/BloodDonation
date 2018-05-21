@@ -17,5 +17,7 @@ namespace BloodDonation.Logic.Models
         public long CollectionDate;
 
         public Enum Component;
+
+        public string DonationCenterID { get; set; }
     }
 }

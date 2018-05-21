@@ -18,6 +18,7 @@ namespace BloodDonation.Models
         public long CollectionDate { get; set; }
         //  will be chanced to an enum when passed forward
         public string Component { get; set; }
+        public string DonationCenterID { get; set; }
         
 
     }
