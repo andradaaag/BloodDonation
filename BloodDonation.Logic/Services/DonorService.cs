@@ -12,7 +12,7 @@ namespace BloodDonation.Business.Services
     public class DonorService
     {
         private readonly DonorRepository donorRepository = new DonorRepository();
-        private readonly LogicToDataMapper logicToDataMapper = new LogicToDataMapper();
+        private readonly LogicToDataMapperDonor logicToDataMapper = new LogicToDataMapperDonor();
         private readonly DataToLogicMapperDonor dataToLogicMapper = new DataToLogicMapperDonor();
 
 
@@ -56,8 +56,14 @@ namespace BloodDonation.Business.Services
                     return dataToLogicMapper.MapDonorDetailsTransferObject(donor);
                 }
             }
+
             return null;
         }
 
-    }
+        public void EditDonorDetails(DonorDetailsTransferObject detailsTransferObject)
+        {
+            donorRepository.UpdateDonorDetails(logicToDataMapper.MapDonor(detailsTransferObject));
+        }
+
+}
 }

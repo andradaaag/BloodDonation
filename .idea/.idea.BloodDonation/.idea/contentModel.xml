@@ -47,6 +47,7 @@
           <e p="BusinessToPresentationMapper.cs" t="Include" />
           <e p="BusinessToPresentationMapperDonor.cs" t="Include" />
           <e p="PresentationToBusinessMapper.cs" t="Include" />
+          <e p="PresentationToBusinessMapperDonor.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
           <e p="ChangeAdminPersonalDataForm.cs" t="Include" />
@@ -127,7 +128,9 @@
             <e p="PersonalDataView.cshtml" t="Include" />
           </e>
           <e p="Donor" t="Include">
+            <e p="BookDonationView.cshtml" t="Include" />
             <e p="DonorPersonalDetailsView.cshtml" t="Include" />
+            <e p="EditDonorPersonalDataView.cshtml" t="Include" />
             <e p="ShowDonorDonationsView.cshtml" t="Include" />
           </e>
           <e p="Error" t="Include">
@@ -189,6 +192,7 @@
           <e p="DataToLogicMapper.cs" t="Include" />
           <e p="DataToLogicMapperDonor.cs" t="Include" />
           <e p="LogicToDataMapper.cs" t="Include" />
+          <e p="LogicToDataMapperDonor.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
           <e p="AccountRequest.cs" t="Include" />

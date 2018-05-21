@@ -206,6 +206,7 @@
     <Compile Include="Mappers\BusinessToPresentationMapper.cs" />
     <Compile Include="Mappers\BusinessToPresentationMapperDonor.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapper.cs" />
+    <Compile Include="Mappers\PresentationToBusinessMapperDonor.cs" />
     <Compile Include="Models\ChangeAdminPersonalDataForm.cs" />
     <Compile Include="Models\CreateAdminForm.cs" />
     <Compile Include="Models\DoctorAccountRequest.cs" />
@@ -274,7 +275,9 @@
     <Content Include="Styles\layout_user_details.css" />
     <Content Include="Styles\mediaqueries.css" />
     <Content Include="Styles\navi.css" />
+    <Content Include="Views\Donor\BookDonationView.cshtml" />
     <Content Include="Views\Donor\DonorPersonalDetailsView.cshtml" />
+    <Content Include="Views\Donor\EditDonorPersonalDataView.cshtml" />
     <Content Include="Views\Donor\ShowDonorDonationsView.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

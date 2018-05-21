@@ -12,6 +12,8 @@ namespace BloodDonation.Controllers
     {
         private readonly BusinessToPresentationMapperDonor
             _businessToPresentationMapper = new BusinessToPresentationMapperDonor();
+        
+        private readonly PresentationToBusinessMapperDonor _presentationToBusinessMapperDonor = new PresentationToBusinessMapperDonor();
 
         private readonly DonorService donorService = new DonorService();
 
@@ -36,5 +38,25 @@ namespace BloodDonation.Controllers
             
             return View("DonorPersonalDetailsView", donorAccountRequest);
         }
-    }
+        
+        public ActionResult GetEditDonorPersonalDataPage()
+        {
+            return View("EditDonorPersonalDataView", new DonorAccountRequest());
+        }
+
+        public ActionResult BookDonationView()
+        {
+            return View("BookDonationView", new DonorAccountRequest());
+        }
+        
+        [HttpPost]
+        public ActionResult UpdateDonorPersonalData(DonorAccountRequest formDetails)
+        {
+            // TODO - somehow update personal data
+            formDetails.ID = "id";
+            
+            donorService.EditDonorDetails(_presentationToBusinessMapperDonor.MapDonorForm(formDetails));
+            return DonorPersonalDetailsView();
+        }
+    }  
 }

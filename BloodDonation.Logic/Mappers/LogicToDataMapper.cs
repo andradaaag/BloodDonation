@@ -6,10 +6,7 @@ namespace BloodDonation.Business.Mappers
 {
     public class LogicToDataMapper
     {
-        public FirebaseDonationForm MapDonationForm(DonationForm form)
-        {
-            return new FirebaseDonationForm();
-        }
+        
 
         public Hospital MapHospital(HospitalTransferObject hto)
         {

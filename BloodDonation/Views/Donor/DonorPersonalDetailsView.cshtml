@@ -26,7 +26,7 @@
                 <ul>
                     <li>@Html.ActionLink("Personal Details", "DonorPersonalDetailsView", "Donor", null, new { @class = "header nav li" })</li>
                     <li>@Html.ActionLink("My Donations", "Index", "Donor", null, new { @class = "header nav li" })</li>
-                    <li>@Html.ActionLink("Book Donation", "DonorPersonalDetailsView", "Donor", null, new { @class = "header nav li" })</li>
+                    <li>@Html.ActionLink("Book Donation", "BookDonationView", "Donor", null, new { @class = "header nav li" })</li>
                     <li>@Html.ActionLink("Account Settings", "DonorPersonalDetailsView", "Donor", null, new { @class = "header nav li" })</li>
                 </ul> 
             </nav>
@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    @Html.ActionLink("Edit", "GetEditPersonalDataPage", "Admin", null, new { @class = "button" })
+                    @Html.ActionLink("Edit", "GetEditDonorPersonalDataPage", "Donor", null, new { @class = "button" })
                 </div>
             </form>
         </div>

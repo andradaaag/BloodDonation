@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Mappers\DataToLogicMapper.cs" />
     <Compile Include="Mappers\DataToLogicMapperDonor.cs" />
+    <Compile Include="Mappers\LogicToDataMapperDonor.cs" />
     <Compile Include="Mappers\LogicToDataMapper.cs" />
     <Compile Include="Models\AccountRequest.cs" />
     <Compile Include="Models\DoctorTransferObject.cs" />
