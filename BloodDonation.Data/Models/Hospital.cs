@@ -12,32 +12,37 @@ namespace BloodDonation.Data.Models
 	public class Hospital : BaseEntity
 	{
 
-		/**
-		 * 
-		 */
-		public Hospital()
-		{
-		}
-
-		/**
-		 * 
-		 */
-		public string location;
-
-		/**
-		 * 
-		 */
-		public string name;
-
-		/**
-		 * 
-		 */
+		public Hospital(){}
+		
 		public HashSet<Doctor> Doctors;
 
+		public HashSet<Patient> Patients;
+
+
 		/**
 		 * 
 		 */
-		public HashSet<Patient> Patients;
+		public Hospital(string location, string name)
+		{
+            this.location = location;
+            this.name = name;
+		}
+
+        /**
+		 * 
+		 */
+        public string location { get; set; }
+
+		/**
+		 * 
+		 */
+		public string name {get;set;}
+
+
+		/**
+		 * 
+		 */
+
 
 	}
 }

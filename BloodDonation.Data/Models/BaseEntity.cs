@@ -6,23 +6,12 @@ using System.Text;
 
 namespace BloodDonation.Data.Models
 {
-/**
- * 
- */
 	public class BaseEntity
 	{
-
-		/**
-		 * 
-		 */
 		public BaseEntity()
 		{
 		}
 
-		/**
-		 * 
-		 */
 		public string ID { get; set;}
-
 	}
 }

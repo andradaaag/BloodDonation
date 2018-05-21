@@ -25,6 +25,14 @@ namespace BloodDonation.Data.Repositories
             newDoc = new Doctor("Mihailescu", "Ounicea", "ouniceaMih@doctorlife.com", new DateTime(), "N/A", "Cluj", "Albania");
             newDoc.ID = "3";
             this.myDoctors.Add(newDoc);
+            newDoc = new Doctor("Doctorescu", "Doc", "docty@cjHospital.com", new DateTime(), "N/A", "Cluj", "Romania");
+            newDoc.ID = "4";
+            newDoc.validateAccount();
+            this.myDoctors.Add(newDoc);
+            newDoc = new Doctor("Stirbu", "Claudia", "claudiaStb@docts.com", new DateTime(), "N/A", "Sibiu", "Romania");
+            newDoc.ID = "5";
+            newDoc.validateAccount();
+            this.myDoctors.Add(newDoc);
         }
 
 

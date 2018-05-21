@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Firebase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FirebaseDatabase.net.3.3.3\lib\netstandard1.1\Firebase.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -78,15 +81,40 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Reactive.Core, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Core.3.1.1\lib\net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Interfaces.3.1.1\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Linq.3.1.1\lib\net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.PlatformServices.3.1.1\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Windows.Threading.3.1.1\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -139,11 +167,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -197,18 +223,50 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DonorController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PersonnelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Mappers\BusinessToPresentationMapper.cs" />
+    <Compile Include="Mappers\BusinessToPresentationMapperPersonnel.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapper.cs" />
+    <Compile Include="Mappers\PresentationToBusinessMapperPersonnel.cs" />
+    <Compile Include="Models\BloodType.cs" />
     <Compile Include="Models\DoctorAccountRequest.cs" />
+    <Compile Include="Models\DonationCenter.cs" />
+    <Compile Include="Models\DonationListModel.cs" />
+    <Compile Include="Models\DonationModel.cs" />
+    <Compile Include="Models\Hospital.cs" />
+    <Compile Include="Mappers\BusinessToPresentationMapperDonor.cs" />
+    <Compile Include="Mappers\PresentationToBusinessMapperDonor.cs" />
+    <Compile Include="Models\ChangeAdminPersonalDataForm.cs" />
+    <Compile Include="Models\CreateAdminForm.cs" />
+    <Compile Include="Models\DoctorDisplayData.cs" />
+    <Compile Include="Models\DonationCenterDisplayData.cs" />
+    <Compile Include="Models\DonationCenterPersonnelAccountRequest.cs" />
+    <Compile Include="Models\DonationCenterPersonnelDisplayData.cs" />
+    <Compile Include="Models\DonorAccountRequest.cs" />
+    <Compile Include="Models\HospitalDisplayData.cs" />
+    <Compile Include="Models\DonorDonationDetails.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageAccountsModel.cs" />
+    <Compile Include="Models\ManageDonationCentersModel.cs" />
+    <Compile Include="Models\ManageHospitalsModel.cs" />
     <Compile Include="Models\ManageRequestsModel.cs" />
+    <Compile Include="Models\NewStatus.cs" />
+    <Compile Include="Models\RequestList.cs" />
+    <Compile Include="Models\RequestPersonnel.cs" />
     <Compile Include="Models\SearchEntityModel.cs" />
+    <Compile Include="Models\Personnel.cs" />
+    <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\ShowDonorDonations.cs" />
     <Compile Include="Models\SignUpForm.cs" />
+    <Compile Include="Models\StoredBloodModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -249,6 +307,7 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Styles\framework.css" />
     <Content Include="Styles\layout.css" />
+    <Content Include="Styles\layout_admin_requests.css" />
     <Content Include="Styles\layout_change_pass.css" />
     <Content Include="Styles\layout_doctor_my_requests.css" />
     <Content Include="Styles\layout_doctor_request.css" />
@@ -258,6 +317,10 @@
     <Content Include="Styles\layout_user_details.css" />
     <Content Include="Styles\mediaqueries.css" />
     <Content Include="Styles\navi.css" />
+    <Content Include="Views\Donor\BookDonationView.cshtml" />
+    <Content Include="Views\Donor\DonorPersonalDetailsView.cshtml" />
+    <Content Include="Views\Donor\EditDonorPersonalDataView.cshtml" />
+    <Content Include="Views\Donor\ShowDonorDonationsView.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -273,6 +336,29 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Login\SignUpView.cshtml" />
     <Content Include="Views\Admin\ManageRequestsView.cshtml" />
+    <Content Include="Views\Personnel\AddDonationView.cshtml" />
+    <Content Include="Views\Personnel\NavigationBannerView.cshtml" />
+    <Content Include="Views\Personnel\EditDonationSeparation.cshtml" />
+    <Content Include="Views\SetLabResults.cshtml" />
+    <Content Include="Views\Personnel\SeparateComponentsView.cshtml" />
+    <Content Include="Views\Personnel\LabResultsView.cshtml" />
+    <Content Include="Views\Personnel\EditDonationLabView.cshtml" />
+    <Content Include="Views\Personnel\HomeView.cshtml" />
+    <Content Include="Views\Personnel\PersonalDetailsView.cshtml" />
+    <Content Include="Views\Personnel\RequestsView.cshtml" />
+    <Content Include="Views\Personnel\AcceptRequestView.cshtml" />
+    <Content Include="Views\Personnel\EditRequestView.cshtml" />
+    <Content Include="Views\Personnel\SuccessView.cshtml" />
+    <Content Include="Views\Admin\ManageDoctorRequestsView.cshtml" />
+    <Content Include="Views\Admin\ManagePersonnelRequestsView.cshtml" />
+    <Content Include="Views\Admin\ManageDoctorsView.cshtml" />
+    <Content Include="Views\Admin\ManagePersonnelView.cshtml" />
+    <Content Include="Views\Admin\ManageHospitalsView.cshtml" />
+    <Content Include="Views\Admin\ManageDonationCentersView.cshtml" />
+    <Content Include="Views\Admin\CreateAdminView.cshtml" />
+    <Content Include="Views\Admin\PersonalDataView.cshtml" />
+    <Content Include="Views\Admin\EditPersonalDataView.cshtml" />
+    <Content Include="Views\Admin\AdminCreatedView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -286,6 +372,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BloodDonation.Data\BloodDonation.Data.csproj">
+      <Project>{2BE91C7B-1AF7-4DEA-9274-7E9051967385}</Project>
+      <Name>BloodDonation.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BloodDonation.Logic\BloodDonation.Business.csproj">
       <Project>{19780FBF-06AC-471E-B5E8-DECE641BFBE3}</Project>
       <Name>BloodDonation.Business</Name>

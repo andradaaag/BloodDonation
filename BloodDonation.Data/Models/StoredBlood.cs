@@ -10,26 +10,16 @@ namespace BloodDonation.Data.Models
  */
     public class StoredBlood : BaseEntity
     {
-        /**
-         * 
-         */
         public StoredBlood()
         {
         }
 
-        /**
-         * 
-         */
-        public BloodType bloodType;
+        public BloodType BloodType;
 
-        /**
-         * 
-         */
-        public DateTime collectionDate;
+        public int Amount { get; set; }
 
-        /**
-         * 
-         */
-        public Enum component;
+        public long CollectionDate;
+
+        public Enum Component;
     }
 }

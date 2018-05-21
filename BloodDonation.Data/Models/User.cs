@@ -7,18 +7,20 @@ using System.Text;
 
 namespace BloodDonation.Data.Models
 {
-    /**
-     * 
-     */
     public abstract class User : BaseEntity
     {
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string emailAddress { get; set; }
+        public DateTime DOB { get; set; }
+        public string Address { get; set; }
+        public string CityTown { get; set; }
+        public string Country { get; set; }
+        public string Residence { get; set; }
+        public string ResCityTown { get; set; }
+        public string ResCountry { get; set; }
 
-        /**
-         * 
-         */
-        public User()
-        {
-        }
+        public User(){}
 
         public User(string firstName, string lastName, string emailAddress, DateTime dOB, string address, string cityTown, string country)
         {
@@ -30,58 +32,5 @@ namespace BloodDonation.Data.Models
             CityTown = cityTown;
             Country = country;
         }
-
-
-
-        /**
-         * 
-         */
-        public string firstName;
-
-        /**
-         * 
-         */
-        public string lastName;
-
-        /**
-         * 
-         */
-        public string emailAddress;
-
-        /**
-         * 
-         */
-        public DateTime DOB;
-
-        /**
-         * 
-         */
-        public string Address;
-
-        /**
-         * 
-         */
-        public string CityTown;
-
-        /**
-         * 
-         */
-        public string Country;
-
-        /**
-         * 
-         */
-        public string Residence;
-
-        /**
-         * 
-         */
-        public string ResCityTown;
-
-        /**
-         * 
-         */
-        public string ResCountry;
-
     }
 }

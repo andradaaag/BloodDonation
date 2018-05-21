@@ -1,0 +1,14 @@
+﻿
+
+<form action="login.html" method="post">
+    <input type="submit" class="sf_submit" value="Log out">
+</form>
+<nav>
+    <ul>
+        <li>@Html.ActionLink("Add donation", "AddDonation", "Personnel", null, new { @class = "header nav li" })</li>
+        <li>@Html.ActionLink("Separate components", "SeparateComponents", "Personnel", null, new { @class = "header nav li" })</li>
+        <li>@Html.ActionLink("Lab results", "LabResults", "Personnel", null, new { @class = "header nav li" })</li>
+        <li>@Html.ActionLink("Account settings", "PersonalDetails", "Personnel", null, new { @class = "header nav li"})</li>
+        <li>@Html.ActionLink("View requests", "Requests", "Personnel", null, new { @class = "header nav li"})</li>
+    </ul>
+</nav>

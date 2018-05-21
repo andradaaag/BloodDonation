@@ -1,0 +1,93 @@
+﻿@model BloodDonation.Models.DonationModel
+
+@{
+    ViewBag.Title = "EditDonationSeparation";
+}
+
+<html lang="en" dir="ltr">
+<head>
+    <title>Separate components</title>
+    <meta charset="iso-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Styles/layout_personel_add_blood.css")
+    @Styles.Render("~/Styles/mediaqueries.css")
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+</head>
+<body>
+    <div class="wrapper row1">
+        <header id="header" class="clear">
+            <div id="hgroup">
+                <h1><a href="#">Separate components</a></h1>
+                <h2><a href="#">Donation center personnel</a></h2>
+            </div>
+            @Html.Partial("NavigationBannerView", null)
+        </header>
+    </div>
+    <div class="wrapper row3">
+        <div class="container">
+            @using (Html.BeginForm("SeparateComponentsToDB", "Personnel", FormMethod.Post))
+            {
+                @Html.ValidationSummary(true)
+
+                <div class="row">
+                    <div class="col-25">
+                        <label for="fname">Donation ID</label>
+
+                    </div>
+                    <div class="col-75">
+                        @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @readonly = "readonly" } })
+                    </div>
+                </div>
+               
+                //TODO: add a measuring unit to all components
+                <div class="row">
+                    <div class="col-25">
+                        <label for="fname">Red blood cells</label>
+
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBoxFor(model => model.RBC, new { @required = "required", placeholder = "RBC" })
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-25">
+                        <label for="fname">Plasma</label>
+
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBoxFor(model => model.Plasma, new { @required = "required", placeholder = "Plasma" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-25">
+                        <label for="fname">Thrombocytes</label>
+
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBoxFor(model => model.Thrombocytes, new { @required = "required", placeholder = "Thrombocytes" })
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <input type="submit" value="Edit donation">
+                </div>
+            }
+
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="wrapper row4">
+        <footer id="footer" class="clear">
+            <p class="fl_left">Copyright &copy; 2013 - All Rights Reserved - <a href="#">Domain Name</a></p>
+        </footer>
+    </div>
+</body>
+</html>
+
