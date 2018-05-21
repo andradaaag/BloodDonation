@@ -29,5 +29,11 @@ namespace BloodDonation.Data.Mapper
             u.ID = user.Key;
             return u;
         }
+        public Request Request(FirebaseObject<Request> request)
+        {
+            Request r = request.Object;
+            r.ID = request.Key;
+            return r;
+        }
     }
 }

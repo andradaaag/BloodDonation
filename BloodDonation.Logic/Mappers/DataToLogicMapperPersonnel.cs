@@ -53,5 +53,54 @@ namespace BloodDonation.Logic.Mappers
             };
             
         }
+
+        public Personnel Personnel(Data.Models.Personnel p)
+        {
+            return new Personnel
+            {
+                ID = p.ID,
+                isApproved = p.isApproved,
+                firstName = p.firstName,
+                lastName = p.lastName,
+                emailAddress = p.emailAddress,
+                DOB = p.DOB,
+                Address = p.Address,
+                CityTown = p.CityTown,
+                Country = p.Country,
+                Residence = p.Residence,
+                ResCityTown = p.ResCityTown,
+                ResCountry = p.ResCountry
+            };
+        }
+
+
+
+        public BloodType BloodType(Data.Models.BloodType bt)
+        {
+            return new BloodType
+            {
+                Group = bt.Group,
+                PH = bt.PH
+            };
+        }
+
+        public Status Status(Data.Models.Status s)
+        {
+            return (Status)s;
+        }
+
+        public RequestPersonnel Request(Data.Models.Request r)
+        {
+            return new RequestPersonnel
+            {
+                ID = r.ID,
+                status = this.Status(r.status),
+                hospitalName = r.destination.name,
+                hospitalLocation = r.destination.location,
+                quantity = r.quantity,
+                bloodType = this.BloodType(r.bloodType)
+            };
+
+        }
     }
 }

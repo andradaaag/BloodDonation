@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BloodDonation.Logic.Services
+namespace BloodDonation.Models
 {
-    class DonationCenterPersonnelService
+    public class BloodType
     {
+        public string Group;
+        public bool PH;
     }
 }

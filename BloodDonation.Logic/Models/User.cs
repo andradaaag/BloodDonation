@@ -1,18 +1,22 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-
-namespace BloodDonation.Data.Models
+namespace BloodDonation.Logic.Models
 {
-    public abstract class User : BaseEntity
+    public class User : BaseEntity
     {
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string emailAddress { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DOB { get; set; }
+
         public string Address { get; set; }
         public string CityTown { get; set; }
         public string Country { get; set; }

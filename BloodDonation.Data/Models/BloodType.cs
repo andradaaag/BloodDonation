@@ -12,16 +12,7 @@ namespace BloodDonation.Data.Models
 	public class BloodType : BaseEntity
 	{
 
-		/**
-		 * 
-		 */
-		public BloodType()
-		{
-		}
-
-		/**
-		 * 
-		 */
+		public BloodType() {}
 		public string Group;
 
 		/**
@@ -32,6 +23,7 @@ namespace BloodDonation.Data.Models
 		/**
 		 * @param blood
 		 */
+
 		public void isCompatible(BloodType blood)
 		{
 			// TODO implement here
