@@ -223,6 +223,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DonorController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PersonnelController.cs" />
@@ -239,7 +240,23 @@
     <Compile Include="Models\DonationListModel.cs" />
     <Compile Include="Models\DonationModel.cs" />
     <Compile Include="Models\Hospital.cs" />
+    <Compile Include="Mappers\BusinessToPresentationMapperDonor.cs" />
+    <Compile Include="Mappers\PresentationToBusinessMapper.cs" />
+    <Compile Include="Mappers\PresentationToBusinessMapperDonor.cs" />
+    <Compile Include="Models\ChangeAdminPersonalDataForm.cs" />
+    <Compile Include="Models\CreateAdminForm.cs" />
+    <Compile Include="Models\DoctorAccountRequest.cs" />
+    <Compile Include="Models\DoctorDisplayData.cs" />
+    <Compile Include="Models\DonationCenterDisplayData.cs" />
+    <Compile Include="Models\DonationCenterPersonnelAccountRequest.cs" />
+    <Compile Include="Models\DonationCenterPersonnelDisplayData.cs" />
+    <Compile Include="Models\DonorAccountRequest.cs" />
+    <Compile Include="Models\HospitalDisplayData.cs" />
+    <Compile Include="Models\DonorDonationDetails.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageAccountsModel.cs" />
+    <Compile Include="Models\ManageDonationCentersModel.cs" />
+    <Compile Include="Models\ManageHospitalsModel.cs" />
     <Compile Include="Models\ManageRequestsModel.cs" />
     <Compile Include="Models\NewStatus.cs" />
     <Compile Include="Models\RequestList.cs" />
@@ -249,6 +266,7 @@
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\ShowDonorDonations.cs" />
     <Compile Include="Models\SignUpForm.cs" />
     <Compile Include="Models\StoredBloodModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -291,6 +309,7 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Styles\framework.css" />
     <Content Include="Styles\layout.css" />
+    <Content Include="Styles\layout_admin_requests.css" />
     <Content Include="Styles\layout_change_pass.css" />
     <Content Include="Styles\layout_doctor_my_requests.css" />
     <Content Include="Styles\layout_doctor_request.css" />
@@ -300,6 +319,10 @@
     <Content Include="Styles\layout_user_details.css" />
     <Content Include="Styles\mediaqueries.css" />
     <Content Include="Styles\navi.css" />
+    <Content Include="Views\Donor\BookDonationView.cshtml" />
+    <Content Include="Views\Donor\DonorPersonalDetailsView.cshtml" />
+    <Content Include="Views\Donor\EditDonorPersonalDataView.cshtml" />
+    <Content Include="Views\Donor\ShowDonorDonationsView.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -328,6 +351,16 @@
     <Content Include="Views\Personnel\AcceptRequestView.cshtml" />
     <Content Include="Views\Personnel\EditRequestView.cshtml" />
     <Content Include="Views\Personnel\SuccessView.cshtml" />
+    <Content Include="Views\Admin\ManageDoctorRequestsView.cshtml" />
+    <Content Include="Views\Admin\ManagePersonnelRequestsView.cshtml" />
+    <Content Include="Views\Admin\ManageDoctorsView.cshtml" />
+    <Content Include="Views\Admin\ManagePersonnelView.cshtml" />
+    <Content Include="Views\Admin\ManageHospitalsView.cshtml" />
+    <Content Include="Views\Admin\ManageDonationCentersView.cshtml" />
+    <Content Include="Views\Admin\CreateAdminView.cshtml" />
+    <Content Include="Views\Admin\PersonalDataView.cshtml" />
+    <Content Include="Views\Admin\EditPersonalDataView.cshtml" />
+    <Content Include="Views\Admin\AdminCreatedView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

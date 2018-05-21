@@ -22,6 +22,7 @@ namespace BloodDonation.Data.Models
 
 		public Stage Stage;
 
+
 		public int Quantity;
 
         public int Plasma;
@@ -39,6 +40,25 @@ namespace BloodDonation.Data.Models
 
         public long DonationTime { get; set; }
       
-    }
+		public String testResult;
+		
+
+		public DonationCenter center;
+
+		public String donationDate;
+
+		/**
+		 * 
+		 */
+		public int quantity;
+
+		public Donation(BloodType bloodType, Donor donor, Stage stage, int quantity, String testResult)
+		{
+			this.bloodType = bloodType;
+			this.donor = donor;
+			this.stage = stage;
+			this.quantity = quantity;
+			this.testResult = testResult;
+		}
+	}
 }
- 

@@ -24,11 +24,44 @@ namespace BloodDonation.Logic.Services
             List<AccountRequest> myDoctorAccountRequests = new List<AccountRequest>();
             
             foreach(Doctor doctor in myDoctors){
-                myDoctorAccountRequests.Add(dataToLogicMapper.MapDoctorToAccountRequest(doctor));
+                if (!doctor.isValidAccount())
+                {
+                    myDoctorAccountRequests.Add(dataToLogicMapper.MapDoctorToAccountRequest(doctor));
+                }
             }
-
             return myDoctorAccountRequests;
         } 
 
+        public List<DoctorTransferObject> GetValidDoctors()
+        {
+            List<Doctor> myDoctors = doctorRepository.findAll();
+            List<DoctorTransferObject> doctorTransferObjects = new List<DoctorTransferObject>();
+
+            foreach(Doctor doctor in myDoctors)
+            {
+                if (doctor.isValidAccount())
+                {
+                    doctorTransferObjects.Add(dataToLogicMapper.MapDoctorTransferObject(doctor));
+                }
+            }
+            return doctorTransferObjects;
+        }
+
+        public List<DoctorTransferObject> FilterDoctorsBySearchQuery(string searchQuery)
+        {
+            if (searchQuery.Length == 0)
+                return GetValidDoctors();
+
+            List<DoctorTransferObject> doctorTransferObjects = GetValidDoctors();
+            List<DoctorTransferObject> respone = new List<DoctorTransferObject>();
+
+            foreach(DoctorTransferObject dto in doctorTransferObjects)
+            {
+                if (dto.FirstName.Contains(searchQuery) || dto.LastName.Contains(searchQuery))
+                    respone.Add(dto);
+            }
+
+            return respone;
+        }
     }
 }

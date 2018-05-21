@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +8,23 @@ namespace BloodDonation.Data.Models
 /**
  * 
  */
-	public class DonationFormEntity : BaseEntity
-	{
+    public class DonationFormEntity : BaseEntity
+    {
+        /**
+         * 
+         */
+        public DonationFormEntity()
+        {
+        }
 
-		/**
-		 * 
-		 */
-		public DonationFormEntity()
-		{
-		}
+        /**
+         * 
+         */
+        public int currentWeight;
 
-		/**
-		 * 
-		 */
-		public int currentWeight;
-
-	}
+        public DonationFormEntity(int currentWeight)
+        {
+            this.currentWeight = currentWeight;
+        }
+    }
 }
