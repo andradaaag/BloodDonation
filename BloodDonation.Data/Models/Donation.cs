@@ -18,7 +18,7 @@ namespace BloodDonation.Data.Models
 
 		public BloodType BloodType;
 
-		public string DonorId;
+		public string DonorCnp;
 
 		public Stage Stage;
 
@@ -34,6 +34,8 @@ namespace BloodDonation.Data.Models
         public bool Syphilis { get; set; }
         public bool Htlv { get; set; }
         public bool Alt { get; set; }
+
+        public string DonationCenterID { get; set; }
 
         public long DonationTime { get; set; }
       

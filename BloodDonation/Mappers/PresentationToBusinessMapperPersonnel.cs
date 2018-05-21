@@ -18,7 +18,7 @@ namespace BloodDonation.Mappers
                 BloodType = new Logic.Models.BloodType
                 {
                     Group = donation.BloodTypeGroup,
-                    PH = donation.BloodTypePH == "Positive"
+                    RH = donation.BloodTypeRH == "Positive"
                 },
                 DonorId = donation.DonorId,
                 HepatitisB = donation.HepatitisB,
@@ -41,7 +41,7 @@ namespace BloodDonation.Mappers
                 BloodType = new Logic.Models.BloodType
                 {
                     Group = b.BloodTypeGroup,
-                    PH = b.BloodTypePH == "Positive"
+                    RH = b.BloodTypePH == "Positive"
                 },
                 Component = (Data.Models.Component)Enum.Parse(typeof(Data.Models.Component), b.Component),
                 CollectionDate = b.CollectionDate,

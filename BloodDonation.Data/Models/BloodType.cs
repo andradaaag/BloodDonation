@@ -27,7 +27,7 @@ namespace BloodDonation.Data.Models
 		/**
 		 * 
 		 */
-		public bool PH;
+		public bool RH;
 
 		/**
 		 * @param blood

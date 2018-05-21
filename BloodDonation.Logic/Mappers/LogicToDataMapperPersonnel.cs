@@ -18,9 +18,9 @@ namespace BloodDonation.Logic.Mappers
                 BloodType = new Data.Models.BloodType
                 {
                     Group = donation.BloodType.Group,
-                    PH = donation.BloodType.PH
+                    RH = donation.BloodType.RH
                 },
-                DonorId = donation.DonorId,
+                DonorCnp = donation.DonorId,
                 HepatitisB = donation.HepatitisB,
                 HepatitisC = donation.HepatitisC,
                 Hiv = donation.Hiv,
@@ -43,7 +43,7 @@ namespace BloodDonation.Logic.Mappers
                 BloodType = new Data.Models.BloodType
                 {
                     Group = storedBlood.BloodType.Group,
-                    PH = storedBlood.BloodType.PH
+                    RH = storedBlood.BloodType.RH
                 },
                 Component = storedBlood.Component,
                 CollectionDate = storedBlood.CollectionDate,

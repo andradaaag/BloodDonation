@@ -16,7 +16,7 @@ namespace BloodDonation.Mappers
                 ID = donation.ID,
                 Alt = donation.Alt,
                 BloodTypeGroup = donation.BloodType.Group,
-                BloodTypePH = donation.BloodType.PH ? "Positive" : "Negative",
+                BloodTypeRH = donation.BloodType.RH ? "Positive" : "Negative",
                 DonorId = donation.DonorId,
                 HepatitisB = donation.HepatitisB,
                 HepatitisC = donation.HepatitisC,
@@ -36,7 +36,7 @@ namespace BloodDonation.Mappers
             return new StoredBloodModel
             {
                 BloodTypeGroup = b.BloodType.Group,
-                BloodTypePH = b.BloodType.PH ? "Positive" : "Negative",
+                BloodTypePH = b.BloodType.RH ? "Positive" : "Negative",
                 Component = b.Component.ToString(),
                 CollectionDate = b.CollectionDate,
                 Amount = b.Amount,

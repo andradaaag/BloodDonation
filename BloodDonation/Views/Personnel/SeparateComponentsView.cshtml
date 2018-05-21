@@ -28,7 +28,7 @@
         </header>
     </div>
 
-   
+
 
     @*TODO: make the top of the table aligned to left for each of the column, somehow*@
     <div class="wrapper row3">
@@ -36,12 +36,16 @@
             <table style="width:100%">
                 <tr>
                     <th>ID</th>
-                    <th>Doner</th>
+                    <th>Doner NIN (National identification number)</th>
                     <th>Quantity</th>
                     <th>Stage</th>
                 </tr>
                 @foreach (var req in Model.Donations)
                 {
+                    <div hidden="hidden">
+                        @Html.BeginForm("EditDonationSeparation", "Personnel", req, FormMethod.Post){
+                    </div>
+
                     <tr>
                         <td>@req.ID</td>
                         <td>@req.DonorId</td>
@@ -49,11 +53,14 @@
                         <td>@req.Stage</td>
                         <td>
                             <div class="row">
-                                @*TODO: make this look like a button*@
-                                @Html.ActionLink("Edit", "EditDonationSeparation", "Personnel", req, new { })
+
+                                <input type="submit" value="Edit">
                             </div>
                         </td>
                     </tr>
+                    <div hidden="hidden">
+                        }
+                    </div>
                 }
 
             </table>

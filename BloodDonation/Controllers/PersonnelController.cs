@@ -18,38 +18,49 @@ namespace BloodDonation.Controllers
 
         private DonationService donationService = new DonationService();
         private StoredBloodService storedBloodService = new StoredBloodService();
+        private UserService userService = new UserService();
+
+        private ErrorController errorController = new ErrorController();
 
         private BusinessToPresentationMapperPersonnel BusinessToPresentation = new BusinessToPresentationMapperPersonnel();
         private PresentationToBusinessMapperPersonnel PresentationToBusiness = new PresentationToBusinessMapperPersonnel();
 
+        
         public ActionResult Index()
         {
-            //List<Logic.Models.Donation> l = donationService.FindUnsolved();
-            return View("AddDonationView");
+            if (IsNotPersonnel())
+                return errorController.Error();
+            return View("AddDonationView");    
         }
 
         //START ADD DONATION
 
         public ActionResult AddDonation()
         {
+            if (IsNotPersonnel())
+                return errorController.Error();
             return View("AddDonationView");
         }
 
         [HttpPost]
         public ActionResult AddDonationInDb(DonationModel donation)
         {
+            if (IsNotPersonnel())
+                return errorController.Error();
             donation.Stage = "Sampling";
             donation.DonationTime = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
 
             donationService.Add(PresentationToBusiness.Donation(donation));
             
-            return Index();
+            return View("AddDonationView");
         }
         //END ADD DONATION
 
         //START SEPARATE COMPONENTS
         public ActionResult SeparateComponents()
         {
+            if (IsNotPersonnel())
+                return errorController.Error();
             DonationListModel dlm = new DonationListModel
             {
                 Donations = GetUnsolvelDonations()
@@ -60,15 +71,19 @@ namespace BloodDonation.Controllers
             return View("SeparateComponentsView", dlm);
         }
 
-        //TODO: find a way to make this post
+        [HttpPost]
         public ActionResult EditDonationSeparation(DonationModel donation)
         {
+            if (IsNotPersonnel())
+                return errorController.Error();
             return View("EditDonationSeparation", donation);
         }
 
         [HttpPost]
         public ActionResult SeparateComponentsToDB(DonationModel donation)
         {
+            if (IsNotPersonnel())
+                return errorController.Error();
             DonationModel original = GetOne(donation.ID);
             original.Plasma = donation.Plasma;
             original.RBC = donation.RBC;
@@ -90,6 +105,8 @@ namespace BloodDonation.Controllers
         //START LAB RESULTS
         public ActionResult LabResults()
         {
+            if (IsNotPersonnel())
+                return errorController.Error();
             DonationListModel dlm = new DonationListModel
             {
                 Donations = GetUnsolvelDonations()
@@ -100,15 +117,19 @@ namespace BloodDonation.Controllers
             return View("LabResultsView", dlm);
         }
 
-        //TODO: find a way to make this post
+        [HttpPost]
         public ActionResult EditDonationLab(DonationModel donation)
         {
+            if (IsNotPersonnel())
+                return errorController.Error();
+            donation.ID = "BUHA";
             return View("EditDonationLabView", donation);
         }
 
         [HttpPost]
         public ActionResult LabResultsToDB(DonationModel donation)
         {
+
             DonationModel original = GetOne(donation.ID);
             original.Alt = donation.Alt;
             original.HepatitisB = donation.HepatitisB;
@@ -141,7 +162,7 @@ namespace BloodDonation.Controllers
                     CollectionDate = donation.DonationTime,
                     Component = "RedBloodCells",
                     BloodTypeGroup = donation.BloodTypeGroup,
-                    BloodTypePH = donation.BloodTypePH
+                    BloodTypePH = donation.BloodTypeRH
                 };
                 StoredBloodModel Plasma = new StoredBloodModel
                 {
@@ -149,7 +170,7 @@ namespace BloodDonation.Controllers
                     CollectionDate = donation.DonationTime,
                     Component = "Plasma",
                     BloodTypeGroup = donation.BloodTypeGroup,
-                    BloodTypePH = donation.BloodTypePH
+                    BloodTypePH = donation.BloodTypeRH
                 };
                 StoredBloodModel Thrombocytes = new StoredBloodModel
                 {
@@ -157,7 +178,7 @@ namespace BloodDonation.Controllers
                     CollectionDate = donation.DonationTime,
                     Component = "Thrombocytes",
                     BloodTypeGroup = donation.BloodTypeGroup,
-                    BloodTypePH = donation.BloodTypePH
+                    BloodTypePH = donation.BloodTypeRH
                 };
                 storedBloodService.Add(PresentationToBusiness.StoredBlood(RBC));
                 storedBloodService.Add(PresentationToBusiness.StoredBlood(Plasma));
@@ -191,6 +212,13 @@ namespace BloodDonation.Controllers
         {
             return BusinessToPresentation.Donation(donationService.GetOne(id));
         }
+
+        public string GetUid()
+        {
+            return "-LCmdpPObpuHY0Hp0VNH";
+        }
+
+        public bool IsNotPersonnel() => userService.GetRole(GetUid()) != "personnel";
 
     }
 }

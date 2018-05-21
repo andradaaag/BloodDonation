@@ -61,6 +61,7 @@
     <Compile Include="Services\DonationService.cs" />
     <Compile Include="Services\DonorService.cs" />
     <Compile Include="Services\StoredBloodService.cs" />
+    <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

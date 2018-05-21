@@ -14,27 +14,12 @@ namespace BloodDonation.Data.Repositories
     {
         private FirebaseClient firebaseClient = new FirebaseClient("https://blooddonation-bc0b9.firebaseio.com/");
         private FirebaseToObject FirebaseToObject = new FirebaseToObject();
-        private string Child = "StoredBlood";
-
-
-        //public List<StoredBlood> FindUnresolved()
-        //{
-        //    return firebaseClient
-        //        .Child(Child)
-        //        .OrderBy("Stage")
-        //        .StartAt(0)
-        //        .EndAt(2)
-        //        .OnceAsync<Donation>()
-        //        .Result
-        //        .AsEnumerable()
-        //        .Select(i => FirebaseToObject.Donation(i))
-        //        .ToList();
-        //}
+        private const string CHILD = "StoredBlood";
 
         public List<StoredBlood> FindAll()
         {
             return firebaseClient
-                .Child(Child)
+                .Child(CHILD)
                 .OrderByKey()
                 .OnceAsync<StoredBlood>()
                 .Result
@@ -45,21 +30,21 @@ namespace BloodDonation.Data.Repositories
         public void Add(StoredBlood d)
         {
             firebaseClient
-               .Child(Child)
+               .Child(CHILD)
                .PostAsync(d);
 
         }
         public void Edit(StoredBlood d)
         {
             firebaseClient
-                .Child(Child)
+                .Child(CHILD)
                 .Child(d.ID)
                 .PutAsync(d);
         }
         public StoredBlood GetOne(string id)
         {
             return firebaseClient
-                 .Child(Child)
+                 .Child(CHILD)
                  .OrderBy("ID")
                  .OnceAsync<StoredBlood>()
                  .Result

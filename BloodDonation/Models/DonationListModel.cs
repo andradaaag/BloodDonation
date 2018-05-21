@@ -14,6 +14,6 @@ namespace BloodDonation.Models
 
         public List<DonationModel> Donations { set; get; } = new List<DonationModel>();
 
-
+        DonationModel Donation { set; get; }
     }
 }

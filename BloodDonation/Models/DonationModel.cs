@@ -14,7 +14,7 @@ namespace BloodDonation.Models
 
 
         public string BloodTypeGroup { get; set; }
-        public string BloodTypePH { get; set; }
+        public string BloodTypeRH { get; set; }
 
         //  TODO: find a way to get this in the interface
         public string DonorId { get; set; }
@@ -50,6 +50,8 @@ namespace BloodDonation.Models
         public bool Syphilis { get; set; }
         public bool Htlv { get; set; }
         public bool Alt { get; set; }
+
+        public string DonationCenterId { get; set; }
 
         public bool isAccepted()
         {

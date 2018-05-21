@@ -55,15 +55,15 @@
 
                 <div class="row">
                     <div class="col-25">
-                        <label for="fname">PH Type</label>
+                        <label for="fname">RH Type</label>
                     </div>
 
                     <div>
-                        @Html.RadioButtonFor(model => model.BloodTypePH, "Positive", new { id = "positive" })
+                        @Html.RadioButtonFor(model => model.BloodTypeRH, "Positive", new { id = "positive" })
                         @Html.Label("positive", "Positive")
                     </div>
                     <div>
-                        @Html.RadioButtonFor(model => model.BloodTypePH, "Negative", new { id = "negative" })
+                        @Html.RadioButtonFor(model => model.BloodTypeRH, "Negative", new { id = "negative" })
                         @Html.Label("negative", "Negative")
                     </div>
 

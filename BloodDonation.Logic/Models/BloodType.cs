@@ -3,6 +3,6 @@
     public class BloodType
     {
         public string Group;
-        public bool PH;
+        public bool RH;
     }
 }

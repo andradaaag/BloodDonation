@@ -33,6 +33,7 @@ namespace BloodDonation.Logic.Models
         public bool Htlv { get; set; }
         public bool Alt { get; set; }
 
+        public string DonationCenterId { get; set; }
         //epoch time
         public long DonationTime { get; set; } 
 

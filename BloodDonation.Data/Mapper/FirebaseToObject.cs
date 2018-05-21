@@ -17,11 +17,17 @@ namespace BloodDonation.Data.Mapper
             return d;
         }
 
-        internal StoredBlood StoredBlood(FirebaseObject<StoredBlood> stored)
+        public StoredBlood StoredBlood(FirebaseObject<StoredBlood> stored)
         {
             StoredBlood b = stored.Object;
             b.ID = stored.Key;
             return b;
+        }
+        public UserFirebase UserFirebase(FirebaseObject<UserFirebase> user)
+        {
+            UserFirebase u = user.Object;
+            u.ID = user.Key;
+            return u;
         }
     }
 }
