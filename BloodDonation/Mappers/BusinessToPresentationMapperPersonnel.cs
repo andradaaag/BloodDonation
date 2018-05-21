@@ -68,7 +68,7 @@ namespace BloodDonation.Mappers
             return new BloodType
             {
                 Group = bt.Group,
-                PH = bt.PH
+                PH = bt.RH
             };
         }
 

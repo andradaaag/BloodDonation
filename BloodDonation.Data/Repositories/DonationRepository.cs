@@ -43,32 +43,8 @@ namespace BloodDonation.Data.Repositories
                 .ToList();
         }
 
-        public async Task FirebaseAdd(DonationCenter dc)
-        {
-            var res = await firebaseClient.Child("donationcenters").PostAsync(dc);
-            var newDc = res.Object;
-            newDc.ID = res.Key;
-            firebaseClient
-                .Child("donationcenters")
-                .Child(res.Key)
-                .PutAsync(newDc);
-        }
-
         public void Add(Donation d)
         {
-            DonationCenter don = new DonationCenter();
-            DonationCenterPersonnel personnel = new DonationCenterPersonnel();
-            personnel.firstName = "First";
-            personnel.lastName = "Last";
-            personnel.isApproved = true;
-            personnel.DonationCenter = new HashSet<DonationCenter>();
-            personnel.DonationCenter.Add(don);
-            personnel.emailAddress = "First.Last@mail.com";
-
-            don.location = "Cluj";
-            don.name = "Donation Center Cluj";
-            FirebaseAdd(don);
-            
             firebaseClient
                .Child(CHILD)
                .PostAsync(d);

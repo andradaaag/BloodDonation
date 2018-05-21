@@ -6,15 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BloodDonation.Data.Mapper;
-using BloodDonation.Data.Models;
-using Firebase.Database;
 using Firebase.Database.Query;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BloodDonation.Data.Repositories
 {
@@ -43,7 +35,7 @@ namespace BloodDonation.Data.Repositories
                 bloodType = new BloodType
                 {
                     Group = "1",
-                    PH = false
+                    RH = false
                 },
                 quantity = 100
             };
@@ -65,7 +57,7 @@ namespace BloodDonation.Data.Repositories
                 bloodType = new BloodType
                 {
                     Group = "1",
-                    PH = false
+                    RH = false
                 },
                 quantity = 200
             };

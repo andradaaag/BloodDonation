@@ -21,18 +21,16 @@ namespace BloodDonation.Data.Repositories
         private FirebaseToObject FirebaseToObject = new FirebaseToObject();
         // TODO: REDO CODE TO WORK WITH DATABASE
         private List<Personnel> tempList = new List<Personnel>();
-        private string filePath = "C:\\Users\\Razvan\\Desktop\\ISS\\BloodDonation\\data.txt";
+        private string filePath = "~\\BloodDonation\\data.txt";
 
         public PersonnelRepository()
         {
             // TODO: REDO CODE TO WORK WITH DATABASE
-            loadFromFile();
 
         }
 
         ~PersonnelRepository()
         {
-            saveToFile();
         }
 
         public void loadFromFile()

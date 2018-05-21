@@ -1,4 +1,4 @@
-﻿using BloodDonation.Logic.Services;
+﻿using BloodDonation.Logic   .Services;
 using BloodDonation.Mappers;
 using BloodDonation.Models;
 using System;
@@ -24,31 +24,20 @@ namespace BloodDonation.Controllers
         private BusinessToPresentationMapperPersonnel BusinessToPresentation = new BusinessToPresentationMapperPersonnel();
         private PresentationToBusinessMapperPersonnel PresentationToBusiness = new PresentationToBusinessMapperPersonnel();
 
-<<<<<<< HEAD
-        
         public ActionResult Index()
         {
             if (IsNotPersonnel())
                 return errorController.Error();
-            return View("AddDonationView");    
-=======
-
-        public PersonnelController()
-        {
+            return View("AddDonationView");
         }
+
 
         public Personnel getLoggedPersonnel()
         {
             // TODO GET CURRENT LOGGED USER
             return BusinessToPresentation.Personnel(personnelService.GetOne("1"));
         }
-
-        public ActionResult Index()
-        {
-            //List<Logic.Models.Donation> l = donationService.FindUnsolved();
-            return View("HomeView", getLoggedPersonnel());
->>>>>>> Personnel_Views_Razvan
-        }
+        
 
         public ActionResult Success()
         {
@@ -82,13 +71,10 @@ namespace BloodDonation.Controllers
 
             donationService.Add(PresentationToBusiness.Donation(donation));
             
-<<<<<<< HEAD
-            return View("AddDonationView");
-=======
+
             return Success();
->>>>>>> Personnel_Views_Razvan
+
         }
-        //END ADD DONATION
 
 
 
@@ -139,6 +125,19 @@ namespace BloodDonation.Controllers
         //END SEPARATE COMPONENTS
 
 
+        public ActionResult Requests()
+        {
+            RequestList rl = new RequestList
+            {
+                Requests = GetAllRequests()
+                .AsEnumerable()
+                .ToList()
+            };
+            return View("RequestsView", rl);
+        }
+
+
+
 
         //START LAB RESULTS
         public ActionResult LabResults()
@@ -154,23 +153,8 @@ namespace BloodDonation.Controllers
             };
             return View("LabResultsView", dlm);
         }
-
-<<<<<<< HEAD
+       
         [HttpPost]
-=======
-        public ActionResult Requests()
-        {
-            RequestList rl = new RequestList
-            {
-                Requests = GetAllRequests()
-                .AsEnumerable()
-                .ToList()
-            };
-            return View("RequestsView", rl);
-        }
-
-        //TODO: find a way to make this post
->>>>>>> Personnel_Views_Razvan
         public ActionResult EditDonationLab(DonationModel donation)
         {
             if (IsNotPersonnel())
@@ -316,18 +300,12 @@ namespace BloodDonation.Controllers
             return BusinessToPresentation.Donation(donationService.GetOne(id));
         }
 
-<<<<<<< HEAD
         public string GetUid()
         {
             return "-LCmdpPObpuHY0Hp0VNH";
         }
 
         public bool IsNotPersonnel() => userService.GetRole(GetUid()) != "personnel";
-=======
-
-        
-
->>>>>>> Personnel_Views_Razvan
 
     }
 }

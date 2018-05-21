@@ -21,6 +21,7 @@ namespace BloodDonation.Models
             status = (Status)Enum.Parse(typeof(Status), s);
         }
 
+        override
         public string ToString()
         {
             return status + "  " + hospitalName + "  " + hospitalLocation + "  " + quantity + "  " + bloodType.Group + "  " + bloodType.PH;
