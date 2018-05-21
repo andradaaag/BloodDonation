@@ -44,7 +44,7 @@ namespace BloodDonation.Mappers
             };
         }
 
-        public Personnel Personnel(Logic.Models.Personnel p)
+        public Personnel Personnel(Logic.Models.DonationCenterPersonnel p)
         {
             return new Personnel
             {

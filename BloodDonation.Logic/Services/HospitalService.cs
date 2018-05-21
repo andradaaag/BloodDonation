@@ -20,10 +20,10 @@ namespace BloodDonation.Logic.Services
 
         public List<HospitalTransferObject> GetAllHospitals()
         {
-            List<Hospital> hospitals = hospitalRepository.findAll();
+            List<Data.Models.Hospital> hospitals = hospitalRepository.findAll();
             List<HospitalTransferObject> hospitalTransferObjects = new List<HospitalTransferObject>();
 
-            foreach(Hospital hospital in hospitals)
+            foreach(Data.Models.Hospital hospital in hospitals)
             {
                 hospitalTransferObjects.Add(dataToLogicMapper.MapHospitalTransferObject(hospital));
             }
@@ -38,10 +38,10 @@ namespace BloodDonation.Logic.Services
 
         public List<HospitalTransferObject> FilterHospitalsByNameAndLocation(string nameQuery, string locationQuery)
         {
-            List<Hospital> hospitals = hospitalRepository.findAll();
+            List<Data.Models.Hospital> hospitals = hospitalRepository.findAll();
             List<HospitalTransferObject> hospitalTransferObjects = new List<HospitalTransferObject>();
 
-            foreach(Hospital hospital in hospitals)
+            foreach(Data.Models.Hospital hospital in hospitals)
             {
                 if(nameQuery != null && locationQuery != null)
                 {

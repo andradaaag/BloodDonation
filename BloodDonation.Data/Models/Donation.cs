@@ -18,7 +18,9 @@ namespace BloodDonation.Data.Models
 
 		public BloodType BloodType;
 
-		public string DonorCnp;
+        public Donor donor { get; private set; }
+
+        public string DonorCnp;
 
 		public Stage Stage;
 
@@ -54,9 +56,9 @@ namespace BloodDonation.Data.Models
 
 		public Donation(BloodType bloodType, Donor donor, Stage stage, int quantity, String testResult)
 		{
-			this.bloodType = bloodType;
+			this.BloodType = bloodType;
 			this.donor = donor;
-			this.stage = stage;
+			this.Stage = stage;
 			this.quantity = quantity;
 			this.testResult = testResult;
 		}

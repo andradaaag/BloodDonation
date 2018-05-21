@@ -76,7 +76,7 @@
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Donation.cs" />
     <Compile Include="Models\DonationCenter.cs" />
-    <Compile Include="Models\Personnel.cs" />
+    <Compile Include="Models\DonationCenterPersonnel.cs" />
     <Compile Include="Models\DonationFormEntity.cs" />
     <Compile Include="Models\Donor.cs" />
     <Compile Include="Models\FirebaseDonationForm.cs" />
@@ -91,9 +91,7 @@
     <Compile Include="Models\UserFirebase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DoctorRepository.cs" />
-
     <Compile Include="Repositories\DonationRepository.cs" />
-    <Compile Include="Repositories\DonorRepository.cs" />
     <Compile Include="Repositories\PersonnelRepository.cs" />
     <Compile Include="Repositories\RequestRepository.cs" />
     <Compile Include="Repositories\StoredBloodRepository.cs" />
@@ -106,7 +104,6 @@
     <Compile Include="Repositories\DonationCenterRepository.cs" />
     <Compile Include="Repositories\DonorRepository.cs" />
     <Compile Include="Repositories\HospitalRepository.cs" />
-
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

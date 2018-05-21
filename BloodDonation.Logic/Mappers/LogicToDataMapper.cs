@@ -8,14 +8,14 @@ namespace BloodDonation.Business.Mappers
     {
         
 
-        public Hospital MapHospital(HospitalTransferObject hto)
+        public Data.Models.Hospital MapHospital(HospitalTransferObject hto)
         {
-            return new Hospital(hto.Location, hto.Name);
+            return new Data.Models.Hospital(hto.Location, hto.Name);
         }
 
-        public DonationCenter MapDonationCenter(DonationCenterTransferObject dcto)
+        public Data.Models.DonationCenter MapDonationCenter(DonationCenterTransferObject dcto)
         {
-            return new DonationCenter(dcto.Location, dcto.Name);
+            return new Data.Models.DonationCenter(dcto.Location, dcto.Name);
         }
     }
 }

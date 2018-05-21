@@ -20,7 +20,7 @@ namespace BloodDonation.Data.Repositories
         private FirebaseClient firebaseClient = new FirebaseClient("https://blooddonation-bc0b9.firebaseio.com/");
         private FirebaseToObject FirebaseToObject = new FirebaseToObject();
         // TODO: REDO CODE TO WORK WITH DATABASE
-        private List<Personnel> tempList = new List<Personnel>();
+        private List<DonationCenterPersonnel> tempList = new List<DonationCenterPersonnel>();
         private string filePath = "~\\BloodDonation\\data.txt";
 
         public PersonnelRepository()
@@ -44,7 +44,7 @@ namespace BloodDonation.Data.Repositories
                     if (line == null)
                         break;
                     List<string> args = line.Split(',').ToList();
-                    tempList.Add(new Personnel
+                    tempList.Add(new DonationCenterPersonnel
                     {
                         ID = args[0],
                         firstName = args[1],
@@ -65,7 +65,7 @@ namespace BloodDonation.Data.Repositories
             File.WriteAllText(filePath, String.Empty);
             using (StreamWriter sw = new StreamWriter(filePath,true))
             {
-                foreach(Personnel p in tempList)
+                foreach(DonationCenterPersonnel p in tempList)
                 {
                     sw.WriteLine(p.ID + "," + p.firstName + "," + p.lastName + "," + p.emailAddress + "," + p.Address + "," +
                         p.CityTown + "," + p.Country);
@@ -73,18 +73,18 @@ namespace BloodDonation.Data.Repositories
             }
         }
 
-        public List<Personnel> FindAll()
+        public List<DonationCenterPersonnel> FindAll()
         {
             // TODO: REDO CODE TO WORK WITH DATABASE
             return tempList;   
         }
-        public void Add(Personnel p)
+        public void Add(DonationCenterPersonnel p)
         {
             // TODO: REDO CODE TO WORK WITH DATABASE
             tempList.Add(p);
             saveToFile();
         }
-        public void Edit(Personnel p)
+        public void Edit(DonationCenterPersonnel p)
         {
             // TODO: REDO CODE TO WORK WITH DATABASE
             var index = tempList.FindIndex(x => x.ID == p.ID);
@@ -92,7 +92,7 @@ namespace BloodDonation.Data.Repositories
             tempList.Insert(index, p);
             saveToFile();
         }
-        public Personnel GetOne(string id)
+        public DonationCenterPersonnel GetOne(string id)
         {
             // TODO: REDO CODE TO WORK WITH DATABASE
             var index = tempList.FindIndex(x => x.ID == id);

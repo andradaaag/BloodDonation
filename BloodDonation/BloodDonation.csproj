@@ -241,11 +241,9 @@
     <Compile Include="Models\DonationModel.cs" />
     <Compile Include="Models\Hospital.cs" />
     <Compile Include="Mappers\BusinessToPresentationMapperDonor.cs" />
-    <Compile Include="Mappers\PresentationToBusinessMapper.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapperDonor.cs" />
     <Compile Include="Models\ChangeAdminPersonalDataForm.cs" />
     <Compile Include="Models\CreateAdminForm.cs" />
-    <Compile Include="Models\DoctorAccountRequest.cs" />
     <Compile Include="Models\DoctorDisplayData.cs" />
     <Compile Include="Models\DonationCenterDisplayData.cs" />
     <Compile Include="Models\DonationCenterPersonnelAccountRequest.cs" />

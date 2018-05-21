@@ -29,9 +29,9 @@ namespace BloodDonation.Data.Models
 			// TODO implement here
 		}
 
-		public BloodType(string @group)
+		public BloodType(string group)
 		{
-			this.@group = @group;
+			this.Group = group;
 		}
 	}
 }

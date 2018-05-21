@@ -22,28 +22,28 @@ namespace BloodDonation.Logic.Services
             return null;
         }
 
-        public List<Personnel> FindAll()
+        public List<DonationCenterPersonnel> FindAll()
         {
-            List<Personnel> toReturn = new List<Personnel>();
-            foreach(Data.Models.Personnel p in Repository.FindAll())
+            List<DonationCenterPersonnel> toReturn = new List<DonationCenterPersonnel>();
+            foreach(Data.Models.DonationCenterPersonnel p in Repository.FindAll())
             {
                 toReturn.Add(dataToLogicMapper.Personnel(p));
             }
             return toReturn;
         }
 
-        public void Add(Personnel p)
+        public void Add(DonationCenterPersonnel p)
         {
             Repository.Add(logicToDataMapper.Personnel(p));
 
         }
 
-        public void Edit(Personnel p)
+        public void Edit(DonationCenterPersonnel p)
         {
             Repository.Edit(logicToDataMapper.Personnel(p));
         }
 
-        public Personnel GetOne(string id)
+        public DonationCenterPersonnel GetOne(string id)
         {
             return dataToLogicMapper.Personnel(  Repository.GetOne(id)  );
         }

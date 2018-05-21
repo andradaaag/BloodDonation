@@ -5,7 +5,7 @@ namespace BloodDonation.Logic.Mappers
 {
     public class DataToLogicMapperDonor
     {
-        public DonationDetails MapDonationToDonationDetails(Donation donation)
+        public DonationDetails MapDonationToDonationDetails(Data.Models.Donation donation)
         {
             return new DonationDetails()
             {

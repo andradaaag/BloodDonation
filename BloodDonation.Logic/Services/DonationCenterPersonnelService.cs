@@ -1,4 +1,7 @@
-﻿using BloodDonation.Data.Repositories;
+﻿using BloodDonation.Business.Mappers;
+using BloodDonation.Data.Repositories;
+using BloodDonation.Logic.Mappers;
+using BloodDonation.Logic.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +18,10 @@ namespace BloodDonation.Logic.Services
 
         public List<AccountRequest> GetDonationCenterPersonnelAccountRequests()
         {
-            List<DonationCenterPersonnel> myDonationCenterPersonnel = donationCenterPersonnelRepository.findAll();
+            List<Data.Models.DonationCenterPersonnel> myDonationCenterPersonnel = donationCenterPersonnelRepository.findAll();
             List<AccountRequest> myDonationCenterPersonnelAccountRequests = new List<AccountRequest>();
-
-            foreach(DonationCenterPersonnel dcp in myDonationCenterPersonnel)
+            
+            foreach(Data.Models.DonationCenterPersonnel dcp in myDonationCenterPersonnel)
             {
                 if (!dcp.isValidAccount())
                 {
@@ -30,10 +33,10 @@ namespace BloodDonation.Logic.Services
 
         public List<DonationCenterPersonnelTransferObject> GetValidDonationCenterPersonnel()
         {
-            List<DonationCenterPersonnel> donationCenterPersonnels = donationCenterPersonnelRepository.findAll();
+            List<Data.Models.DonationCenterPersonnel> donationCenterPersonnels = donationCenterPersonnelRepository.findAll();
             List<DonationCenterPersonnelTransferObject> donationCenterPersonnelTransferObjects = new List<DonationCenterPersonnelTransferObject>();
 
-            foreach (DonationCenterPersonnel dcp in donationCenterPersonnels)
+            foreach (Data.Models.DonationCenterPersonnel dcp in donationCenterPersonnels)
             {
                 if (dcp.isValidAccount())
                 {

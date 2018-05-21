@@ -54,9 +54,9 @@ namespace BloodDonation.Logic.Mappers
             
         }
 
-        public Personnel Personnel(Data.Models.Personnel p)
+        public DonationCenterPersonnel Personnel(Data.Models.DonationCenterPersonnel p)
         {
-            return new Personnel
+            return new DonationCenterPersonnel
             {
                 ID = p.ID,
                 isApproved = p.isApproved,

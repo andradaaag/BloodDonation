@@ -10,7 +10,7 @@ namespace BloodDonation.Logic.Models
     {
         public string location { get; set; }
         public string name { get; set; }
-        public HashSet<Personnel> Personnel { get; set; }
+        public HashSet<DonationCenterPersonnel> Personnel { get; set; }
         public HashSet<StoredBlood> StoredBlood { get; set; }
 
         public DonationCenter() { }

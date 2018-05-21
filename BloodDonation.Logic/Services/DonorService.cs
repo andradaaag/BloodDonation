@@ -24,9 +24,9 @@ namespace BloodDonation.Business.Services
 
         public List<DonationDetails> GetDonationDetails()
         {
-            List<Donation> myDonations = donorRepository.GetDonations();
+            List<Data.Models.Donation> myDonations = donorRepository.GetDonations();
             List<DonationDetails> donationDetails = new List<DonationDetails>();
-            foreach (Donation donation in myDonations)
+            foreach (Data.Models.Donation donation in myDonations)
             {
                 donationDetails.Add(dataToLogicMapper.MapDonationToDonationDetails(donation));
             }

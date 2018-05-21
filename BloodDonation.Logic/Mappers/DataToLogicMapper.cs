@@ -25,7 +25,7 @@ namespace BloodDonation.Logic.Mappers
             };
         }
 
-        public AccountRequest MapDonationCenterPersonnelToAccountRequest(DonationCenterPersonnel doctor)
+        public AccountRequest MapDonationCenterPersonnelToAccountRequest(Data.Models.DonationCenterPersonnel doctor)
         {
             return new AccountRequest()
             {
@@ -36,7 +36,7 @@ namespace BloodDonation.Logic.Mappers
                 City = doctor.CityTown,
                 Country = doctor.Country,
                 InstituteName = "unknown",
-                RequestType = "Personnel"
+                RequestType = "DonationCenterPersonnel"
             };
         }
 
@@ -54,7 +54,7 @@ namespace BloodDonation.Logic.Mappers
             };
         }
 
-        public DonationCenterPersonnelTransferObject MapDonationCenterPersonnelTransferObject(DonationCenterPersonnel dcp)
+        public DonationCenterPersonnelTransferObject MapDonationCenterPersonnelTransferObject(Data.Models.DonationCenterPersonnel dcp)
         {
             return new DonationCenterPersonnelTransferObject()
             {
@@ -68,7 +68,7 @@ namespace BloodDonation.Logic.Mappers
             };
         }
 
-        public HospitalTransferObject MapHospitalTransferObject(Hospital hospital)
+        public HospitalTransferObject MapHospitalTransferObject(Data.Models.Hospital hospital)
         {
             return new HospitalTransferObject()
             {
@@ -78,7 +78,7 @@ namespace BloodDonation.Logic.Mappers
             };
         }
 
-        public DonationCenterTransferObject MapDonationCenterTransferObject(DonationCenter dc)
+        public DonationCenterTransferObject MapDonationCenterTransferObject(Data.Models.DonationCenter dc)
         {
             return new DonationCenterTransferObject()
             {
