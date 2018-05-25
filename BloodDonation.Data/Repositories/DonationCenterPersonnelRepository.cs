@@ -35,6 +35,10 @@ namespace BloodDonation.Data.Repositories
             this.myDonationCenterPersonnel.Add(newDcP);
 
         }
+        public void Save(DonationCenterPersonnel dcp)
+        {
+            // TODO - implement firebase
+        }
 
         public List<DonationCenterPersonnel> findAll()
         {

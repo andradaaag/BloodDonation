@@ -29,9 +29,10 @@ namespace BloodDonation.Data.Repositories
             donorList.Add(donor);
         }
 
-        public void AddDonationForm(FirebaseDonationForm form)
+
+        public void Save(Donor newDonor)
         {
-            //add to firebase
+            // TODO - save to firebase
         }
 
         public void UpdateDonorDetails(Donor donor)

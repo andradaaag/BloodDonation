@@ -13,13 +13,14 @@ namespace BloodDonation.Business.Services
     {
         private readonly DonorRepository donorRepository = new DonorRepository();
         private readonly LogicToDataMapperDonor logicToDataMapper = new LogicToDataMapperDonor();
+        private readonly LogicToDataMapper logicToDataMapper2 = new LogicToDataMapper();
         private readonly DataToLogicMapperDonor dataToLogicMapper = new DataToLogicMapperDonor();
 
 
-        public void AddDonationForm(DonationForm form)
+        public void AddDonorAccount(NewUserTransferObject nuto)
         {
-            var firebaseDonationForm = logicToDataMapper.MapDonationForm(form);
-            donorRepository.AddDonationForm(firebaseDonationForm);
+            Donor newDonor = logicToDataMapper2.MapNewDonor(nuto);
+            donorRepository.Save(newDonor);
         }
 
         public List<DonationDetails> GetDonationDetails()

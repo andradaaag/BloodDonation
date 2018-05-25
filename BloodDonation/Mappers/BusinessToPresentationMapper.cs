@@ -89,7 +89,5 @@ namespace BloodDonation.Mappers
                 Name = dcto.Name
             };
         }
-
-       
     }
 }

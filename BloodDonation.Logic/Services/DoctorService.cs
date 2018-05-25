@@ -5,10 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using BloodDonation.Data.Repositories;
 using BloodDonation.Business.Mappers;
-using BloodDonation.Business.Models;
+using BloodDonation.Logic.Models;
 using BloodDonation.Logic.Mappers;
 using BloodDonation.Data.Models;
-using BloodDonation.Logic.Models;
 
 namespace BloodDonation.Logic.Services
 {
@@ -17,6 +16,13 @@ namespace BloodDonation.Logic.Services
         private readonly DoctorRepository doctorRepository = new DoctorRepository();
         private readonly LogicToDataMapper logicToDataMapper = new LogicToDataMapper();
         private readonly DataToLogicMapper dataToLogicMapper = new DataToLogicMapper();
+
+        public void AddDoctorAccount(NewUserTransferObject nuto)
+        {
+            Doctor newDoctor = logicToDataMapper.MapNewDoctor(nuto);
+
+            doctorRepository.Save(newDoctor);
+        }
 
         public List<AccountRequest> GetDoctorAccountRequests()
         {

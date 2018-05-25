@@ -1,24 +1,28 @@
-﻿using BloodDonation.Business.Models;
+﻿
+using BloodDonation.Logic.Models;
 using BloodDonation.Models;
 
 namespace BloodDonation.Mappers
 {
     public class PresentationToBusinessMapper
     {
-        public DonationForm MapDonationForm(SignUpForm form)
+        public NewUserTransferObject MapNewUserTransferObject(SignUpForm signUpForm)
         {
-            return new DonationForm()
+            return new NewUserTransferObject()
             {
-                Address = form.Address,
-                City = form.City,
-                Country = form.Country,
-                DOB = form.DOB,
-                FirstName = form.FirstName,
-                LastName = form.LastName,
-                OtherAddress = form.OtherAddress,
-                OtherCity = form.OtherCity,
-                OtherCountry = form.OtherCountry,
-                UID = form.UID
+                UID = signUpForm.UID,
+                FirstName = signUpForm.FirstName,
+                LastName = signUpForm.LastName,
+                DOB = signUpForm.DOB,
+                Address = signUpForm.Address,
+                City = signUpForm.City,
+                Country = signUpForm.Country,
+                OtherAddress = signUpForm.OtherAddress,
+                OtherCity = signUpForm.OtherCity,
+                OtherCountry = signUpForm.OtherCountry,
+                Email = signUpForm.Email,
+                Hospital = signUpForm.Hospital,
+                DonationCenter = signUpForm.DonationCenter
             };
         }
     }

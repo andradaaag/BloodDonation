@@ -6,7 +6,7 @@ namespace BloodDonation.Business.Mappers
 {
     public class LogicToDataMapper
     {
-        
+        // TODO - modify here
 
         public Data.Models.Hospital MapHospital(HospitalTransferObject hto)
         {
@@ -16,6 +16,66 @@ namespace BloodDonation.Business.Mappers
         public Data.Models.DonationCenter MapDonationCenter(DonationCenterTransferObject dcto)
         {
             return new Data.Models.DonationCenter(dcto.Location, dcto.Name);
+        }
+
+        // end todo
+
+        public Doctor MapNewDoctor(NewUserTransferObject nuto)
+        {
+            return new Doctor()
+            {
+                ID = nuto.UID,
+                firstName = nuto.FirstName,
+                lastName = nuto.LastName,
+                DOB = nuto.DOB,
+                Address = nuto.Address,
+                CityTown = nuto.City,
+                Country = nuto.Country,
+                Residence = nuto.OtherAddress,
+                ResCityTown = nuto.OtherAddress,
+                ResCountry = nuto.OtherCountry,
+                emailAddress = nuto.Email,
+                
+                //TODO - somehow add hospital id to a list of now nonexisting ids
+            };
+        }
+
+        public Donor MapNewDonor(NewUserTransferObject nuto)
+        {
+            return new Donor()
+            {
+                ID = nuto.UID,
+                firstName = nuto.FirstName,
+                lastName = nuto.LastName,
+                DOB = nuto.DOB,
+                Address = nuto.Address,
+                CityTown = nuto.City,
+                Country = nuto.Country,
+                Residence = nuto.OtherAddress,
+                ResCityTown = nuto.OtherAddress,
+                ResCountry = nuto.OtherCountry,
+                emailAddress = nuto.Email,
+            };
+        }
+
+        public Data.Models.DonationCenterPersonnel MapNewDonationCenterPersonnel(NewUserTransferObject nuto)
+        {
+            return new Data.Models.DonationCenterPersonnel()
+            {
+                ID = nuto.UID,
+                firstName = nuto.FirstName,
+                lastName = nuto.LastName,
+                DOB = nuto.DOB,
+                Address = nuto.Address,
+                CityTown = nuto.City,
+                Country = nuto.Country,
+                Residence = nuto.OtherAddress,
+                ResCityTown = nuto.OtherAddress,
+                ResCountry = nuto.OtherCountry,
+                emailAddress = nuto.Email,
+
+                //TODO - somehow add donation center id to a list of now nonexisting ids
+            };
         }
     }
 }

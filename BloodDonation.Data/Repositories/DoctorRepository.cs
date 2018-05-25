@@ -35,6 +35,10 @@ namespace BloodDonation.Data.Repositories
             this.myDoctors.Add(newDoc);
         }
 
+        public void Save(Doctor newDoctor)
+        {
+            //TODO - implement Firebase
+        }
 
         public List<Doctor> findAll()
         {
