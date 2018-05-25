@@ -26,21 +26,6 @@ namespace BloodDonation.Controllers
 
         public ActionResult Index()
         {
-            //Logic.Models.DonationCenterPersonnel p = new Logic.Models.DonationCenterPersonnel();
-            //p.ID = "-LCmdpPObpuHY0Hp0VNH";
-            //p.firstName = "First";
-            //p.lastName = "Last";
-            //p.Address = "N/A";
-            //p.CityTown = "N/A";
-            //p.Country = "N/A";
-            //p.DOB = DateTime.Parse("10.10.1980");
-            //p.DonationCenterID = "-LCnZC29CZNHVfs9XTtI";
-            //p.emailAddress = "First.Last@mail.com";
-            //p.isApproved = true;
-            //p.ResCityTown = "N/A";
-            //p.ResCountry = "N/A";
-            //p.Residence = "N/A";
-            //personnelService.Edit(p);
             if (IsNotPersonnel())
                 return errorController.Error();
             return View("AddDonationView");

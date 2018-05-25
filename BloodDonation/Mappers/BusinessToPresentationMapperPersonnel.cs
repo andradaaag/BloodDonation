@@ -92,5 +92,16 @@ namespace BloodDonation.Mappers
                 bloodType = this.BloodType(r.bloodType)
             };
         }
+        public SeparateStoredBloodModel SeparateBlood(Logic.Models.StoredBlood sb)
+        {
+            return new SeparateStoredBloodModel
+            {
+                ID = sb.ID,
+                BloodTypeGroup = sb.BloodType.Group,
+                BloodTypeRH = sb.BloodType.RH ? "Positive" : "Negative",
+                CollectionDate = sb.CollectionDate,
+                DonationCenterID = sb.DonationCenterID
+            };
+        }
     }
 }
