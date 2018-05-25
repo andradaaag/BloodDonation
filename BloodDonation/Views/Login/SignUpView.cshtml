@@ -25,9 +25,6 @@
             <div id="hgroup">
                 <h1><a href="#">Sign up</a></h1>
             </div>
-            <form action="login.html" method="post">
-                <input type="submit" class="sf_submit" value="Log in">
-            </form>
             @Html.ActionLink("Log in", "Index", "Login", null, new { @class = "sf_submit header input" })
 
         </header>
@@ -35,13 +32,12 @@
     <!-- content -->
     <div class="wrapper row3">
         <div class="container">
-            @using (Html.BeginForm("SignUp", "Login", FormMethod.Post))
+            @using (Html.BeginForm())
             {
                 <div class="row">
                     <div class="col-25">
                         <label>Sign up as</label>
                     </div>
-                    @Html.RadioButtonFor(model => model.UserType, 0, new { @onclick = "handleRadioClick1(this);" }) Admin <br />
                     @Html.RadioButtonFor(model => model.UserType, 2, new { @onclick = "handleRadioClick1(this);" }) Doctor <br />
                     @Html.RadioButtonFor(model => model.UserType, 3, new { @onclick = "handleRadioClick1(this);" }) Personnel <br />
                     @Html.RadioButtonFor(model => model.UserType, 1, new { @checked = "checked", @onclick = "handleRadioClick1(this);" }) Donor <br />
