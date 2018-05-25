@@ -1,4 +1,6 @@
-﻿@{
+﻿@model BloodDonation.Models.LogInForm
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -10,7 +12,6 @@
     <!--[if lt IE 9]>
         <script src="scripts/html5shiv.js"></script><![endif]-->
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-    <script src="~/Scripts/login-register.js"></script>
 </head>
 <body>
     <div class="wrapper row1">
@@ -41,20 +42,39 @@
             </section>
             <!-- main content -->
             <div id="intro">
+
                 <section class="clear">
-                    <form action="#" method="post">
-                        <fieldset>
-                            <legend>Search:</legend>
-                            <input type="text" placeholder="User name" id="username"
-                                   onFocus="this.value = (this.value == 'Search Our Website&hellip;') ? '' : this.value;">
-                            <input type="password" placeholder="Password" id="password"
-                                   onFocus="this.value = (this.value == 'Search Our Website&hellip;') ? '' : this.value;">
-                            <input class="sf_submit" value="Log in" onclick="login();">
-                            <!--<input class="sf_submit" value="Sign up" onclick="">-->
-                            @Html.ActionLink("Sign up", "ShowSignUpPage", "Login", null, new { @class="sf_submit input"})
-                            <input type="submit" class="forget_pass" value="Forgot password?">
-                        </fieldset>
-                    </form>
+
+                    @using (Html.BeginForm("LogIn", "Login", FormMethod.Post))
+    {
+
+
+                <div class="row">
+                    <div class="col-25">
+                        <label>Email</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.TextBoxFor(model => model.Username, new { @required = "required" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Password</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.PasswordFor(model => model.Password, new { @required = "required" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <input class="sf_submit input" type="submit" value="Log in" />
+                </div>
+
+                <div class="row">
+                    @Html.ActionLink("Sign up", "ShowSignUpPage", "Login", null, new { @class = "sf_submit input" })
+                </div>
+}
+
                 </section>
             </div>
         </div>

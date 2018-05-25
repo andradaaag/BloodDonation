@@ -22,6 +22,13 @@ namespace BloodDonation.Controllers
         private readonly HospitalService hospitalService = new HospitalService();
         private readonly DonationCenterService donationCenterService = new DonationCenterService();
 
+        private bool checkUserType()
+        {
+            if ((string)Session["usertype"] != "admin")
+                return false;
+            return true;
+        }
+
         // GET: Admin
         public ActionResult Index()
         {
@@ -37,7 +44,9 @@ namespace BloodDonation.Controllers
             {
                 manageRequestsModel.AddDonationCenterPersonnelAccountRequest(_businessToPresentationMapper.MapDonationCenterPersonnelAccountRequest(ar));
             }
-            return View("ManagePersonnelRequestsView", manageRequestsModel);
+            if(checkUserType())
+                return View("ManagePersonnelRequestsView", manageRequestsModel);
+            return RedirectToAction("Error", "Error");
         }
 
         public ActionResult GetDoctorAccountRequestsPage()
@@ -48,7 +57,9 @@ namespace BloodDonation.Controllers
             {
                 manageRequestsModel.AddDoctorAccountRequest(_businessToPresentationMapper.MapDoctorAccountRequest(ar));
             }
-            return View("ManageDoctorRequestsView", manageRequestsModel);
+            if (checkUserType())
+                return View("ManageDoctorRequestsView", manageRequestsModel);
+            return RedirectToAction("Error", "Error");
         }
 
         public ActionResult GetDoctorsPage()
@@ -60,7 +71,9 @@ namespace BloodDonation.Controllers
             {
                 manageAccountsModel.AddDoctorAccount(_businessToPresentationMapper.MapDoctorDisplayData(dto));
             }
-            return View("ManageDoctorsView", manageAccountsModel);
+            if (checkUserType())
+                return View("ManageDoctorsView", manageAccountsModel);
+            return RedirectToAction("Error", "Error");
         }
 
         public ActionResult GetPersonnelPage()
@@ -71,7 +84,9 @@ namespace BloodDonation.Controllers
             {
                 manageAccountsModel.AddDonationCenterPersonnelAccount(_businessToPresentationMapper.MapDonationCenterPersonnelDisplayData(dcpto));
             }
-            return View("ManagePersonnelView", manageAccountsModel);
+            if (checkUserType())
+                return View("ManagePersonnelView", manageAccountsModel);
+            return RedirectToAction("Error", "Error");
         }
 
         public ActionResult GetHospitalsPage()
@@ -83,7 +98,9 @@ namespace BloodDonation.Controllers
             {
                 manageHospitalsModel.AddHospital(_businessToPresentationMapper.MapHospitalDisplayData(hto));
             }
-            return View("ManageHospitalsView", manageHospitalsModel);
+            if (checkUserType())
+                return View("ManageHospitalsView", manageHospitalsModel);
+            return RedirectToAction("Error", "Error");
         }
 
         public ActionResult GetDonationCentersPage()
@@ -94,34 +111,46 @@ namespace BloodDonation.Controllers
             {
                 manageDonationCentersModel.AddDonationCenter(_businessToPresentationMapper.MapDonationCenterDisplayData(dcto));
             }
-            return View("ManageDonationCentersView", manageDonationCentersModel);
+            if (checkUserType())
+                return View("ManageDonationCentersView", manageDonationCentersModel);
+            return RedirectToAction("Error", "Error");
         }
 
         public ActionResult GetCreateAdminPage()
         {
-            return View("CreateAdminView", new CreateAdminForm());
+            if (checkUserType())
+                return View("CreateAdminView", new CreateAdminForm());
+            return RedirectToAction("Error", "Error");
         }
 
         public ActionResult GetPersonalDataPage()
         {
-            return View("PersonalDataView");
+            if (checkUserType())
+                return View("PersonalDataView");
+            return RedirectToAction("Error", "Error");
         }
 
         public ActionResult GetEditPersonalDataPage()
         {
-            return View("EditPersonalDataView", new ChangeAdminPersonalDataForm());
+            if (checkUserType())
+                return View("EditPersonalDataView", new ChangeAdminPersonalDataForm());
+            return RedirectToAction("Error", "Error");
         }
 
         public ActionResult GetAdminCreatedPage()
         {
-            return View("AdminCreatedView");
+            if (checkUserType())
+                return View("AdminCreatedView");
+            return RedirectToAction("Error", "Error");
         }
 
         [HttpPost]
         public ActionResult UpdatePersonalData(ChangeAdminPersonalDataForm form)
         {
             // TODO - somehow update personal data
-            return GetPersonalDataPage();
+            if (checkUserType())
+                return GetPersonalDataPage();
+            return RedirectToAction("Error", "Error");
         }
 
         [HttpPost]
@@ -138,8 +167,9 @@ namespace BloodDonation.Controllers
             {
                 model.AddDoctorAccount(_businessToPresentationMapper.MapDoctorDisplayData(dto));
             }
-
-            return View("ManageDoctorsView", model);
+            if (checkUserType())
+                return View("ManageDoctorsView", model);
+            return RedirectToAction("Error", "Error");
         }
 
         [HttpPost]
@@ -157,8 +187,9 @@ namespace BloodDonation.Controllers
             {
                 model.AddDonationCenterPersonnelAccount(_businessToPresentationMapper.MapDonationCenterPersonnelDisplayData(dcpto));
             }
-
-            return View("ManagePersonnelView", model);
+            if (checkUserType())
+                return View("ManagePersonnelView", model);
+            return RedirectToAction("Error", "Error");
 
         }
 
@@ -172,8 +203,9 @@ namespace BloodDonation.Controllers
             };
 
             hospitalService.AddNewHospital(newHospital);
-
-            return GetHospitalsPage();
+            if (checkUserType())
+                return GetHospitalsPage();
+            return RedirectToAction("Error", "Error");
         }
 
         [HttpPost]
@@ -186,8 +218,9 @@ namespace BloodDonation.Controllers
             };
 
             donationCenterService.AddNewDonationCenter(newDC);
-
-            return GetDonationCentersPage();
+            if (checkUserType())
+                return GetDonationCentersPage();
+            return RedirectToAction("Error", "Error");
         }
 
         [HttpPost]
@@ -205,8 +238,9 @@ namespace BloodDonation.Controllers
             {
                 model.AddHospital(_businessToPresentationMapper.MapHospitalDisplayData(hto));
             }
-
-            return View("ManageHospitalsView", model);
+            if (checkUserType())
+                return View("ManageHospitalsView", model);
+            return RedirectToAction("Error", "Error");
         }
 
         [HttpPost]
@@ -224,8 +258,9 @@ namespace BloodDonation.Controllers
             {
                 model.AddDonationCenter(_businessToPresentationMapper.MapDonationCenterDisplayData(dcto));
             }
-
-            return View("ManageDonationCentersView", model);
+            if (checkUserType())
+                return View("ManageDonationCentersView", model);
+            return RedirectToAction("Error", "Error");
         }
 
         [HttpPost]

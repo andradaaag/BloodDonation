@@ -10,6 +10,27 @@ namespace BloodDonation.Data.Mapper
 {
     public class FirebaseToObject
     {
+        public Donor Donor(FirebaseObject<Donor> donor)
+        {
+            Donor d = donor.Object;
+            d.ID = donor.Key;
+            return d;
+        }
+
+        public DonationCenterPersonnel DonationCenterPersonnel(FirebaseObject<DonationCenterPersonnel> dcp)
+        {
+            DonationCenterPersonnel doncenp = dcp.Object;
+            doncenp.ID = dcp.Key;
+            return doncenp;
+        }
+
+        public Doctor Doctor(FirebaseObject<Doctor> doctor)
+        {
+            Doctor d = doctor.Object;
+            d.ID = doctor.Key;
+            return d;
+        }
+
         public Donation Donation(FirebaseObject<Donation> donation)
         {
             Donation d = donation.Object;
