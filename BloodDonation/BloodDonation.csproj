@@ -237,6 +237,7 @@
     <Compile Include="Models\BloodType.cs" />
     <Compile Include="Models\DoctorAccountRequest.cs" />
     <Compile Include="Models\DonationCenter.cs" />
+    <Compile Include="Models\DonationSepModel.cs" />
     <Compile Include="Models\DonationListModel.cs" />
     <Compile Include="Models\DonationModel.cs" />
     <Compile Include="Models\Hospital.cs" />

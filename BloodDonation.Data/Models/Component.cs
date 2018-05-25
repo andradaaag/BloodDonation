@@ -12,9 +12,10 @@ namespace BloodDonation.Data.Models
         //  shelf time: 5 days
         RedBloodCells,
         //  shelf time: 42 days
-        Plasma
+        Plasma,
         //  shelf time: several months
         // TODO: find out a more exact time
+        Whole
         
 
     }

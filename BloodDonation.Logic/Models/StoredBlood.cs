@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BloodDonation.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace BloodDonation.Logic.Models
 
         public long CollectionDate;
 
-        public Enum Component;
+        public Component Component;
 
         public string DonationCenterID { get; set; }
     }

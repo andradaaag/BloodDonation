@@ -96,12 +96,19 @@ namespace BloodDonation.Controllers
         {
             if (IsNotPersonnel())
                 return errorController.Error();
-            DonationListModel dlm = new DonationListModel
+            DonationSepModel dlm = new DonationSepModel
             {
                 Donations = GetUnsolvelDonations()
                 .AsEnumerable()
                 .Where(i => i.Stage == "Sampling" || i.Stage == "BiologicalQualityControl")
                 .ToList()
+                ,
+                StoredBlood = storedBloodService
+                    .FindAll(GetLoggedPersonnel().DonationCenterID)
+                    .AsEnumerable()
+                    .Where(i => i.Component == Data.Models.Component.Whole)
+                    .Select(i => BusinessToPresentation.StoredBlood(i))
+                    .ToList()
             };
             return View("SeparateComponentsView", dlm);
         }
@@ -115,11 +122,40 @@ namespace BloodDonation.Controllers
         }
 
         [HttpPost]
+        public ActionResult EditBloodSeparation(StoredBloodModel storedBlood)
+        {
+            if (IsNotPersonnel())
+                return errorController.Error();
+            return View("EditBloodSeparation", storedBlood);
+        }
+
+        [HttpPost]
         public ActionResult SeparateComponentsToDB(DonationModel donation)
         {
             if (IsNotPersonnel())
                 return errorController.Error();
             DonationModel original = GetOne(donation.ID);
+            original.Plasma = donation.Plasma;
+            original.RBC = donation.RBC;
+            original.Thrombocytes = donation.Thrombocytes;
+            if (original.Stage == "Sampling")
+                original.Stage = "Preparation";
+            else
+            {
+                AddComponents(original);
+            }
+
+            donationService.Edit(PresentationToBusiness.Donation(original));
+            Thread.Sleep(1000);
+            return SeparateComponents();
+        }
+
+        [HttpPost]
+        public ActionResult SeparateBloodComponentsToDB(StoredBloodModel storedBlood)
+        {
+            if (IsNotPersonnel())
+                return errorController.Error();
+            Logic.Models.StoredBlood original = storedBloodService.GetOne(storedBlood.ID);
             original.Plasma = donation.Plasma;
             original.RBC = donation.RBC;
             original.Thrombocytes = donation.Thrombocytes;

@@ -1,4 +1,4 @@
-﻿@model BloodDonation.Models.DonationListModel
+﻿@model BloodDonation.Models.DonationSepModel
 
 @{
     ViewBag.Title = "SeparateComponentsView";
@@ -33,6 +33,7 @@
     @*TODO: make the top of the table aligned to left for each of the column, somehow*@
     <div class="wrapper row3">
         <div class="container">
+            <h3>Unchecked donations</h3>
             <table style="width:100%">
                 <tr>
                     <th>ID</th>
@@ -40,28 +41,61 @@
                     <th>Quantity</th>
                     <th>Stage</th>
                 </tr>
+
                 @foreach (var req in Model.Donations)
                 {
-                    <div hidden="hidden">
-                        @Html.BeginForm("EditDonationSeparation", "Personnel", req, FormMethod.Post){
-                    </div>
-
-                    <tr>
-                        <td>@req.ID</td>
-                        <td>@req.DonorId</td>
-                        <td>@req.Quantity</td>
-                        <td>@req.Stage</td>
-                        <td>
-                            <div class="row">
-
-                                <input type="submit" value="Edit">
-                            </div>
-                        </td>
-                    </tr>
-                    <div hidden="hidden">
-                        }
-                    </div>
+                    using (Html.BeginForm("EditDonationSeparation", "Personnel", req, FormMethod.Post))
+                    {
+                        <tr>
+                            <td>@req.ID</td>
+                            <td>@req.DonorId</td>
+                            <td>@req.Quantity</td>
+                            <td>@req.Stage</td>
+                            <td>
+                                <div class="row">
+                                    <input type="submit" value="Edit">
+                                </div>
+                            </td>
+                        </tr>
+                    }
                 }
+
+
+            </table>
+        </div>
+    </div>
+
+    <div class="wrapper row3">
+        <div class="container">
+            <h3>Stored whole blood</h3>
+            <table style="width:100%">
+                <tr>
+                    <th>ID</th>
+                    <th>Blood group</th>
+                    <th>Blood RH</th>
+                    <th>Collection date</th>
+                    <th>Amount</th>
+                </tr>
+
+                @foreach (var req in Model.StoredBlood)
+                {
+                    using (Html.BeginForm("EditDonationSeparation", "Personnel", req, FormMethod.Post))
+                    {
+                        <tr>
+                            <td>@req.ID</td>
+                            <td>@req.BloodTypeGroup</td>
+                            <td>@req.BloodTypePH</td>
+                            <td>@req.CollectionDate</td>
+                            <td>@req.Amount</td>
+                            <td>
+                                <div class="row">
+                                    <input type="submit" value="Edit">
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+
 
             </table>
         </div>
