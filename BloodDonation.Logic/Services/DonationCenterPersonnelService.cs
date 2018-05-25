@@ -74,5 +74,15 @@ namespace BloodDonation.Logic.Services
             return respone;
         }
 
+        public void ApproveAccount(string id)
+        {
+            
+        }
+
+        public void DeleteAccount(string id)
+        {
+            donationCenterPersonnelRepository.deleteForId(id);
+        }
+
     }
 }

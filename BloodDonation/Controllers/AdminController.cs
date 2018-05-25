@@ -9,6 +9,7 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using System.Diagnostics;
+using Firebase.Auth;
 
 namespace BloodDonation.Controllers
 {
@@ -22,8 +23,14 @@ namespace BloodDonation.Controllers
         private readonly HospitalService hospitalService = new HospitalService();
         private readonly DonationCenterService donationCenterService = new DonationCenterService();
 
+        static FirebaseConfig config = new FirebaseConfig("AIzaSyBX9u-1P99X08XHfL-rr3DxqJMCVnI4Vbw");
+        FirebaseAuthProvider authProvider = new FirebaseAuthProvider(config);
+
         private bool checkUserType()
         {
+
+            //TODO - if unavailable, redirect to login
+
             if ((string)Session["usertype"] != "admin")
                 return false;
             return true;
@@ -261,6 +268,54 @@ namespace BloodDonation.Controllers
             if (checkUserType())
                 return View("ManageDonationCentersView", model);
             return RedirectToAction("Error", "Error");
+        }
+
+        public ActionResult ApproveAccountRequest(string id, string requestType)
+        {
+
+            switch (requestType)
+            {
+                case "Doctor":
+                    {
+                        doctorService.ApproveAccount(id);
+                        return GetDoctorAccountRequestsPage();
+                    }
+                case "Personnel":
+                    {
+                        donationCenterPersonnelService.ApproveAccount(id);
+                        return GetPersonnelAccountRequestsPage();
+                    }
+                default:
+                    {
+                        return RedirectToAction("Error", "Error");
+                    }
+            }
+        }
+
+        public ActionResult DenyAccountRequest(string id, string requestType)
+        {
+
+            switch (requestType)
+            {
+
+
+                // TOOD - remove from auth as well
+
+                case "Doctor":
+                    {
+                        doctorService.DeleteAccount(id);
+                        return GetDoctorAccountRequestsPage();
+                    }
+                case "Personnel":
+                    {
+                        donationCenterPersonnelService.DeleteAccount(id);
+                        return GetPersonnelAccountRequestsPage();
+                    }
+                default:
+                    {
+                        return RedirectToAction("Error", "Error");
+                    }
+            }
         }
 
         [HttpPost]
