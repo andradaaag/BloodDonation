@@ -43,18 +43,23 @@ namespace BloodDonation.Controllers
             if (_doctorService.IsIDPresent(id))
             {
                 // To be implemented
+                Session["usertype"] = "doctor";
                 return RedirectToAction("Error", "Error");
+                
             }
             else if (_donorService.IsIDPresent(id))
             {
+                Session["usertype"] = "donor";
                 return RedirectToAction("Index", "Donor");
             }
             else if (_donationCenterPersonnelService.IsIDPresent(id))
             {
+                Session["usertype"] = "personnel";
                 return RedirectToAction("Index", "Personnel");
             }
             else
             {
+                Session["usertype"] = "admin";
                 return RedirectToAction("Index", "Admin");
             }
         }
