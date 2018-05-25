@@ -35,6 +35,15 @@ namespace BloodDonation.Data.Repositories
 
         }
 
+        public bool IsIDPresent(string id)
+        {
+            return firebaseClient
+                .Child(CHILD)
+                .OrderByKey()
+                .EqualTo(id)
+                .OnceAsync<Donor>()
+                .Result.AsEnumerable().Count() == 1;
+        }
 
         public void Save(Donor newDonor)
         {

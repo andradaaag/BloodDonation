@@ -19,16 +19,64 @@ namespace BloodDonation.Controllers
         static FirebaseConfig config = new FirebaseConfig("AIzaSyBX9u-1P99X08XHfL-rr3DxqJMCVnI4Vbw");
         FirebaseAuthProvider authProvider = new FirebaseAuthProvider(config);
 
-        public ActionResult Index()
+        public async System.Threading.Tasks.Task<ActionResult> Index()
         {
-            
+
+            if (Session["user"] != null && Session["pass"]!=null)
+            {
+                FirebaseAuthLink firebaseAuthLink = await authProvider.SignInWithEmailAndPasswordAsync((string)Session["user"], (string)Session["pass"]);
+
+                return redirectUser(firebaseAuthLink.User.LocalId);
+            }
 
             return View("LoginHomePage");
+            
         }
 
         public ActionResult ShowSignUpPage()
         {
             return View("SignUpView", new SignUpForm());
+        }
+
+        public ActionResult redirectUser(string id)
+        {
+            if (_doctorService.IsIDPresent(id))
+            {
+                // To be implemented
+                return RedirectToAction("Error", "Error");
+            }
+            else if (_donorService.IsIDPresent(id))
+            {
+                return RedirectToAction("Index", "Donor");
+            }
+            else if (_donationCenterPersonnelService.IsIDPresent(id))
+            {
+                return RedirectToAction("Index", "Personnel");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+        }
+
+        [HttpPost]
+        public async System.Threading.Tasks.Task<ActionResult> LogIn(LogInForm logInForm)
+        {
+            try
+            {
+                FirebaseAuthLink firebaseAuthLink = await authProvider.SignInWithEmailAndPasswordAsync(logInForm.Username, logInForm.Password);
+
+                Session.Timeout = 480; //in minutes;
+                Session["user"] = logInForm.Username;
+                Session["pass"] = logInForm.Password;
+
+                return redirectUser(firebaseAuthLink.User.LocalId);
+            } 
+            catch (Firebase.Auth.FirebaseAuthException e)
+            {
+                // TODO - implement invalid username and password
+                return RedirectToAction("Error", "Error");
+            }
         }
 
         [HttpPost]

@@ -19,7 +19,7 @@ namespace BloodDonation.Tests.Controllers
             LoginController controller = new LoginController();
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            ViewResult result = controller.IndexAsync() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

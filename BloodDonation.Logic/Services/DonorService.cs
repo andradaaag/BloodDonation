@@ -23,6 +23,11 @@ namespace BloodDonation.Business.Services
             donorRepository.Save(newDonor);
         }
 
+        public bool IsIDPresent(string id)
+        {
+            return donorRepository.IsIDPresent(id);
+        }
+
         public List<DonationDetails> GetDonationDetails()
         {
             List<Data.Models.Donation> myDonations = donorRepository.GetDonations();
@@ -60,6 +65,8 @@ namespace BloodDonation.Business.Services
 
             return null;
         }
+
+
 
         public void EditDonorDetails(DonorDetailsTransferObject detailsTransferObject)
         {
