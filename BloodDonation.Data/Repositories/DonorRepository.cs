@@ -1,18 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BloodDonation.Data.Mapper;
 using BloodDonation.Data.Models;
+using Firebase.Database;
+using Firebase.Database.Query;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BloodDonation.Data.Repositories
 {
     public class DonorRepository
     {
+        private FirebaseClient firebaseClient = new FirebaseClient("https://blooddonation-bc0b9.firebaseio.com/");
+        private FirebaseToObject FirebaseToObject = new FirebaseToObject();
+        private const string CHILD = "donors";
+
+
         private List<Donation> myDonations;
-        private List<Donor> donorList;
 
         public DonorRepository()
         {
             myDonations = new List<Donation>();
-            donorList= new List<Donor>();
+
             Donation donation = new Donation();
             DonationCenter center = new DonationCenter("cluj", "test");
             donation.center = center;
@@ -23,21 +33,30 @@ namespace BloodDonation.Data.Repositories
             myDonations.Add(donation);
             myDonations.Add(donation);
 
-            Donor donor = new Donor("Decebal", "Popescu", "gica@yahoo.com", DateTime.Now, "No adderess ", "Capalna",
-                "Romania", new DonationFormEntity(90), "No comments");
-            donor.ID = "id";
-            donorList.Add(donor);
         }
 
-        public void AddDonationForm(FirebaseDonationForm form)
+        public bool IsIDPresent(string id)
         {
-            //add to firebase
+            return firebaseClient
+                .Child(CHILD)
+                .OrderByKey()
+                .EqualTo(id)
+                .OnceAsync<Donor>()
+                .Result.AsEnumerable().Count() == 1;
+        }
+
+        public void Save(Donor newDonor)
+        {
+            firebaseClient
+                .Child(CHILD)
+                .Child(newDonor.ID)
+                .PutAsync(newDonor);
         }
 
         public void UpdateDonorDetails(Donor donor)
         {
             Donor oldDonor = new Donor();
-            foreach (Donor d in donorList)
+            foreach (Donor d in GetDonors())
             {
                 if (d.ID == donor.ID)
                 {
@@ -51,15 +70,23 @@ namespace BloodDonation.Data.Repositories
             oldDonor.emailAddress = donor.emailAddress;
             oldDonor.additionalCommentaries = donor.additionalCommentaries;
         }
-       
+
         public List<Donation> GetDonations()
         {
             return myDonations;
         }
 
+
         public List<Donor> GetDonors()
         {
-            return donorList;
+            return firebaseClient
+               .Child(CHILD)
+               .OrderByKey()
+               .OnceAsync<Donor>()
+               .Result
+               .AsEnumerable()
+               .Select(i => FirebaseToObject.Donor(i))
+               .ToList();
         }
     }
 }

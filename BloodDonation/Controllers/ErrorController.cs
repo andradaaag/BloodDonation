@@ -8,7 +8,6 @@ namespace BloodDonation.Controllers
 {
     public class ErrorController : Controller
     {
-        // GET: Error
         public ActionResult NotFound()
         {
             return View();

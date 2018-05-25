@@ -61,6 +61,7 @@
     <Compile Include="Models\DonationForm.cs" />
     <Compile Include="Models\Hospital.cs" />
     <Compile Include="Models\DonationCenterPersonnel.cs" />
+    <Compile Include="Models\NewUserTransferObject.cs" />
     <Compile Include="Models\RequestPersonnel.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\StoredBlood.cs" />

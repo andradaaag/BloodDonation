@@ -48,6 +48,9 @@
     <Reference Include="Firebase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FirebaseDatabase.net.3.3.3\lib\netstandard1.1\Firebase.dll</HintPath>
     </Reference>
+    <Reference Include="Firebase.Auth, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FirebaseAuthentication.net.3.0.7\lib\netstandard1.1\Firebase.Auth.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -81,8 +84,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -252,6 +255,7 @@
     <Compile Include="Models\HospitalDisplayData.cs" />
     <Compile Include="Models\DonorDonationDetails.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LogInForm.cs" />
     <Compile Include="Models\ManageAccountsModel.cs" />
     <Compile Include="Models\ManageDonationCentersModel.cs" />
     <Compile Include="Models\ManageHospitalsModel.cs" />
@@ -379,6 +383,10 @@
     <ProjectReference Include="..\BloodDonation.Logic\BloodDonation.Business.csproj">
       <Project>{19780FBF-06AC-471E-B5E8-DECE641BFBE3}</Project>
       <Name>BloodDonation.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BloodDonation.Utils\BloodDonation.Utils.csproj">
+      <Project>{B4C4D092-9274-490A-81B6-08155457BA4B}</Project>
+      <Name>BloodDonation.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
