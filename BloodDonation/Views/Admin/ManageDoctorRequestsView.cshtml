@@ -63,7 +63,6 @@
 
                         @foreach (var req in Model.GetDoctorAccountRequests())
                         {
-<<<<<<< HEAD
                            <tr>
                                 <td>@req.ID</td>
                                 <td>@req.FirstName @req.LastName</td>
@@ -76,24 +75,7 @@
                                 </td>
                             </tr>
                          }
-=======
 
-
-                                <tr>
-                                    <td>@req.FirstName @req.LastName</td>
-                                    <td>@req.EmailAddress</td>
-                                    <td>@req.HospitalName</td>
-                                    <td>
-                                        <ul>
-                                            <li>@Html.ActionLink("Approve", "ApproveAccountRequest", "Admin", new { id = req.ID, requestType = req.RequestType}, new { @class = "button" })</li>
-                                            <li>@Html.ActionLink("Deny", "DenyAccountRequest", "Admin", new { id = req.ID, requestType = req.RequestType }, new { @class = "button" })</li>
-                                        </ul>
-
-                                    </td>
-                                </tr>
-                                
-                        }
->>>>>>> develop
 
                     </table>
                 </form>
