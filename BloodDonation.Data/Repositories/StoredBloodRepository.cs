@@ -53,5 +53,17 @@ namespace BloodDonation.Data.Repositories
                  .ToList()
                  .First();
         }
+
+        public List<StoredBlood> FindAllByDonationCenter(string donCenter)
+        {
+            return firebaseClient
+                .Child(CHILD)
+                .OrderBy("DonationCenterID")
+                .EqualTo(donCenter)
+                .OnceAsync<StoredBlood>()
+                .Result
+                .Select(i => FirebaseToObject.StoredBlood(i))
+                .ToList();
+        }
     }
 }

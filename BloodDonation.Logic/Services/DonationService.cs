@@ -15,6 +15,8 @@ namespace BloodDonation.Logic.Services
         private LogicToDataMapperPersonnel LogicToData = new LogicToDataMapperPersonnel();
         private DataToLogicMapperPersonnel DataToLogic = new DataToLogicMapperPersonnel();
 
+        private DonationCenterPersonnelRepository dcprRepo = new DonationCenterPersonnelRepository();
+
         public List<Donation> FindAll()
         {
             return Repository
@@ -30,6 +32,28 @@ namespace BloodDonation.Logic.Services
                 .AsEnumerable()
                 .Select(i => DataToLogic.Donation(i))
                 .ToList();
+        }
+
+        public List<Donation> FindByDonCenterForCompSep(string UID)
+        {
+            return Repository
+               .FindByDonationCenter(dcprRepo.GetOne(UID).DonationCenterID)
+               .AsEnumerable()
+               .Select(i => DataToLogic.Donation(i))
+               .Where(i => i.Stage == Data.Models.Stage.Sampling || i.Stage == Data.Models.Stage.BiologicalQualityControl)
+               .ToList();
+
+        }
+
+        public List<Donation> FindByDonCenterForLabRes(string UID)
+        {
+            return Repository
+               .FindByDonationCenter(dcprRepo.GetOne(UID).DonationCenterID)
+               .AsEnumerable()
+               .Select(i => DataToLogic.Donation(i))
+               .Where(i => i.Stage == Data.Models.Stage.Sampling || i.Stage == Data.Models.Stage.Preparation)
+               .ToList();
+
         }
 
         public List<Donation> FindUnsolvedByDonationCenter(string donationCenterID)

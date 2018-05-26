@@ -79,12 +79,12 @@
 
                 @foreach (var req in Model.StoredBlood)
                 {
-                    using (Html.BeginForm("EditDonationSeparation", "Personnel", req, FormMethod.Post))
+                    using (Html.BeginForm("EditBloodSeparation", "Personnel", req, FormMethod.Post))
                     {
                         <tr>
                             <td>@req.ID</td>
                             <td>@req.BloodTypeGroup</td>
-                            <td>@req.BloodTypePH</td>
+                            <td>@req.BloodTypeRH</td>
                             <td>@req.CollectionDate</td>
                             <td>@req.Amount</td>
                             <td>

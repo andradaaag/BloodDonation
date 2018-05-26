@@ -34,8 +34,9 @@ namespace BloodDonation.Logic.Models
         public bool Alt { get; set; }
 
         public string DonationCenterId { get; set; }
-        //epoch time
-        public long DonationTime { get; set; } 
+        public long DonationTime { get; set; }
+
+        public bool IsAccepted() => !(Hiv && HepatitisB && HepatitisC && Syphilis && Htlv && Alt);
 
     }
 }

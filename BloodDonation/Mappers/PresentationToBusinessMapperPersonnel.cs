@@ -42,7 +42,7 @@ namespace BloodDonation.Mappers
                 BloodType = new Logic.Models.BloodType
                 {
                     Group = b.BloodTypeGroup,
-                    RH = b.BloodTypePH == "Positive"
+                    RH = b.BloodTypeRH == "Positive"
                 },
                 Component = (Data.Models.Component)Enum.Parse(typeof(Data.Models.Component), b.Component),
                 CollectionDate = b.CollectionDate,
@@ -75,6 +75,25 @@ namespace BloodDonation.Mappers
         public Logic.Models.Status Status(Status s)
         {
             return (Logic.Models.Status)s;
+        }
+
+        public Logic.Models.SeparateBlood SeparateBlood(SeparateStoredBloodModel blood)
+        {
+            return new Logic.Models.SeparateBlood
+            {
+                ID = blood.ID,
+                BloodType = new Logic.Models.BloodType
+                {
+                    Group = blood.BloodTypeGroup,
+                    RH = blood.BloodTypeRH == "Positive"
+                },
+                CollectionDate = blood.CollectionDate,
+                DonationCenterID = blood.DonationCenterID,
+                RBC = blood.RBC,
+                Plasma = blood.Plasma,
+                Thrombocytes = blood.Thrombocytes
+
+            };
         }
     }
 }

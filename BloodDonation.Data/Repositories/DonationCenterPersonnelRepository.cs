@@ -46,5 +46,23 @@ namespace BloodDonation.Data.Repositories
                 .ToList();
         }
 
+        public void Edit(DonationCenterPersonnel d)
+        {
+            firebaseClient
+                .Child(CHILD)
+                .Child(d.ID)
+                .PutAsync(d);
+        }
+        public DonationCenterPersonnel GetOne(string id)
+        {
+            return FirebaseToObject.Personnel(firebaseClient
+             .Child(CHILD)
+             .OrderByKey()
+             .EqualTo(id)
+             .OnceAsync<DonationCenterPersonnel>()
+             .Result
+             .First());
+        }
+
     }
 }

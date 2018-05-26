@@ -41,24 +41,7 @@ namespace BloodDonation.Data.Repositories
                .Child(CHILD)
                .PostAsync(d);
         }
-        public void Edit(DonationCenterPersonnel d)
-        {
-            firebaseClient
-                .Child(CHILD)
-                .Child(d.ID)
-                .PutAsync(d);
-        }
-        public DonationCenterPersonnel GetOne(string id)
-        {
-            return FirebaseToObject.Personnel(firebaseClient
-             .Child(CHILD)
-             .OrderByKey()
-             .StartAt(id)
-             .LimitToFirst(1)
-             .OnceAsync<DonationCenterPersonnel>()
-             .Result
-             .First());
-        }
+       
 
     }
 }
