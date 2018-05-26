@@ -48,8 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mappers\DataToLogicMapper.cs" />
+    <Compile Include="Mappers\DataToLogicMapperDoctor.cs" />
     <Compile Include="Mappers\DataToLogicMapperPersonnel.cs" />
     <Compile Include="Mappers\DataToLogicMapperDonor.cs" />
+    <Compile Include="Mappers\LogicToDataMapperDoctor.cs" />
     <Compile Include="Mappers\LogicToDataMapperDonor.cs" />
     <Compile Include="Mappers\LogicToDataMapper.cs" />
     <Compile Include="Mappers\LogicToDataMapperPersonnel.cs" />

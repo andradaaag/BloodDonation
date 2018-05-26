@@ -1,0 +1,51 @@
+﻿@model List<int> 
+@{
+    ViewBag.Title = "DoctorShowRequestsView";
+}
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <title>Doctor - Show Requests</title>
+    <meta charset="iso-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Styles/layout_doctor.css")
+    @Styles.Render("~/Styles/mediaqueries.css")
+    <script src="scripts/jquery.1.9.0.min.js"></script>
+    <script src="scripts/jquery-mobilemenu.min.js"></script>
+</head>
+<body>
+
+    <div class="wrapper row1">
+        <header id="header" class="clear">
+            <div id="hgroup">
+                <h1><a href="#">Manage Hospitals</a></h1>
+                <h2><a href="#">Admin</a></h2>
+            </div>
+            <form action="login.html" method="post">
+                <input type="submit" class="sf_submit" value="Log out">
+            </form>
+            <nav>
+                <ul>
+                    <li>@Html.ActionLink("Requests - Doctor", "GetDoctorAccountRequestsPage", "Admin", null, new { @class = "header nav li" })</li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    @foreach (var req in Model)
+    {
+        <tr>
+           @req
+        </tr>
+    }
+    <!-- content -->
+
+    <div class="indexPage">
+
+
+
+    </div>
+</body>
+</html>

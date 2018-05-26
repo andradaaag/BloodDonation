@@ -35,5 +35,19 @@ namespace BloodDonation.Logic.Services
         {
             return DataToLogic.Request(Repository.GetOne(id));
         }
+
+        public List<RequestPersonnel> FindByDoctorId(string id)
+        {
+            return Repository
+                   .GetRentalByDoctorId(id)
+                   .AsEnumerable()
+                   .Select(i => DataToLogic.Request(i))
+                   .ToList();
+        }
+
+        public void AddRequest(RequestPersonnel request)
+        {
+            Repository.Add(LogicToData.RequestPersonelToRequest(request));
+        }
     }
 }

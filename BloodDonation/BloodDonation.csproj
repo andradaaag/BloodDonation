@@ -226,6 +226,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\DonorController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -233,9 +234,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mappers\BusinessToPresentationMapperDoctor.cs" />
     <Compile Include="Mappers\BusinessToPresentationMapper.cs" />
     <Compile Include="Mappers\BusinessToPresentationMapperPersonnel.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapper.cs" />
+    <Compile Include="Mappers\PresentationToBusinessMapperDoctor.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapperPersonnel.cs" />
     <Compile Include="Models\BloodType.cs" />
     <Compile Include="Models\DoctorAccountRequest.cs" />
@@ -363,6 +366,7 @@
     <Content Include="Views\Admin\PersonalDataView.cshtml" />
     <Content Include="Views\Admin\EditPersonalDataView.cshtml" />
     <Content Include="Views\Admin\AdminCreatedView.cshtml" />
+    <Content Include="Views\Doctor\DoctorShowRequestsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

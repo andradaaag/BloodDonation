@@ -70,6 +70,25 @@ namespace BloodDonation.Logic.Mappers
             };
         }
 
+        public Data.Models.Request RequestPersonelToRequest(RequestPersonnel r)
+        {
+            return new Data.Models.Request
+            {
+                ID = r.ID,
+                status = (Data.Models.Status)r.status,
+                destination = r.destination,
+                source = r.source,
+                doctorId = r.doctorId,
+                quantity = r.quantity,
+                bloodType = new Data.Models.BloodType
+                {
+                    Group = r.bloodType.Group,
+                    RH = r.bloodType.RH
+                }
+            };
+
+        }
+
         public Data.Models.Status Status(Status s)
         {
             return (Data.Models.Status)s;

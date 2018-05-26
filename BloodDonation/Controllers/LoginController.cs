@@ -44,7 +44,7 @@ namespace BloodDonation.Controllers
             {
                 // To be implemented
                 Session["usertype"] = "doctor";
-                return RedirectToAction("Error", "Error");
+                return RedirectToAction("Index", "Doctor");
                 
             }
             else if (_donorService.IsIDPresent(id))

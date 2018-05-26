@@ -20,46 +20,21 @@ namespace BloodDonation.Logic.Services
 
         public List<HospitalTransferObject> GetAllHospitals()
         {
-            List<Data.Models.Hospital> hospitals = hospitalRepository.findAll();
-            List<HospitalTransferObject> hospitalTransferObjects = new List<HospitalTransferObject>();
-
-            foreach(Data.Models.Hospital hospital in hospitals)
-            {
-                hospitalTransferObjects.Add(dataToLogicMapper.MapHospitalTransferObject(hospital));
-            }
-
-            return hospitalTransferObjects;
+            return hospitalRepository.FindAll()
+                                     .AsEnumerable()
+                                     .Select(el => dataToLogicMapper.MapHospitalTransferObject(el))
+                                     .ToList();
         }
 
         public void AddNewHospital(HospitalTransferObject newHospital)
         {
-            hospitalRepository.save(logicToDataMapper.MapHospital(newHospital));
+            hospitalRepository.Save(logicToDataMapper.MapHospital(newHospital));
         }
 
-        public List<HospitalTransferObject> FilterHospitalsByNameAndLocation(string nameQuery, string locationQuery)
+        public List<HospitalTransferObject> FilterHospitalsByNameAndLocation(String nameQuery, String locationQuery)
         {
-            List<Data.Models.Hospital> hospitals = hospitalRepository.findAll();
-            List<HospitalTransferObject> hospitalTransferObjects = new List<HospitalTransferObject>();
-
-            foreach(Data.Models.Hospital hospital in hospitals)
-            {
-                if(nameQuery != null && locationQuery != null)
-                {
-                    if (hospital.name.Contains(nameQuery) && hospital.location.Contains(locationQuery))
-                        hospitalTransferObjects.Add(dataToLogicMapper.MapHospitalTransferObject(hospital));
-                } else if (nameQuery != null)
-                {
-                    if(hospital.name.Contains(nameQuery))
-                        hospitalTransferObjects.Add(dataToLogicMapper.MapHospitalTransferObject(hospital));
-                } else
-                {
-                    if(hospital.location.Contains(locationQuery))
-                        hospitalTransferObjects.Add(dataToLogicMapper.MapHospitalTransferObject(hospital));
-                }
-            }
-
-            return hospitalTransferObjects;
-
+            return null;
+           /////TODO
         }
     }
 }

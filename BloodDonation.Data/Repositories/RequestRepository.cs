@@ -22,16 +22,8 @@ namespace BloodDonation.Data.Repositories
             {
                 ID = "1",
                 status = Status.BeingProcessed,
-                source = new DonationCenter
-                {
-                    location = "None",
-                    name = "None"
-                },
-                destination = new Hospital
-                {
-                    location = "Street Testing, No. 15",
-                    name = "Hospital St. Paul"
-                },
+                source = "None",
+                destination = "None",
                 bloodType = new BloodType
                 {
                     Group = "1",
@@ -44,16 +36,8 @@ namespace BloodDonation.Data.Repositories
             {
                 ID = "2",
                 status = Status.Accepted,
-                source = new DonationCenter
-                {
-                    location = "Street Testing, No. 10",
-                    name = "Donation Center A"
-                },
-                destination = new Hospital
-                {
-                    location = "Street Testing, No. 17",
-                    name = "Hospital name"
-                },
+                source = "1",
+                destination = "1",
                 bloodType = new BloodType
                 {
                     Group = "1",
@@ -125,6 +109,26 @@ namespace BloodDonation.Data.Repositories
             catch(System.InvalidOperationException e)
             {
                 return null;
+            }
+        }
+
+        public List<Request> GetRentalByDoctorId(string doctorId)
+        {
+            try
+            {
+                return firebaseClient
+                .Child("requests")
+                .OrderBy("doctorId")
+                .EqualTo(doctorId)
+                .OnceAsync<Request>()
+                .Result
+                .AsEnumerable()
+                .Select(i => FirebaseToObject.Request(i))
+                .ToList();
+            }
+            catch (System.InvalidOperationException e)
+            {
+                return new List<Request>();
             }
         }
     }
