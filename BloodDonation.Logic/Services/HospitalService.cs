@@ -33,8 +33,11 @@ namespace BloodDonation.Logic.Services
 
         public List<HospitalTransferObject> FilterHospitalsByNameAndLocation(String nameQuery, String locationQuery)
         {
-            return null;
-           /////TODO
+            return hospitalRepository.FindByName(nameQuery)
+                                     .AsEnumerable()
+                                     .Where(el => el.location == locationQuery)
+                                     .Select(el => dataToLogicMapper.MapHospitalTransferObject(el))
+                                     .ToList();
         }
     }
 }

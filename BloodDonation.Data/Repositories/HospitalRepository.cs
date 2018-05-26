@@ -57,6 +57,18 @@ namespace BloodDonation.Data.Repositories
                 .PutAsync(newhospital);
         }
 
+        public List<Hospital> FindByName(String name)
+        {
+            return firebaseClient
+                    .Child(CHILD)
+                    .OrderBy("name")
+                    .EqualTo(name)
+                    .OnceAsync<Hospital>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.Hospital(i))
+                    .ToList();
+        }
 
 
     }
