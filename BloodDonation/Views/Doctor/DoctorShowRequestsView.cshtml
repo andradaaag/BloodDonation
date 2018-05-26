@@ -1,4 +1,5 @@
-﻿@model List<int> 
+﻿@using BloodDonation.Logic.Models;
+@model  List<RequestPersonnel>
 @{
     ViewBag.Title = "DoctorShowRequestsView";
 }
@@ -37,7 +38,7 @@
     @foreach (var req in Model)
     {
         <tr>
-           @req
+            @req.patientCnp
         </tr>
     }
     <!-- content -->

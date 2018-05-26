@@ -6,15 +6,25 @@ using System.Threading.Tasks;
 
 namespace BloodDonation.Models
 {
-    public class RequestPersonnel: BaseEntity
+    public class RequestPersonnelView: BaseEntity
     {
-        public RequestPersonnel() { }
+        public RequestPersonnelView() { }
         public Status status;
-        public string hospitalName;
-        public string hospitalLocation;
+
+        public String destination;      //hospitalid
+        public String source;           //donationcenterid
+        public String doctorId;
+        public String patientCnp;
+
+
+        public String hospitalName;
+        public String hospitalLocation;
+
+        public String doctorName;
+
         public int quantity;
         public BloodType bloodType;
-        public string tempStatus = "BeingProcessed";
+        public String tempStatus = "BeingProcessed";
 
         public void setStatus(string s)
         {

@@ -39,5 +39,16 @@ namespace BloodDonation.Logic.Services
                                      .Select(el => dataToLogicMapper.MapHospitalTransferObject(el))
                                      .ToList();
         }
+
+
+        public HospitalTransferObject GetHospitalById(String hospitalId)
+        {
+            return dataToLogicMapper.MapHospitalTransferObject
+                            (
+                                hospitalRepository.FindById(hospitalId)
+                            );
+                                    
+        }
+
     }
 }

@@ -165,7 +165,7 @@ namespace BloodDonation.Controllers
 
         public ActionResult AcceptRequest(string id)
         {
-            RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(id));
+            RequestPersonnelView r = BusinessToPresentation.Request(requestService.GetOne(id));
             return View("AcceptRequestView", r);
         }
 
@@ -177,7 +177,7 @@ namespace BloodDonation.Controllers
 
         public ActionResult EditRequest(string id)
         {
-            RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(id));
+            RequestPersonnelView r = BusinessToPresentation.Request(requestService.GetOne(id));
             NewStatus ns = new NewStatus();
             ns.ID = r.ID;
             ns.status = r.status.ToString();
@@ -268,7 +268,7 @@ namespace BloodDonation.Controllers
             }
         }
 
-        public List<RequestPersonnel> GetAllRequests()
+        public List<RequestPersonnelView> GetAllRequests()
         {
             return requestService
                 .FindAll()

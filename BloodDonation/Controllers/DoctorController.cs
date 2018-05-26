@@ -1,12 +1,11 @@
-﻿using BloodDonation.Logic.Models;
-using BloodDonation.Logic.Services;
+﻿using BloodDonation.Logic.Services;
 using BloodDonation.Mappers;
-using BloodDonation.Models;
+using BloodDonation.Logic.Models;
+using Firebase.Auth;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+
 
 namespace BloodDonation.Controllers
 {
@@ -24,12 +23,29 @@ namespace BloodDonation.Controllers
 
         public ActionResult MainDoctorPage()
         {
-            requestService.FindByDoctorId();
-
-
-            return View("DoctorShowRequestsView", elems);
+            return View("DoctorShowRequestsView", 
+                        requestService
+                            .FindByDoctorId
+                                   (
+                                        this.GetUid()
+                                    )
+                        );
         }
 
-        public 
+        public String GetUid()
+        {
+            try
+            {
+                return ((FirebaseAuthLink)Session["authlink"]).User.LocalId;
+            }catch(Exception e)
+            {
+                Console.Beep();
+                Console.Beep();
+                Console.Beep();
+                Console.Beep();
+                Console.Beep();
+                return "";
+            }
+        }
     }
 }

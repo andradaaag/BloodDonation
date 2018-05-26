@@ -96,7 +96,7 @@ namespace BloodDonation.Controllers
 
             switch (form.UserType)
             {
-                case (int)UserTypeEnum.Doctor:
+                case (int)Utils.Enums.UserTypeEnum.Doctor:
                     {
                         _doctorService.AddDoctorAccount(newUser);
                         break;

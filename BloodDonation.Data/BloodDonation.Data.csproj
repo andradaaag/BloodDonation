@@ -93,6 +93,7 @@
     <Compile Include="Repositories\DoctorRepository.cs" />
     <Compile Include="Repositories\DonationRepository.cs" />
     <Compile Include="Repositories\PatientRepository.cs" />
+    <Compile Include="Repositories\PatientStatus.cs" />
     <Compile Include="Repositories\PersonnelRepository.cs" />
     <Compile Include="Repositories\RequestRepository.cs" />
     <Compile Include="Repositories\StoredBloodRepository.cs" />

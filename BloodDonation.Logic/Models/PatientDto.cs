@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BloodDonation.Logic.Models
 {
-    class PatientDto
+    public class PatientDto
     {
         public String Id { get; set; }
         public String Cnp { get; set; }

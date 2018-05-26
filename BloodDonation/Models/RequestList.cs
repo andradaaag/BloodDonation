@@ -13,6 +13,6 @@ namespace BloodDonation.Models
 
         }
 
-        public List<RequestPersonnel> Requests { set; get; } = new List<RequestPersonnel>();
+        public List<RequestPersonnelView> Requests { set; get; } = new List<RequestPersonnelView>();
     }
 }

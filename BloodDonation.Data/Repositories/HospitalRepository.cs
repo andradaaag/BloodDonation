@@ -70,6 +70,17 @@ namespace BloodDonation.Data.Repositories
                     .ToList();
         }
 
+        public Hospital FindById(String Id)
+        {
+            return firebaseClient
+                    .Child(CHILD)
+                    .Child(Id)
+                    .OnceAsync<Hospital>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.Hospital(i))
+                    .First();
+        }
 
     }
 }

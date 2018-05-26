@@ -22,6 +22,7 @@ namespace BloodDonation.Mappers
             return new DonorAccountRequest()
             {
                 ID = donorAccountDetails.ID,
+                Cnp = donorAccountDetails.Cnp,
                 FirstName = donorAccountDetails.FirstName,
                 LastName = donorAccountDetails.LastName,
                 DateOfBirth = donorAccountDetails.DateOfBirth,

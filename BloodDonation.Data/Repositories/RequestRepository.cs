@@ -126,7 +126,7 @@ namespace BloodDonation.Data.Repositories
                 .Select(i => FirebaseToObject.Request(i))
                 .ToList();
             }
-            catch (System.InvalidOperationException e)
+            catch (Exception e)
             {
                 return new List<Request>();
             }
