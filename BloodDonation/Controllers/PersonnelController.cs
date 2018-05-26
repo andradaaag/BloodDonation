@@ -238,7 +238,6 @@ namespace BloodDonation.Controllers
 
         public bool IsNotPersonnel()
         {
-            return false;
             return (string) Session["usertype"] != "personnel";
         }
     }
