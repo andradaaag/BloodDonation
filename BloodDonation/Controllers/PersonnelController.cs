@@ -51,7 +51,7 @@ namespace BloodDonation.Controllers
 
         public ActionResult PersonalDetails()
         {
-            return View("PersonalDetailsView", personnelService.GetOne(GetUid()));
+            return View("PersonalDetailsView", BusinessToPresentation.Personnel( personnelService.GetOne(GetUid())));
         }
 
         [HttpPost]
@@ -59,7 +59,7 @@ namespace BloodDonation.Controllers
         {
             if (IsNotPersonnel())
                 return errorController.Error();
-            personnelService.AddDonationInDB(PresentationToBusiness.Donation(donation), GetUid());
+            personnelService.AddDonationInDB(PresentationToBusiness.Donation(donation), GetUid(),donation.KeepWhole);
             return Success();
         }
 
@@ -103,7 +103,7 @@ namespace BloodDonation.Controllers
                 DonationCenterID = stored.DonationCenterID,
                 BloodTypeGroup = stored.BloodTypeGroup,
                 BloodTypeRH = stored.BloodTypeRH,
-                CollectionDate = stored.CollectionDate
+                CollectionDate = (stored.CollectionDate - new DateTime(1970, 1, 1)).Seconds
             };
             return View("EditBloodSeparation", blood);
         }

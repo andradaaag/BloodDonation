@@ -28,7 +28,6 @@ namespace BloodDonation.Mappers
                 Plasma = donation.Plasma,
                 Quantity = donation.Quantity,
                 RBC = donation.RBC,
-                Stage = (Data.Models.Stage)Enum.Parse(typeof(Data.Models.Stage), donation.Stage),
                 Syphilis = donation.Syphilis,
                 Thrombocytes = donation.Thrombocytes,
                 DonationTime = donation.DonationTime,
@@ -45,7 +44,7 @@ namespace BloodDonation.Mappers
                     RH = b.BloodTypeRH == "Positive"
                 },
                 Component = (Data.Models.Component)Enum.Parse(typeof(Data.Models.Component), b.Component),
-                CollectionDate = b.CollectionDate,
+                CollectionDate = (b.CollectionDate - new DateTime(1970, 1, 1)).Seconds,
                 Amount = b.Amount,
                 ID = b.ID,
                 DonationCenterID = b.DonationCenterID

@@ -19,8 +19,7 @@ namespace BloodDonation.Models
         //  TODO: find a way to get this in the interface
         public string DonorId { get; set; }
 
-        //  will be chanced to an enum when passed forward
-        public string Stage { get; set; }
+
 
         public int Quantity { get; set; }
 
@@ -52,6 +51,8 @@ namespace BloodDonation.Models
         public bool Alt { get; set; }
 
         public string DonationCenterId { get; set; }
+
+        public bool KeepWhole { get; set; }
 
         public bool isAccepted()
         {

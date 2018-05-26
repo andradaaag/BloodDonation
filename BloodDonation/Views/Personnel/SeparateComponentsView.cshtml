@@ -39,7 +39,6 @@
                     <th>ID</th>
                     <th>Doner NIN (National identification number)</th>
                     <th>Quantity</th>
-                    <th>Stage</th>
                 </tr>
 
                 @foreach (var req in Model.Donations)
@@ -50,7 +49,6 @@
                             <td>@req.ID</td>
                             <td>@req.DonorId</td>
                             <td>@req.Quantity</td>
-                            <td>@req.Stage</td>
                             <td>
                                 <div class="row">
                                     <input type="submit" value="Edit">

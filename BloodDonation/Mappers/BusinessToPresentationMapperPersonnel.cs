@@ -25,7 +25,6 @@ namespace BloodDonation.Mappers
                 Plasma = donation.Plasma,
                 Quantity = donation.Quantity,
                 RBC = donation.RBC,
-                Stage = donation.Stage.ToString(),
                 Syphilis = donation.Syphilis,
                 Thrombocytes = donation.Thrombocytes,
                 DonationTime = donation.DonationTime,
@@ -39,7 +38,7 @@ namespace BloodDonation.Mappers
                 BloodTypeGroup = b.BloodType.Group,
                 BloodTypeRH = b.BloodType.RH ? "Positive" : "Negative",
                 Component = b.Component.ToString(),
-                CollectionDate = b.CollectionDate,
+                CollectionDate = new DateTime(1970, 1, 1).AddSeconds(b.CollectionDate),
                 Amount = b.Amount,
                 ID = b.ID,
                 DonationCenterID = b.DonationCenterID

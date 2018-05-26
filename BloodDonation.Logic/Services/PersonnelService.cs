@@ -27,12 +27,12 @@ namespace BloodDonation.Logic.Services
             return null;
         }
 
-        public void AddDonationInDB(Donation donation, string UID)
+        public void AddDonationInDB(Donation donation, string UID, bool keepWhole)
         {
-            donation.Stage = Data.Models.Stage.Sampling;
+            donation.Stage = Data.Models.Stage.Preparation;
             donation.DonationCenterId = dcprRepo.GetOne(UID).DonationCenterID;
             donation.DonationTime = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
-
+            donation.RBC = -1;
             donRepo.Add(logicToData.Donation(donation));
 
         }
@@ -67,6 +67,7 @@ namespace BloodDonation.Logic.Services
         public void CommitLabResults(Donation don)
         {
             Donation original = dataToLogic.Donation(donRepo.GetOne(don.ID));
+            original.BloodType = don.BloodType;
             original.Alt = don.Alt;
             original.HepatitisB = don.HepatitisB;
             original.HepatitisC = don.HepatitisC;
@@ -123,12 +124,20 @@ namespace BloodDonation.Logic.Services
             {
                 string centerId = donation.DonationCenterId;
                 donation.Stage = Data.Models.Stage.Redistribution;
-                StoredBlood RBC = CompFromDonation(donation,Data.Models.Component.RedBloodCells,centerId,donation.RBC);
-                StoredBlood Plasma = CompFromDonation(donation, Data.Models.Component.Plasma, centerId,donation.Plasma);
-                StoredBlood Thrombocytes = CompFromDonation(donation, Data.Models.Component.Thrombocytes, centerId,donation.Thrombocytes);
-                bloodRepo.Add(logicToData.StoredBlood(RBC));
-                bloodRepo.Add(logicToData.StoredBlood(Plasma));
-                bloodRepo.Add(logicToData.StoredBlood(Thrombocytes));
+                if (donation.RBC == -1)
+                {
+                    StoredBlood whole = CompFromDonation(donation, Data.Models.Component.Whole, centerId, 400);
+                    bloodRepo.Add(logicToData.StoredBlood(whole));
+                }
+                else
+                {
+                    StoredBlood RBC = CompFromDonation(donation, Data.Models.Component.RedBloodCells, centerId, donation.RBC);
+                    StoredBlood Plasma = CompFromDonation(donation, Data.Models.Component.Plasma, centerId, donation.Plasma);
+                    StoredBlood Thrombocytes = CompFromDonation(donation, Data.Models.Component.Thrombocytes, centerId, donation.Thrombocytes);
+                    bloodRepo.Add(logicToData.StoredBlood(RBC));
+                    bloodRepo.Add(logicToData.StoredBlood(Plasma));
+                    bloodRepo.Add(logicToData.StoredBlood(Thrombocytes));
+                }
             }
             else
             {
