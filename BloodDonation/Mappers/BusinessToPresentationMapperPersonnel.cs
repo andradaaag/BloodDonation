@@ -71,7 +71,7 @@ namespace BloodDonation.Mappers
         public Models.RequestPersonnel Request(Logic.Models.RequestPersonnel r)
         {
             HospitalService hs = new HospitalService();
-            HospitalTransferObject h = hs.GetHospitalById(r.ID);
+            HospitalTransferObject h = hs.GetHospitalById(r.destination);
 
             return new Models.RequestPersonnel
             {

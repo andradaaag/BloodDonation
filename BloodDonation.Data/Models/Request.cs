@@ -9,7 +9,6 @@ namespace BloodDonation.Data.Models
 	public class Request : BaseEntity
 	{
 		public Request(){}
-
 		public Status status { get; set; }
 
         public String source { get; set; }

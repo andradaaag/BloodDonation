@@ -63,14 +63,15 @@ namespace BloodDonation.Data.Repositories
 
         public Hospital FindById(String Id)
         {
-            return firebaseClient
-                    .Child(CHILD)
-                    .Child(Id)
-                    .OnceAsync<Hospital>()
-                    .Result
-                    .AsEnumerable()
-                    .Select(i => FirebaseToObject.Hospital(i))
-                    .First();
+
+            return FirebaseToObject.Hospital(firebaseClient
+                .Child(CHILD)
+                .OrderByKey()
+                .StartAt(Id)
+                .LimitToFirst(1)
+                .OnceAsync<Hospital>()
+                .Result
+                .First());
         }
 
         public void DeleteById(string id)
