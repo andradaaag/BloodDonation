@@ -19,6 +19,12 @@ namespace BloodDonation.Data.Models
         {
         }
 
+        public Doctor(string firstName, string lastName, string emailAddress, DateTime DOB, string address, string cityTown, string country, string hospitalId)
+            : base(firstName, lastName, emailAddress, DOB, address, cityTown, country)
+        {
+            this.HospitalId = hospitalId;
+        }
+
         public bool isReviewed = false; // TODO - change to isReviewed
         public bool isValid = false;
 
@@ -47,7 +53,7 @@ namespace BloodDonation.Data.Models
         /**
 		 * 
 		 */
-        public HashSet<Hospital> Hospitals;
+        public String HospitalId;
 
 		/**
 		 * 

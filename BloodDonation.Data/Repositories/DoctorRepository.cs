@@ -57,6 +57,8 @@ namespace BloodDonation.Data.Repositories
 
         public Doctor GetOne(string id)
         {
+            try
+            { 
             return firebaseClient
                 .Child(CHILD)
                 .OrderByKey()
@@ -66,6 +68,11 @@ namespace BloodDonation.Data.Repositories
                 .AsEnumerable()
                 .Select(i => FirebaseToObject.Doctor(i))
                 .First();
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

@@ -35,29 +35,24 @@
         </header>
     </div>
 
-
-    <table style="width:100%">
-        <tr>
-            <th>Patient Cnp</th>
-            <th>Hospital Name</th>
-            <th>Hospital Location</th>
-            <th>Status</th>
-        </tr>
-        @foreach (var req in Model)
-        {
-        <tr>
-            <td>@req.patientCnp</td>
-            <td>@req.hospitalName</td>
-            <td>@req.hospitalLocation</td>
-            <td>@req.status</td>
-        </tr>
-        }
-        <!-- content -->
-
-        <div class="indexPage">
-
-
-
-        </div>
+    <div class="indexPage" style="width:100%;">
+        <table style="width:75%; margin:auto; text-align: center">
+            <tr>
+                <th>Patient Cnp</th>
+                <th>Hospital Name</th>
+                <th>Hospital Location</th>
+                <th>Status</th>
+            </tr>
+            @foreach (var req in Model)
+            {
+                <tr>
+                    <td>@req.patientCnp</td>
+                    <td>@req.hospitalName</td>
+                    <td>@req.hospitalLocation</td>
+                    <td>@req.status</td>
+                </tr>
+            }
+            <!-- content -->
+    </div>
 </body>
 </html>

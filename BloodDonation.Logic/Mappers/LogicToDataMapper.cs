@@ -25,6 +25,7 @@ namespace BloodDonation.Business.Mappers
             return new Doctor()
             {
                 ID = nuto.UID,
+                HospitalId = nuto.Hospital,
                 firstName = nuto.FirstName,
                 lastName = nuto.LastName,
                 DOB = nuto.DOB,

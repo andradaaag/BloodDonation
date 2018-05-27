@@ -1,5 +1,5 @@
 ﻿@using BloodDonation.Models
-@model RequestPersonnel
+@model RequestBloodForm
 @{
     ViewBag.Title = "MakeRequestView";
 }
@@ -36,44 +36,47 @@
 
     <div class="wrapper row3">
         <div class="container">
-            @using (Html.BeginForm("CreateRequest", "Doctor", FormMethod.Post))
-    {
-        <div class="row">
-            <div class="col-25">
-                <label for="fname">Patient Cnp</label>
-            </div>
-            <div class="col-75">
-                @Html.TextBoxFor(model => model.patientCnp, new { @required = "required" })
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-25">
-                <label for="lname">Blood Group</label>
-            </div>
-            <div class="col-75">
-                @Html.TextBoxFor(model => model.bloodType.Group, new { @required = "required" })
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-25">
-                <label for="address">Blood RH</label>
-            </div>
-            <div class="col-75">
-                @Html.TextBoxFor(model => model.bloodType.PH, new {@required = "required"})
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-25">
-                <label for="address">Quantity</label>
-            </div>
-            <div class="col-75">
-                @Html.TextBoxFor(model => model.quantity, new { @Type = "number", @required = "required" })
-            </div>
-        </div>
-        <div class="row">
-            <input type="submit" value="Send Email">
-        </div>
-}
+                @using (Html.BeginForm("CreateRequest", "Doctor", FormMethod.Post))
+                {
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="patientCnp">Patient Cnp</label>
+                        </div>
+                        <div class="col-75">
+                            @Html.TextBoxFor(model => model.patientCnp, new { @required = "required", id = "cnp" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="bloodType.Group">Blood Group</label>
+                        </div>
+                        <div class="col-75">
+
+                            @Html.DropDownListFor(model => model.bloodGroup, 
+                                        new SelectList( new [] { "A", "AB", "B", "0" } ),"Select Group")
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="bloodType.PH">Blood RH</label>
+                        </div>
+                        <div class="col-75">
+                            @Html.DropDownListFor(model => model.bloodRh, 
+                                        new SelectList(new [] { "positive", "negative" }), "Select RH")
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="quantity">Quantity</label>
+                        </div>
+                        <div class="col-75">
+                            @Html.TextBoxFor(model => model.quantity, new { @Type = "number", @required = "required" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input type="submit" value="Send Email">
+                    </div>
+                 }
 
         </div>
     </div>
