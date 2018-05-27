@@ -201,15 +201,31 @@ namespace BloodDonation.Controllers
         }
 
 
-        public ActionResult Requests()
+        public ActionResult AcceptedRequests()
         {
             RequestList rl = new RequestList
             {
-                Requests = GetAllRequests()
+                Requests = GetDonationCenterRequests()
+                    .AsEnumerable()
+                    .ToList()
+            };
+            return View("PendingRequestsView", rl);
+        }
+
+        public ActionResult PendingRequests()
+        {
+            RequestList rl = new RequestList
+            {
+                Requests = GetUnsolvedRequests()
                 .AsEnumerable()
                 .ToList()
             };
-            return View("RequestsView", rl);
+            return View("PendingRequestsView", rl);
+        }
+
+        public ActionResult Requests()
+        {
+            return View("RequestsView");
         }
 
         [HttpPost]
@@ -225,6 +241,27 @@ namespace BloodDonation.Controllers
         {
             return requestService
                 .FindAll()
+                .AsEnumerable()
+                .Select(i => BusinessToPresentation.Request(i))
+                .ToList();
+        }
+
+        public List<RequestPersonnel> GetUnsolvedRequests()
+        {
+            return requestService
+                .FindUnsolved()
+                .AsEnumerable()
+                .Select(i => BusinessToPresentation.Request(i))
+                .ToList();
+        }
+
+        public List<RequestPersonnel> GetDonationCenterRequests()
+        {
+            Personnel loggedPersonnel = BusinessToPresentation.Personnel(personnelService.GetOne(GetUid()));
+            string donationCenterID = loggedPersonnel.DonationCenterID;
+
+            return requestService
+                .FindDonationCenterRequests(donationCenterID)
                 .AsEnumerable()
                 .Select(i => BusinessToPresentation.Request(i))
                 .ToList();

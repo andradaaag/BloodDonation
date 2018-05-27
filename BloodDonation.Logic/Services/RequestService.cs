@@ -25,6 +25,24 @@ namespace BloodDonation.Logic.Services
                 .ToList();
         }
 
+        public List<RequestPersonnel> FindUnsolved()
+        {
+            return Repository
+                .GetUnsolvedRequests()
+                .AsEnumerable()
+                .Select(i => DataToLogic.Request(i))
+                .ToList();
+        }
+
+        public List<RequestPersonnel> FindDonationCenterRequests(string donationCenterID)
+        {
+            return Repository
+                .GetRequestByDonationCenter(donationCenterID)
+                .AsEnumerable()
+                .Select(i => DataToLogic.Request(i))
+                .ToList();
+        }
+
         public void EditStatus(string id,Status s)
         {
             Repository

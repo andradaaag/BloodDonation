@@ -39,6 +39,49 @@ namespace BloodDonation.Data.Repositories
                 .ToList();
         }
 
+        public List<Request> GetUnsolvedRequests()
+        {
+            return firebaseClient
+                .Child(CHILD)
+                .OrderBy("status")
+                .EqualTo(0)
+                .OnceAsync<Request>()
+                .Result
+                .AsEnumerable()
+                .Select(i => FirebaseToObject.Request(i))
+                .ToList();
+        }
+
+        public List<Request> GetRequestByDonationCenter(string donationCenterID)
+        {
+            // Get all the requests taken by given donation center
+            List<Request> donationCenterRequests = firebaseClient
+                .Child(CHILD)
+                .OrderBy("source")
+                .EqualTo(donationCenterID)
+                .OnceAsync<Request>()
+                .Result
+                .AsEnumerable()
+                .Select(x => FirebaseToObject.Request(x))
+                .ToList();
+
+            // Ignore requests that are either Denied or Completed
+            int i = 0;
+            Request current;
+            while(i < donationCenterRequests.Count)
+            {
+                current = donationCenterRequests[i];
+                if (current.status == Status.Denied || current.status == Status.Completed)
+                    donationCenterRequests.RemoveAt(i);
+                else
+                    i++;
+            }
+
+
+
+            return donationCenterRequests;
+        }
+
         public void Save(Request r)
         {
             firebaseClient

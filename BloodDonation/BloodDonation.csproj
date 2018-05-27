@@ -371,6 +371,8 @@
     <Content Include="Views\Doctor\DoctorShowRequestsView.cshtml" />
     <Content Include="Views\Doctor\MakeRequestView.cshtml" />
     <Content Include="Views\Personnel\EditBloodSeparation.cshtml" />
+    <Content Include="Views\Personnel\PendingRequestsView.cshtml" />
+    <Content Include="Views\Personnel\AcceptedRequestsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

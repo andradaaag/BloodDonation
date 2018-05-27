@@ -97,6 +97,15 @@
                     </div>
                 </div>
 
+            <div class="row">
+                <div class="col-25">
+                    <label for="5">Donation center ID</label>
+                </div>
+                <div class="col-75">
+                    @Html.TextBoxFor(model => model.DonationCenterID, new { placeholder = Model.DonationCenterID })
+                </div>
+            </div>
+
                 <div class="row">
                     <input type="submit" value="Confirm changes">
                 </div>

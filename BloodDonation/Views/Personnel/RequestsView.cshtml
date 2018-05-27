@@ -29,56 +29,16 @@
         </header>
     </div>
 
-    @*TODO: make the top of the table aligned to left for each of the column, somehow*@
-    <div class="wrapper row3">
-        <div class="container">
-            <table style="width:100%">
-                <tr>
-                    <th>ID</th>
-                    <th>Status</th>
-                    <th>Hospital name</th>
-                    <th>Hospital location</th>
-                    <th>Quantity</th>
-                    <th>Blood group</th>
-                    <th>Blood ph</th>
-                </tr>
-                @{
-                    var text = "";
-                    var method = "";
-                    var reqID = "1";
-                }
-                @foreach (var req in Model.Requests)
-                {
-                    switch(Convert.ToString(req.status)){
-                        case "BeingProcessed":
-                            text = "Accept request";
-                            method = "AcceptRequest";
-                            break;
-                        default:
-                            text = "Edit status";
-                            method = "EditRequest";
-                            break;
-                    }
-                    reqID = Convert.ToString(@req.ID);
-
-
-                <tr>
-                    <td>@req.ID</td>
-                    <td>@req.status</td>
-                    <td>@req.hospitalName</td>
-                    <td>@req.hospitalLocation</td>
-                    <td>@req.quantity</td>
-                    <td>@req.bloodType.Group</td>
-                    <td>@req.bloodType.PH</td>
-                    
-                    <td>
-                       @Html.ActionLink(@text,@method, "Personnel", new { id = @reqID },null)
-                    </td>
-                </tr>
-                }
-
-            </table>
-        </div>
+    <div class="wrapper row1">
+        
+            <header id="header" class="clear">
+                <nav>
+                    <ul>
+                        <li>@Html.ActionLink("Pending Requests", "PendingRequests", "Personnel", null, new { @class = "header nav li" })</li>
+                        <li>@Html.ActionLink("Accepted Requests", "AcceptedRequests", "Personnel", null, new { @class = "header nav li" })</li>
+                    </ul>
+                </nav>
+            </header>   
     </div>
     <!-- Footer -->
     <div class="wrapper row4">
