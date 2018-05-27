@@ -24,16 +24,12 @@ namespace BloodDonation.Controllers
         private PresentationToBusinessMapperPersonnel presentationToBusinessMapperPersonnel = new PresentationToBusinessMapperPersonnel();
 
         private DoctorService doctorService = new DoctorService();
-        private HospitalService hosp = new HospitalService();
-
         private RequestService requestService = new RequestService();
 
         List<Models.RequestPersonnel> requests;
 
         public ActionResult Index()
         {
-            //List<HospitalTransferObject> hto = hosp.GetAllHospitals();
-            HospitalTransferObject hto1 = hosp.GetHospitalById("-LDWUaTBY-N7EzgxNtZ4");
             return MainDoctorPage();
         }
 
@@ -54,12 +50,21 @@ namespace BloodDonation.Controllers
             return View("MakeRequestView");
         }
 
+
+        public ActionResult DeleteRequest(BloodDonation.Models.RequestPersonnel info)
+        {
+            requestService.DeleteById(info.ID);
+            System.Threading.Thread.Sleep(700);
+            return MainDoctorPage();
+        }
+
         [HttpPost]
         public ActionResult CreateRequest(RequestBloodForm request)
         {
             Regex regex = new Regex("^[0-9]{13}$");
             if(!regex.IsMatch(request.patientCnp))
             {
+                //// TODO mesaj de eroare somehow
                 return GetMakeBloodRequest();
             }
 

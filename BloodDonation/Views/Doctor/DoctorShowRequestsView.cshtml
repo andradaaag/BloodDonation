@@ -35,24 +35,75 @@
         </header>
     </div>
 
-    <div class="indexPage" style="width:100%;">
-        <table style="width:75%; margin:auto; text-align: center">
-            <tr>
-                <th>Patient Cnp</th>
-                <th>Hospital Name</th>
-                <th>Hospital Location</th>
-                <th>Status</th>
-            </tr>
-            @foreach (var req in Model)
-            {
-                <tr>
-                    <td>@req.patientCnp</td>
-                    <td>@req.hospitalName</td>
-                    <td>@req.hospitalLocation</td>
-                    <td>@req.status</td>
-                </tr>
-            }
-            <!-- content -->
+    <div class="indexPage" style="width:75%;margin:auto;padding-top:20px">
+        <h1> Requests in progess:</h1>
+                <table style="width:80%; margin:auto; text-align: center">
+                    <tr>
+                        <th>Patient Cnp</th>
+                        <th>Hospital</th>
+                        <th>Blood </th>
+                        <th>Status</th>
+                        <th>Donnation Center</th>
+                        <th>Delete</th>
+                    </tr>
+                    @foreach (var req in Model)
+                    {
+                    <tr>
+                        <td>@req.patientCnp</td>
+                        <td>
+                            <p>
+                                @req.hospitalName,<br> 
+                                @req.hospitalLocation
+                            </p>
+
+                        </td>
+
+                        <td>
+                            <div>
+                                <ul style=" list-style-type: none; padding: 0,10,0,0; text-align:left; ">
+                                    <li> Blood Group: @req.bloodType.Group </li>
+                                    @if (req.bloodType.PH == true)
+                {
+                    <li>Blood RH: Positive</li>
+}
+                                    @if (req.bloodType.PH == false)
+                {
+                    <li>Blood RH: Negative</li>
+}
+                                    <li>Blood Quantity:  @req.quantity   </li>
+
+                                </ul>
+                            </div>
+                        </td>
+                        <td>
+                            @req.status
+                        </td>
+
+                        <td>
+                            @if(@req.DonationCenterName != "Request is still pending")
+                            {
+                            <p>
+                                @req.DonationCenterName,<br>
+                                @req.DonationCenterLocation
+                            </p>
+                            }
+                            else
+                            {
+                            <p>
+                                @req.DonationCenterName
+                            </p>
+                            }
+                        </td>
+
+                        <td>
+                            <input type="button" value="Delete" onclick="location.href='@Url.Action("DeleteRequest", "Doctor", req )'" />
+                        </td>
+
+                    </tr>
+                    }
+                    </table>
     </div>
+
+
 </body>
 </html>
