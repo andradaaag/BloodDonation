@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
 using BloodDonation.Business.Services;
 using BloodDonation.Logic.Models;
 using BloodDonation.Logic.Services;
@@ -16,6 +18,8 @@ namespace BloodDonation.Controllers
 
         private readonly DonorService _donorService = new DonorService();
         private readonly DoctorService _doctorService = new DoctorService();
+        private readonly HospitalService _hospitalService = new HospitalService();
+        private readonly DonationCenterService _donationCenterService = new DonationCenterService();
 
         private readonly DonationCenterPersonnelService _donationCenterPersonnelService =
             new DonationCenterPersonnelService();
@@ -37,8 +41,60 @@ namespace BloodDonation.Controllers
             return View("LoginHomePage");
         }
 
+        private List<SelectListItem> GetHospitalList()
+        {
+            var result = new List<SelectListItem>();
+            var hospitals = _hospitalService.GetAllHospitals();
+
+            result.Add(new SelectListItem
+            {
+                Text = "Choose a hospital",
+                Value = "",
+                Selected = true
+            });
+
+            foreach (var hospital in hospitals)
+            {
+                result.Add(new SelectListItem
+                {
+                    Text = hospital.Name,
+                    Value = hospital.ID
+                });
+            }
+
+            result[0].Selected = true;
+
+            return result;
+        }
+
+        private List<SelectListItem> GetDonationCenterList()
+        {
+            var result = new List<SelectListItem>();
+            var centers = _donationCenterService.GetAllDonationCenters();
+
+            result.Add(new SelectListItem
+            {
+                Text = "Choose a center",
+                Value = "",
+                Selected = true
+            });
+
+            foreach (var center in centers)
+            {
+                result.Add(new SelectListItem
+                {
+                    Text = center.Name,
+                    Value = center.ID
+                });
+            }
+
+            return result;
+        }
+
         public ActionResult ShowSignUpPage()
         {
+            ViewData["hospitals"] = GetHospitalList();
+            ViewData["centers"] = GetDonationCenterList();
             return View("SignUpView", new SignUpForm());
         }
 
@@ -48,7 +104,6 @@ namespace BloodDonation.Controllers
             {
                 Session["usertype"] = "doctor";
                 return RedirectToAction("Index", "Doctor");
-                
             }
             else if (_donorService.IsIDPresent(id))
             {
@@ -99,29 +154,29 @@ namespace BloodDonation.Controllers
 
 
             NewUserTransferObject newUser = _presentationToBusinessMapper.MapNewUserTransferObject(form);
+            Console.Write(newUser.DonationCenter);
 
             switch (form.UserType)
             {
+                case (int) Utils.Enums.UserTypeEnum.Doctor:
+                {
+                    _doctorService.AddDoctorAccount(newUser);
+                    break;
+                }
 
-                case (int)Utils.Enums.UserTypeEnum.Doctor:
-                    {
-                        _doctorService.AddDoctorAccount(newUser);
-                        break;
-                    }
+                case (int) UserTypeEnum.Donor:
+                {
+                    _donorService.AddDonorAccount(newUser);
+                    break;
+                }
 
-                case (int)UserTypeEnum.Donor:
-                    {
-                        _donorService.AddDonorAccount(newUser);
-                        break;
-                    }
+                case (int) UserTypeEnum.Personnel:
+                {
+                    _donationCenterPersonnelService.AddDonationCenterPersonnelAccount(newUser);
+                    break;
+                }
 
-                case (int)UserTypeEnum.Personnel:
-                    {
-                        _donationCenterPersonnelService.AddDonationCenterPersonnelAccount(newUser);
-                        break;
-                    }  
 
-              
                 default:
                 {
                     break;
@@ -130,6 +185,7 @@ namespace BloodDonation.Controllers
 
             return View("LoginHomePage");
         }
+
         public ActionResult LogOut()
         {
             Session["user"] = null;

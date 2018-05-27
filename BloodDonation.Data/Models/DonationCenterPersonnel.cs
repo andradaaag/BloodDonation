@@ -31,10 +31,11 @@ namespace BloodDonation.Data.Models
             isValid = false;
         }
 
-        public DonationCenterPersonnel(string firstName, string lastName, string emailAddress, DateTime DOB, string address, string cityTown, string country)
+        public DonationCenterPersonnel(string firstName, string lastName, string emailAddress, DateTime DOB, string address, string cityTown, string country,string dcid)
             : base(firstName, lastName, emailAddress, DOB, address, cityTown, country) {
             isReviewed = false;
             isValid = false;
+            DonationCenterID = dcid;
         }
 
         override

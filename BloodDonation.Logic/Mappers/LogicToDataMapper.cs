@@ -79,8 +79,8 @@ namespace BloodDonation.Business.Mappers
                 emailAddress = nuto.Email,
 
                 isReviewed = nuto.isReviewed,
-                isValid = nuto.isValid
-
+                isValid = nuto.isValid,
+                DonationCenterID = nuto.DonationCenter
                 //TODO - somehow add donation center id to a list of now nonexisting ids
             };
         }
