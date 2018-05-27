@@ -1,5 +1,5 @@
 ﻿@using BloodDonation.Models;
-@model  List<RequestPersonnelView>
+@model  List<RequestPersonnel>
 @{
     ViewBag.Title = "DoctorShowRequestsView";
 }
@@ -38,17 +38,18 @@
 
     <table style="width:100%">
         <tr>
-            <th>ID</th>
-            <th>Full Name</th>
-            <th>Mail</th>
-            <th>Hospital</th>
-            <th>Action</th>
+            <th>Patient Cnp</th>
+            <th>Hospital Name</th>
+            <th>Hospital Location</th>
+            <th>Status</th>
         </tr>
         @foreach (var req in Model)
         {
         <tr>
             <td>@req.patientCnp</td>
-            <td>@req.</td>
+            <td>@req.hospitalName</td>
+            <td>@req.hospitalLocation</td>
+            <td>@req.status</td>
         </tr>
         }
         <!-- content -->
