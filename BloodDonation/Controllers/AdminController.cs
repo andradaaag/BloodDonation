@@ -280,7 +280,7 @@ namespace BloodDonation.Controllers
                         doctorService.ApproveAccount(id);
                         return GetDoctorAccountRequestsPage();
                     }
-                case "Personnel":
+                case "DonationCenterPersonnel":
                     {
                         donationCenterPersonnelService.ApproveAccount(id);
                         return GetPersonnelAccountRequestsPage();
@@ -306,7 +306,7 @@ namespace BloodDonation.Controllers
                         doctorService.DeleteAccount(id);
                         return GetDoctorAccountRequestsPage();
                     }
-                case "Personnel":
+                case "DonationCenterPersonnel":
                     {
                         donationCenterPersonnelService.DeleteAccount(id);
                         return GetPersonnelAccountRequestsPage();

@@ -35,7 +35,11 @@ namespace BloodDonation.Business.Mappers
                 ResCityTown = nuto.OtherAddress,
                 ResCountry = nuto.OtherCountry,
                 emailAddress = nuto.Email,
-                
+
+                isReviewed = nuto.isReviewed,
+                isValid = nuto.isValid
+
+            
                 //TODO - somehow add hospital id to a list of now nonexisting ids
             };
         }
@@ -73,6 +77,9 @@ namespace BloodDonation.Business.Mappers
                 ResCityTown = nuto.OtherAddress,
                 ResCountry = nuto.OtherCountry,
                 emailAddress = nuto.Email,
+
+                isReviewed = nuto.isReviewed,
+                isValid = nuto.isValid
 
                 //TODO - somehow add donation center id to a list of now nonexisting ids
             };

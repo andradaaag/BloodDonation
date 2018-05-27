@@ -51,5 +51,18 @@ namespace BloodDonation.Data.Repositories
             firebaseClient.Child(CHILD).Child(id).DeleteAsync();
         }
 
+        public DonationCenterPersonnel GetOne(string id)
+        {
+            return firebaseClient
+                .Child(CHILD)
+                .OrderByKey()
+                .EqualTo(id)
+                .OnceAsync<DonationCenterPersonnel>()
+                .Result
+                .AsEnumerable()
+                .Select(i => FirebaseToObject.DonationCenterPersonnel(i))
+                .First();
+        }
+
     }
 }

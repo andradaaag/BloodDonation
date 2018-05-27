@@ -54,7 +54,7 @@ namespace BloodDonation.Data.Repositories
                         Address = args[4],
                         CityTown = args[5],
                         Country = args[6],
-                        isApproved = true
+                        isReviewed = true
                     });
                 }
             }
