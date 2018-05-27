@@ -48,8 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mappers\DataToLogicMapper.cs" />
+    <Compile Include="Mappers\DataToLogicMapperDoctor.cs" />
     <Compile Include="Mappers\DataToLogicMapperPersonnel.cs" />
     <Compile Include="Mappers\DataToLogicMapperDonor.cs" />
+    <Compile Include="Mappers\LogicToDataMapperDoctor.cs" />
     <Compile Include="Mappers\LogicToDataMapperDonor.cs" />
     <Compile Include="Mappers\LogicToDataMapper.cs" />
     <Compile Include="Mappers\LogicToDataMapperPersonnel.cs" />
@@ -62,11 +64,13 @@
     <Compile Include="Models\Hospital.cs" />
     <Compile Include="Models\DonationCenterPersonnel.cs" />
     <Compile Include="Models\NewUserTransferObject.cs" />
+    <Compile Include="Models\PatientDto.cs" />
     <Compile Include="Models\RequestPersonnel.cs" />
     <Compile Include="Models\SeparateBlood.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\StoredBlood.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Services\PatientService.cs" />
     <Compile Include="Services\PersonnelService.cs" />
     <Compile Include="Services\DonationService.cs" />
     <Compile Include="Services\RequestService.cs" />

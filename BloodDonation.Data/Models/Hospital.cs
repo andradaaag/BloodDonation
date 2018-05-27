@@ -14,9 +14,9 @@ namespace BloodDonation.Data.Models
 
 		public Hospital(){}
 		
-		public HashSet<Doctor> Doctors;
+		public HashSet<string> Doctors;
 
-		public HashSet<Patient> Patients;
+		public HashSet<string> Patients;
 
 
 		/**
@@ -28,21 +28,8 @@ namespace BloodDonation.Data.Models
             this.name = name;
 		}
 
-        /**
-		 * 
-		 */
         public string location { get; set; }
 
-		/**
-		 * 
-		 */
 		public string name {get;set;}
-
-
-		/**
-		 * 
-		 */
-
-
 	}
 }

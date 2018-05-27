@@ -29,7 +29,8 @@ namespace BloodDonation.Logic.Mappers
                 Weight = donor.DonationFormEntity.currentWeight,
                 Email = donor.emailAddress,
                 Country = donor.Country,
-                Commentaries = donor.additionalCommentaries
+                Commentaries = donor.additionalCommentaries,
+                Cnp = donor.cnp
             };
         }
     }

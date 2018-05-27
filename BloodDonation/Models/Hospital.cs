@@ -9,7 +9,7 @@ namespace BloodDonation.Models
     public class Hospital : BaseEntity
     {
         public Hospital() { }
-        public string location;
-        public string name;
+        public string Location;
+        public string Name;
     }
 }

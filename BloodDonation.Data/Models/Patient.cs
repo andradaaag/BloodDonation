@@ -1,4 +1,5 @@
 
+using BloodDonation.Utils.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,22 +13,22 @@ namespace BloodDonation.Data.Models
 	public class Patient : BaseEntity
 	{
 
-		/**
-		 * 
-		 */
-		public Patient()
-		{
-		}
+        public String Cnp;
+        public String FirstName;
+        public String LastName;
+        public int BloodQuantity;
+        public PatientStatus PatientStatus;
 
-		/**
-		 * 
-		 */
-		public int noDonations;
+		public Patient(){}
 
-		/**
-		 * 
-		 */
-		public int bloodNeeded;
+        public Patient(String cnp, String firstName, String lastName, int bloodQuantity, PatientStatus patientStatus)
+        {
+            this.Cnp = cnp;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.BloodQuantity = bloodQuantity;
+            this.PatientStatus = patientStatus;
+        }
 
-	}
+    }
 }

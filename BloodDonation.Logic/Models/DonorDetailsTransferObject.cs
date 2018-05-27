@@ -14,6 +14,6 @@ namespace BloodDonation.Logic.Models
         public String Email { get; set; }
         public String Country { get; set; }
         public String Commentaries { get; set; }
-        
+        public String Cnp { get; set; }
     }
 }
