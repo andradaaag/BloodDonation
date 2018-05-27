@@ -49,6 +49,12 @@ namespace BloodDonation.Controllers
             return View("MakeRequestView");
         }
 
+        [HttpPost]
+        public ActionResult CreateRequest()
+        {
+            return MainDoctorPage();
+        }
+
         public String GetUid()
         {
             try
