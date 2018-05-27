@@ -15,42 +15,7 @@ namespace BloodDonation.Data.Repositories
         private FirebaseClient firebaseClient = new FirebaseClient("https://blooddonation-bc0b9.firebaseio.com/");
         private FirebaseToObject FirebaseToObject = new FirebaseToObject();
 
-        public void testing()
-        {
-
-            Request a = new Request
-            {
-                ID = "1",
-                status = Status.BeingProcessed,
-                source = "None",
-                destination = "None",
-                bloodType = new BloodType
-                {
-                    Group = "1",
-                    RH = false
-                },
-                quantity = 100
-            };
-
-            Request b = new Request
-            {
-                ID = "2",
-                status = Status.Accepted,
-                source = "1",
-                destination = "1",
-                bloodType = new BloodType
-                {
-                    Group = "1",
-                    RH = false
-                },
-                quantity = 200
-            };
-
-            if( this.GetOne(a.ID) == null)
-                this.Add(a);
-            if (this.GetOne(b.ID) == null)
-                this.Add(b);
-        }
+        public RequestRepository() { }
 
         public void removeAll()
         {
@@ -59,12 +24,6 @@ namespace BloodDonation.Data.Repositories
                 .DeleteAsync();
         }
 
-
-        public RequestRepository()
-        {
-            //removeAll();
-            testing();
-        }
 
         public List<Request> FindAll()
         {
@@ -77,7 +36,7 @@ namespace BloodDonation.Data.Repositories
                 .Select(i => FirebaseToObject.Request(i))
                 .ToList();
         }
-        public void Add(Request r)
+        public void Save(Request r)
         {
             firebaseClient
                .Child("requests")

@@ -1,9 +1,7 @@
-﻿@using BloodDonation.Models;
-@model  List<RequestPersonnelView>
+﻿
 @{
-    ViewBag.Title = "DoctorShowRequestsView";
+    ViewBag.Title = "MakeRequestView";
 }
-
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -21,7 +19,7 @@
     <div class="wrapper row1">
         <header id="header" class="clear">
             <div id="hgroup">
-                <h1><a href="#">Showing Your Blood Requests</a></h1>
+                <h1><a href="#">Add Blood Request</a></h1>
                 <h2><a href="#">Doctor</a></h2>
             </div>
             <form action="login.html" method="post">
@@ -29,34 +27,15 @@
             </form>
             <nav>
                 <ul>
-                    <li>@Html.ActionLink("Make Blood Request", "GetMakeBloodRequest", "Doctor", null, new { @class = "header nav li" })</li>
+                    <li>@Html.ActionLink("Show Blood Requests", "MainDoctorPage", "Doctor", null, new { @class = "header nav li" })</li>
                 </ul>
             </nav>
         </header>
     </div>
 
+    <div>
 
-    <table style="width:100%">
-        <tr>
-            <th>ID</th>
-            <th>Full Name</th>
-            <th>Mail</th>
-            <th>Hospital</th>
-            <th>Action</th>
-        </tr>
-        @foreach (var req in Model)
-        {
-        <tr>
-            <td>@req.patientCnp</td>
-            <td>@req.</td>
-        </tr>
-        }
-        <!-- content -->
+    </div>
 
-        <div class="indexPage">
-
-
-
-        </div>
 </body>
 </html>

@@ -1,20 +1,28 @@
 ﻿using BloodDonation.Logic.Services;
 using BloodDonation.Mappers;
 using BloodDonation.Logic.Models;
-using Firebase.Auth;
+
 using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
 
+using System.Collections.Generic;
+
+using System.Linq;
+using BloodDonation.Models;
 
 namespace BloodDonation.Controllers
 {
     public class DoctorController : Controller
     {
-        private readonly BusinessToPresentationMapperDoctor businessToPresentationMapperDoctor = new BusinessToPresentationMapperDoctor();
-        private readonly PresentationToBusinessMapperDoctor presentationToBusinessMapperDoctor = new PresentationToBusinessMapperDoctor();
+        private BusinessToPresentationMapperDoctor businessToPresentationMapperDoctor = new BusinessToPresentationMapperDoctor();
+        private BusinessToPresentationMapperPersonnel businessToPresentationMapperPersonnel = new BusinessToPresentationMapperPersonnel();
 
-        private readonly RequestService requestService = new RequestService();
+        private PresentationToBusinessMapperDoctor presentationToBusinessMapperDoctor = new PresentationToBusinessMapperDoctor();
+        private PresentationToBusinessMapperPersonnel presentationToBusinessMapperPersonnel = new PresentationToBusinessMapperPersonnel();
+
+        private RequestService requestService = new RequestService();
+
+        List<RequestPersonnelView> requests;
 
         public ActionResult Index()
         {
@@ -23,27 +31,30 @@ namespace BloodDonation.Controllers
 
         public ActionResult MainDoctorPage()
         {
-            return View("DoctorShowRequestsView", 
-                        requestService
-                            .FindByDoctorId
-                                   (
-                                        this.GetUid()
-                                    )
+
+            requests = requestService
+                        .FindByDoctorId(GetUid())
+                        .AsEnumerable()
+                        .Select(el => businessToPresentationMapperPersonnel.Request(el))
+                        .ToList();
+
+            return View("DoctorShowRequestsView",
+                            requests
                         );
+        }
+
+        public ActionResult GetMakeBloodRequest()
+        {
+            return View("MakeRequestView");
         }
 
         public String GetUid()
         {
             try
             {
-                return ((FirebaseAuthLink)Session["authlink"]).User.LocalId;
+                return (String)Session["localId"];
             }catch(Exception e)
             {
-                Console.Beep();
-                Console.Beep();
-                Console.Beep();
-                Console.Beep();
-                Console.Beep();
                 return "";
             }
         }

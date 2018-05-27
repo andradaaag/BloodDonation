@@ -47,7 +47,7 @@ namespace BloodDonation.Logic.Services
 
         public void AddRequest(RequestPersonnel request)
         {
-            Repository.Add(LogicToData.RequestPersonelToRequest(request));
+            Repository.Save(LogicToData.RequestPersonelToRequest(request));
         }
     }
 }
