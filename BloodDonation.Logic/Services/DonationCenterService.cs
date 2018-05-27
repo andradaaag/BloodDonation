@@ -19,7 +19,7 @@ namespace BloodDonation.Logic.Services
 
         public List<DonationCenterTransferObject> GetAllDonationCenters()
         {
-            List<Data.Models.DonationCenter> donationCenters = donationCenterRepository.findAll();
+            List<Data.Models.DonationCenter> donationCenters = donationCenterRepository.FindAll();
             List<DonationCenterTransferObject> donationCenterTransferObjects = new List<DonationCenterTransferObject>();
 
             foreach(Data.Models.DonationCenter dc in donationCenters)
@@ -32,12 +32,12 @@ namespace BloodDonation.Logic.Services
 
         public void AddNewDonationCenter(DonationCenterTransferObject dcto)
         {
-            donationCenterRepository.save(logicToDataMapper.MapDonationCenter(dcto));
+            donationCenterRepository.Save(logicToDataMapper.MapDonationCenter(dcto));
         }
 
         public List<DonationCenterTransferObject> FilterDonationCentersByNameAndLocation(string nameQuery, string locationQuery)
         {
-            List<Data.Models.DonationCenter> donationCenters = donationCenterRepository.findAll();
+            List<Data.Models.DonationCenter> donationCenters = donationCenterRepository.FindAll();
             List<DonationCenterTransferObject> donationCenterTransferObjects = new List<DonationCenterTransferObject>();
 
             foreach(Data.Models.DonationCenter donationCenter in donationCenters)
@@ -62,5 +62,11 @@ namespace BloodDonation.Logic.Services
             return donationCenterTransferObjects;
 
         }
+
+        public void RemoveById(string id)
+        {
+            donationCenterRepository.DeleteById(id);
+        }
+
     }
 }

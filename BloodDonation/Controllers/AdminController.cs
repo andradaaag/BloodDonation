@@ -324,6 +324,12 @@ namespace BloodDonation.Controllers
             return GetHospitalsPage();
         }
 
+        public ActionResult DeleteDonationCenter(string id)
+        {
+            donationCenterService.RemoveById(id);
+            return GetDonationCentersPage();
+        }
+
         [HttpPost]
         public ActionResult CreateAdmin(CreateAdminForm form)
         {
