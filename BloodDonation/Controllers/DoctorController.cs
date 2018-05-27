@@ -22,7 +22,7 @@ namespace BloodDonation.Controllers
 
         private RequestService requestService = new RequestService();
 
-        List<RequestPersonnelView> requests;
+        List<Models.RequestPersonnel> requests;
 
         public ActionResult Index()
         {

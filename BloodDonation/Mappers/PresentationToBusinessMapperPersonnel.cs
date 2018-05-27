@@ -28,10 +28,10 @@ namespace BloodDonation.Mappers
                 Plasma = donation.Plasma,
                 Quantity = donation.Quantity,
                 RBC = donation.RBC,
-                Stage = (Data.Models.Stage)Enum.Parse(typeof(Data.Models.Stage), donation.Stage),
                 Syphilis = donation.Syphilis,
                 Thrombocytes = donation.Thrombocytes,
-                DonationTime = donation.DonationTime
+                DonationTime = donation.DonationTime,
+                DonationCenterId = donation.DonationCenterId
             };
         }
         public Logic.Models.StoredBlood StoredBlood(StoredBloodModel b)
@@ -41,12 +41,13 @@ namespace BloodDonation.Mappers
                 BloodType = new Logic.Models.BloodType
                 {
                     Group = b.BloodTypeGroup,
-                    RH = b.BloodTypePH == "Positive"
+                    RH = b.BloodTypeRH == "Positive"
                 },
                 Component = (Data.Models.Component)Enum.Parse(typeof(Data.Models.Component), b.Component),
-                CollectionDate = b.CollectionDate,
+                CollectionDate = (b.CollectionDate - new DateTime(1970, 1, 1)).Seconds,
                 Amount = b.Amount,
-                ID = b.ID
+                ID = b.ID,
+                DonationCenterID = b.DonationCenterID
             };
         }
 
@@ -65,7 +66,8 @@ namespace BloodDonation.Mappers
                 Country = p.Country,
                 Residence = p.Residence,
                 ResCityTown = p.ResCityTown,
-                ResCountry = p.ResCountry
+                ResCountry = p.ResCountry,
+                DonationCenterID = p.DonationCenterID
             };
         }
 
@@ -74,7 +76,7 @@ namespace BloodDonation.Mappers
             return (Logic.Models.Status)s;
         }
 
-        public Logic.Models.RequestPersonnel Request(RequestPersonnelView r)
+        public Logic.Models.RequestPersonnel Request(RequestPersonnel r)
         {
             return new Logic.Models.RequestPersonnel
             {
@@ -97,5 +99,23 @@ namespace BloodDonation.Mappers
             };
         }
 
+        public Logic.Models.SeparateBlood SeparateBlood(SeparateStoredBloodModel blood)
+        {
+            return new Logic.Models.SeparateBlood
+            {
+                ID = blood.ID,
+                BloodType = new Logic.Models.BloodType
+                {
+                    Group = blood.BloodTypeGroup,
+                    RH = blood.BloodTypeRH == "Positive"
+                },
+                CollectionDate = blood.CollectionDate,
+                DonationCenterID = blood.DonationCenterID,
+                RBC = blood.RBC,
+                Plasma = blood.Plasma,
+                Thrombocytes = blood.Thrombocytes
+
+            };
+        }
     }
 }

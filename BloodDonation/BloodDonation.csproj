@@ -243,6 +243,7 @@
     <Compile Include="Models\BloodType.cs" />
     <Compile Include="Models\DoctorAccountRequest.cs" />
     <Compile Include="Models\DonationCenter.cs" />
+    <Compile Include="Models\DonationSepModel.cs" />
     <Compile Include="Models\DonationListModel.cs" />
     <Compile Include="Models\DonationModel.cs" />
     <Compile Include="Models\Hospital.cs" />
@@ -266,10 +267,11 @@
     <Compile Include="Models\NewStatus.cs" />
     <Compile Include="Models\PatientDtoView.cs" />
     <Compile Include="Models\RequestList.cs" />
-    <Compile Include="Models\RequestPersonnelView.cs" />
+    <Compile Include="Models\RequestPersonnel.cs" />
     <Compile Include="Models\SearchEntityModel.cs" />
     <Compile Include="Models\Personnel.cs" />
     <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\SeparateStoredBloodModel.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\ShowDonorDonations.cs" />
@@ -369,6 +371,7 @@
     <Content Include="Views\Admin\AdminCreatedView.cshtml" />
     <Content Include="Views\Doctor\DoctorShowRequestsView.cshtml" />
     <Content Include="Views\Doctor\MakeRequestView.cshtml" />
+    <Content Include="Views\Personnel\EditBloodSeparation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

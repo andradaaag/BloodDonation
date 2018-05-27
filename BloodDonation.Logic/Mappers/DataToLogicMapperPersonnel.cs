@@ -21,6 +21,7 @@ namespace BloodDonation.Logic.Mappers
                     Group = donation.BloodType.Group,
                     RH = donation.BloodType.RH
                 },
+                DonationCenterId = donation.DonationCenterID,
                 DonorId = donation.DonorCnp,
                 HepatitisB = donation.HepatitisB,
                 HepatitisC = donation.HepatitisC,
@@ -49,7 +50,8 @@ namespace BloodDonation.Logic.Mappers
                 },
                 Component = i.Component,
                 CollectionDate = i.CollectionDate,
-                Amount = i.Amount
+                Amount = i.Amount,
+                DonationCenterID = i.DonationCenterID
             };
             
         }
@@ -69,7 +71,8 @@ namespace BloodDonation.Logic.Mappers
                 Country = p.Country,
                 Residence = p.Residence,
                 ResCityTown = p.ResCityTown,
-                ResCountry = p.ResCountry
+                ResCountry = p.ResCountry,
+                DonationCenterID = p.DonationCenterID
             };
         }
 

@@ -14,7 +14,7 @@ namespace BloodDonation.Data.Repositories
     {
         private FirebaseClient firebaseClient = new FirebaseClient("https://blooddonation-bc0b9.firebaseio.com/");
         private FirebaseToObject FirebaseToObject = new FirebaseToObject();
-        private const string CHILD = "StoredBlood";
+        private const string CHILD = "storedblood";
 
         public List<StoredBlood> FindAll()
         {
@@ -52,6 +52,18 @@ namespace BloodDonation.Data.Repositories
                  .Select(i => FirebaseToObject.StoredBlood(i))
                  .ToList()
                  .First();
+        }
+
+        public List<StoredBlood> FindAllByDonationCenter(string donCenter)
+        {
+            return firebaseClient
+                .Child(CHILD)
+                .OrderBy("DonationCenterID")
+                .EqualTo(donCenter)
+                .OnceAsync<StoredBlood>()
+                .Result
+                .Select(i => FirebaseToObject.StoredBlood(i))
+                .ToList();
         }
     }
 }

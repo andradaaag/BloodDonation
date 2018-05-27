@@ -17,12 +17,66 @@ namespace BloodDonation.Data.Repositories
 
         public RequestRepository() { }
 
+        //public void testing()
+        //{
+
+        //    Request a = new Request
+        //    {
+        //        ID = "1",
+        //        status = Status.BeingProcessed,
+        //        source = new DonationCenter
+        //        {
+        //            location = "None",
+        //            name = "None"
+        //        },
+        //        destination = new Hospital
+        //        {
+        //            location = "Street Testing, No. 15",
+        //            name = "Hospital St. Paul"
+        //        },
+        //        bloodType = new BloodType
+        //        {
+        //            Group = "1",
+        //            RH = false
+        //        },
+        //        quantity = 100
+        //    };
+
+        //    Request b = new Request
+        //    {
+        //        ID = "2",
+        //        status = Status.Accepted,
+        //        source = new DonationCenter
+        //        {
+        //            location = "Street Testing, No. 10",
+        //            name = "Donation Center A"
+        //        },
+        //        destination = new Hospital
+        //        {
+        //            location = "Street Testing, No. 17",
+        //            name = "Hospital name"
+        //        },
+        //        bloodType = new BloodType
+        //        {
+        //            Group = "1",
+        //            RH = false
+        //        },
+        //        quantity = 200
+        //    };
+
+        //    if( this.GetOne(a.ID) == null)
+        //        this.Add(a);
+        //    if (this.GetOne(b.ID) == null)
+        //        this.Add(b);
+        //}
+
         public void removeAll()
         {
             firebaseClient
                 .Child("requests")
                 .DeleteAsync();
         }
+
 
 
         public List<Request> FindAll()

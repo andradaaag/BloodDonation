@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BloodDonation.Models
 {
-    public class RequestPersonnelView: BaseEntity
+    public class RequestPersonnel: BaseEntity
     {
-        public RequestPersonnelView() { }
+        public RequestPersonnel() { }
         public Status status;
 
         public String destination;      //hospitalid

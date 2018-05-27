@@ -27,10 +27,10 @@ namespace BloodDonation.Mappers
                 Plasma = donation.Plasma,
                 Quantity = donation.Quantity,
                 RBC = donation.RBC,
-                Stage = donation.Stage.ToString(),
                 Syphilis = donation.Syphilis,
                 Thrombocytes = donation.Thrombocytes,
-                DonationTime = donation.DonationTime
+                DonationTime = donation.DonationTime,
+                DonationCenterId = donation.DonationCenterId
             };
         }
         public StoredBloodModel StoredBlood(Logic.Models.StoredBlood  b)
@@ -38,11 +38,12 @@ namespace BloodDonation.Mappers
             return new StoredBloodModel
             {
                 BloodTypeGroup = b.BloodType.Group,
-                BloodTypePH = b.BloodType.RH ? "Positive" : "Negative",
+                BloodTypeRH = b.BloodType.RH ? "Positive" : "Negative",
                 Component = b.Component.ToString(),
-                CollectionDate = b.CollectionDate,
+                CollectionDate = new DateTime(1970, 1, 1).AddSeconds(b.CollectionDate),
                 Amount = b.Amount,
-                ID = b.ID
+                ID = b.ID,
+                DonationCenterID = b.DonationCenterID
             };
         }
 
@@ -61,17 +62,18 @@ namespace BloodDonation.Mappers
                 Country = p.Country,
                 Residence = p.Residence,
                 ResCityTown = p.ResCityTown,
-                ResCountry = p.ResCountry
+                ResCountry = p.ResCountry,
+                DonationCenterID = p.DonationCenterID
             };
         }
        
 
-        public RequestPersonnelView Request(Logic.Models.RequestPersonnel r)
+        public Models.RequestPersonnel Request(Logic.Models.RequestPersonnel r)
         {
             HospitalService hs = new HospitalService();
             HospitalTransferObject h = hs.GetHospitalById(r.ID);
 
-            return new RequestPersonnelView
+            return new Models.RequestPersonnel
             {
                 ID = r.ID,
                 status = (Models.Status)r.status,
@@ -91,6 +93,17 @@ namespace BloodDonation.Mappers
                 hospitalName = h.Name,
                 hospitalLocation = h.Location,       
                 
+            };
+        }
+        public SeparateStoredBloodModel SeparateBlood(Logic.Models.StoredBlood sb)
+        {
+            return new SeparateStoredBloodModel
+            {
+                ID = sb.ID,
+                BloodTypeGroup = sb.BloodType.Group,
+                BloodTypeRH = sb.BloodType.RH ? "Positive" : "Negative",
+                CollectionDate = sb.CollectionDate,
+                DonationCenterID = sb.DonationCenterID
             };
         }
     }

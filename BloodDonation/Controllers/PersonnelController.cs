@@ -1,6 +1,7 @@
 ﻿using BloodDonation.Logic   .Services;
 using BloodDonation.Mappers;
 using BloodDonation.Models;
+using Firebase.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,14 +32,6 @@ namespace BloodDonation.Controllers
             return View("AddDonationView");
         }
 
-
-        public Personnel getLoggedPersonnel()
-        {
-            // TODO GET CURRENT LOGGED USER
-            return BusinessToPresentation.Personnel(personnelService.GetOne("1"));
-        }
-        
-
         public ActionResult Success()
         {
             return View("SuccessView");
@@ -58,7 +51,7 @@ namespace BloodDonation.Controllers
 
         public ActionResult PersonalDetails()
         {
-            return View("PersonalDetailsView", getLoggedPersonnel());
+            return View("PersonalDetailsView", BusinessToPresentation.Personnel( personnelService.GetOne(GetUid())));
         }
 
         [HttpPost]
@@ -66,30 +59,27 @@ namespace BloodDonation.Controllers
         {
             if (IsNotPersonnel())
                 return errorController.Error();
-            donation.Stage = "Sampling";
-            donation.DonationTime = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
-
-            donationService.Add(PresentationToBusiness.Donation(donation));
-            
-
+            personnelService.AddDonationInDB(PresentationToBusiness.Donation(donation), GetUid(),donation.KeepWhole);
             return Success();
-
         }
-
-
-
 
         //START SEPARATE COMPONENTS
         public ActionResult SeparateComponents()
         {
             if (IsNotPersonnel())
                 return errorController.Error();
-            DonationListModel dlm = new DonationListModel
+
+            DonationSepModel dlm = new DonationSepModel
             {
-                Donations = GetUnsolvelDonations()
-                .AsEnumerable()
-                .Where(i => i.Stage == "Sampling" || i.Stage == "BiologicalQualityControl")
-                .ToList()
+                Donations = donationService
+                    .FindByDonCenterForCompSep(GetUid())
+                    .Select(i=>BusinessToPresentation.Donation(i))
+                    .ToList()
+                ,
+                StoredBlood = storedBloodService
+                    .GetWholeStoredBloodByDonCent(GetUid())
+                    .Select(i => BusinessToPresentation.StoredBlood(i))
+                    .ToList()
             };
             return View("SeparateComponentsView", dlm);
         }
@@ -103,26 +93,112 @@ namespace BloodDonation.Controllers
         }
 
         [HttpPost]
+        public ActionResult EditBloodSeparation(StoredBloodModel stored)
+        {
+            if (IsNotPersonnel())
+                return errorController.Error();
+            SeparateStoredBloodModel blood = new SeparateStoredBloodModel
+            {
+                ID = stored.ID,
+                DonationCenterID = stored.DonationCenterID,
+                BloodTypeGroup = stored.BloodTypeGroup,
+                BloodTypeRH = stored.BloodTypeRH,
+                CollectionDate = (stored.CollectionDate - new DateTime(1970, 1, 1)).Seconds
+            };
+            return View("EditBloodSeparation", blood);
+        }
+
+        [HttpPost]
         public ActionResult SeparateComponentsToDB(DonationModel donation)
         {
             if (IsNotPersonnel())
                 return errorController.Error();
-            DonationModel original = GetOne(donation.ID);
-            original.Plasma = donation.Plasma;
-            original.RBC = donation.RBC;
-            original.Thrombocytes = donation.Thrombocytes;
-            if (original.Stage == "Sampling")
-                original.Stage = "Preparation";
-            else
-            {
-                AddComponents(original);
-            }
+            personnelService.SeparateComponentsFromDonation(PresentationToBusiness.Donation(donation));
+            //TODO: maybe remove sleep
+            Thread.Sleep(1000);
+            return SeparateComponents();
+        }
 
-            donationService.Edit(PresentationToBusiness.Donation(original));
+        [HttpPost]
+        public ActionResult SeparateBloodComponentsToDB(SeparateStoredBloodModel storedBlood)
+        {
+            if (IsNotPersonnel())
+                return errorController.Error();
+            personnelService.SeparateComponentsFromBlood(PresentationToBusiness.SeparateBlood(storedBlood));
+            //TODO: maybe remove sleep
             Thread.Sleep(1000);
             return SeparateComponents();
         }
         //END SEPARATE COMPONENTS
+
+       
+
+        //START LAB RESULTS
+        public ActionResult LabResults()
+        {
+            if (IsNotPersonnel())
+                return errorController.Error();
+            DonationListModel dlm = new DonationListModel
+            {
+                Donations = donationService
+                .FindByDonCenterForLabRes(GetUid())
+                .AsEnumerable()
+                .Select(i=>BusinessToPresentation.Donation(i))
+                .ToList()
+            };
+            return View("LabResultsView", dlm);
+        }
+       
+        [HttpPost]
+        public ActionResult EditDonationLab(DonationModel donation)
+        {
+            if (IsNotPersonnel())
+                return errorController.Error();
+            return View("EditDonationLabView", donation);
+        }
+
+        [HttpPost]
+        public ActionResult LabResultsToDB(DonationModel donation)
+        {
+            if (IsNotPersonnel())
+                return errorController.Error();
+            personnelService.CommitLabResults(PresentationToBusiness.Donation(donation));
+
+            Thread.Sleep(1000);
+            return LabResults();
+        }
+        //END LAB RESULTS
+
+        public ActionResult AcceptRequest(string id)
+        {
+            RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(id));
+            return View("AcceptRequestView", r);
+        }
+
+        public ActionResult ConfirmAcceptRequest(string id)
+        {
+            requestService.EditStatus(id, PresentationToBusiness.Status(Status.Accepted));
+            return Success();
+        }
+
+        public ActionResult EditRequest(string id)
+        {
+            RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(id));
+            NewStatus ns = new NewStatus();
+            ns.ID = r.ID;
+            ns.status = r.status.ToString();
+            return View("EditRequestView", ns);
+        }
+
+
+        [HttpPost]
+        public ActionResult RequestToDb(NewStatus ns)
+        {
+            Status s = (Status)Enum.Parse(typeof(Status), ns.status);
+            requestService.EditStatus(ns.ID, PresentationToBusiness.Status(s));
+            return Success();
+
+        }
 
 
         public ActionResult Requests()
@@ -136,64 +212,6 @@ namespace BloodDonation.Controllers
             return View("RequestsView", rl);
         }
 
-
-
-
-        //START LAB RESULTS
-        public ActionResult LabResults()
-        {
-            if (IsNotPersonnel())
-                return errorController.Error();
-            DonationListModel dlm = new DonationListModel
-            {
-                Donations = GetUnsolvelDonations()
-                .AsEnumerable()
-                .Where(i => i.Stage == "Sampling" || i.Stage == "Preparation")
-                .ToList()
-            };
-            return View("LabResultsView", dlm);
-        }
-       
-        [HttpPost]
-        public ActionResult EditDonationLab(DonationModel donation)
-        {
-            if (IsNotPersonnel())
-                return errorController.Error();
-            donation.ID = "BUHA";
-            return View("EditDonationLabView", donation);
-        }
-
-        public ActionResult AcceptRequest(string id)
-        {
-            RequestPersonnelView r = BusinessToPresentation.Request(requestService.GetOne(id));
-            return View("AcceptRequestView", r);
-        }
-
-        public ActionResult ConfirmAcceptRequest(string id)
-        {
-            requestService.EditStatus(id, PresentationToBusiness.Status(Status.Accepted));
-            return Success();
-        }
-
-        public ActionResult EditRequest(string id)
-        {
-            RequestPersonnelView r = BusinessToPresentation.Request(requestService.GetOne(id));
-            NewStatus ns = new NewStatus();
-            ns.ID = r.ID;
-            ns.status = r.status.ToString();
-            return View("EditRequestView",ns);
-        }
-
-
-        [HttpPost]
-        public ActionResult RequestToDb(NewStatus ns)
-        {
-            Status s = (Status)Enum.Parse(typeof(Status), ns.status);
-            requestService.EditStatus(ns.ID, PresentationToBusiness.Status(s));
-            return Success();
-
-        }
-
         [HttpPost]
         public ActionResult UpdatePersonnel(Personnel p)
         {
@@ -201,74 +219,9 @@ namespace BloodDonation.Controllers
             return Success();
         }
 
-        [HttpPost]
-        public ActionResult LabResultsToDB(DonationModel donation)
-        {
-
-            DonationModel original = GetOne(donation.ID);
-            original.Alt = donation.Alt;
-            original.HepatitisB = donation.HepatitisB;
-            original.HepatitisC = donation.HepatitisC;
-            original.Hiv = donation.Hiv;
-            original.Htlv = donation.Htlv;
-            original.Syphilis = donation.Syphilis;
-            if (original.Stage == "Sampling")
-                original.Stage = "BiologicalQualityControl";
-            else
-            {
-                AddComponents(original);
-            }
-
-            donationService.Edit(PresentationToBusiness.Donation(original));
-            Thread.Sleep(1000);
-            return LabResults();
-        }
-        //END LAB RESULTS
-
-        
-
 
         //UTIL
-        public void AddComponents(DonationModel donation)
-        {
-            if (donation.isAccepted())
-            {
-                donation.Stage = "Redistribution";
-                StoredBloodModel RBC = new StoredBloodModel
-                {
-                    Amount = donation.RBC,
-                    CollectionDate = donation.DonationTime,
-                    Component = "RedBloodCells",
-                    BloodTypeGroup = donation.BloodTypeGroup,
-                    BloodTypePH = donation.BloodTypeRH
-                };
-                StoredBloodModel Plasma = new StoredBloodModel
-                {
-                    Amount = donation.Plasma,
-                    CollectionDate = donation.DonationTime,
-                    Component = "Plasma",
-                    BloodTypeGroup = donation.BloodTypeGroup,
-                    BloodTypePH = donation.BloodTypeRH
-                };
-                StoredBloodModel Thrombocytes = new StoredBloodModel
-                {
-                    Amount = donation.Thrombocytes,
-                    CollectionDate = donation.DonationTime,
-                    Component = "Thrombocytes",
-                    BloodTypeGroup = donation.BloodTypeGroup,
-                    BloodTypePH = donation.BloodTypeRH
-                };
-                storedBloodService.Add(PresentationToBusiness.StoredBlood(RBC));
-                storedBloodService.Add(PresentationToBusiness.StoredBlood(Plasma));
-                storedBloodService.Add(PresentationToBusiness.StoredBlood(Thrombocytes));
-            }
-            else
-            {
-               donation.Stage = "Failed";
-            }
-        }
-
-        public List<RequestPersonnelView> GetAllRequests()
+        public List<RequestPersonnel> GetAllRequests()
         {
             return requestService
                 .FindAll()
@@ -277,35 +230,15 @@ namespace BloodDonation.Controllers
                 .ToList();
         }
 
-        public List<DonationModel> GetAllDonations()
-        {
-            return donationService
-                .FindAll()
-                .AsEnumerable()
-                .Select(i => BusinessToPresentation.Donation(i))
-                .ToList();
-        }
-
-        public List<DonationModel> GetUnsolvelDonations()
-        {
-            return donationService
-                .FindUnsolved()
-                .AsEnumerable()
-                .Select(i => BusinessToPresentation.Donation(i))
-                .ToList();
-        }
-
-        public DonationModel GetOne(string id)
-        {
-            return BusinessToPresentation.Donation(donationService.GetOne(id));
-        }
-
+        
         public string GetUid()
         {
-            return "-LCmdpPObpuHY0Hp0VNH";
+            return ((FirebaseAuthLink) Session["authlink"]).User.LocalId;
         }
 
-        public bool IsNotPersonnel() => userService.GetRole(GetUid()) != "personnel";
-
+        public bool IsNotPersonnel()
+        {
+            return (string) Session["usertype"] != "personnel";
+        }
     }
 }

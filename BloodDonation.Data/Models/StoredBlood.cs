@@ -20,6 +20,8 @@ namespace BloodDonation.Data.Models
 
         public long CollectionDate;
 
-        public Enum Component;
+        public Component Component;
+
+        public string DonationCenterID { get; set; }
     }
 }

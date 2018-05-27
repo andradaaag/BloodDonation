@@ -30,7 +30,20 @@ namespace BloodDonation.Data.Repositories
                 .Select(i=>FirebaseToObject.Donation(i))
                 .ToList();
         }
-        
+
+        public List<Donation> FindByDonationCenter(string donationCenterID)
+        {
+            return firebaseClient
+                .Child(CHILD)
+                .OrderBy("DonationCenterID")
+                .EqualTo(donationCenterID)
+                .OnceAsync<Donation>()
+                .Result
+                .AsEnumerable()
+                .Select(i => FirebaseToObject.Donation(i))
+                .ToList();
+        }
+
         public List<Donation> FindAll()
         {
             return firebaseClient
