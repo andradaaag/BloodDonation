@@ -123,7 +123,7 @@
                             <td>@req.Name</td>
                             <td>@req.Location</td>
                             <td>
-                                <button> Delete </button>
+                                @Html.ActionLink("Delete", "DeleteHospital", "Admin", new { id = req.ID}, new { @class = "button" })
                             </td>
                         </tr>
                 }

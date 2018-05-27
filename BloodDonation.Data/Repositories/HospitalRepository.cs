@@ -73,5 +73,13 @@ namespace BloodDonation.Data.Repositories
                     .First();
         }
 
+        public void DeleteById(string id)
+        {
+            firebaseClient
+                .Child(CHILD)
+                .Child(id)
+                .DeleteAsync();
+        }
+
     }
 }

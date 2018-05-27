@@ -318,6 +318,12 @@ namespace BloodDonation.Controllers
             }
         }
 
+        public ActionResult DeleteHospital(string id)
+        {
+            hospitalService.RemoveById(id);
+            return GetHospitalsPage();
+        }
+
         [HttpPost]
         public ActionResult CreateAdmin(CreateAdminForm form)
         {
