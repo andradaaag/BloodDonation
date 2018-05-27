@@ -19,11 +19,11 @@ namespace BloodDonation.Data.Repositories
         public bool IsIDPresent(string id)
         {
             return firebaseClient
-                .Child(CHILD)
-                .OrderByKey()
-                .EqualTo(id)
-                .OnceAsync<DonationCenterPersonnel>()
-                .Result.AsEnumerable().Count() == 1;
+                       .Child(CHILD)
+                       .OrderByKey()
+                       .EqualTo(id)
+                       .OnceAsync<DonationCenterPersonnel>()
+                       .Result.AsEnumerable().Count() == 1;
         }
 
         public void Save(DonationCenterPersonnel dcp)
@@ -33,6 +33,16 @@ namespace BloodDonation.Data.Repositories
                 .Child(dcp.ID)
                 .PutAsync(dcp);
         }
+
+
+        public void Edit(DonationCenterPersonnel d)
+        {
+            firebaseClient
+                .Child(CHILD)
+                .Child(d.ID)
+                .PutAsync(d);
+        }
+
 
         public List<DonationCenterPersonnel> findAll()
         {
@@ -46,23 +56,23 @@ namespace BloodDonation.Data.Repositories
                 .ToList();
         }
 
-        public void Edit(DonationCenterPersonnel d)
+
+        public void deleteForId(string id)
         {
-            firebaseClient
-                .Child(CHILD)
-                .Child(d.ID)
-                .PutAsync(d);
-        }
-        public DonationCenterPersonnel GetOne(string id)
-        {
-            return FirebaseToObject.Personnel(firebaseClient
-             .Child(CHILD)
-             .OrderByKey()
-             .EqualTo(id)
-             .OnceAsync<DonationCenterPersonnel>()
-             .Result
-             .First());
+            firebaseClient.Child(CHILD).Child(id).DeleteAsync();
         }
 
+        public DonationCenterPersonnel GetOne(string id)
+        {
+            return firebaseClient
+                .Child(CHILD)
+                .OrderByKey()
+                .EqualTo(id)
+                .OnceAsync<DonationCenterPersonnel>()
+                .Result
+                .AsEnumerable()
+                .Select(i => FirebaseToObject.DonationCenterPersonnel(i))
+                .First();
+        }
     }
 }

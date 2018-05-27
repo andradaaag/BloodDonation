@@ -11,33 +11,54 @@ namespace BloodDonation.Data.Models
      */
     public class DonationCenterPersonnel : User
     {
-        public bool isApproved { get; set; }
+
+        public bool isReviewed { get; set; } 
+
+
+        public bool isValid { get; set; }
+
+
+        public bool wasReviewed()
+        {
+            return this.isReviewed;
+        }
+
         public string DonationCenterID { get; set; }
 
+
         public DonationCenterPersonnel(): base("N/A", "N/A", "N/A", DateTime.Now, "N/A", "N/A", "N/A") {
-            isApproved = false;
+            isReviewed = false;
+            isValid = false;
         }
 
         public DonationCenterPersonnel(string firstName, string lastName, string emailAddress, DateTime DOB, string address, string cityTown, string country)
             : base(firstName, lastName, emailAddress, DOB, address, cityTown, country) {
-            isApproved = false;
+            isReviewed = false;
+            isValid = false;
         }
 
         override
         public string ToString()
         {
             return "Personnel(" + ID + ", " +firstName + ", " + lastName + ", " + emailAddress + ", " + DOB.ToShortDateString() 
-                + ", " + Address + ", " + CityTown + ", " + Country + ", " + isApproved + ")";
+                + ", " + Address + ", " + CityTown + ", " + Country + ", " + isReviewed + ")";
         }
 
         public void validateAccount()
         {
-            isApproved = true;
+            isReviewed = true;
+            isValid = true;
+        }
+
+        public void invalidateAccount()
+        {
+            isReviewed = true;
+            isValid = false;
         }
 
         public bool isValidAccount()
         {
-            return isApproved;
+            return isReviewed && isValid;
         }
     }
 }

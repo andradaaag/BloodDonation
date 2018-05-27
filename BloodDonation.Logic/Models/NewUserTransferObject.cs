@@ -19,5 +19,8 @@ namespace BloodDonation.Logic.Models
 
         public String Hospital { get; set; }
         public String DonationCenter { get; set; }
+
+        public bool isReviewed { get; set; }
+        public bool isValid { get; set; }
     }
 }

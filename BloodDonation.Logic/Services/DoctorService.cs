@@ -64,5 +64,19 @@ namespace BloodDonation.Logic.Services
 
             return respone;
         }
+
+        public void ApproveAccount(string id)
+        {
+            Doctor d = doctorRepository.GetOne(id);
+            d.validateAccount();
+            doctorRepository.Save(d);
+        }
+
+        public void DeleteAccount(string id)
+        {
+            Doctor d = doctorRepository.GetOne(id);
+            d.invalidateAccount();
+            doctorRepository.Save(d);
+        }
     }
 }

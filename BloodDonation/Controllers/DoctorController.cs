@@ -9,6 +9,7 @@ using System.Collections.Generic;
 
 using System.Linq;
 using BloodDonation.Models;
+using Firebase.Auth;
 
 namespace BloodDonation.Controllers
 {
@@ -52,8 +53,10 @@ namespace BloodDonation.Controllers
         {
             try
             {
-                return (String)Session["localId"];
-            }catch(Exception e)
+                return ((FirebaseAuthLink)Session["authlink"]).User.LocalId;
+
+            }
+            catch (Exception e)
             {
                 return "";
             }
