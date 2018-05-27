@@ -28,8 +28,8 @@ namespace BloodDonation.Data.Models
             this.name = name;
 		}
 
-        public string location { get; set; }
+        public String location { get; set; }
 
-		public string name {get;set;}
+		public String name {get;set;}
 	}
 }

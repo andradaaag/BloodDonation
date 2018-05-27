@@ -32,7 +32,7 @@ namespace BloodDonation.Controllers
 
         public ActionResult Index()
         {
-            List<HospitalTransferObject> hto = hosp.GetAllHospitals();
+            //List<HospitalTransferObject> hto = hosp.GetAllHospitals();
             HospitalTransferObject hto1 = hosp.GetHospitalById("-LDWUaTBY-N7EzgxNtZ4");
             return MainDoctorPage();
         }

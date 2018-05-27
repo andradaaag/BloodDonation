@@ -66,13 +66,14 @@ namespace BloodDonation.Data.Repositories
             try
             {
                 return firebaseClient
-                        .Child(CHILD)
-                        .Child(Id)
-                        .OnceAsync<Hospital>()
-                        .Result
-                        .AsEnumerable()
-                        .Select(i => FirebaseToObject.Hospital(i))
-                        .First();
+                    .Child(CHILD)
+                    .OrderByKey()
+                    .EqualTo(Id)
+                    .OnceAsync<Hospital>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.Hospital(i))
+                    .First();
             }
             catch(Exception e)
             {
