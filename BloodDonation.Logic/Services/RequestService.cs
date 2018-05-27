@@ -49,6 +49,12 @@ namespace BloodDonation.Logic.Services
                 .EditStatus(id, LogicToData.Status(s));
         }
 
+        public void EditSource(string id, string donationCenterID)
+        {
+            Repository
+                .EditSource(id, donationCenterID);
+        }
+
         public RequestPersonnel GetOne(string id)
         {
             return DataToLogic.Request(Repository.GetOne(id));

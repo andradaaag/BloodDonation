@@ -109,6 +109,16 @@ namespace BloodDonation.Data.Repositories
                 .PutAsync(r);
         }
 
+        public void EditSource(string id, string donationCenterID)
+        {
+            Request r = GetOne(id);
+            r.source = donationCenterID;
+            firebaseClient
+                .Child(CHILD)
+                .Child(r.ID)
+                .PutAsync(r);
+        }
+
         public Request GetOne(string id)
         {
             try

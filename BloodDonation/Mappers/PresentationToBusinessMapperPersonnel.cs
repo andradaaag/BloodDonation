@@ -93,7 +93,7 @@ namespace BloodDonation.Mappers
                 bloodType = new BloodDonation.Logic.Models.BloodType
                 {
                     Group = r.bloodType.Group,
-                    RH = r.bloodType.PH
+                    RH = r.bloodType.RH
                 }
 
             };

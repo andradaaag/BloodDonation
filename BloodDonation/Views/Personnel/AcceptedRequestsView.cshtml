@@ -40,7 +40,7 @@
                     <th>Hospital location</th>
                     <th>Quantity</th>
                     <th>Blood group</th>
-                    <th>Blood ph</th>
+                    <th>Blood RH</th>
                 </tr>
                 @{
                     var text = "";
@@ -69,7 +69,7 @@
                     <td>@req.hospitalLocation</td>
                     <td>@req.quantity</td>
                     <td>@req.bloodType.Group</td>
-                    <td>@req.bloodType.PH</td>
+                    <td>@req.bloodType.RH</td>
                     
                     <td>
                        @Html.ActionLink(@text,@method, "Personnel", new { id = @reqID },null)

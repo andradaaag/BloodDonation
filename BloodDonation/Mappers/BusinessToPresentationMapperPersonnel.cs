@@ -87,7 +87,7 @@ namespace BloodDonation.Mappers
                 bloodType = new Models.BloodType
                 {
                     Group = r.bloodType.Group,
-                    PH = r.bloodType.RH
+                    RH = r.bloodType.RH
                 },
 
                 hospitalName = h.Name,

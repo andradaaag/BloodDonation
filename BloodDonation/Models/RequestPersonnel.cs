@@ -24,7 +24,6 @@ namespace BloodDonation.Models
 
         public int quantity;
         public BloodType bloodType;
-        public String tempStatus = "BeingProcessed";
 
         public void setStatus(string s)
         {
@@ -34,7 +33,7 @@ namespace BloodDonation.Models
         override
         public string ToString()
         {
-            return status + "  " + hospitalName + "  " + hospitalLocation + "  " + quantity + "  " + bloodType.Group + "  " + bloodType.PH;
+            return status + "  " + hospitalName + "  " + hospitalLocation + "  " + quantity + "  " + bloodType.Group + "  " + bloodType.RH;
         }
     }
 }
