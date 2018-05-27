@@ -35,7 +35,7 @@ namespace BloodDonation.Logic.Services
             
             foreach(Data.Models.DonationCenterPersonnel dcp in myDonationCenterPersonnel)
             {
-                if (!dcp.isValidAccount())
+                if (!dcp.wasReviewed())
                 {
                     myDonationCenterPersonnelAccountRequests.Add(dataToLogicMapper.MapDonationCenterPersonnelToAccountRequest(dcp));
                 }

@@ -17,6 +17,10 @@ namespace BloodDonation.Data.Models
         public bool isValid { get; set; }
 
 
+        public bool wasReviewed()
+        {
+            return this.isReviewed;
+        }
 
 
         public DonationCenterPersonnel(): base("N/A", "N/A", "N/A", DateTime.Now, "N/A", "N/A", "N/A") {
