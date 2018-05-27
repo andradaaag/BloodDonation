@@ -92,13 +92,15 @@ namespace BloodDonation.Data.Repositories
                 .Select(i => FirebaseToObject.Request(i))
                 .ToList();
         }
+
         public void Add(Request r)
         {
             firebaseClient
-               .Child("requests")
-               .PostAsync(r);
+                .Child("requests")
+                .PostAsync(r);
         }
-        public void EditStatus(string id,Status s)
+
+        public void EditStatus(string id, Status s)
         {
             Request r = GetOne(id);
             r.status = s;
@@ -108,20 +110,21 @@ namespace BloodDonation.Data.Repositories
                 .Child(r.ID)
                 .PutAsync(r);
         }
+
         public Request GetOne(string id)
         {
             try
             {
                 return FirebaseToObject.Request(firebaseClient
-                 .Child("requests")
-                 .OrderByKey()
-                 .StartAt(id)
-                 .LimitToFirst(1)
-                 .OnceAsync<Request>()
-                 .Result
-                 .First());
+                    .Child("requests")
+                    .OrderByKey()
+                    .StartAt(id)
+                    .LimitToFirst(1)
+                    .OnceAsync<Request>()
+                    .Result
+                    .First());
             }
-            catch(System.InvalidOperationException e)
+            catch (System.InvalidOperationException)
             {
                 return null;
             }
