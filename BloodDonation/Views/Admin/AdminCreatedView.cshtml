@@ -19,7 +19,7 @@
                 <h2><a href="#">Admin</a></h2>
             </div>
             <form action="login.html" method="post">
-                <input type="submit" class="sf_submit" value="Log out">
+                @Html.ActionLink("Log Out", "LogOut", "Admin", null, new { @class = "sf_submit" })
             </form>
             <nav>
                 <ul>
