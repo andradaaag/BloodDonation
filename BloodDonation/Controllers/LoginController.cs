@@ -46,9 +46,9 @@ namespace BloodDonation.Controllers
         {
             if (_doctorService.IsIDPresent(id))
             {
-                // To be implemented
                 Session["usertype"] = "doctor";
-                return RedirectToAction("Error", "Error");
+                return RedirectToAction("Index", "Doctor");
+                
             }
             else if (_donorService.IsIDPresent(id))
             {
@@ -78,6 +78,7 @@ namespace BloodDonation.Controllers
                 Session.Timeout = 480; //in minutes;
                 Session["user"] = logInForm.Username;
                 Session["pass"] = logInForm.Password;
+
                 Session["authlink"] = firebaseAuthLink;
 
                 return redirectUser(firebaseAuthLink.User.LocalId);
@@ -101,23 +102,26 @@ namespace BloodDonation.Controllers
 
             switch (form.UserType)
             {
-                case (int) UserTypeEnum.Doctor:
-                {
-                    _doctorService.AddDoctorAccount(newUser);
-                    break;
-                }
 
-                case (int) UserTypeEnum.Donor:
-                {
-                    _donorService.AddDonorAccount(newUser);
-                    break;
-                }
+                case (int)Utils.Enums.UserTypeEnum.Doctor:
+                    {
+                        _doctorService.AddDoctorAccount(newUser);
+                        break;
+                    }
 
-                case (int) UserTypeEnum.Personnel:
-                {
-                    _donationCenterPersonnelService.AddDonationCenterPersonnelAccount(newUser);
-                    break;
-                }
+                case (int)UserTypeEnum.Donor:
+                    {
+                        _donorService.AddDonorAccount(newUser);
+                        break;
+                    }
+
+                case (int)UserTypeEnum.Personnel:
+                    {
+                        _donationCenterPersonnelService.AddDonationCenterPersonnelAccount(newUser);
+                        break;
+                    }  
+
+              
                 default:
                 {
                     break;

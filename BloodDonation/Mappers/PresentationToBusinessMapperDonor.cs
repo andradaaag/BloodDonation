@@ -10,6 +10,7 @@ namespace BloodDonation.Mappers
             return new DonorDetailsTransferObject()
             {
                 ID = donorForm.ID,
+                Cnp =donorForm.Cnp,
                 FirstName = donorForm.FirstName,
                 LastName = donorForm.LastName,
                 DateOfBirth = donorForm.DateOfBirth,

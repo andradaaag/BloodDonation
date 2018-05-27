@@ -1,4 +1,6 @@
 ﻿
+using BloodDonation.Logic.Models;
+using BloodDonation.Logic.Services;
 using BloodDonation.Models;
 using System;
 using System.Collections.Generic;
@@ -64,31 +66,33 @@ namespace BloodDonation.Mappers
                 DonationCenterID = p.DonationCenterID
             };
         }
+       
 
-        public BloodType BloodType(Logic.Models.BloodType bt)
+        public Models.RequestPersonnel Request(Logic.Models.RequestPersonnel r)
         {
-            return new BloodType
-            {
-                Group = bt.Group,
-                PH = bt.RH
-            };
-        }
+            HospitalService hs = new HospitalService();
+            HospitalTransferObject h = hs.GetHospitalById(r.ID);
 
-        public Status Status(Logic.Models.Status s)
-        {
-            return (Status)s;
-        }
-
-        public RequestPersonnel Request(Logic.Models.RequestPersonnel r)
-        {
-            return new RequestPersonnel
+            return new Models.RequestPersonnel
             {
                 ID = r.ID,
-                status = this.Status(r.status),
-                hospitalName = r.hospitalLocation,
-                hospitalLocation = r.hospitalLocation,
+                status = (Models.Status)r.status,
+
+                destination = r.destination,
+                source = r.source,
+                doctorId = r.doctorId,
+                patientCnp = r.patientCnp,
+
                 quantity = r.quantity,
-                bloodType = this.BloodType(r.bloodType)
+                bloodType = new Models.BloodType
+                {
+                    Group = r.bloodType.Group,
+                    PH = r.bloodType.RH
+                },
+
+                hospitalName = h.Name,
+                hospitalLocation = h.Location,       
+                
             };
         }
         public SeparateStoredBloodModel SeparateBlood(Logic.Models.StoredBlood sb)

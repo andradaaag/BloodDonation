@@ -11,9 +11,15 @@ namespace BloodDonation.Data.Models
 		public Request(){}
 
 		public Status status { get; set; }
-        public DonationCenter source { get; set; }
-        public Hospital destination { get; set; }
-		public int quantity { get; set; }
+
+        public String source { get; set; }
+        public String destination { get; set; }
+        public String doctorId { get; set; }
+        public String patientCnp { get; set; }
+
+        public int quantity { get; set; }
+
         public BloodType bloodType { get; set; }
+
     }
 }

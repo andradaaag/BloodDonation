@@ -18,7 +18,8 @@ namespace BloodDonation.Logic.Mappers
                 DonationFormEntity = new DonationFormEntity(detailsTransferObject.Weight),
                 emailAddress = detailsTransferObject.Email,
                 Country = detailsTransferObject.Country,
-                additionalCommentaries = detailsTransferObject.Commentaries
+                additionalCommentaries = detailsTransferObject.Commentaries,
+                cnp = detailsTransferObject.Cnp
             };
         }
 

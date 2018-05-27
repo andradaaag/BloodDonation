@@ -15,6 +15,8 @@ namespace BloodDonation.Data.Repositories
         private FirebaseClient firebaseClient = new FirebaseClient("https://blooddonation-bc0b9.firebaseio.com/");
         private FirebaseToObject FirebaseToObject = new FirebaseToObject();
 
+        public RequestRepository() { }
+
         //public void testing()
         //{
 
@@ -76,10 +78,6 @@ namespace BloodDonation.Data.Repositories
         }
 
 
-        public RequestRepository()
-        {
-            //removeAll();
-        }
 
         public List<Request> FindAll()
         {
@@ -93,7 +91,16 @@ namespace BloodDonation.Data.Repositories
                 .ToList();
         }
 
+        public void Save(Request r)
+        {
+            firebaseClient
+                .Child("requests")
+                .PostAsync(r);
+        }
+
+
         public void Add(Request r)
+
         {
             firebaseClient
                 .Child("requests")
@@ -127,6 +134,26 @@ namespace BloodDonation.Data.Repositories
             catch (System.InvalidOperationException)
             {
                 return null;
+            }
+        }
+
+        public List<Request> GetRentalByDoctorId(string doctorId)
+        {
+            try
+            {
+                return firebaseClient
+                .Child("requests")
+                .OrderBy("doctorId")
+                .EqualTo(doctorId)
+                .OnceAsync<Request>()
+                .Result
+                .AsEnumerable()
+                .Select(i => FirebaseToObject.Request(i))
+                .ToList();
+            }
+            catch (Exception e)
+            {
+                return new List<Request>();
             }
         }
     }

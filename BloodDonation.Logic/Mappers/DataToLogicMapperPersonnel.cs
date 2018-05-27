@@ -78,7 +78,7 @@ namespace BloodDonation.Logic.Mappers
 
 
 
-        public BloodType BloodType(Data.Models.BloodType bt)
+        public BloodType convertBloodType(Data.Models.BloodType bt)
         {
             return new BloodType
             {
@@ -98,10 +98,11 @@ namespace BloodDonation.Logic.Mappers
             {
                 ID = r.ID,
                 status = this.Status(r.status),
-                hospitalName = r.destination.name,
-                hospitalLocation = r.destination.location,
+                destination = r.destination,
+                source = r.source,
+                doctorId = r.doctorId,
                 quantity = r.quantity,
-                bloodType = this.BloodType(r.bloodType)
+                bloodType = this.convertBloodType(r.bloodType)
             };
 
         }
