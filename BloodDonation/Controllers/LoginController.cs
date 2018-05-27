@@ -77,7 +77,8 @@ namespace BloodDonation.Controllers
                 Session.Timeout = 480; //in minutes;
                 Session["user"] = logInForm.Username;
                 Session["pass"] = logInForm.Password;
-               
+
+                Session["authlink"] = firebaseAuthLink;
 
                 return redirectUser(firebaseAuthLink.User.LocalId);
             } 
