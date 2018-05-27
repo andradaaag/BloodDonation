@@ -31,24 +31,25 @@ namespace BloodDonation.Logic.Services
 
         public List<AccountRequest> GetDoctorAccountRequests()
         {
-            List<Doctor> myDoctors =  doctorRepository.findAll();
+            List<Doctor> myDoctors = doctorRepository.findAll();
             List<AccountRequest> myDoctorAccountRequests = new List<AccountRequest>();
-            
-            foreach(Doctor doctor in myDoctors){
-                if (!doctor.wasReviewed())
+
+            foreach (Doctor doctor in myDoctors)
+            {
+                if (!doctor.isValidAccount())
                 {
                     myDoctorAccountRequests.Add(dataToLogicMapper.MapDoctorToAccountRequest(doctor));
                 }
             }
             return myDoctorAccountRequests;
-        } 
+        }
 
         public List<DoctorTransferObject> GetValidDoctors()
         {
             List<Doctor> myDoctors = doctorRepository.findAll();
             List<DoctorTransferObject> doctorTransferObjects = new List<DoctorTransferObject>();
 
-            foreach(Doctor doctor in myDoctors)
+            foreach (Doctor doctor in myDoctors)
             {
                 if (doctor.isValidAccount())
                 {
@@ -66,27 +67,13 @@ namespace BloodDonation.Logic.Services
             List<DoctorTransferObject> doctorTransferObjects = GetValidDoctors();
             List<DoctorTransferObject> respone = new List<DoctorTransferObject>();
 
-            foreach(DoctorTransferObject dto in doctorTransferObjects)
+            foreach (DoctorTransferObject dto in doctorTransferObjects)
             {
                 if (dto.FirstName.Contains(searchQuery) || dto.LastName.Contains(searchQuery))
                     respone.Add(dto);
             }
 
             return respone;
-        }
-
-        public void ApproveAccount(string id)
-        {
-            Doctor d = doctorRepository.GetOne(id);
-            d.validateAccount();
-            doctorRepository.Save(d);
-        }
-
-        public void DeleteAccount(string id)
-        {
-            Doctor d = doctorRepository.GetOne(id);
-            d.invalidateAccount();
-            doctorRepository.Save(d);
         }
     }
 }

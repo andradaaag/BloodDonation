@@ -1,4 +1,7 @@
-﻿using BloodDonation.Data.Models;
+﻿using BloodDonation.Data.Mapper;
+using BloodDonation.Data.Models;
+using Firebase.Database;
+using Firebase.Database.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,37 +12,75 @@ namespace BloodDonation.Data.Repositories
 {
     public class HospitalRepository
     {
-        private List<Hospital> hospitals;
+
+        private FirebaseClient firebaseClient = new FirebaseClient("https://blooddonation-bc0b9.firebaseio.com/");
+        private FirebaseToObject FirebaseToObject = new FirebaseToObject();
+        private const string CHILD = "hospitals";
 
         public HospitalRepository()
         {
-            this.hospitals = new List<Hospital>();
-
             Hospital hospital = new Hospital("Cluj", "Bagdazar");
-            hospital.ID = "1";
-            this.hospitals.Add(hospital);
-
+            this.Save(hospital);
             hospital = new Hospital("Cluj", "Regina Maria");
-            hospital.ID = "2";
-            this.hospitals.Add(hospital);
-
+            this.Save(hospital);
             hospital = new Hospital("Bucuresti", "Urgente");
-            hospital.ID = "3";
-            this.hospitals.Add(hospital);
-
+            this.Save(hospital);
             hospital = new Hospital("Sibiu", "Tulea");
-            hospital.ID = "4";
-            this.hospitals.Add(hospital);
+            this.Save(hospital);
         }
 
-        public List<Hospital> findAll()
+        public List<Hospital> FindAll()
         {
-            return this.hospitals;
+            return firebaseClient
+                    .Child(CHILD)
+                    .OrderByKey()
+                    .OnceAsync<Hospital>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.Hospital(i))
+                    .ToList();
         }
 
-        public void save(Hospital hospital)
+        public void Save(Hospital newhospital)
         {
-            this.hospitals.Add(hospital);
+            firebaseClient
+                .Child(CHILD)
+                .Child(newhospital.ID)
+                .PutAsync(newhospital);
         }
+
+        public void Edit(Hospital newhospital)
+        {
+            firebaseClient
+                .Child(CHILD)
+                .Child(newhospital.ID)
+                .PutAsync(newhospital);
+        }
+
+        public List<Hospital> FindByName(String name)
+        {
+            return firebaseClient
+                    .Child(CHILD)
+                    .OrderBy("name")
+                    .EqualTo(name)
+                    .OnceAsync<Hospital>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.Hospital(i))
+                    .ToList();
+        }
+
+        public Hospital FindById(String Id)
+        {
+            return firebaseClient
+                    .Child(CHILD)
+                    .Child(Id)
+                    .OnceAsync<Hospital>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.Hospital(i))
+                    .First();
+        }
+
     }
 }

@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace BloodDonation.Logic.Models
 {
+
     public class Hospital : BaseEntity
     {
         public Hospital() { }
-        public string location;
-        public string name;
+        public String Location;
+        public String Name;
+        public String ID;
     }
 }

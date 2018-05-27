@@ -15,6 +15,8 @@ namespace BloodDonation.Data.Repositories
         private FirebaseClient firebaseClient = new FirebaseClient("https://blooddonation-bc0b9.firebaseio.com/");
         private FirebaseToObject FirebaseToObject = new FirebaseToObject();
 
+        public RequestRepository() { }
+
         //public void testing()
         //{
 
@@ -76,10 +78,6 @@ namespace BloodDonation.Data.Repositories
         }
 
 
-        public RequestRepository()
-        {
-            //removeAll();
-        }
 
         public List<Request> FindAll()
         {
@@ -92,13 +90,24 @@ namespace BloodDonation.Data.Repositories
                 .Select(i => FirebaseToObject.Request(i))
                 .ToList();
         }
-        public void Add(Request r)
+
+        public void Save(Request r)
         {
             firebaseClient
-               .Child("requests")
-               .PostAsync(r);
+                .Child("requests")
+                .PostAsync(r);
         }
-        public void EditStatus(string id,Status s)
+
+
+        public void Add(Request r)
+
+        {
+            firebaseClient
+                .Child("requests")
+                .PostAsync(r);
+        }
+
+        public void EditStatus(string id, Status s)
         {
             Request r = GetOne(id);
             r.status = s;
@@ -108,22 +117,43 @@ namespace BloodDonation.Data.Repositories
                 .Child(r.ID)
                 .PutAsync(r);
         }
+
         public Request GetOne(string id)
         {
             try
             {
                 return FirebaseToObject.Request(firebaseClient
-                 .Child("requests")
-                 .OrderByKey()
-                 .StartAt(id)
-                 .LimitToFirst(1)
-                 .OnceAsync<Request>()
-                 .Result
-                 .First());
+                    .Child("requests")
+                    .OrderByKey()
+                    .StartAt(id)
+                    .LimitToFirst(1)
+                    .OnceAsync<Request>()
+                    .Result
+                    .First());
             }
-            catch(System.InvalidOperationException e)
+            catch (System.InvalidOperationException)
             {
                 return null;
+            }
+        }
+
+        public List<Request> GetRentalByDoctorId(string doctorId)
+        {
+            try
+            {
+                return firebaseClient
+                .Child("requests")
+                .OrderBy("doctorId")
+                .EqualTo(doctorId)
+                .OnceAsync<Request>()
+                .Result
+                .AsEnumerable()
+                .Select(i => FirebaseToObject.Request(i))
+                .ToList();
+            }
+            catch (Exception e)
+            {
+                return new List<Request>();
             }
         }
     }

@@ -11,26 +11,30 @@ namespace BloodDonation.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly PresentationToBusinessMapper _presentationToBusinessMapper = new PresentationToBusinessMapper();
+        private readonly PresentationToBusinessMapper
+            _presentationToBusinessMapper = new PresentationToBusinessMapper();
+
         private readonly DonorService _donorService = new DonorService();
         private readonly DoctorService _doctorService = new DoctorService();
-        private readonly DonationCenterPersonnelService _donationCenterPersonnelService = new DonationCenterPersonnelService();
+
+        private readonly DonationCenterPersonnelService _donationCenterPersonnelService =
+            new DonationCenterPersonnelService();
 
         static FirebaseConfig config = new FirebaseConfig("AIzaSyBX9u-1P99X08XHfL-rr3DxqJMCVnI4Vbw");
         FirebaseAuthProvider authProvider = new FirebaseAuthProvider(config);
 
         public async System.Threading.Tasks.Task<ActionResult> Index()
         {
-
-            if (Session["user"] != null && Session["pass"]!=null)
+            if (Session["user"] != null && Session["pass"] != null)
             {
-                FirebaseAuthLink firebaseAuthLink = await authProvider.SignInWithEmailAndPasswordAsync((string)Session["user"], (string)Session["pass"]);
+                FirebaseAuthLink firebaseAuthLink =
+                    await authProvider.SignInWithEmailAndPasswordAsync((string) Session["user"],
+                        (string) Session["pass"]);
 
                 return redirectUser(firebaseAuthLink.User.LocalId);
             }
 
             return View("LoginHomePage");
-            
         }
 
         public ActionResult ShowSignUpPage()
@@ -42,9 +46,8 @@ namespace BloodDonation.Controllers
         {
             if (_doctorService.IsIDPresent(id))
             {
-                // To be implemented
                 Session["usertype"] = "doctor";
-                return RedirectToAction("Error", "Error");
+                return RedirectToAction("Index", "Doctor");
                 
             }
             else if (_donorService.IsIDPresent(id))
@@ -69,16 +72,18 @@ namespace BloodDonation.Controllers
         {
             try
             {
-                FirebaseAuthLink firebaseAuthLink = await authProvider.SignInWithEmailAndPasswordAsync(logInForm.Username, logInForm.Password);
+                FirebaseAuthLink firebaseAuthLink =
+                    await authProvider.SignInWithEmailAndPasswordAsync(logInForm.Username, logInForm.Password);
 
                 Session.Timeout = 480; //in minutes;
                 Session["user"] = logInForm.Username;
                 Session["pass"] = logInForm.Password;
+
                 Session["authlink"] = firebaseAuthLink;
 
                 return redirectUser(firebaseAuthLink.User.LocalId);
-            } 
-            catch (Firebase.Auth.FirebaseAuthException e)
+            }
+            catch (Firebase.Auth.FirebaseAuthException)
             {
                 // TODO - implement invalid username and password
                 return RedirectToAction("Error", "Error");
@@ -88,8 +93,8 @@ namespace BloodDonation.Controllers
         [HttpPost]
         public async System.Threading.Tasks.Task<ActionResult> SignUp(SignUpForm form)
         {
-
-            FirebaseAuthLink firebaseAuthLink = await authProvider.CreateUserWithEmailAndPasswordAsync(form.Email, form.Password);
+            FirebaseAuthLink firebaseAuthLink =
+                await authProvider.CreateUserWithEmailAndPasswordAsync(form.Email, form.Password);
             form.UID = firebaseAuthLink.User.LocalId;
 
 
@@ -97,7 +102,8 @@ namespace BloodDonation.Controllers
 
             switch (form.UserType)
             {
-                case (int)UserTypeEnum.Doctor:
+
+                case (int)Utils.Enums.UserTypeEnum.Doctor:
                     {
                         _doctorService.AddDoctorAccount(newUser);
                         break;
@@ -114,13 +120,15 @@ namespace BloodDonation.Controllers
                         _donationCenterPersonnelService.AddDonationCenterPersonnelAccount(newUser);
                         break;
                     }  
+
+              
                 default:
-                    {
-                        break;
-                    }
+                {
+                    break;
+                }
             }
+
             return View("LoginHomePage");
-            
         }
     }
 }

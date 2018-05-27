@@ -57,6 +57,20 @@ namespace BloodDonation.Data.Mapper
             return r;
         }
 
+        public Hospital Hospital(FirebaseObject<Hospital> hospital)
+        {
+            Hospital h = hospital.Object;
+            h.ID = hospital.Key;
+            return h;
+        }
+
+        public Patient Patient(FirebaseObject<Patient> patient)
+        {
+            Patient p = patient.Object;
+            p.ID = patient.Key;
+            return p;
+        }
+
         public DonationCenterPersonnel Personnel(FirebaseObject<DonationCenterPersonnel> personnel)
         {
             DonationCenterPersonnel p = personnel.Object;

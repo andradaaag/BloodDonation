@@ -8,7 +8,7 @@ namespace BloodDonation.Models
         public String ID { get; set; }
         public String FirstName { get; set; }
         public String LastName { get; set; }
-        
+        public String Cnp { get; set; }
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
         public String Address { get; set; }

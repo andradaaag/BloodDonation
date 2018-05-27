@@ -19,11 +19,11 @@ namespace BloodDonation.Data.Repositories
         public bool IsIDPresent(string id)
         {
             return firebaseClient
-                .Child(CHILD)
-                .OrderByKey()
-                .EqualTo(id)
-                .OnceAsync<DonationCenterPersonnel>()
-                .Result.AsEnumerable().Count() == 1;
+                       .Child(CHILD)
+                       .OrderByKey()
+                       .EqualTo(id)
+                       .OnceAsync<DonationCenterPersonnel>()
+                       .Result.AsEnumerable().Count() == 1;
         }
 
         public void Save(DonationCenterPersonnel dcp)
@@ -33,16 +33,18 @@ namespace BloodDonation.Data.Repositories
                 .Child(dcp.ID)
                 .PutAsync(dcp);
         }
-      
-   
-              public void Edit(DonationCenterPersonnel d)
+
+
+
+
+        public void Edit(DonationCenterPersonnel d)
+
         {
             firebaseClient
                 .Child(CHILD)
                 .Child(d.ID)
                 .PutAsync(d);
         }
-      
 
 
         public List<DonationCenterPersonnel> findAll()
@@ -76,6 +78,5 @@ namespace BloodDonation.Data.Repositories
                 .First();
 
         }
-
     }
 }
