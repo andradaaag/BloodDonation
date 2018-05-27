@@ -15,6 +15,9 @@ namespace BloodDonation.Logic.Services
         private DataToLogicMapperPersonnel DataToLogic = new DataToLogicMapperPersonnel();
         private LogicToDataMapperPersonnel LogicToData = new LogicToDataMapperPersonnel();
 
+        private readonly DonationCenterPersonnelRepository dcprRepo = new DonationCenterPersonnelRepository();
+
+
         public List<StoredBlood> FindAll(string CollectionCenterID)
         {
             //TODO: implement the proper FINDALL in repo
@@ -22,6 +25,15 @@ namespace BloodDonation.Logic.Services
                 .FindAll()
                 .AsEnumerable()
                 .Select(i=>DataToLogic.StoredBlood(i))
+                .ToList();
+        }
+
+        public List<StoredBlood> GetWholeStoredBloodByDonCent(string UID)
+        {
+            return Repository
+                .FindAllByDonationCenter(dcprRepo.GetOne(UID).DonationCenterID)
+                .Select(i => DataToLogic.StoredBlood(i))
+                .Where(i => i.Component == Data.Models.Component.Whole)
                 .ToList();
         }
 
