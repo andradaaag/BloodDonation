@@ -61,7 +61,7 @@ namespace BloodDonation.Logic.Mappers
             return new DonationCenterPersonnel
             {
                 ID = p.ID,
-                isApproved = p.isApproved,
+                isApproved = p.isReviewed,
                 firstName = p.firstName,
                 lastName = p.lastName,
                 emailAddress = p.emailAddress,

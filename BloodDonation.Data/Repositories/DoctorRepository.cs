@@ -50,6 +50,22 @@ namespace BloodDonation.Data.Repositories
                 .ToList();
         }
 
+        public void deleteForId(string id)
+        {
+            firebaseClient.Child(CHILD).Child(id).DeleteAsync();
+        }
 
+        public Doctor GetOne(string id)
+        {
+            return firebaseClient
+                .Child(CHILD)
+                .OrderByKey()
+                .EqualTo(id)
+                .OnceAsync<Doctor>()
+                .Result
+                .AsEnumerable()
+                .Select(i => FirebaseToObject.Doctor(i))
+                .First();
+        }
     }
 }

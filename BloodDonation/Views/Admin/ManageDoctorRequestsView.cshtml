@@ -54,29 +54,31 @@
                 <form action="#">
                     <table style="width:100%">
                         <tr>
-                            <th>ID</th>
                             <th>Full Name</th>
                             <th>Mail</th>
                             <th>Hospital</th>
-                            <th>Request Type </th>
                             <th>Approve/Decline</th>
                         </tr>
                         <!-- Add informations in table -->
 
                         @foreach (var req in Model.GetDoctorAccountRequests())
                         {
-                           <tr>
-                                <td>@req.ID</td>
-                                <td>@req.FirstName @req.LastName</td>
-                                <td>@req.EmailAddress</td>
-                                <td>@req.HospitalName</td>
-                                <td>@req.RequestType</td>
-                                <td>
-                                    <button> Approve</button>
-                                    <button> Decline</button>
-                                </td>
-                            </tr>
-                         }
+
+
+                                <tr>
+                                    <td>@req.FirstName @req.LastName</td>
+                                    <td>@req.EmailAddress</td>
+                                    <td>@req.HospitalName</td>
+                                    <td>
+                                        <ul>
+                                            <li>@Html.ActionLink("Approve", "ApproveAccountRequest", "Admin", new { id = req.ID, requestType = req.RequestType}, new { @class = "button" })</li>
+                                            <li>@Html.ActionLink("Deny", "DenyAccountRequest", "Admin", new { id = req.ID, requestType = req.RequestType }, new { @class = "button" })</li>
+                                        </ul>
+
+                                    </td>
+                                </tr>
+                                
+                        }
 
                     </table>
                 </form>

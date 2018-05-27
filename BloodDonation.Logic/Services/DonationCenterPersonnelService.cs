@@ -1,6 +1,7 @@
 ﻿using BloodDonation.Business.Mappers;
 using BloodDonation.Data.Repositories;
 using BloodDonation.Logic.Mappers;
+using BloodDonation.Data.Models;
 using BloodDonation.Logic.Models;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace BloodDonation.Logic.Services
             
             foreach(Data.Models.DonationCenterPersonnel dcp in myDonationCenterPersonnel)
             {
-                if (!dcp.isValidAccount())
+                if (!dcp.wasReviewed())
                 {
                     myDonationCenterPersonnelAccountRequests.Add(dataToLogicMapper.MapDonationCenterPersonnelToAccountRequest(dcp));
                 }
@@ -72,6 +73,21 @@ namespace BloodDonation.Logic.Services
             }
 
             return respone;
+        }
+
+        public void ApproveAccount(string id)
+        {
+            Data.Models.DonationCenterPersonnel dcp = donationCenterPersonnelRepository.GetOne(id);
+            dcp.validateAccount();
+            donationCenterPersonnelRepository.Save(dcp);
+
+        }
+
+        public void DeleteAccount(string id)
+        {
+            Data.Models.DonationCenterPersonnel dcp = donationCenterPersonnelRepository.GetOne(id);
+            dcp.invalidateAccount();
+            donationCenterPersonnelRepository.Save(dcp);
         }
 
     }
