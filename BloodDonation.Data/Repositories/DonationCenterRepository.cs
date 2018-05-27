@@ -1,4 +1,7 @@
-﻿using BloodDonation.Data.Models;
+﻿using BloodDonation.Data.Mapper;
+using BloodDonation.Data.Models;
+using Firebase.Database;
+using Firebase.Database.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,37 +12,72 @@ namespace BloodDonation.Data.Repositories
 {
     public class DonationCenterRepository
     {
-        private List<DonationCenter> donationCenters;
+        private FirebaseClient firebaseClient = new FirebaseClient("https://blooddonation-bc0b9.firebaseio.com/");
+        private FirebaseToObject FirebaseToObject = new FirebaseToObject();
+        private const string CHILD = "donationcenters";
 
         public DonationCenterRepository()
         {
-            this.donationCenters = new List<DonationCenter>();
-
-            DonationCenter dc = new DonationCenter("Cluj-Napoca", "Fii erou!");
-            dc.ID = "1";
-            this.donationCenters.Add(dc);
-
-            dc = new DonationCenter("Brasov", "Hai la ace!");
-            dc.ID = "2";
-            this.donationCenters.Add(dc);
-
-            dc = new DonationCenter("Pitesti", "Primim sange");
-            dc.ID = "3";
-            this.donationCenters.Add(dc);
-
-            dc = new DonationCenter("Vaslui", "Sange pentru rachiu");
-            dc.ID = "4";
-            this.donationCenters.Add(dc);
         }
 
-        public List<DonationCenter> findAll()
+        public List<DonationCenter> FindAll()
         {
-            return this.donationCenters;
+            return firebaseClient
+                    .Child(CHILD)
+                    .OrderByKey()
+                    .OnceAsync<DonationCenter>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.DonationCenter(i))
+                    .ToList();
         }
 
-        public void save(DonationCenter dc)
+        public void Save(DonationCenter newdc)
         {
-            this.donationCenters.Add(dc);
+            firebaseClient
+                .Child(CHILD)
+                .PostAsync(newdc);
+        }
+
+        public void Edit(DonationCenter dc)
+        {
+            firebaseClient
+                .Child(CHILD)
+                .Child(dc.ID)
+                .PutAsync(dc);
+        }
+
+        public List<DonationCenter> FindByName(String name)
+        {
+            return firebaseClient
+                    .Child(CHILD)
+                    .OrderBy("name")
+                    .EqualTo(name)
+                    .OnceAsync<DonationCenter>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.DonationCenter(i))
+                    .ToList();
+        }
+
+        public DonationCenter FindById(String Id)
+        {
+            return firebaseClient
+                    .Child(CHILD)
+                    .Child(Id)
+                    .OnceAsync<DonationCenter>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.DonationCenter(i))
+                    .First();
+        }
+
+        public void DeleteById(string id)
+        {
+            firebaseClient
+                .Child(CHILD)
+                .Child(id)
+                .DeleteAsync();
         }
     }
 }

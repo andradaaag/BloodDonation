@@ -10,8 +10,8 @@ namespace BloodDonation.Data.Models
 	{
         public string location { get; set; }
         public string name { get; set; }
-        public HashSet<DonationCenterPersonnel> Personnel { get; set; }
-        public HashSet<StoredBlood> StoredBlood { get; set; }
+        public HashSet<string> Personnel { get; set; }
+        public HashSet<string> StoredBlood { get; set; }
 		public DonationCenter(string location, string name)
 		{
             this.location = location;

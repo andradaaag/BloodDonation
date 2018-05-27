@@ -31,6 +31,11 @@ namespace BloodDonation.Logic.Services
             hospitalRepository.Save(logicToDataMapper.MapHospital(newHospital));
         }
 
+        public void RemoveById(string id)
+        {
+            hospitalRepository.DeleteById(id);
+        }
+
         public List<HospitalTransferObject> FilterHospitalsByNameAndLocation(String nameQuery, String locationQuery)
         {
             return hospitalRepository.FindByName(nameQuery)

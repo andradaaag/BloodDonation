@@ -26,14 +26,16 @@ namespace BloodDonation.Controllers
         static FirebaseConfig config = new FirebaseConfig("AIzaSyBX9u-1P99X08XHfL-rr3DxqJMCVnI4Vbw");
         FirebaseAuthProvider authProvider = new FirebaseAuthProvider(config);
 
-        private bool checkUserType()
+        private ActionResult goIfPossible(ActionResult actionResultSuccess)
         {
-
-            //TODO - if unavailable, redirect to login
-
+            if (Session["usertype"] == null)
+                return RedirectToAction("Index", "Login");
             if ((string)Session["usertype"] != "admin")
-                return false;
-            return true;
+                return RedirectToAction("Error", "Error");
+            if(Session["authlink"] != null && ((FirebaseAuthLink)Session["authlink"]).IsExpired())
+                return RedirectToAction("Index", "Login");
+
+            return actionResultSuccess;
         }
 
         // GET: Admin
@@ -51,9 +53,7 @@ namespace BloodDonation.Controllers
             {
                 manageRequestsModel.AddDonationCenterPersonnelAccountRequest(_businessToPresentationMapper.MapDonationCenterPersonnelAccountRequest(ar));
             }
-            if(checkUserType())
-                return View("ManagePersonnelRequestsView", manageRequestsModel);
-            return RedirectToAction("Error", "Error");
+            return goIfPossible(View("ManagePersonnelRequestsView", manageRequestsModel));
         }
 
         public ActionResult GetDoctorAccountRequestsPage()
@@ -64,9 +64,7 @@ namespace BloodDonation.Controllers
             {
                 manageRequestsModel.AddDoctorAccountRequest(_businessToPresentationMapper.MapDoctorAccountRequest(ar));
             }
-            if (checkUserType())
-                return View("ManageDoctorRequestsView", manageRequestsModel);
-            return RedirectToAction("Error", "Error");
+            return goIfPossible(View("ManageDoctorRequestsView", manageRequestsModel));
         }
 
         public ActionResult GetDoctorsPage()
@@ -78,9 +76,7 @@ namespace BloodDonation.Controllers
             {
                 manageAccountsModel.AddDoctorAccount(_businessToPresentationMapper.MapDoctorDisplayData(dto));
             }
-            if (checkUserType())
-                return View("ManageDoctorsView", manageAccountsModel);
-            return RedirectToAction("Error", "Error");
+            return goIfPossible(View("ManageDoctorsView", manageAccountsModel));
         }
 
         public ActionResult GetPersonnelPage()
@@ -91,9 +87,7 @@ namespace BloodDonation.Controllers
             {
                 manageAccountsModel.AddDonationCenterPersonnelAccount(_businessToPresentationMapper.MapDonationCenterPersonnelDisplayData(dcpto));
             }
-            if (checkUserType())
-                return View("ManagePersonnelView", manageAccountsModel);
-            return RedirectToAction("Error", "Error");
+            return goIfPossible(View("ManagePersonnelView", manageAccountsModel));
         }
 
         public ActionResult GetHospitalsPage()
@@ -105,9 +99,7 @@ namespace BloodDonation.Controllers
             {
                 manageHospitalsModel.AddHospital(_businessToPresentationMapper.MapHospitalDisplayData(hto));
             }
-            if (checkUserType())
-                return View("ManageHospitalsView", manageHospitalsModel);
-            return RedirectToAction("Error", "Error");
+            return goIfPossible(View("ManageHospitalsView", manageHospitalsModel));
         }
 
         public ActionResult GetDonationCentersPage()
@@ -118,46 +110,34 @@ namespace BloodDonation.Controllers
             {
                 manageDonationCentersModel.AddDonationCenter(_businessToPresentationMapper.MapDonationCenterDisplayData(dcto));
             }
-            if (checkUserType())
-                return View("ManageDonationCentersView", manageDonationCentersModel);
-            return RedirectToAction("Error", "Error");
+            return goIfPossible(View("ManageDonationCentersView", manageDonationCentersModel));
         }
 
         public ActionResult GetCreateAdminPage()
         {
-            if (checkUserType())
-                return View("CreateAdminView", new CreateAdminForm());
-            return RedirectToAction("Error", "Error");
+            return goIfPossible(View("CreateAdminView", new CreateAdminForm()));
         }
 
         public ActionResult GetPersonalDataPage()
         {
-            if (checkUserType())
-                return View("PersonalDataView");
-            return RedirectToAction("Error", "Error");
+            return goIfPossible(View("PersonalDataView"));
         }
 
         public ActionResult GetEditPersonalDataPage()
         {
-            if (checkUserType())
-                return View("EditPersonalDataView", new ChangeAdminPersonalDataForm());
-            return RedirectToAction("Error", "Error");
+            return goIfPossible(View("EditPersonalDataView", new ChangeAdminPersonalDataForm()));
         }
 
         public ActionResult GetAdminCreatedPage()
         {
-            if (checkUserType())
-                return View("AdminCreatedView");
-            return RedirectToAction("Error", "Error");
+            return goIfPossible(View("AdminCreatedView"));
         }
 
         [HttpPost]
         public ActionResult UpdatePersonalData(ChangeAdminPersonalDataForm form)
         {
             // TODO - somehow update personal data
-            if (checkUserType())
-                return GetPersonalDataPage();
-            return RedirectToAction("Error", "Error");
+            return goIfPossible(GetPersonalDataPage());
         }
 
         [HttpPost]
@@ -174,9 +154,8 @@ namespace BloodDonation.Controllers
             {
                 model.AddDoctorAccount(_businessToPresentationMapper.MapDoctorDisplayData(dto));
             }
-            if (checkUserType())
-                return View("ManageDoctorsView", model);
-            return RedirectToAction("Error", "Error");
+     
+            return goIfPossible(View("ManageDoctorsView", model));
         }
 
         [HttpPost]
@@ -194,9 +173,8 @@ namespace BloodDonation.Controllers
             {
                 model.AddDonationCenterPersonnelAccount(_businessToPresentationMapper.MapDonationCenterPersonnelDisplayData(dcpto));
             }
-            if (checkUserType())
-                return View("ManagePersonnelView", model);
-            return RedirectToAction("Error", "Error");
+  
+            return goIfPossible(View("ManagePersonnelView", model));
 
         }
 
@@ -210,9 +188,7 @@ namespace BloodDonation.Controllers
             };
 
             hospitalService.AddNewHospital(newHospital);
-            if (checkUserType())
-                return GetHospitalsPage();
-            return RedirectToAction("Error", "Error");
+            return goIfPossible(GetHospitalsPage());
         }
 
         [HttpPost]
@@ -225,9 +201,7 @@ namespace BloodDonation.Controllers
             };
 
             donationCenterService.AddNewDonationCenter(newDC);
-            if (checkUserType())
-                return GetDonationCentersPage();
-            return RedirectToAction("Error", "Error");
+            return goIfPossible(GetDonationCentersPage());
         }
 
         [HttpPost]
@@ -245,9 +219,7 @@ namespace BloodDonation.Controllers
             {
                 model.AddHospital(_businessToPresentationMapper.MapHospitalDisplayData(hto));
             }
-            if (checkUserType())
-                return View("ManageHospitalsView", model);
-            return RedirectToAction("Error", "Error");
+            return goIfPossible(View("ManageHospitalsView", model));
         }
 
         [HttpPost]
@@ -265,9 +237,7 @@ namespace BloodDonation.Controllers
             {
                 model.AddDonationCenter(_businessToPresentationMapper.MapDonationCenterDisplayData(dcto));
             }
-            if (checkUserType())
-                return View("ManageDonationCentersView", model);
-            return RedirectToAction("Error", "Error");
+            return goIfPossible(View("ManageDonationCentersView", model));
         }
 
         public ActionResult ApproveAccountRequest(string id, string requestType)
@@ -278,12 +248,12 @@ namespace BloodDonation.Controllers
                 case "Doctor":
                     {
                         doctorService.ApproveAccount(id);
-                        return GetDoctorAccountRequestsPage();
+                        return goIfPossible(GetDoctorAccountRequestsPage());
                     }
                 case "DonationCenterPersonnel":
                     {
                         donationCenterPersonnelService.ApproveAccount(id);
-                        return GetPersonnelAccountRequestsPage();
+                        return goIfPossible(GetPersonnelAccountRequestsPage());
                     }
                 default:
                     {
@@ -304,12 +274,12 @@ namespace BloodDonation.Controllers
                 case "Doctor":
                     {
                         doctorService.DeleteAccount(id);
-                        return GetDoctorAccountRequestsPage();
+                        return goIfPossible(GetDoctorAccountRequestsPage());
                     }
                 case "DonationCenterPersonnel":
                     {
                         donationCenterPersonnelService.DeleteAccount(id);
-                        return GetPersonnelAccountRequestsPage();
+                        return goIfPossible(GetPersonnelAccountRequestsPage());
                     }
                 default:
                     {
@@ -317,6 +287,20 @@ namespace BloodDonation.Controllers
                     }
             }
         }
+
+        public ActionResult DeleteHospital(string id)
+        {
+            hospitalService.RemoveById(id);
+            return goIfPossible(GetHospitalsPage());
+        }
+
+        public ActionResult DeleteDonationCenter(string id)
+        {
+            donationCenterService.RemoveById(id);
+            return goIfPossible(GetDonationCentersPage());
+        }
+
+       
 
         [HttpPost]
         public ActionResult CreateAdmin(CreateAdminForm form)
