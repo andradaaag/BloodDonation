@@ -300,15 +300,7 @@ namespace BloodDonation.Controllers
             return goIfPossible(GetDonationCentersPage());
         }
 
-        public ActionResult LogOut()
-        {
-            Session["user"] = null;
-            Session["pass"] = null;
-            Session["usertype"] = null;
-            Session["authlink"] = null;
-
-            return RedirectToAction("Index", "Login");
-        }
+       
 
         [HttpPost]
         public ActionResult CreateAdmin(CreateAdminForm form)
