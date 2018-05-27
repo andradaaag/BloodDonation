@@ -36,7 +36,7 @@ namespace BloodDonation.Logic.Services
 
             foreach (Doctor doctor in myDoctors)
             {
-                if (!doctor.isValidAccount())
+                if (!doctor.wasReviewed())
                 {
                     myDoctorAccountRequests.Add(dataToLogicMapper.MapDoctorToAccountRequest(doctor));
                 }
