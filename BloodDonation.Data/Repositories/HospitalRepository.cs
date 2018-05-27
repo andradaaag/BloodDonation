@@ -19,14 +19,6 @@ namespace BloodDonation.Data.Repositories
 
         public HospitalRepository()
         {
-            Hospital hospital = new Hospital("Cluj", "Bagdazar");
-            this.Save(hospital);
-            hospital = new Hospital("Cluj", "Regina Maria");
-            this.Save(hospital);
-            hospital = new Hospital("Bucuresti", "Urgente");
-            this.Save(hospital);
-            hospital = new Hospital("Sibiu", "Tulea");
-            this.Save(hospital);
         }
 
         public List<Hospital> FindAll()
@@ -45,8 +37,7 @@ namespace BloodDonation.Data.Repositories
         {
             firebaseClient
                 .Child(CHILD)
-                .Child(newhospital.ID)
-                .PutAsync(newhospital);
+                .PostAsync(newhospital);
         }
 
         public void Edit(Hospital newhospital)
