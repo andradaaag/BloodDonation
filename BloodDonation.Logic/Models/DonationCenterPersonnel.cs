@@ -9,6 +9,7 @@ namespace BloodDonation.Logic.Models
     public class DonationCenterPersonnel : User
     {
         public bool isApproved { get; set; }
+        public string DonationCenterID { get; set; }
 
         public DonationCenterPersonnel() : base("N/A", "N/A", "N/A", DateTime.Now, "N/A", "N/A", "N/A")
         {

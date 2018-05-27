@@ -45,9 +45,9 @@
                         @Html.Label("AB", "AB")
                     </div>
                     <div>
-                        @Html.RadioButtonFor(model => model.BloodTypeGroup,"B", new { id = "B" })
+                        @Html.RadioButtonFor(model => model.BloodTypeGroup, "B", new { id = "B" })
                         @Html.Label("B", "B")
-                        @Html.RadioButtonFor(model => model.BloodTypeGroup,"O", new { id = "O" })
+                        @Html.RadioButtonFor(model => model.BloodTypeGroup, "O", new { id = "O" })
                         @Html.Label("O", "O")
                     </div>
 
@@ -97,6 +97,18 @@
                         @Html.TextBoxFor(model => model.Cnp, new { placeholder = "CNP..." })
                     </div>
                 </div>
+
+                
+                <div class="row">
+                    <div class="col-25">
+                        <label for="lname">Keep blood whole</label>
+                    </div>
+                    <div class="col-75">
+                        @Html.CheckBoxFor(x => x.KeepWhole, new { })
+                    </div>
+                </div>
+
+                
 
 
                 <div class="row">

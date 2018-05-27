@@ -33,6 +33,17 @@ namespace BloodDonation.Data.Repositories
                 .Child(dcp.ID)
                 .PutAsync(dcp);
         }
+      
+      /*
+              public void Edit(DonationCenterPersonnel d)
+        {
+            firebaseClient
+                .Child(CHILD)
+                .Child(d.ID)
+                .PutAsync(d);
+        }
+      
+      */
 
         public List<DonationCenterPersonnel> findAll()
         {
@@ -45,6 +56,7 @@ namespace BloodDonation.Data.Repositories
                 .Select(i => FirebaseToObject.DonationCenterPersonnel(i))
                 .ToList();
         }
+
 
         public void deleteForId(string id)
         {
@@ -62,6 +74,19 @@ namespace BloodDonation.Data.Repositories
                 .AsEnumerable()
                 .Select(i => FirebaseToObject.DonationCenterPersonnel(i))
                 .First();
+
+        }
+      
+
+        public DonationCenterPersonnel GetOne(string id)
+        {
+            return FirebaseToObject.Personnel(firebaseClient
+             .Child(CHILD)
+             .OrderByKey()
+             .EqualTo(id)
+             .OnceAsync<DonationCenterPersonnel>()
+             .Result
+             .First());
         }
 
     }

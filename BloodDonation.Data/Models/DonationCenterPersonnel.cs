@@ -11,6 +11,7 @@ namespace BloodDonation.Data.Models
      */
     public class DonationCenterPersonnel : User
     {
+
         public bool isReviewed { get; set; } 
 
 
@@ -21,6 +22,8 @@ namespace BloodDonation.Data.Models
         {
             return this.isReviewed;
         }
+
+        public string DonationCenterID { get; set; }
 
 
         public DonationCenterPersonnel(): base("N/A", "N/A", "N/A", DateTime.Now, "N/A", "N/A", "N/A") {
