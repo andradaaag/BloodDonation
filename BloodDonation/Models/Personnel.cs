@@ -8,6 +8,8 @@ namespace BloodDonation.Models
 
         public bool isApproved { get; set; }
 
+        public string DonationCenterID { get; set; }
+
         public Personnel() : base("N/A", "N/A", "N/A", DateTime.Now, "N/A", "N/A", "N/A")
         {
             isApproved = false;
