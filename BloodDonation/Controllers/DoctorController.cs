@@ -23,7 +23,7 @@ namespace BloodDonation.Controllers
         private PresentationToBusinessMapperDoctor presentationToBusinessMapperDoctor = new PresentationToBusinessMapperDoctor();
         private PresentationToBusinessMapperPersonnel presentationToBusinessMapperPersonnel = new PresentationToBusinessMapperPersonnel();
 
-        private DoctorService doctorService = new DoctorService();
+        
         private RequestService requestService = new RequestService();
 
         List<Models.RequestPersonnel> requests;
@@ -68,22 +68,8 @@ namespace BloodDonation.Controllers
                 return GetMakeBloodRequest();
             }
 
-            Logic.Models.RequestPersonnel newRequest = new Logic.Models.RequestPersonnel();
-            newRequest.bloodType.Group = request.bloodGroup;
-            newRequest.bloodType.RH = request.bloodRh == "positive" ? true : false;
-            newRequest.patientCnp = request.patientCnp;
-            newRequest.quantity = request.quantity;
-            newRequest.status = Logic.Models.Status.BeingProcessed;
-            newRequest.doctorId = GetUid();
-
-            Doctor doctor = doctorService.findById(newRequest.doctorId);
-            if(doctor == null)
-            {
-                return GetMakeBloodRequest();
-            }
-            newRequest.destination = doctor.HospitalId;
-
-            newRequest.source = "none";
+            Logic.Models.RequestPersonnel newRequest = 
+                businessToPresentationMapperDoctor.MapRequestBloodFormToRequestPersonnel(request, GetUid());
             requestService.AddRequest(newRequest);
 
             System.Threading.Thread.Sleep(700);

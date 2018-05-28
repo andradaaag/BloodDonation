@@ -66,7 +66,8 @@ namespace BloodDonation.Data.Repositories
             {
                 return firebaseClient
                         .Child(CHILD)
-                        .Child(Id)
+                        .OrderByKey()
+                        .EqualTo(Id)
                         .OnceAsync<DonationCenter>()
                         .Result
                         .AsEnumerable()
