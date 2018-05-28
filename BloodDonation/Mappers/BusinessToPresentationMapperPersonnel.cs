@@ -73,13 +73,6 @@ namespace BloodDonation.Mappers
             HospitalService hs = new HospitalService();
             HospitalTransferObject h = hs.GetHospitalById(r.destination);
 
-            Models.BloodType newBloodType = new Models.BloodType();
-            newBloodType.Group = r.bloodType.Group;
-            if (r.bloodType.RH)
-                newBloodType.RH = "Positive";
-            else
-                newBloodType.RH = "Negative";
-
             return new Models.RequestPersonnel
             {
                 ID = r.ID,
@@ -90,8 +83,12 @@ namespace BloodDonation.Mappers
                 doctorId = r.doctorId,
                 patientCnp = r.patientCnp,
 
-                quantity = r.quantity.ToString(),
-                bloodType = newBloodType,
+                quantity = r.quantity,
+                bloodType = new Models.BloodType
+                {
+                    Group = r.bloodType.Group,
+                    PH = r.bloodType.RH
+                },
                 hospitalName = h.Name,
                 hospitalLocation = h.Location,       
                 

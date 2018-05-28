@@ -94,8 +94,14 @@
                     <label for="fname">Blood RH</label>
 
                 </div>
+
                 <div class="col-75">
-                    @Html.EditorFor(model => model.bloodType.RH, new { htmlAttributes = new { @readonly = "readonly" } })
+                    @if(Model.bloodType.PH){
+                        <input type="text" id="Foo" name="pos" value="Positive" readonly="readonly"/>
+                    }
+                    else{
+                    <input type="text" id="Foo" name="neg" value="Negative" readonly="readonly" />
+                    }
                 </div>
             </div>
             <br />

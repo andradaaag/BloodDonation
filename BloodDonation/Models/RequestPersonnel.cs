@@ -28,7 +28,7 @@ namespace BloodDonation.Models
 
         public String doctorName;
 
-        public string quantity;
+        public int quantity;
         public BloodType bloodType;
 
         public void setStatus(string s)
@@ -39,7 +39,7 @@ namespace BloodDonation.Models
         override
         public string ToString()
         {
-            return status + "  " + hospitalName + "  " + hospitalLocation + "  " + quantity + "  " + bloodType.Group + "  " + bloodType.RH;
+            return status + "  " + hospitalName + "  " + hospitalLocation + "  " + quantity + "  " + bloodType.Group + "  " + bloodType.PH;
         }
     }
 }
