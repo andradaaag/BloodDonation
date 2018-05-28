@@ -172,6 +172,16 @@ namespace BloodDonation.Controllers
         public ActionResult AcceptRequest(string id)
         {
             RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(id));
+            Personnel loggedPersonnel = BusinessToPresentation.Personnel(personnelService.GetOne(GetUid()));
+            string donationCenterID = loggedPersonnel.DonationCenterID;
+            int missingBlood = requestService.getMissingBlood(donationCenterID, PresentationToBusiness.Request(r));
+
+            if (missingBlood > 0)
+            {
+                String param = Convert.ToString(missingBlood);
+                return View("MissingBloodView", model: param);
+            }
+
             return View("AcceptRequestView", r);
         }
 
@@ -199,6 +209,12 @@ namespace BloodDonation.Controllers
         public ActionResult RequestToDb(NewStatus ns)
         {
             Status s = (Status)Enum.Parse(typeof(Status), ns.status);
+            if (s == Status.BeingProcessed)
+            {
+                requestService.EditSource(ns.ID, "none");
+                requestService.EditStatus(ns.ID, PresentationToBusiness.Status(s));
+
+            }
             requestService.EditStatus(ns.ID, PresentationToBusiness.Status(s));
             return Success();
 

@@ -78,6 +78,13 @@ namespace BloodDonation.Mappers
 
         public Logic.Models.RequestPersonnel Request(RequestPersonnel r)
         {
+            BloodDonation.Logic.Models.BloodType newBT = new Logic.Models.BloodType();
+            newBT.Group = r.bloodType.Group;
+            if (r.bloodType.RH == "Positive")
+                newBT.RH = true;
+            else
+                newBT.RH = false;
+
             return new Logic.Models.RequestPersonnel
             {
                 ID = r.ID,
@@ -88,13 +95,9 @@ namespace BloodDonation.Mappers
                 doctorId = r.doctorId,
                 patientCnp = r.patientCnp,
 
-                quantity = r.quantity,
+                quantity = Convert.ToInt32(r.quantity),
                 
-                bloodType = new BloodDonation.Logic.Models.BloodType
-                {
-                    Group = r.bloodType.Group,
-                    RH = r.bloodType.RH
-                }
+                bloodType = newBT
 
             };
         }

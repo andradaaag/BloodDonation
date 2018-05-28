@@ -16,6 +16,56 @@ namespace BloodDonation.Logic.Services
         private LogicToDataMapperPersonnel LogicToData = new LogicToDataMapperPersonnel();
         private DataToLogicMapperPersonnel DataToLogic = new DataToLogicMapperPersonnel();
 
+
+
+        public int getStoredBlood(string donationCenterID, BloodType bloodType)
+        {
+            
+            StoredBloodRepository bloodRepo = new StoredBloodRepository();
+            List<StoredBlood> bloodList = bloodRepo
+                    .FindAllByDonationCenter(donationCenterID)
+                    .AsEnumerable()
+                    .Select(x => DataToLogic.StoredBlood(x))
+                    .ToList();
+
+
+            int totalQuantity = 0;
+            foreach (StoredBlood blood in bloodList)
+                if(blood.BloodType.isCompatible(bloodType))
+                    totalQuantity += blood.Amount;
+
+            return totalQuantity;
+        }
+
+        public int getPromisedBlood(string donationCenterID, BloodType bloodType)
+        {
+
+
+            List<RequestPersonnel> promisedRequests = this.FindDonationCenterRequests(donationCenterID);
+
+            int totalQuantity = 0;
+            foreach(RequestPersonnel request in promisedRequests)
+                if( request.status != Status.Denied && bloodType.isCompatible(request.bloodType))
+                    totalQuantity += request.quantity;
+
+            return totalQuantity;
+        }
+
+        public int getMissingBlood(string donationCenterID, RequestPersonnel r)
+        {
+
+            int storedBlood = this.getStoredBlood(donationCenterID,r.bloodType);
+            int promisedBlood = this.getPromisedBlood(donationCenterID, r.bloodType);
+            int availableBlood = storedBlood - promisedBlood;
+
+            if (availableBlood >= r.quantity)
+                return 0;
+
+            return r.quantity - availableBlood;
+
+        }
+
+
         public List<RequestPersonnel> FindAll()
         {
             return Repository

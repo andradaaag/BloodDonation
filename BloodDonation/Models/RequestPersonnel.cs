@@ -1,15 +1,21 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BloodDonation.Models
 {
-    public class RequestPersonnel: BaseEntity
+    public class RequestPersonnel : BaseEntity
     {
         public RequestPersonnel() { }
-        public Status status;
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        [Display(Name = "Status")]
+        public Status status { get; set; } 
 
         public String destination;      //hospitalid
         public String source;           //donationcenterid
@@ -22,7 +28,7 @@ namespace BloodDonation.Models
 
         public String doctorName;
 
-        public int quantity;
+        public string quantity;
         public BloodType bloodType;
 
         public void setStatus(string s)
