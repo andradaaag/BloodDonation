@@ -78,6 +78,7 @@ namespace BloodDonation.Logic.Mappers
             return new Data.Models.Request
             {
                 ID = r.ID,
+                patientCnp = r.patientCnp,
                 status = (Data.Models.Status)r.status,
                 destination = r.destination,
                 source = r.source,

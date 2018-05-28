@@ -62,14 +62,22 @@ namespace BloodDonation.Data.Repositories
 
         public DonationCenter FindById(String Id)
         {
-            return firebaseClient
-                    .Child(CHILD)
-                    .Child(Id)
-                    .OnceAsync<DonationCenter>()
-                    .Result
-                    .AsEnumerable()
-                    .Select(i => FirebaseToObject.DonationCenter(i))
-                    .First();
+            try
+            {
+                return firebaseClient
+                        .Child(CHILD)
+                        .OrderByKey()
+                        .EqualTo(Id)
+                        .OnceAsync<DonationCenter>()
+                        .Result
+                        .AsEnumerable()
+                        .Select(i => FirebaseToObject.DonationCenter(i))
+                        .First();
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
 
         public void DeleteById(string id)

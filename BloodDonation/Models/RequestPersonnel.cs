@@ -20,6 +20,9 @@ namespace BloodDonation.Models
         public String hospitalName;
         public String hospitalLocation;
 
+        public String DonationCenterName;
+        public String DonationCenterLocation;
+
         public String doctorName;
 
         public int quantity;
