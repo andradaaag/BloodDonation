@@ -16,10 +16,11 @@ namespace BloodDonation.Logic.Models
             isApproved = false;
         }
 
-        public DonationCenterPersonnel(string firstName, string lastName, string emailAddress, DateTime DOB, string address, string cityTown, string country)
+        public DonationCenterPersonnel(string firstName, string lastName, string emailAddress, DateTime DOB, string address, string cityTown, string country, string donationCenterId)
             : base(firstName, lastName, emailAddress, DOB, address, cityTown, country)
         {
             isApproved = false;
+            DonationCenterID = donationCenterId;
         }
     }
 }
