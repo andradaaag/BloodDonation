@@ -21,6 +21,7 @@ namespace BloodDonation.Mappers
                     RH = donation.BloodTypeRH == "Positive"
                 },
                 DonorId = donation.DonorId,
+                PatientCnp = donation.Cnp,
                 HepatitisB = donation.HepatitisB,
                 HepatitisC = donation.HepatitisC,
                 Hiv = donation.Hiv,

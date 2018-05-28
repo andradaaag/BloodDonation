@@ -18,6 +18,8 @@ namespace BloodDonation.Logic.Models
 
         public string DonorId;
 
+        public string PatientCnp;
+        
         public Stage Stage;
 
         public int Quantity;

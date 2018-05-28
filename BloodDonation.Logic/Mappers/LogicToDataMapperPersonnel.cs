@@ -21,6 +21,7 @@ namespace BloodDonation.Logic.Mappers
                     RH = donation.BloodType.RH
                 },
                 DonorCnp = donation.DonorId,
+                PatientCnp = donation.PatientCnp,
                 DonationCenterID = donation.DonationCenterId,
                 HepatitisB = donation.HepatitisB,
                 HepatitisC = donation.HepatitisC,
