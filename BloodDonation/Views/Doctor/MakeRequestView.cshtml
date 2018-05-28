@@ -24,7 +24,7 @@
                 <h2><a href="#">Doctor</a></h2>
             </div>
             <form action="login.html" method="post">
-                <input type="submit" class="sf_submit" value="Log out">
+                @Html.ActionLink("Log Out", "LogOut", "Login", null, new { @class = "sf_submit" })
             </form>
             <nav>
                 <ul>
@@ -75,8 +75,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <input type="submit" value="Send Email">
+                        <input type="submit" value="Send Request">
                     </div>
+
                  }
 
         </div>
