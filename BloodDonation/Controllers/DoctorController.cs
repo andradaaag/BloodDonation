@@ -25,7 +25,6 @@ namespace BloodDonation.Controllers
         private PresentationToBusinessMapperDoctor presentationToBusinessMapperDoctor = new PresentationToBusinessMapperDoctor();
         private PresentationToBusinessMapperPersonnel presentationToBusinessMapperPersonnel = new PresentationToBusinessMapperPersonnel();
 
-
         private RequestService requestService = new RequestService();
 
         List<Models.RequestPersonnel> requests;
@@ -111,7 +110,6 @@ namespace BloodDonation.Controllers
                 businessToPresentationMapperDoctor.MapRequestBloodFormToRequestPersonnel(request, GetUid());
             requestService.AddRequest(newRequest);
 
-            /// Send mail async
             Thread mailThread = new Thread(() => sendEmailToAllPersonnel(newRequest));
             mailThread.Start();
 

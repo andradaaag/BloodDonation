@@ -31,11 +31,11 @@ namespace BloodDonation.Mappers
             Logic.Models.RequestPersonnel newRequest = new Logic.Models.RequestPersonnel();
             newRequest.bloodType.Group = request.bloodGroup;
             newRequest.bloodType.RH = request.bloodRh == "positive" ? true : false;
+            newRequest.bloodType.bloodComponent = request.bloodComponent;
             newRequest.patientCnp = request.patientCnp;
             newRequest.quantity = request.quantity;
             newRequest.status = Logic.Models.Status.BeingProcessed;
             newRequest.doctorId = uid;
-
             Doctor doctor = doctorService.findById(newRequest.doctorId);
             if (doctor == null)
             {

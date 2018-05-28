@@ -20,9 +20,10 @@ namespace BloodDonation.Data.Models
 		 */
 		public bool RH;
 
-		/**
+        /**
 		 * @param blood
 		 */
+        public BloodDonation.Data.Models.Component Component;
 
 		public void isCompatible(BloodType blood)
 		{

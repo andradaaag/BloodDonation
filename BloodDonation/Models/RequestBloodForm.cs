@@ -11,6 +11,7 @@ namespace BloodDonation.Models
         public String bloodRh { get; set; }
         public String bloodGroup { get; set; }
         public int quantity { get; set; }
+        public BloodDonation.Data.Models.Component bloodComponent { get; set; }
 
     }
 }
