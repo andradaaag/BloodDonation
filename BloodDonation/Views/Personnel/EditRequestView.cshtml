@@ -48,17 +48,6 @@
                 List<SelectListItem> listItems= new List<SelectListItem>();
                         listItems.Add(new SelectListItem
                         {
-                            Text = "Being processed",
-                            Value = "BeingProcessed"
-                        });
-                        listItems.Add(new SelectListItem
-                        {
-                            Text = "Accepted",
-                            Value = "Accepted",
-                            Selected = true
-                        });
-                        listItems.Add(new SelectListItem
-                        {
                             Text = "On the way",
                             Value = "OnTheWay"
                         });
@@ -75,7 +64,7 @@
                 
                     }
                     <div class="col-75">
-                        @Html.DropDownListFor(model => model.status, listItems, "Select status...")
+                        @Html.DropDownListFor(model => model.status, listItems)
                     </div>
                 </div>
 

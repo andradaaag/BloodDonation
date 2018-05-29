@@ -192,6 +192,10 @@ namespace BloodDonation.Controllers
             string donationCenterID = loggedPersonnel.DonationCenterID;
             requestService.EditSource(id, donationCenterID);
 
+            RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(id));
+            storedBloodService.RemoveBlood(donationCenterID, r.quantity,
+                PresentationToBusiness.BloodType(r.bloodType), PresentationToBusiness.RequestComponent(r.component));
+
             return Success();
         }
 
@@ -211,20 +215,6 @@ namespace BloodDonation.Controllers
             Status s = (Status)Enum.Parse(typeof(Status), ns.status);
             RequestPersonnel previousRequest = BusinessToPresentation.Request(requestService.GetOne(ns.ID));
 
-            // TO DO, TREAT CASE WHEN WE GO BACK FROM ONTHEWAY TO ACCEPTED OR SMTH LIKE THAT
-
-            
-            if (s == Status.BeingProcessed)
-                previousRequest.source = "none";
-
-            if( s == Status.OnTheWay)
-            {
-                RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(ns.ID));
-                Personnel loggedPersonnel = BusinessToPresentation.Personnel(personnelService.GetOne(GetUid()));
-                string donationCenterID = loggedPersonnel.DonationCenterID;
-                storedBloodService.RemoveBlood(donationCenterID, r.quantity,
-                    PresentationToBusiness.BloodType(r.bloodType), PresentationToBusiness.RequestComponent(r.component));
-            }
             previousRequest.status = s;
             requestService.Edit(PresentationToBusiness.Request(previousRequest));
             return Success();

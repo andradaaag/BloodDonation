@@ -66,5 +66,13 @@ namespace BloodDonation.Data.Repositories
                 .Select(i => FirebaseToObject.StoredBlood(i))
                 .ToList();
         }
+
+        public void DeleteById(string id)
+        {
+            firebaseClient
+                .Child(CHILD)
+                .Child(id)
+                .DeleteAsync();
+        }
     }
 }

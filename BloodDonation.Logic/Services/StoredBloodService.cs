@@ -62,6 +62,7 @@ namespace BloodDonation.Logic.Services
             List<StoredBlood> storedBloodList = GetStoredBloodByDonationCenter(donationCenterID);
             //storedBloodList.Sort();
 
+
             int i = 0;
             int a = 0;
             while( i < storedBloodList.Count && quantity > 0)
@@ -83,10 +84,15 @@ namespace BloodDonation.Logic.Services
                             current.Amount = current.Amount - quantity;
                             quantity = 0;
                         }
-                        Repository.Edit(LogicToData.StoredBlood(current));
+                        
                     }
                 }
-                i++;    
+                if(current.Amount == 0)
+                    Repository.DeleteById(current.ID);
+                else
+                    Repository.Edit(LogicToData.StoredBlood(current));
+                i++;
+                
             }
         }
     }
