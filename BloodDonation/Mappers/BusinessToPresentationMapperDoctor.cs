@@ -25,6 +25,7 @@ namespace BloodDonation.Mappers
             newRequest.quantity = request.quantity;
             newRequest.status = Status.BeingProcessed;
             newRequest.doctorId = uid;
+            newRequest.urgency = request.urgency;
             Doctor doctor = doctorService.findById(newRequest.doctorId);
             if (doctor == null)
             {

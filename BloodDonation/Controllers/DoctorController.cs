@@ -59,7 +59,14 @@ namespace BloodDonation.Controllers
             return MainDoctorPage();
         }
 
-
+        public ActionResult CompleteRequest(BloodDonation.Models.RequestPersonnel info)
+        {
+            BloodDonation.Logic.Models.RequestPersonnel request = requestService.GetOne(info.ID);
+            request.status = Utils.Enums.Status.Completed;
+            requestService.Edit(request);
+            System.Threading.Thread.Sleep(700);
+            return MainDoctorPage();
+        }
 
 
         private void SendBloodRequestMail(Logic.Models.RequestPersonnel newrequest, String destinationEmail)

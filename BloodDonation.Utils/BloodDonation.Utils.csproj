@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Component.cs" />
+    <Compile Include="Enums\RequestUrgency.cs" />
     <Compile Include="Enums\Stage.cs" />
     <Compile Include="Enums\Status.cs" />
     <Compile Include="Enums\UserTypeEnum.cs" />

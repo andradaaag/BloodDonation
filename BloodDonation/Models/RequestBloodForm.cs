@@ -13,6 +13,6 @@ namespace BloodDonation.Models
         public String bloodGroup { get; set; }
         public int quantity { get; set; }
         public Component bloodComponent { get; set; }
-
+        public DoctorUrgencyLevel urgency { get; set; }
     }
 }

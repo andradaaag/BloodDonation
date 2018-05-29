@@ -21,6 +21,8 @@ namespace BloodDonation.Logic.Models
         public int quantity { get; set; }
         public BloodType bloodType { get; set; }
 
+        public DoctorUrgencyLevel urgency { get; set; }
+
         public RequestPersonnel()
         {
             this.bloodType = new BloodType();
