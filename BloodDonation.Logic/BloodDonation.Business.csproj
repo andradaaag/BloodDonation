@@ -76,7 +76,6 @@
     <Compile Include="Services\DonationService.cs" />
     <Compile Include="Services\RequestService.cs" />
     <Compile Include="Services\StoredBloodService.cs" />
-    <Compile Include="Services\UserService.cs" />
     <Compile Include="Models\DoctorTransferObject.cs" />
     <Compile Include="Models\DonationCenterPersonnelTransferObject.cs" />
     <Compile Include="Models\DonationCenterTransferObject.cs" />

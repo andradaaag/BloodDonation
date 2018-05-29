@@ -20,7 +20,6 @@ namespace BloodDonation.Controllers
         private RequestService requestService = new RequestService();
         private StoredBloodService storedBloodService = new StoredBloodService();
         private DoctorService doctorService = new DoctorService();
-        private UserService userService = new UserService();
 
         private ErrorController errorController = new ErrorController();
 
