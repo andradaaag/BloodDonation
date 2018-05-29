@@ -81,11 +81,31 @@
 
             <div class="row">
                 <div class="col-25">
+                    <label for="fname">Doctor name</label>
+
+                </div>
+                <div class="col-75">
+                    @Html.EditorFor(model => model.doctorName, new { htmlAttributes = new { @readonly = "readonly" } })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="fname">Doctor email</label>
+
+                </div>
+                <div class="col-75">
+                    @Html.EditorFor(model => model.doctorEmail, new { htmlAttributes = new { @readonly = "readonly" } })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
                     <label for="fname">Quantity</label>
 
                 </div>
                 <div class="col-75">
-                    @Html.EditorFor(model => model.quantity, new { htmlAttributes = new { @readonly = "readonly" } })
+                    @Html.EditorFor(model => model.quantityString, new { htmlAttributes = new { @readonly = "readonly" } })
                 </div>
             </div>
 

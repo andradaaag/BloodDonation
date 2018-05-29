@@ -112,5 +112,19 @@ namespace BloodDonation.Mappers
                 DonationCenterID = sb.DonationCenterID
             };
         }
+
+        public DoctorDisplayData MapDoctorDisplayData(DoctorTransferObject doctor)
+        {
+            return new DoctorDisplayData()
+            {
+                ID = doctor.ID,
+                FirstName = doctor.FirstName,
+                LastName = doctor.LastName,
+                EmailAddress = doctor.EmailAddress,
+                City = doctor.City,
+                Country = doctor.Country,
+                HospitalName = doctor.InstituteName,
+            };
+        }
     }
 }

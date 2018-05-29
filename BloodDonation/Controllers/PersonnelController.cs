@@ -18,6 +18,7 @@ namespace BloodDonation.Controllers
         private PersonnelService personnelService = new PersonnelService();
         private RequestService requestService = new RequestService();
         private StoredBloodService storedBloodService = new StoredBloodService();
+        private DoctorService doctorService = new DoctorService();
         private UserService userService = new UserService();
 
         private ErrorController errorController = new ErrorController();
@@ -182,6 +183,8 @@ namespace BloodDonation.Controllers
                 return View("MissingBloodView", model: param);
             }
 
+            r = AddDoctorEmail(r);
+            r.quantityString = Convert.ToString(r.quantity);
             return View("AcceptRequestView", r);
         }
 
@@ -264,6 +267,7 @@ namespace BloodDonation.Controllers
                 .FindAll()
                 .AsEnumerable()
                 .Select(i => BusinessToPresentation.Request(i))
+                .Select(x => AddDoctorEmail(x))
                 .ToList();
         }
 
@@ -273,6 +277,7 @@ namespace BloodDonation.Controllers
                 .FindUnsolved()
                 .AsEnumerable()
                 .Select(i => BusinessToPresentation.Request(i))
+                .Select(x => AddDoctorEmail(x))
                 .ToList();
         }
 
@@ -285,10 +290,23 @@ namespace BloodDonation.Controllers
                 .FindDonationCenterRequests(donationCenterID)
                 .AsEnumerable()
                 .Select(i => BusinessToPresentation.Request(i))
+                .Select(x => AddDoctorEmail(x))
                 .ToList();
         }
 
-        
+        public RequestPersonnel AddDoctorEmail(RequestPersonnel req)
+        {
+            DoctorDisplayData doctor = doctorService
+                .GetValidDoctors()
+                .AsEnumerable()
+                .Select(x => BusinessToPresentation.MapDoctorDisplayData(x))
+                .Where(x => x.ID == req.doctorId)
+                .Single();
+            req.doctorEmail = doctor.EmailAddress;
+            req.doctorName = doctor.LastName + " " + doctor.FirstName;
+            return req;
+        }
+
         public string GetUid()
         {
             return ((FirebaseAuthLink) Session["authlink"]).User.LocalId;

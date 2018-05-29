@@ -21,13 +21,14 @@ namespace BloodDonation.Models
         public String source;           //donationcenterid
         public String doctorId;
         public String patientCnp;
-
+        public String doctorEmail;
 
         public String hospitalName;
         public String hospitalLocation;
 
         public String doctorName;
 
+        public string quantityString;
         public int quantity;
         public BloodType bloodType;
         public RequestComponent component { get; set; }
