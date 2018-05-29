@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BloodDonation.Logic.Models;
+using BloodDonation.Utils.Enums;
 
 namespace BloodDonation.Logic.Services
 {
@@ -40,7 +41,7 @@ namespace BloodDonation.Logic.Services
                .FindByDonationCenter(dcprRepo.GetOne(UID).DonationCenterID)
                .AsEnumerable()
                .Select(i => DataToLogic.Donation(i))
-               .Where(i => i.Stage == Data.Models.Stage.Sampling || i.Stage == Data.Models.Stage.BiologicalQualityControl)
+               .Where(i => i.Stage == Stage.Sampling || i.Stage == Stage.BiologicalQualityControl)
                .ToList();
 
         }
@@ -51,7 +52,7 @@ namespace BloodDonation.Logic.Services
                .FindByDonationCenter(dcprRepo.GetOne(UID).DonationCenterID)
                .AsEnumerable()
                .Select(i => DataToLogic.Donation(i))
-               .Where(i => i.Stage == Data.Models.Stage.Sampling || i.Stage == Data.Models.Stage.Preparation)
+               .Where(i => i.Stage == Stage.Sampling || i.Stage == Stage.Preparation)
                .ToList();
 
         }
@@ -62,7 +63,7 @@ namespace BloodDonation.Logic.Services
                .FindByDonationCenter(donationCenterID)
                .AsEnumerable()
                .Select(i => DataToLogic.Donation(i))
-               .Where( i=> i.Stage != Data.Models.Stage.Redistribution && i.Stage != Data.Models.Stage.Failed)
+               .Where( i=> i.Stage != Stage.Redistribution && i.Stage != Stage.Failed)
                .ToList();
         }
 

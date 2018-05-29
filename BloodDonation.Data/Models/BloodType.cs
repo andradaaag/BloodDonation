@@ -1,4 +1,5 @@
 
+using BloodDonation.Utils.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace BloodDonation.Data.Models
         /**
 		 * @param blood
 		 */
-     public BloodDonation.Data.Models.Component Component;
+     public Component Component;
         
 		public void isCompatible(BloodType blood)
 		{

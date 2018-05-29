@@ -77,7 +77,7 @@ namespace BloodDonation.Mappers
             return new Models.RequestPersonnel
             {
                 ID = r.ID,
-                status = (Models.Status)r.status,
+                status = r.status,
 
                 destination = r.destination,
                 source = r.source,

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Firebase.Database.Query;
+using BloodDonation.Utils.Enums;
 
 namespace BloodDonation.Data.Repositories
 {

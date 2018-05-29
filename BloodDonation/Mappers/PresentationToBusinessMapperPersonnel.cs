@@ -1,4 +1,5 @@
 ﻿using BloodDonation.Models;
+using BloodDonation.Utils.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,7 @@ namespace BloodDonation.Mappers
                     Group = b.BloodTypeGroup,
                     RH = b.BloodTypeRH == "Positive"
                 },
-                Component = (Data.Models.Component)Enum.Parse(typeof(Data.Models.Component), b.Component),
+                Component = (Component)Enum.Parse(typeof(Component), b.Component),
                 CollectionDate = (b.CollectionDate - new DateTime(1970, 1, 1)).Seconds,
                 Amount = b.Amount,
                 ID = b.ID,
@@ -72,10 +73,7 @@ namespace BloodDonation.Mappers
             };
         }
 
-        public Logic.Models.Status Status(Status s)
-        {
-            return (Logic.Models.Status)s;
-        }
+        
 
         public Logic.Models.RequestPersonnel Request(RequestPersonnel r)
         {
@@ -83,7 +81,7 @@ namespace BloodDonation.Mappers
             return new Logic.Models.RequestPersonnel
             {
                 ID = r.ID,
-                status = (BloodDonation.Logic.Models.Status)r.status,
+                status = r.status,
 
                 destination = r.destination,
                 source = r.source,

@@ -2,6 +2,7 @@
 using BloodDonation.Logic.Models;
 using BloodDonation.Logic.Services;
 using BloodDonation.Models;
+using BloodDonation.Utils.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace BloodDonation.Mappers
             newRequest.bloodType.bloodComponent = request.bloodComponent;
             newRequest.patientCnp = request.patientCnp;
             newRequest.quantity = request.quantity;
-            newRequest.status = Logic.Models.Status.BeingProcessed;
+            newRequest.status = Status.BeingProcessed;
             newRequest.doctorId = uid;
             Doctor doctor = doctorService.findById(newRequest.doctorId);
             if (doctor == null)

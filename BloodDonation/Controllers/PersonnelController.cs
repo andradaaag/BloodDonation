@@ -1,6 +1,7 @@
 ﻿using BloodDonation.Logic   .Services;
 using BloodDonation.Mappers;
 using BloodDonation.Models;
+using BloodDonation.Utils.Enums;
 using Firebase.Auth;
 using System;
 using System.Collections.Generic;
@@ -190,7 +191,7 @@ namespace BloodDonation.Controllers
 
         public ActionResult ConfirmAcceptRequest(string id)
         {
-            requestService.EditStatus(id, PresentationToBusiness.Status(Status.Accepted));
+            requestService.EditStatus(id, Status.Accepted);
             Personnel loggedPersonnel = BusinessToPresentation.Personnel(personnelService.GetOne(GetUid()));
             string donationCenterID = loggedPersonnel.DonationCenterID;
             requestService.EditSource(id, donationCenterID);

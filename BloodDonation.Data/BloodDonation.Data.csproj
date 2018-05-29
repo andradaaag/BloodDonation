@@ -39,6 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Reactive.Core, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
@@ -72,7 +73,6 @@
     <Compile Include="Mapper\FirebaseToObject.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BloodType.cs" />
-    <Compile Include="Models\Component.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Donation.cs" />
     <Compile Include="Models\DonationCenter.cs" />
@@ -83,8 +83,6 @@
     <Compile Include="Models\Hospital.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\Request.cs" />
-    <Compile Include="Models\Stage.cs" />
-    <Compile Include="Models\Status.cs" />
     <Compile Include="Models\StoredBlood.cs" />
     <Compile Include="Models\SysAdmin.cs" />
     <Compile Include="Models\User.cs" />
@@ -106,6 +104,12 @@
     <Compile Include="Repositories\DonationCenterRepository.cs" />
     <Compile Include="Repositories\DonorRepository.cs" />
     <Compile Include="Repositories\HospitalRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BloodDonation.Utils\BloodDonation.Utils.csproj">
+      <Project>{B4C4D092-9274-490A-81B6-08155457BA4B}</Project>
+      <Name>BloodDonation.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

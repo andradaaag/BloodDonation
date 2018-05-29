@@ -74,16 +74,7 @@ namespace BloodDonation.Logic.Services
 
         }
 
-        public DonationCenterTransferObject GetDonationCenterById(String id)
-        {
-            Data.Models.DonationCenter d = donationCenterRepository.FindById(id);
-
-            if (d == null)
-                return null;
-
-            return dataToLogicMapper
-                        .MapDonationCenterTransferObject(d);
-        }
+     
 
         public void RemoveById(string id)
         {

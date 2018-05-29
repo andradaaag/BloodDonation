@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using BloodDonation.Utils.Enums;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,6 @@ namespace BloodDonation.Models
         public string quantityString;
         public int quantity;
         public BloodType bloodType;
-        public string DonationCenterName;
-        public string DonationCenterLocation;
+        
     }
 }
