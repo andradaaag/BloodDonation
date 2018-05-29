@@ -372,8 +372,9 @@
     <Content Include="Views\Doctor\MakeRequestView.cshtml" />
     <Content Include="Views\Personnel\EditBloodSeparation.cshtml" />
     <Content Include="Views\Personnel\PendingRequestsView.cshtml" />
-    <Content Include="Views\Personnel\AcceptedRequestsView.cshtml" />
     <Content Include="Views\Personnel\MissingBloodView.cshtml" />
+    <Content Include="Views\Personnel\StoredBloodView.cshtml" />
+    <Content Include="Views\Personnel\DeleteExpiredBloodView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -95,6 +95,7 @@ namespace BloodDonation.Logic.Mappers
             return new RequestPersonnel
             {
                 ID = r.ID,
+                urgency = r.urgency,
                 patientCnp = r.patientCnp,
                 status = r.status,
                 destination = r.destination,

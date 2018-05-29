@@ -65,6 +65,8 @@ namespace BloodDonation.Data.Repositories
             if (Id == "none")
                 return null;
 
+            try
+            {
                 return firebaseClient
                         .Child(CHILD)
                         .OrderByKey()
@@ -73,7 +75,11 @@ namespace BloodDonation.Data.Repositories
                         .Result
                         .AsEnumerable()
                         .Select(i => FirebaseToObject.DonationCenter(i))
-                        .First(); 
+                        .First();
+            }catch(Exception ex)
+            {
+                return null;
+            }
         }
 
         public void DeleteById(string id)

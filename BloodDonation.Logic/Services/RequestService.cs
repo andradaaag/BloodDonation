@@ -68,7 +68,7 @@ namespace BloodDonation.Logic.Services
         public List<RequestPersonnel> FindDonationCenterRequests(string donationCenterID)
         {
             return Repository
-                .GetRequestByDonationCenter(donationCenterID)
+                .GetRequestsInProgress(donationCenterID)
                 .AsEnumerable()
                 .Select(i => DataToLogic.Request(i))
                 .ToList();

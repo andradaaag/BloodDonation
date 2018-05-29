@@ -30,6 +30,13 @@ namespace BloodDonation.Controllers
         {
             if (IsNotPersonnel())
                 return errorController.Error();
+            ///CRISTI LOG EXPIRED BLOOD phase 1 at init check if there is expired blood
+            List<BloodDonation.Logic.Models.StoredBlood> expiredBlood = personnelService.GetExpiredBlood();
+            if(expiredBlood.Count() > 0)
+            {
+                return View("DeleteExpiredBloodView",expiredBlood);
+            }
+
             return View("AddDonationView");
         }
 
@@ -54,6 +61,7 @@ namespace BloodDonation.Controllers
         {
             return View("PersonalDetailsView", BusinessToPresentation.Personnel( personnelService.GetOne(GetUid())));
         }
+        
 
         [HttpPost]
         public ActionResult AddDonationInDb(DonationModel donation)
@@ -69,7 +77,7 @@ namespace BloodDonation.Controllers
         {
             if (IsNotPersonnel())
                 return errorController.Error();
-            /// Cristi - aici ceva nu se-npupa
+            
             DonationSepModel dlm = new DonationSepModel
             {
                 Donations = donationService
@@ -115,7 +123,6 @@ namespace BloodDonation.Controllers
             if (IsNotPersonnel())
                 return errorController.Error();
             personnelService.SeparateComponentsFromDonation(PresentationToBusiness.Donation(donation));
-            //TODO: maybe remove sleep
             Thread.Sleep(1000);
             return SeparateComponents();
         }
@@ -126,7 +133,6 @@ namespace BloodDonation.Controllers
             if (IsNotPersonnel())
                 return errorController.Error();
             personnelService.SeparateComponentsFromBlood(PresentationToBusiness.SeparateBlood(storedBlood));
-            //TODO: maybe remove sleep
             Thread.Sleep(1000);
             return SeparateComponents();
         }
@@ -188,6 +194,16 @@ namespace BloodDonation.Controllers
             return View("AcceptRequestView", r);
         }
 
+        ///CRISTI LOG EXPIRED BLOOD phase 4 get again all expired blood & delete it by ID
+        public ActionResult DeleteExpiredBlood()
+        {
+            personnelService.GetExpiredBlood()
+                           .ForEach(el => storedBloodService.RemoveBloodById(el.ID));
+            return Index();
+            
+        }
+
+
         public ActionResult ConfirmAcceptRequest(string id)
         {
             requestService.EditStatus(id, Status.Accepted);
@@ -202,13 +218,15 @@ namespace BloodDonation.Controllers
             return Success();
         }
 
-        public ActionResult EditRequest(string id)
+        public ActionResult SendRequest(string id)
         {
-            RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(id));
-            NewStatus ns = new NewStatus();
-            ns.ID = r.ID;
-            ns.status = r.status.ToString();
-            return View("EditRequestView", ns);
+            Logic.Models.RequestPersonnel r = requestService.GetOne(id);
+            r.status = Status.OnTheWay;
+            requestService.Edit(r);
+
+            
+                
+            return View("PendingRequestsView", GetDonationCenterRequests());
         }
 
 
@@ -223,28 +241,27 @@ namespace BloodDonation.Controllers
             return Success();
 
         }
+        
+        public ActionResult ViewStoredBlood()
+        {
+            int[] arrayOfBlood = personnelService.GetArrayOfBloodQuantity();
 
-
+            return View("StoredBloodView", arrayOfBlood);
+        }
         public ActionResult AcceptedRequests()
         {
-            RequestList rl = new RequestList
-            {
-                Requests = GetDonationCenterRequests()
-                    .AsEnumerable()
-                    .ToList()
-            };
-            return View("PendingRequestsView", rl);
+            List<RequestPersonnel> listOfAcceptedRequest = GetDonationCenterRequests();
+            listOfAcceptedRequest.Sort((el1, el2) =>(-1) *  el1.urgency.CompareTo(el2.urgency));
+
+            return View("PendingRequestsView", listOfAcceptedRequest);
         }
 
         public ActionResult PendingRequests()
         {
-            RequestList rl = new RequestList
-            {
-                Requests = GetUnsolvedRequests()
-                .AsEnumerable()
-                .ToList()
-            };
-            return View("PendingRequestsView", rl);
+            List<RequestPersonnel> listOfUnresolvedRequest = GetUnsolvedRequests();
+            listOfUnresolvedRequest.Sort((el1, el2) => (-1) * el1.urgency.CompareTo(el2.urgency));
+
+            return View("PendingRequestsView", listOfUnresolvedRequest);
         }
 
         public ActionResult Requests()

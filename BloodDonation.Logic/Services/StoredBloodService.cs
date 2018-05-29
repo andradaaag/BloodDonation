@@ -57,6 +57,10 @@ namespace BloodDonation.Logic.Services
             Repository.Add(LogicToData.StoredBlood(storedBlood));
         }
 
+        public void RemoveBloodById(String id)
+        {
+            Repository.DeleteById(id);
+        }
 
         public void RemoveBlood(string donationCenterID,int quantity, BloodType receiverBloodType)
         {

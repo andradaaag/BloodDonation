@@ -37,7 +37,7 @@ namespace BloodDonation.Data.Repositories
 
         public List<Request> FindAll()
         {
-
+            try { 
             return firebaseClient
                 .Child("requests")
                 .OrderByKey()
@@ -46,51 +46,57 @@ namespace BloodDonation.Data.Repositories
                 .AsEnumerable()
                 .Select(i => FirebaseToObject.Request(i))
                 .ToList();
-
+            }
+            catch (Exception ex)
+            {
+                return new List<Request>();
+            }
 
         }
 
         public List<Request> GetUnsolvedRequests()
         {
-            return firebaseClient
-                .Child(CHILD)
-                .OrderBy("status")
-                .EqualTo(0)
-                .OnceAsync<Request>()
-                .Result
-                .AsEnumerable()
-                .Select(i => FirebaseToObject.Request(i))
-                .ToList();
+            try
+            {
+                return firebaseClient
+                    .Child(CHILD)
+                    .OrderBy("status")
+                    .EqualTo(0)
+                    .OnceAsync<Request>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.Request(i))
+                    .ToList();
+            }
+            catch(Exception ex)
+            {
+                return new List<Request>();
+            }
         }
 
-        public List<Request> GetRequestByDonationCenter(string donationCenterID)
+        public List<Request> GetRequestsInProgress(string donationCenterID)
         {
             // Get all the requests taken by given donation center
-            List<Request> donationCenterRequests = firebaseClient
-                .Child(CHILD)
-                .OrderBy("source")
-                .EqualTo(donationCenterID)
-                .OnceAsync<Request>()
-                .Result
-                .AsEnumerable()
-                .Select(x => FirebaseToObject.Request(x))
-                .ToList();
-
-            // Ignore requests that are either Denied or Completed
-            int i = 0;
-            Request current;
-            while (i < donationCenterRequests.Count)
+            try
             {
-                current = donationCenterRequests[i];
-                if (current.status == Status.Denied || current.status == Status.Completed)
-                    donationCenterRequests.RemoveAt(i);
-                else
-                    i++;
+                return firebaseClient
+                    .Child(CHILD)
+                    .OrderBy("source")
+                    .EqualTo(donationCenterID)
+                    .OnceAsync<Request>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(x => FirebaseToObject.Request(x))
+                    .Where(x=> x.status == Status.Accepted && x.source == donationCenterID )
+                    .ToList();
+
+            }
+            catch (Exception ex)
+            {
+                return new List<Request>();
             }
 
-
-
-            return donationCenterRequests;
+           
         }
 
         public void Save(Request r)
@@ -140,43 +146,60 @@ namespace BloodDonation.Data.Repositories
 
         public Request GetOne(string id)
         {
-
-            return FirebaseToObject.Request(firebaseClient
-                .Child(CHILD)
-                .OrderByKey()
-                .StartAt(id)
-                .LimitToFirst(1)
-                .OnceAsync<Request>()
-                .Result
-                .First());
-
+            try
+            {
+                return FirebaseToObject.Request(firebaseClient
+                    .Child(CHILD)
+                    .OrderByKey()
+                    .StartAt(id)
+                    .LimitToFirst(1)
+                    .OnceAsync<Request>()
+                    .Result
+                    .First());
+            }catch(Exception ex)
+            {
+                return null;
+            }
         }
 
         public List<Request> GetRentalByDoctorId(string doctorId)
         {
-
-            return firebaseClient
-            .Child(CHILD)
-            .OrderBy("doctorId")
-            .EqualTo(doctorId)
-            .OnceAsync<Request>()
-            .Result
-            .AsEnumerable()
-            .Select(i => FirebaseToObject.Request(i))
-            .ToList();
-
-        }
-        public List<Request> GetRequestByPatientCnp(string patientCnp)
-        {
-            return firebaseClient
-                .Child("requests")
-                .OrderBy("patientCnp")
-                .EqualTo(patientCnp)
+            try
+            {
+                return firebaseClient
+                .Child(CHILD)
+                .OrderBy("doctorId")
+                .EqualTo(doctorId)
                 .OnceAsync<Request>()
                 .Result
                 .AsEnumerable()
                 .Select(i => FirebaseToObject.Request(i))
                 .ToList();
+            }
+            catch(Exception ex)
+            {
+                return new List<Request>();
+            }
+
+        }
+        public List<Request> GetRequestByPatientCnp(string patientCnp)
+        {
+            try
+            {
+                return firebaseClient
+                    .Child("requests")
+                    .OrderBy("patientCnp")
+                    .EqualTo(patientCnp)
+                    .OnceAsync<Request>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.Request(i))
+                    .ToList();
+            }
+            catch(Exception ex)
+            {
+                return new List<Request>();
+            }
 
         }
 
