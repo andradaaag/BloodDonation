@@ -1,6 +1,7 @@
 ﻿using BloodDonation.Data.Repositories;
 using BloodDonation.Logic.Mappers;
 using BloodDonation.Logic.Models;
+using BloodDonation.Utils.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace BloodDonation.Logic.Services
             return Repository
                 .FindAllByDonationCenter(dcprRepo.GetOne(UID).DonationCenterID)
                 .Select(i => DataToLogic.StoredBlood(i))
-                .Where(i => i.Component == Data.Models.Component.Whole)
+                .Where(i => i.Component == Component.Whole)
                 .ToList();
         }
 
@@ -60,7 +61,7 @@ namespace BloodDonation.Logic.Services
         public void RemoveBlood(string donationCenterID,int quantity, BloodType receiverBloodType)
         {
             List<StoredBlood> storedBloodList = GetStoredBloodByDonationCenter(donationCenterID);
-            Data.Models.Component component = receiverBloodType.bloodComponent;
+            Component component = receiverBloodType.bloodComponent;
             //storedBloodList.Sort();
 
 
@@ -69,7 +70,7 @@ namespace BloodDonation.Logic.Services
             while( i < storedBloodList.Count && quantity > 0)
             {
                 StoredBlood current = storedBloodList[i];
-                if (current.BloodType.bloodComponent == (Data.Models.Component)component)
+                if (current.BloodType.bloodComponent == (Component)component)
                 {
                     a = 1;
                     if (current.BloodType.CanDonate(receiverBloodType))

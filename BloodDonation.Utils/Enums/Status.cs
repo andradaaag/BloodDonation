@@ -1,4 +1,5 @@
-namespace BloodDonation.Data.Models
+
+namespace BloodDonation.Utils.Enums
 {
 	public enum Status
 	{

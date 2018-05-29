@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BloodDonation.Logic.Models;
+using BloodDonation.Utils.Enums;
 
 namespace BloodDonation.Logic.Services
 {
@@ -20,7 +21,7 @@ namespace BloodDonation.Logic.Services
 
         public int GetCompatibleStoredBlood(string donationCenterID, BloodType bloodType)
         {
-            Data.Models.Component component = bloodType.bloodComponent;
+            Component component = bloodType.bloodComponent;
             
             StoredBloodRepository bloodRepo = new StoredBloodRepository();
             List<StoredBlood> bloodList = bloodRepo
@@ -86,7 +87,7 @@ namespace BloodDonation.Logic.Services
             if(s == Status.Accepted)
 
 
-            Repository.EditStatus(id, LogicToData.Status(s));
+            Repository.EditStatus(id, s);
         }
 
         public void EditSource(string id, string donationCenterID)

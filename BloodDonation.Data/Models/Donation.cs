@@ -1,4 +1,5 @@
 
+using BloodDonation.Utils.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,27 +7,27 @@ using System.Text;
 
 namespace BloodDonation.Data.Models
 {
-/**
- * 
- */
-	public class Donation : BaseEntity
-	{
+    /**
+     * 
+     */
+    public class Donation : BaseEntity
+    {
 
-		public Donation()
-		{
-		}
+        public Donation()
+        {
+        }
 
-		public BloodType BloodType;
+        public BloodType BloodType;
 
         public Donor donor { get; private set; }
 
         public string DonorCnp;
 
-		public Stage Stage;
+        public Stage Stage;
 
         public string PatientCnp { get; set; }
 
-		public int Quantity;
+        public int Quantity;
 
         public int Plasma;
         public int RBC;
@@ -42,26 +43,26 @@ namespace BloodDonation.Data.Models
         public string DonationCenterID { get; set; }
 
         public long DonationTime { get; set; }
-      
-		public String testResult;
-		
 
-		public DonationCenter center;
+        public String testResult;
 
-		public String donationDate;
 
-		/**
+        public DonationCenter center;
+
+        public String donationDate;
+
+        /**
 		 * 
 		 */
-		public int quantity;
+        public int quantity;
 
-		public Donation(BloodType bloodType, Donor donor, Stage stage, int quantity, String testResult)
-		{
-			this.BloodType = bloodType;
-			this.donor = donor;
-			this.Stage = stage;
-			this.quantity = quantity;
-			this.testResult = testResult;
-		}
-	}
+        public Donation(BloodType bloodType, Donor donor, Stage stage, int quantity, String testResult)
+        {
+            this.BloodType = bloodType;
+            this.donor = donor;
+            this.Stage = stage;
+            this.quantity = quantity;
+            this.testResult = testResult;
+        }
+    }
 }

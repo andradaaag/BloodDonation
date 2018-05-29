@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BloodDonation.Utils.Enums;
+using System.Collections.Generic;
 
 namespace BloodDonation.Logic.Models
 {
@@ -6,7 +7,7 @@ namespace BloodDonation.Logic.Models
     {
         public string Group { get; set; }
         public bool RH { get; set; }
-        public BloodDonation.Data.Models.Component bloodComponent { get; set; }
+        public Component bloodComponent { get; set; }
 
         /**
          * Determine if this blood type is a compatible donor to the receiver blood type.

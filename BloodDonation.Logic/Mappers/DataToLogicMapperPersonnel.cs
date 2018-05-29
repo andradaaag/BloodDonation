@@ -89,18 +89,14 @@ namespace BloodDonation.Logic.Mappers
             };
         }
 
-        public Status Status(Data.Models.Status s)
-        {
-            return (Status)s;
-        }
-
+       
         public RequestPersonnel Request(Data.Models.Request r)
         {
             return new RequestPersonnel
             {
                 ID = r.ID,
                 patientCnp = r.patientCnp,
-                status = this.Status(r.status),
+                status = r.status,
                 destination = r.destination,
                 source = r.source,
                 doctorId = r.doctorId,

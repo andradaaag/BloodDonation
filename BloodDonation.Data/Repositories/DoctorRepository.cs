@@ -12,7 +12,7 @@ namespace BloodDonation.Data.Repositories
 {
     public class DoctorRepository
     {
-   
+
 
         private FirebaseClient firebaseClient = new FirebaseClient("https://blooddonation-bc0b9.firebaseio.com/");
         private FirebaseToObject FirebaseToObject = new FirebaseToObject();
@@ -57,8 +57,6 @@ namespace BloodDonation.Data.Repositories
 
         public Doctor GetOne(string id)
         {
-            try
-            { 
             return firebaseClient
                 .Child(CHILD)
                 .OrderByKey()
@@ -68,11 +66,7 @@ namespace BloodDonation.Data.Repositories
                 .AsEnumerable()
                 .Select(i => FirebaseToObject.Doctor(i))
                 .First();
-            }
-            catch(Exception ex)
-            {
-                return null;
-            }
         }
+
     }
 }

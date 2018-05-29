@@ -80,7 +80,7 @@ namespace BloodDonation.Logic.Mappers
             {
                 ID = r.ID,
                 patientCnp = r.patientCnp,
-                status = (Data.Models.Status)r.status,
+                status = r.status,
                 destination = r.destination,
                 source = r.source,
                 doctorId = r.doctorId,
@@ -95,9 +95,5 @@ namespace BloodDonation.Logic.Mappers
 
         }
 
-        public Data.Models.Status Status(Status s)
-        {
-            return (Data.Models.Status)s;
-        }
     }
 }

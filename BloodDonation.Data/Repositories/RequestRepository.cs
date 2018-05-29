@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Firebase.Database.Query;
+using BloodDonation.Utils.Enums;
 
 namespace BloodDonation.Data.Repositories
 {
@@ -36,23 +37,17 @@ namespace BloodDonation.Data.Repositories
 
         public List<Request> FindAll()
         {
-            try
-            {
-                return firebaseClient
-                    .Child("requests")
-                    .OrderByKey()
-                    .OnceAsync<Request>()
-                    .Result
-                    .AsEnumerable()
-                    .Select(i => FirebaseToObject.Request(i))
-                    .ToList();
-            }
-            catch (Exception ex)
-            {
-                Console.Out.WriteLine(ex.Message);
-                Console.Out.WriteLine(ex.StackTrace);
-                return new List<Request>();
-            }
+
+            return firebaseClient
+                .Child("requests")
+                .OrderByKey()
+                .OnceAsync<Request>()
+                .Result
+                .AsEnumerable()
+                .Select(i => FirebaseToObject.Request(i))
+                .ToList();
+
+
         }
 
         public List<Request> GetUnsolvedRequests()
@@ -84,7 +79,7 @@ namespace BloodDonation.Data.Repositories
             // Ignore requests that are either Denied or Completed
             int i = 0;
             Request current;
-            while(i < donationCenterRequests.Count)
+            while (i < donationCenterRequests.Count)
             {
                 current = donationCenterRequests[i];
                 if (current.status == Status.Denied || current.status == Status.Completed)
@@ -145,48 +140,35 @@ namespace BloodDonation.Data.Repositories
 
         public Request GetOne(string id)
         {
-            try
-            {
-                return FirebaseToObject.Request(firebaseClient
-                    .Child(CHILD)
-                    .OrderByKey()
-                    .StartAt(id)
-                    .LimitToFirst(1)
-                    .OnceAsync<Request>()
-                    .Result
-                    .First());
-            }
-            catch (System.InvalidOperationException)
-            {
-                return null;
-            }
+
+            return FirebaseToObject.Request(firebaseClient
+                .Child(CHILD)
+                .OrderByKey()
+                .StartAt(id)
+                .LimitToFirst(1)
+                .OnceAsync<Request>()
+                .Result
+                .First());
+
         }
 
         public List<Request> GetRentalByDoctorId(string doctorId)
         {
-            try
-            {
-                return firebaseClient
-                .Child(CHILD)
-                .OrderBy("doctorId")
-                .EqualTo(doctorId)
-                .OnceAsync<Request>()
-                .Result
-                .AsEnumerable()
-                .Select(i => FirebaseToObject.Request(i))
-                .ToList();
-            }
-            catch (Exception e)
-            {
-                return new List<Request>();
-            }
-        }
 
+            return firebaseClient
+            .Child(CHILD)
+            .OrderBy("doctorId")
+            .EqualTo(doctorId)
+            .OnceAsync<Request>()
+            .Result
+            .AsEnumerable()
+            .Select(i => FirebaseToObject.Request(i))
+            .ToList();
+
+        }
         public List<Request> GetRequestByPatientCnp(string patientCnp)
         {
-            try
-            {
-                return firebaseClient
+            return firebaseClient
                 .Child("requests")
                 .OrderBy("patientCnp")
                 .EqualTo(patientCnp)
@@ -195,11 +177,7 @@ namespace BloodDonation.Data.Repositories
                 .AsEnumerable()
                 .Select(i => FirebaseToObject.Request(i))
                 .ToList();
-            }
-            catch (Exception e)
-            {
-                return new List<Request>();
-            }
+
         }
 
     }

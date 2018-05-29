@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BloodDonation.Data.Models
+
+namespace BloodDonation.Utils.Enums
 {
     public enum Component
     {
