@@ -1,14 +1,13 @@
-﻿@model BloodDonation.Models.RequestList
+﻿@model String
 
 @{
-    ViewBag.Title = "RequestsView";
+    ViewBag.Title = "MissingBloodView";
 }
-
 
 
 <html lang="en" dir="ltr">
 <head>
-    <title>Requests</title>
+    <title>Error</title>
     <meta charset="iso-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @Styles.Render("~/Styles/layout_personel_add_blood.css")
@@ -18,29 +17,26 @@
     <script src="@Url.Content(" ~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 </head>
 <body>
-
     <div class="wrapper row1">
         <header id="header" class="clear">
             <div id="hgroup">
-                <h1><a href="#">View all requests</a></h1>
+                <h1><a href="#">Homepage</a></h1>
                 <h2><a href="#">Donation center personnel</a></h2>
             </div>
             @Html.Partial("NavigationBannerView", null)
         </header>
     </div>
 
-    <div class="wrapper row1">
-        
-            <header id="header" class="clear">
-                <nav>
-                    <ul>
-                        <li>@Html.ActionLink("Pending Requests", "PendingRequests", "Personnel", null, new { @class = "header nav li" })</li>
-                        <li>@Html.ActionLink("Accepted Requests", "AcceptedRequests", "Personnel", null, new { @class = "header nav li" })</li>
-                    </ul>
-                </nav>
-            </header>   
+    <div class="wrapper row3">
+        <div class="container">
+            <p class="h1" style="font-size: 30px;"> Could not accept the request. You are missing 
+            <p class="h1" style="display:inline; font-size: 30px;"> @Model </p>
+            <p class="h1" style="display:inline; font-size: 30px;"> ml of blood. </p>
+        </div>
+
     </div>
     <!-- Footer -->
+    
     <div class="wrapper row4">
         <footer id="footer" class="clear">
             <p class="fl_left">Copyright &copy; 2013 - All Rights Reserved - <a href="#">Domain Name</a></p>
@@ -48,3 +44,4 @@
     </div>
 </body>
 </html>
+

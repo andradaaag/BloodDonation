@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BloodDonation.Data.Models
+namespace BloodDonation.Logic.Models
 {
-    public enum Component
+    public enum RequestComponent
     {
         Thrombocytes,
         //  shelf time: 5 days

@@ -8,9 +8,11 @@ namespace BloodDonation.Logic.Models
 {
     public class RequestPersonnel: BaseEntity
     {
+
+
         public Status status { get; set; }
 
-        public string destination { get; set; }   //hospitalid
+        public string destination { get; set; }      //hospitalid
         public string source { get; set; }           //donationcenterid
         public string doctorId { get; set; }
         public string patientCnp { get; set; }
@@ -22,7 +24,5 @@ namespace BloodDonation.Logic.Models
         {
             this.bloodType = new BloodType();
         }
-
-        
     }
 }

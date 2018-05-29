@@ -41,6 +41,7 @@ namespace BloodDonation.Data.Repositories
                 .Child(d.ID)
                 .PutAsync(d);
         }
+
         public StoredBlood GetOne(string id)
         {
             return firebaseClient
@@ -64,6 +65,14 @@ namespace BloodDonation.Data.Repositories
                 .Result
                 .Select(i => FirebaseToObject.StoredBlood(i))
                 .ToList();
+        }
+
+        public void DeleteById(string id)
+        {
+            firebaseClient
+                .Child(CHILD)
+                .Child(id)
+                .DeleteAsync();
         }
     }
 }

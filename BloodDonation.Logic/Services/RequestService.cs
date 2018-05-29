@@ -16,6 +16,36 @@ namespace BloodDonation.Logic.Services
         private LogicToDataMapperPersonnel LogicToData = new LogicToDataMapperPersonnel();
         private DataToLogicMapperPersonnel DataToLogic = new DataToLogicMapperPersonnel();
 
+
+
+        public int GetCompatibleStoredBlood(string donationCenterID, BloodType bloodType)
+        {
+            Data.Models.Component component = bloodType.bloodComponent;
+            
+            StoredBloodRepository bloodRepo = new StoredBloodRepository();
+            List<StoredBlood> bloodList = bloodRepo
+                    .FindAllByDonationCenter(donationCenterID)
+                    .AsEnumerable()
+                    .Select(x => DataToLogic.StoredBlood(x))
+                    .ToList();
+
+            int totalQuantity = 0;
+            foreach (StoredBlood blood in bloodList)
+                if(blood.Component == component && blood.BloodType.CanDonate(bloodType))
+                    totalQuantity += blood.Amount;
+
+            return totalQuantity;
+        }
+
+        public int GetMissingBlood(string donationCenterID, RequestPersonnel r)
+        {
+            int storedBlood = this.GetCompatibleStoredBlood(donationCenterID,r.bloodType);
+
+            if (storedBlood >= r.quantity)
+                return 0;
+            return r.quantity - storedBlood;
+        }
+
         public List<RequestPersonnel> FindAll()
         {
             return Repository
@@ -25,10 +55,44 @@ namespace BloodDonation.Logic.Services
                 .ToList();
         }
 
+        public List<RequestPersonnel> FindUnsolved()
+        {
+            return Repository
+                .GetUnsolvedRequests()
+                .AsEnumerable()
+                .Select(i => DataToLogic.Request(i))
+                .ToList();
+        }
+
+        public List<RequestPersonnel> FindDonationCenterRequests(string donationCenterID)
+        {
+            return Repository
+                .GetRequestByDonationCenter(donationCenterID)
+                .AsEnumerable()
+                .Select(i => DataToLogic.Request(i))
+                .ToList();
+        }
+
+
+
+        public void Edit(RequestPersonnel req)
+        {
+            Repository.Edit(LogicToData.RequestPersonelToRequest(req));
+        }
+
+
         public void EditStatus(string id,Status s)
         {
+            if(s == Status.Accepted)
+
+
+            Repository.EditStatus(id, LogicToData.Status(s));
+        }
+
+        public void EditSource(string id, string donationCenterID)
+        {
             Repository
-                .EditStatus(id, LogicToData.Status(s));
+                .EditSource(id, donationCenterID);
         }
 
         public RequestPersonnel GetOne(string id)

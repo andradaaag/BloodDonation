@@ -42,13 +42,31 @@
 
             <div class="row">
                 <div class="col-25">
-                    <label for="fname">New status</label>
+                    <label for="fname" style="display:inline;">New status</label>
                 </div>
-
-                <div class="col-75">
-                    @Html.TextBoxFor(model => model.status, new { placeholder = "Insert new status here..." })
+                @{
+                List<SelectListItem> listItems= new List<SelectListItem>();
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "On the way",
+                            Value = "OnTheWay"
+                        });
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "Denied",
+                            Value = "Denied"
+                        });
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "Completed",
+                            Value = "Completed"
+                        });
+                
+                    }
+                    <div class="col-75">
+                        @Html.DropDownListFor(model => model.status, listItems)
+                    </div>
                 </div>
-            </div>
 
             <div class="row">
                 <input type="submit" value="Confirm edit">

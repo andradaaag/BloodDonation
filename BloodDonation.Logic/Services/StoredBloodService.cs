@@ -37,6 +37,15 @@ namespace BloodDonation.Logic.Services
                 .ToList();
         }
 
+        public List<StoredBlood> GetStoredBloodByDonationCenter(string donationCenterID)
+        {
+            return Repository
+                .FindAllByDonationCenter(donationCenterID)
+                .AsEnumerable()
+                .Select(x => DataToLogic.StoredBlood(x))
+                .ToList();
+        }
+
         public StoredBlood GetOne(string id)
         {
             return DataToLogic.StoredBlood(Repository.GetOne(id));
@@ -47,5 +56,45 @@ namespace BloodDonation.Logic.Services
             Repository.Add(LogicToData.StoredBlood(storedBlood));
         }
 
+
+        public void RemoveBlood(string donationCenterID,int quantity, BloodType receiverBloodType)
+        {
+            List<StoredBlood> storedBloodList = GetStoredBloodByDonationCenter(donationCenterID);
+            Data.Models.Component component = receiverBloodType.bloodComponent;
+            //storedBloodList.Sort();
+
+
+            int i = 0;
+            int a = 0;
+            while( i < storedBloodList.Count && quantity > 0)
+            {
+                StoredBlood current = storedBloodList[i];
+                if (current.BloodType.bloodComponent == (Data.Models.Component)component)
+                {
+                    a = 1;
+                    if (current.BloodType.CanDonate(receiverBloodType))
+                    {
+                        a = 2;
+                        if (current.Amount < quantity)
+                        {
+                            quantity = quantity - current.Amount;
+                            current.Amount = 0;
+                        }
+                        else
+                        {
+                            current.Amount = current.Amount - quantity;
+                            quantity = 0;
+                        }
+                        
+                    }
+                }
+                if(current.Amount == 0)
+                    Repository.DeleteById(current.ID);
+                else
+                    Repository.Edit(LogicToData.StoredBlood(current));
+                i++;
+                
+            }
+        }
     }
 }

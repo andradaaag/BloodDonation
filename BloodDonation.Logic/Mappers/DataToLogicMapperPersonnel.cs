@@ -84,7 +84,8 @@ namespace BloodDonation.Logic.Mappers
             return new BloodType
             {
                 Group = bt.Group,
-                RH = bt.RH
+                RH = bt.RH,
+                bloodComponent = bt.Component
             };
         }
 

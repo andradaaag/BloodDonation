@@ -72,7 +72,6 @@ namespace BloodDonation.Mappers
 
         public Models.RequestPersonnel Request(Logic.Models.RequestPersonnel r)
         {
-
             HospitalTransferObject h = hospitalService.GetHospitalById(r.destination);
             DonationCenterTransferObject dcto = DonationCenterService.GetDonationCenterById(r.source);
             return new Models.RequestPersonnel
@@ -92,14 +91,15 @@ namespace BloodDonation.Mappers
                 bloodType = new Models.BloodType
                 {
                     Group = r.bloodType.Group,
-                    PH = r.bloodType.RH
+                    PH = r.bloodType.RH,
+                    component = r.bloodType.bloodComponent
                 },
-
                 hospitalName = h.Name,
-                hospitalLocation = h.Location,       
+                hospitalLocation = h.Location
                 
             };
         }
+
         public SeparateStoredBloodModel SeparateBlood(Logic.Models.StoredBlood sb)
         {
             return new SeparateStoredBloodModel
@@ -109,6 +109,20 @@ namespace BloodDonation.Mappers
                 BloodTypeRH = sb.BloodType.RH ? "Positive" : "Negative",
                 CollectionDate = sb.CollectionDate,
                 DonationCenterID = sb.DonationCenterID
+            };
+        }
+
+        public DoctorDisplayData MapDoctorDisplayData(DoctorTransferObject doctor)
+        {
+            return new DoctorDisplayData()
+            {
+                ID = doctor.ID,
+                FirstName = doctor.FirstName,
+                LastName = doctor.LastName,
+                EmailAddress = doctor.EmailAddress,
+                City = doctor.City,
+                Country = doctor.Country,
+                HospitalName = doctor.InstituteName,
             };
         }
     }

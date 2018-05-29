@@ -18,6 +18,7 @@ namespace BloodDonation.Controllers
         private PersonnelService personnelService = new PersonnelService();
         private RequestService requestService = new RequestService();
         private StoredBloodService storedBloodService = new StoredBloodService();
+        private DoctorService doctorService = new DoctorService();
         private UserService userService = new UserService();
 
         private ErrorController errorController = new ErrorController();
@@ -172,12 +173,32 @@ namespace BloodDonation.Controllers
         public ActionResult AcceptRequest(string id)
         {
             RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(id));
+            Personnel loggedPersonnel = BusinessToPresentation.Personnel(personnelService.GetOne(GetUid()));
+            string donationCenterID = loggedPersonnel.DonationCenterID;
+            int missingBlood = requestService.GetMissingBlood(donationCenterID, PresentationToBusiness.Request(r));
+
+            if (missingBlood > 0)
+            {
+                String param = Convert.ToString(missingBlood);
+                return View("MissingBloodView", model: param);
+            }
+
+            r = AddDoctorEmail(r);
+            r.quantityString = Convert.ToString(r.quantity);
             return View("AcceptRequestView", r);
         }
 
         public ActionResult ConfirmAcceptRequest(string id)
         {
             requestService.EditStatus(id, PresentationToBusiness.Status(Status.Accepted));
+            Personnel loggedPersonnel = BusinessToPresentation.Personnel(personnelService.GetOne(GetUid()));
+            string donationCenterID = loggedPersonnel.DonationCenterID;
+            requestService.EditSource(id, donationCenterID);
+
+            RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(id));
+            storedBloodService.RemoveBlood(donationCenterID, r.quantity,
+                PresentationToBusiness.BloodType(r.bloodType));
+
             return Success();
         }
 
@@ -195,21 +216,40 @@ namespace BloodDonation.Controllers
         public ActionResult RequestToDb(NewStatus ns)
         {
             Status s = (Status)Enum.Parse(typeof(Status), ns.status);
-            requestService.EditStatus(ns.ID, PresentationToBusiness.Status(s));
+            RequestPersonnel previousRequest = BusinessToPresentation.Request(requestService.GetOne(ns.ID));
+
+            previousRequest.status = s;
+            requestService.Edit(PresentationToBusiness.Request(previousRequest));
             return Success();
 
         }
 
 
-        public ActionResult Requests()
+        public ActionResult AcceptedRequests()
         {
             RequestList rl = new RequestList
             {
-                Requests = GetAllRequests()
+                Requests = GetDonationCenterRequests()
+                    .AsEnumerable()
+                    .ToList()
+            };
+            return View("PendingRequestsView", rl);
+        }
+
+        public ActionResult PendingRequests()
+        {
+            RequestList rl = new RequestList
+            {
+                Requests = GetUnsolvedRequests()
                 .AsEnumerable()
                 .ToList()
             };
-            return View("RequestsView", rl);
+            return View("PendingRequestsView", rl);
+        }
+
+        public ActionResult Requests()
+        {
+            return View("RequestsView");
         }
 
         [HttpPost]
@@ -227,10 +267,46 @@ namespace BloodDonation.Controllers
                 .FindAll()
                 .AsEnumerable()
                 .Select(i => BusinessToPresentation.Request(i))
+                .Select(x => AddDoctorEmail(x))
                 .ToList();
         }
 
-        
+        public List<RequestPersonnel> GetUnsolvedRequests()
+        {
+            return requestService
+                .FindUnsolved()
+                .AsEnumerable()
+                .Select(i => BusinessToPresentation.Request(i))
+                .Select(x => AddDoctorEmail(x))
+                .ToList();
+        }
+
+        public List<RequestPersonnel> GetDonationCenterRequests()
+        {
+            Personnel loggedPersonnel = BusinessToPresentation.Personnel(personnelService.GetOne(GetUid()));
+            string donationCenterID = loggedPersonnel.DonationCenterID;
+
+            return requestService
+                .FindDonationCenterRequests(donationCenterID)
+                .AsEnumerable()
+                .Select(i => BusinessToPresentation.Request(i))
+                .Select(x => AddDoctorEmail(x))
+                .ToList();
+        }
+
+        public RequestPersonnel AddDoctorEmail(RequestPersonnel req)
+        {
+            DoctorDisplayData doctor = doctorService
+                .GetValidDoctors()
+                .AsEnumerable()
+                .Select(x => BusinessToPresentation.MapDoctorDisplayData(x))
+                .Where(x => x.ID == req.doctorId)
+                .Single();
+            req.doctorEmail = doctor.EmailAddress;
+            req.doctorName = doctor.LastName + " " + doctor.FirstName;
+            return req;
+        }
+
         public string GetUid()
         {
             return ((FirebaseAuthLink) Session["authlink"]).User.LocalId;

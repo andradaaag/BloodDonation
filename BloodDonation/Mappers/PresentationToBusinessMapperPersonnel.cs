@@ -79,6 +79,7 @@ namespace BloodDonation.Mappers
 
         public Logic.Models.RequestPersonnel Request(RequestPersonnel r)
         {
+
             return new Logic.Models.RequestPersonnel
             {
                 ID = r.ID,
@@ -91,12 +92,12 @@ namespace BloodDonation.Mappers
 
                 quantity = r.quantity,
                 
-                bloodType = new BloodDonation.Logic.Models.BloodType
+                bloodType = new Logic.Models.BloodType
                 {
                     Group = r.bloodType.Group,
-                    RH = r.bloodType.PH
+                    RH = r.bloodType.PH,
+                    bloodComponent = r.bloodType.component
                 }
-
             };
         }
 
@@ -118,5 +119,15 @@ namespace BloodDonation.Mappers
 
             };
         }
+
+        public Logic.Models.BloodType BloodType(BloodType bt)
+        {
+            return new Logic.Models.BloodType
+            {
+                Group = bt.Group,
+                RH = bt.PH
+            };
+        }
     }
+
 }
