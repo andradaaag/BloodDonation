@@ -73,7 +73,7 @@ namespace BloodDonation.Data.Repositories
                         .Result
                         .AsEnumerable()
                         .Select(i => FirebaseToObject.DonationCenter(i))
-                        .First();
+                        .First(); 
         }
 
         public void DeleteById(string id)
