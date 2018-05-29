@@ -37,6 +37,15 @@ namespace BloodDonation.Logic.Services
                 .ToList();
         }
 
+        public List<StoredBlood> GetStoredBloodByDonationCenter(string donationCenterID)
+        {
+            return Repository
+                .FindAllByDonationCenter(donationCenterID)
+                .AsEnumerable()
+                .Select(x => DataToLogic.StoredBlood(x))
+                .ToList();
+        }
+
         public StoredBlood GetOne(string id)
         {
             return DataToLogic.StoredBlood(Repository.GetOne(id));
@@ -47,5 +56,38 @@ namespace BloodDonation.Logic.Services
             Repository.Add(LogicToData.StoredBlood(storedBlood));
         }
 
+
+        public void RemoveBlood(string donationCenterID,int quantity, BloodType receiverBloodType, RequestComponent component)
+        {
+            List<StoredBlood> storedBloodList = GetStoredBloodByDonationCenter(donationCenterID);
+            //storedBloodList.Sort();
+
+            int i = 0;
+            int a = 0;
+            while( i < storedBloodList.Count && quantity > 0)
+            {
+                StoredBlood current = storedBloodList[i];
+                if (DataToLogic.RequestComponent(current.Component) == component)
+                {
+                    a = 1;
+                    if (current.BloodType.CanDonate(receiverBloodType))
+                    {
+                        a = 2;
+                        if (current.Amount < quantity)
+                        {
+                            quantity = quantity - current.Amount;
+                            current.Amount = 0;
+                        }
+                        else
+                        {
+                            current.Amount = current.Amount - quantity;
+                            quantity = 0;
+                        }
+                        Repository.Edit(LogicToData.StoredBlood(current));
+                    }
+                }
+                i++;    
+            }
+        }
     }
 }

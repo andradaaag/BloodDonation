@@ -95,9 +95,15 @@ namespace BloodDonation.Mappers
                 {
                     Group = r.bloodType.Group,
                     RH = r.bloodType.PH
-                }
+                },
+                component = RequestComponent(r.component)
 
             };
+        }
+
+        public Logic.Models.RequestComponent RequestComponent(RequestComponent rc)
+        {
+            return (Logic.Models.RequestComponent)rc;
         }
 
         public Logic.Models.SeparateBlood SeparateBlood(SeparateStoredBloodModel blood)
@@ -116,6 +122,15 @@ namespace BloodDonation.Mappers
                 Plasma = blood.Plasma,
                 Thrombocytes = blood.Thrombocytes
 
+            };
+        }
+
+        public Logic.Models.BloodType BloodType(BloodType bt)
+        {
+            return new Logic.Models.BloodType
+            {
+                Group = bt.Group,
+                RH = bt.PH
             };
         }
     }

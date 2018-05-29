@@ -90,10 +90,17 @@ namespace BloodDonation.Mappers
                     PH = r.bloodType.RH
                 },
                 hospitalName = h.Name,
-                hospitalLocation = h.Location,       
+                hospitalLocation = h.Location,
+                component = RequestComponent(r.component)
                 
             };
         }
+
+        public Models.RequestComponent RequestComponent(Logic.Models.RequestComponent rc)
+        {
+            return (Models.RequestComponent)rc;
+        }
+
         public SeparateStoredBloodModel SeparateBlood(Logic.Models.StoredBlood sb)
         {
             return new SeparateStoredBloodModel

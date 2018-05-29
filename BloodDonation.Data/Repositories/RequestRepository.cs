@@ -98,6 +98,14 @@ namespace BloodDonation.Data.Repositories
                 .PostAsync(r);
         }
 
+        public void Edit(Request r)
+        {
+            firebaseClient
+                .Child(CHILD)
+                .Child(r.ID)
+                .PutAsync(r);
+        }
+
         public void EditStatus(string id, Status s)
         {
             Request r = GetOne(id);

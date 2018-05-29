@@ -241,6 +241,7 @@
     <Compile Include="Mappers\PresentationToBusinessMapperDoctor.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapperPersonnel.cs" />
     <Compile Include="Models\BloodType.cs" />
+    <Compile Include="Models\RequestComponent.cs" />
     <Compile Include="Models\DoctorAccountRequest.cs" />
     <Compile Include="Models\DonationCenter.cs" />
     <Compile Include="Models\DonationSepModel.cs" />

@@ -18,7 +18,7 @@ namespace BloodDonation.Logic.Services
 
 
 
-        public int getStoredBlood(string donationCenterID, BloodType bloodType)
+        public int GetCompatibleStoredBlood(string donationCenterID, BloodType bloodType, RequestComponent component)
         {
             
             StoredBloodRepository bloodRepo = new StoredBloodRepository();
@@ -28,43 +28,22 @@ namespace BloodDonation.Logic.Services
                     .Select(x => DataToLogic.StoredBlood(x))
                     .ToList();
 
-
             int totalQuantity = 0;
             foreach (StoredBlood blood in bloodList)
-                if(blood.BloodType.isCompatible(bloodType))
+                if(DataToLogic.RequestComponent(blood.Component) == component && blood.BloodType.CanDonate(bloodType))
                     totalQuantity += blood.Amount;
 
             return totalQuantity;
         }
 
-        public int getPromisedBlood(string donationCenterID, BloodType bloodType)
+        public int GetMissingBlood(string donationCenterID, RequestPersonnel r)
         {
+            int storedBlood = this.GetCompatibleStoredBlood(donationCenterID,r.bloodType,r.component);
 
-
-            List<RequestPersonnel> promisedRequests = this.FindDonationCenterRequests(donationCenterID);
-
-            int totalQuantity = 0;
-            foreach(RequestPersonnel request in promisedRequests)
-                if( request.status != Status.Denied && bloodType.isCompatible(request.bloodType))
-                    totalQuantity += request.quantity;
-
-            return totalQuantity;
-        }
-
-        public int getMissingBlood(string donationCenterID, RequestPersonnel r)
-        {
-
-            int storedBlood = this.getStoredBlood(donationCenterID,r.bloodType);
-            int promisedBlood = this.getPromisedBlood(donationCenterID, r.bloodType);
-            int availableBlood = storedBlood - promisedBlood;
-
-            if (availableBlood >= r.quantity)
+            if (storedBlood >= r.quantity)
                 return 0;
-
-            return r.quantity - availableBlood;
-
+            return r.quantity - storedBlood;
         }
-
 
         public List<RequestPersonnel> FindAll()
         {
@@ -93,10 +72,20 @@ namespace BloodDonation.Logic.Services
                 .ToList();
         }
 
+
+
+        public void Edit(RequestPersonnel req)
+        {
+            Repository.Edit(LogicToData.RequestPersonelToRequest(req));
+        }
+
+
         public void EditStatus(string id,Status s)
         {
-            Repository
-                .EditStatus(id, LogicToData.Status(s));
+            if(s == Status.Accepted)
+
+
+            Repository.EditStatus(id, LogicToData.Status(s));
         }
 
         public void EditSource(string id, string donationCenterID)

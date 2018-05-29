@@ -51,6 +51,16 @@
 
             <div class="row">
                 <div class="col-25">
+                    <label for="fname">Component</label>
+
+                </div>
+                <div class="col-75">
+                    @Html.EditorFor(model => model.component, new { htmlAttributes = new { @readonly = "readonly" } })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
                     <label for="fname">Hospital name</label>
 
                 </div>

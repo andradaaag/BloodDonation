@@ -20,5 +20,16 @@ namespace BloodDonation.Logic.Models
         public Component Component;
 
         public string DonationCenterID { get; set; }
+
+
+        /*
+         * Default comparer method for .Sort() calls. Will place objects in decreasing order based on their Amount field.
+         */
+        public int CompareTo(StoredBlood other)
+        {
+            if (other == null)
+                return 1;
+            return other.Amount.CompareTo(this.Amount);
+        }
     }
 }

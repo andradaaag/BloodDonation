@@ -1,69 +1,37 @@
-﻿namespace BloodDonation.Logic.Models
+﻿using System.Collections.Generic;
+
+namespace BloodDonation.Logic.Models
 {
     public class BloodType
     {
         public string Group;
         public bool RH;
-
-        public bool isCompatible(BloodType destination)
+        
+        /**
+         * Determine if this blood type is a compatible donor to the receiver blood type.
+         */
+        public bool CanDonate(BloodType receiver)
         {
+            if (receiver == null) return false;
 
-            string sourceT = this.Group;
-            if (this.RH)
-                sourceT += "+";
-            else
-                sourceT += "-";
+            List<string> legend = new List<string>() { "O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+" };
 
-            string destT = destination.Group;
-            if (destination.RH)
-                destT += "+";
-            else
-                destT += "-";
+            // Compatibility array, compatibiliy[x][y] == 1  -->   y can donate to x
+            int[][] compatibility = new int[8][] {
+                new int[8] {1,0,0,0,0,0,0,0},
+                new int[8] {1,1,0,0,0,0,0,0},
+                new int[8] {1,0,1,0,0,0,0,0},
+                new int[8] {1,1,1,1,0,0,0,0},
+                new int[8] {1,0,0,0,1,0,0,0},
+                new int[8] {1,1,0,0,1,1,0,0},
+                new int[8] {1,0,1,0,1,0,1,0},
+                new int[8] {1,1,1,1,1,1,1,1}
+                };
 
+            int donorIndex = legend.FindIndex(x => x == this.Group + ( (this.RH) ? "+" : "-") );
+            int receiverIndex = legend.FindIndex(x => x == receiver.Group + ( (receiver.RH) ? "+" : "-") );
 
-            switch (sourceT)
-            {
-                case "O-":
-                    return true;
-
-                case "O+":
-                    if (destT == "O-" || destT == "A-" || destT == "B-" || destT == "AB-")
-                        return false;
-                    return true;
-
-                case "A-":
-                    if (destT == "O-" || destT == "O+" || destT == "B-" || destT == "B+")
-                        return false;
-                    return true;
-
-                case "A+":
-                    if (destT == "A+" || destT == "AB+")
-                        return true;
-                    return false;
-
-                case "B-":
-                    if (destT == "O-" || destT == "O+" || destT == "A-" || destT == "A+")
-                        return false;
-                    return true;
-
-                case "B+":
-                    if (destT == "B+" || destT == "AB+")
-                        return true;
-                    return false;
-
-                case "AB-":
-                    if (destT == "AB-" || destT == "AB+")
-                        return true;
-                    return false;
-
-                case "AB+":
-                    return destT == "AB+";
-
-                default:
-                    return false;
-
-
-            }
+            return compatibility[receiverIndex][donorIndex] == 1;
         }
     }
 }

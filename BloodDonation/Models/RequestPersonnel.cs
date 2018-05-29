@@ -30,16 +30,6 @@ namespace BloodDonation.Models
 
         public int quantity;
         public BloodType bloodType;
-
-        public void setStatus(string s)
-        {
-            status = (Status)Enum.Parse(typeof(Status), s);
-        }
-
-        override
-        public string ToString()
-        {
-            return status + "  " + hospitalName + "  " + hospitalLocation + "  " + quantity + "  " + bloodType.Group + "  " + bloodType.PH;
-        }
+        public RequestComponent component { get; set; }
     }
 }

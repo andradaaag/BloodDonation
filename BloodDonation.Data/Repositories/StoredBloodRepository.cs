@@ -41,6 +41,7 @@ namespace BloodDonation.Data.Repositories
                 .Child(d.ID)
                 .PutAsync(d);
         }
+
         public StoredBlood GetOne(string id)
         {
             return firebaseClient

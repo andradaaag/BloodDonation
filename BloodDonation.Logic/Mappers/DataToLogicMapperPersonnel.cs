@@ -102,9 +102,15 @@ namespace BloodDonation.Logic.Mappers
                 source = r.source,
                 doctorId = r.doctorId,
                 quantity = r.quantity,
-                bloodType = this.convertBloodType(r.bloodType)
+                bloodType = this.convertBloodType(r.bloodType),
+                component = RequestComponent(r.bloodType.component)
             };
 
+        }
+
+        public RequestComponent RequestComponent(Data.Models.Component c)
+        {
+            return (RequestComponent)c;
         }
     }
 }

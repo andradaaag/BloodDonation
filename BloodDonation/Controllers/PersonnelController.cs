@@ -174,7 +174,7 @@ namespace BloodDonation.Controllers
             RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(id));
             Personnel loggedPersonnel = BusinessToPresentation.Personnel(personnelService.GetOne(GetUid()));
             string donationCenterID = loggedPersonnel.DonationCenterID;
-            int missingBlood = requestService.getMissingBlood(donationCenterID, PresentationToBusiness.Request(r));
+            int missingBlood = requestService.GetMissingBlood(donationCenterID, PresentationToBusiness.Request(r));
 
             if (missingBlood > 0)
             {
@@ -209,13 +209,24 @@ namespace BloodDonation.Controllers
         public ActionResult RequestToDb(NewStatus ns)
         {
             Status s = (Status)Enum.Parse(typeof(Status), ns.status);
-            if (s == Status.BeingProcessed)
-            {
-                requestService.EditSource(ns.ID, "none");
-                requestService.EditStatus(ns.ID, PresentationToBusiness.Status(s));
+            RequestPersonnel previousRequest = BusinessToPresentation.Request(requestService.GetOne(ns.ID));
 
+            // TO DO, TREAT CASE WHEN WE GO BACK FROM ONTHEWAY TO ACCEPTED OR SMTH LIKE THAT
+
+            
+            if (s == Status.BeingProcessed)
+                previousRequest.source = "none";
+
+            if( s == Status.OnTheWay)
+            {
+                RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(ns.ID));
+                Personnel loggedPersonnel = BusinessToPresentation.Personnel(personnelService.GetOne(GetUid()));
+                string donationCenterID = loggedPersonnel.DonationCenterID;
+                storedBloodService.RemoveBlood(donationCenterID, r.quantity,
+                    PresentationToBusiness.BloodType(r.bloodType), PresentationToBusiness.RequestComponent(r.component));
             }
-            requestService.EditStatus(ns.ID, PresentationToBusiness.Status(s));
+            previousRequest.status = s;
+            requestService.Edit(PresentationToBusiness.Request(previousRequest));
             return Success();
 
         }

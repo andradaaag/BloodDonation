@@ -19,5 +19,6 @@ namespace BloodDonation.Logic.Models
 
         public int quantity;
         public BloodType bloodType;
+        public RequestComponent component;
     }
 }

@@ -19,6 +19,7 @@ namespace BloodDonation.Data.Models
         public int quantity { get; set; }
 
         public BloodType bloodType { get; set; }
+        
 
     }
 }
