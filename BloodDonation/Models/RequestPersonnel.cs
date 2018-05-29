@@ -31,6 +31,5 @@ namespace BloodDonation.Models
         public string quantityString;
         public int quantity;
         public BloodType bloodType;
-        public RequestComponent component { get; set; }
     }
 }

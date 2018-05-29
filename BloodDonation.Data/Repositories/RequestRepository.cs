@@ -29,14 +29,23 @@ namespace BloodDonation.Data.Repositories
 
         public List<Request> FindAll()
         {
-            return firebaseClient
-                .Child(CHILD)
-                .OrderByKey()
-                .OnceAsync<Request>()
-                .Result
-                .AsEnumerable()
-                .Select(i => FirebaseToObject.Request(i))
-                .ToList();
+            try
+            {
+                return firebaseClient
+                    .Child("requests")
+                    .OrderByKey()
+                    .OnceAsync<Request>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.Request(i))
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+                Console.Out.WriteLine(ex.StackTrace);
+                return new List<Request>();
+            }
         }
 
         public List<Request> GetUnsolvedRequests()

@@ -18,8 +18,9 @@ namespace BloodDonation.Logic.Services
 
 
 
-        public int GetCompatibleStoredBlood(string donationCenterID, BloodType bloodType, RequestComponent component)
+        public int GetCompatibleStoredBlood(string donationCenterID, BloodType bloodType)
         {
+            Data.Models.Component component = bloodType.bloodComponent;
             
             StoredBloodRepository bloodRepo = new StoredBloodRepository();
             List<StoredBlood> bloodList = bloodRepo
@@ -30,7 +31,7 @@ namespace BloodDonation.Logic.Services
 
             int totalQuantity = 0;
             foreach (StoredBlood blood in bloodList)
-                if(DataToLogic.RequestComponent(blood.Component) == component && blood.BloodType.CanDonate(bloodType))
+                if(blood.Component == component && blood.BloodType.CanDonate(bloodType))
                     totalQuantity += blood.Amount;
 
             return totalQuantity;
@@ -38,7 +39,7 @@ namespace BloodDonation.Logic.Services
 
         public int GetMissingBlood(string donationCenterID, RequestPersonnel r)
         {
-            int storedBlood = this.GetCompatibleStoredBlood(donationCenterID,r.bloodType,r.component);
+            int storedBlood = this.GetCompatibleStoredBlood(donationCenterID,r.bloodType);
 
             if (storedBlood >= r.quantity)
                 return 0;

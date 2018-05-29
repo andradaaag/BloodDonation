@@ -57,9 +57,10 @@ namespace BloodDonation.Logic.Services
         }
 
 
-        public void RemoveBlood(string donationCenterID,int quantity, BloodType receiverBloodType, RequestComponent component)
+        public void RemoveBlood(string donationCenterID,int quantity, BloodType receiverBloodType)
         {
             List<StoredBlood> storedBloodList = GetStoredBloodByDonationCenter(donationCenterID);
+            Data.Models.Component component = receiverBloodType.bloodComponent;
             //storedBloodList.Sort();
 
 
@@ -68,7 +69,7 @@ namespace BloodDonation.Logic.Services
             while( i < storedBloodList.Count && quantity > 0)
             {
                 StoredBlood current = storedBloodList[i];
-                if (DataToLogic.RequestComponent(current.Component) == component)
+                if (current.BloodType.bloodComponent == (Data.Models.Component)component)
                 {
                     a = 1;
                     if (current.BloodType.CanDonate(receiverBloodType))

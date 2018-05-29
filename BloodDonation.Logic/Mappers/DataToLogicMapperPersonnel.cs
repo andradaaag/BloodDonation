@@ -83,7 +83,8 @@ namespace BloodDonation.Logic.Mappers
             return new BloodType
             {
                 Group = bt.Group,
-                RH = bt.RH
+                RH = bt.RH,
+                bloodComponent = bt.Component
             };
         }
 
@@ -102,15 +103,9 @@ namespace BloodDonation.Logic.Mappers
                 source = r.source,
                 doctorId = r.doctorId,
                 quantity = r.quantity,
-                bloodType = this.convertBloodType(r.bloodType),
-                component = RequestComponent(r.bloodType.component)
+                bloodType = this.convertBloodType(r.bloodType)
             };
 
-        }
-
-        public RequestComponent RequestComponent(Data.Models.Component c)
-        {
-            return (RequestComponent)c;
         }
     }
 }

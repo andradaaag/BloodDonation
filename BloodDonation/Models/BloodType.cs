@@ -16,6 +16,7 @@ namespace BloodDonation.Models
     {
         public string Group { get; set; }
         public bool PH { get; set; }
+        public Data.Models.Component component { get; set; }
 
     }
 }

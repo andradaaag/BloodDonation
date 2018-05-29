@@ -78,7 +78,8 @@ namespace BloodDonation.Logic.Mappers
             return new Data.Models.Request
             {
                 ID = r.ID,
-                status = Status(r.status),
+                patientCnp = r.patientCnp,
+                status = (Data.Models.Status)r.status,
                 destination = r.destination,
                 source = r.source,
                 doctorId = r.doctorId,
@@ -87,7 +88,7 @@ namespace BloodDonation.Logic.Mappers
                 {
                     Group = r.bloodType.Group,
                     RH = r.bloodType.RH,
-                    component = Component(r.component)
+                    Component = r.bloodType.bloodComponent
                 }
             };
 
@@ -96,11 +97,6 @@ namespace BloodDonation.Logic.Mappers
         public Data.Models.Status Status(Status s)
         {
             return (Data.Models.Status)s;
-        }
-
-        public Data.Models.Component Component(RequestComponent c)
-        {
-            return (Data.Models.Component)c;
         }
     }
 }

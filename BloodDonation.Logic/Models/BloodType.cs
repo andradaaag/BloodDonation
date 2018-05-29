@@ -6,7 +6,8 @@ namespace BloodDonation.Logic.Models
     {
         public string Group;
         public bool RH;
-        
+        public BloodDonation.Data.Models.Component bloodComponent { get; set; }
+
         /**
          * Determine if this blood type is a compatible donor to the receiver blood type.
          */

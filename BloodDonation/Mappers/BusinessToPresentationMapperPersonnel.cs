@@ -87,18 +87,13 @@ namespace BloodDonation.Mappers
                 bloodType = new Models.BloodType
                 {
                     Group = r.bloodType.Group,
-                    PH = r.bloodType.RH
+                    PH = r.bloodType.RH,
+                    component = r.bloodType.bloodComponent
                 },
                 hospitalName = h.Name,
-                hospitalLocation = h.Location,
-                component = RequestComponent(r.component)
+                hospitalLocation = h.Location
                 
             };
-        }
-
-        public Models.RequestComponent RequestComponent(Logic.Models.RequestComponent rc)
-        {
-            return (Models.RequestComponent)rc;
         }
 
         public SeparateStoredBloodModel SeparateBlood(Logic.Models.StoredBlood sb)

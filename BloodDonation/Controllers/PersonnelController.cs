@@ -197,7 +197,7 @@ namespace BloodDonation.Controllers
 
             RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(id));
             storedBloodService.RemoveBlood(donationCenterID, r.quantity,
-                PresentationToBusiness.BloodType(r.bloodType), PresentationToBusiness.RequestComponent(r.component));
+                PresentationToBusiness.BloodType(r.bloodType));
 
             return Success();
         }

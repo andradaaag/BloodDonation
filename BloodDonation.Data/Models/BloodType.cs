@@ -23,7 +23,7 @@ namespace BloodDonation.Data.Models
         /**
 		 * @param blood
 		 */
-        public Component component;
+        public BloodDonation.Data.Models.Component Component;
         public void isCompatible(BloodType blood)
 		{
 			// TODO implement here

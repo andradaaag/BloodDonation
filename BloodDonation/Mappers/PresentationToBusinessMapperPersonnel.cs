@@ -94,16 +94,10 @@ namespace BloodDonation.Mappers
                 bloodType = new Logic.Models.BloodType
                 {
                     Group = r.bloodType.Group,
-                    RH = r.bloodType.PH
-                },
-                component = RequestComponent(r.component)
-
+                    RH = r.bloodType.PH,
+                    bloodComponent = r.bloodType.component
+                }
             };
-        }
-
-        public Logic.Models.RequestComponent RequestComponent(RequestComponent rc)
-        {
-            return (Logic.Models.RequestComponent)rc;
         }
 
         public Logic.Models.SeparateBlood SeparateBlood(SeparateStoredBloodModel blood)
