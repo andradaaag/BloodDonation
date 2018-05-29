@@ -25,7 +25,14 @@ namespace BloodDonation.Data.Repositories
                 .DeleteAsync();
         }
 
+        public void DeleteById(String id)
+        {
+            firebaseClient
+                .Child("requests")
+                .Child(id)
+                .DeleteAsync();
 
+        }
 
         public List<Request> FindAll()
         {
@@ -174,5 +181,26 @@ namespace BloodDonation.Data.Repositories
                 return new List<Request>();
             }
         }
+
+        public List<Request> GetRequestByPatientCnp(string patientCnp)
+        {
+            try
+            {
+                return firebaseClient
+                .Child("requests")
+                .OrderBy("patientCnp")
+                .EqualTo(patientCnp)
+                .OnceAsync<Request>()
+                .Result
+                .AsEnumerable()
+                .Select(i => FirebaseToObject.Request(i))
+                .ToList();
+            }
+            catch (Exception e)
+            {
+                return new List<Request>();
+            }
+        }
+
     }
 }

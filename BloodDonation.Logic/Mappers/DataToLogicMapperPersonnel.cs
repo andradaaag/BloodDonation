@@ -22,6 +22,7 @@ namespace BloodDonation.Logic.Mappers
                     RH = donation.BloodType.RH
                 },
                 DonationCenterId = donation.DonationCenterID,
+                PatientCnp = donation.PatientCnp,
                 DonorId = donation.DonorCnp,
                 HepatitisB = donation.HepatitisB,
                 HepatitisC = donation.HepatitisC,
@@ -98,6 +99,7 @@ namespace BloodDonation.Logic.Mappers
             return new RequestPersonnel
             {
                 ID = r.ID,
+                patientCnp = r.patientCnp,
                 status = this.Status(r.status),
                 destination = r.destination,
                 source = r.source,

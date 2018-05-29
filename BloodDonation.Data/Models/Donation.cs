@@ -24,6 +24,7 @@ namespace BloodDonation.Data.Models
 
 		public Stage Stage;
 
+        public string PatientCnp { get; set; }
 
 		public int Quantity;
 

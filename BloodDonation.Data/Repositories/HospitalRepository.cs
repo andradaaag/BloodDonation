@@ -82,7 +82,6 @@ namespace BloodDonation.Data.Repositories
             }
         }
 
-
         public void DeleteById(string id)
         {
             firebaseClient

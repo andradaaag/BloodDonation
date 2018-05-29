@@ -17,6 +17,17 @@ namespace BloodDonation.Logic.Services
         private readonly LogicToDataMapper logicToDataMapper = new LogicToDataMapper();
         private readonly DataToLogicMapper dataToLogicMapper = new DataToLogicMapper();
 
+        public DonationCenterTransferObject GetDonationCenterById(String id)
+        {
+            Data.Models.DonationCenter d = donationCenterRepository.FindById(id);
+
+            if (d == null)
+                return null;
+
+            return dataToLogicMapper
+                        .MapDonationCenterTransferObject(d);
+        }
+
         public List<DonationCenterTransferObject> GetAllDonationCenters()
         {
             List<Data.Models.DonationCenter> donationCenters = donationCenterRepository.FindAll();

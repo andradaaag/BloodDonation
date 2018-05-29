@@ -9,6 +9,7 @@ namespace BloodDonation.Logic.Models
     public class RequestPersonnel: BaseEntity
     {
 
+
         public Status status { get; set; }
 
         public string destination { get; set; }      //hospitalid

@@ -25,6 +25,7 @@ namespace BloodDonation.Business.Mappers
             return new Doctor()
             {
                 ID = nuto.UID,
+                HospitalId = nuto.Hospital,
                 firstName = nuto.FirstName,
                 lastName = nuto.LastName,
                 DOB = nuto.DOB,
@@ -79,8 +80,8 @@ namespace BloodDonation.Business.Mappers
                 emailAddress = nuto.Email,
 
                 isReviewed = nuto.isReviewed,
-                isValid = nuto.isValid
-
+                isValid = nuto.isValid,
+                DonationCenterID = nuto.DonationCenter
                 //TODO - somehow add donation center id to a list of now nonexisting ids
             };
         }

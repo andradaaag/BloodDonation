@@ -109,6 +109,11 @@ namespace BloodDonation.Logic.Services
                    .ToList();
         }
 
+        public void DeleteById(String Id)
+        {
+            Repository.DeleteById(Id);
+        }
+
         public void AddRequest(RequestPersonnel request)
         {
             Repository.Save(LogicToData.RequestPersonelToRequest(request));

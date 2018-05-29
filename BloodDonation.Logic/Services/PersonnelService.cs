@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace BloodDonation.Logic.Services
 {
     public class PersonnelService
@@ -20,12 +19,16 @@ namespace BloodDonation.Logic.Services
         private readonly DonationCenterPersonnelRepository dcprRepo = new DonationCenterPersonnelRepository();
         private readonly StoredBloodRepository bloodRepo = new StoredBloodRepository();
 
+        
+
         private readonly DateTime epoch = new DateTime(1970, 1, 1);
         public List<AccountRequest> GetPersonnelAccountRequests()
         {
             // TO DO
             return null;
         }
+
+        
 
         public void AddDonationInDB(Donation donation, string UID, bool keepWhole)
         {
@@ -34,6 +37,8 @@ namespace BloodDonation.Logic.Services
             donation.DonationTime = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
             donation.RBC = -1;
             donRepo.Add(logicToData.Donation(donation));
+
+      
 
         }
 

@@ -6,6 +6,7 @@ namespace BloodDonation.Data.Models
 		Accepted,
 		OnTheWay,
 		Denied,
-		Completed
+		Completed,
+        ReadyToSend
 	}
 }

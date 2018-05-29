@@ -66,13 +66,14 @@ namespace BloodDonation.Mappers
                 DonationCenterID = p.DonationCenterID
             };
         }
-       
+
+        HospitalService hospitalService = new HospitalService();
+        DonationCenterService DonationCenterService = new DonationCenterService();
 
         public Models.RequestPersonnel Request(Logic.Models.RequestPersonnel r)
         {
-            HospitalService hs = new HospitalService();
-            HospitalTransferObject h = hs.GetHospitalById(r.destination);
-
+            HospitalTransferObject h = hospitalService.GetHospitalById(r.destination);
+            DonationCenterTransferObject dcto = DonationCenterService.GetDonationCenterById(r.source);
             return new Models.RequestPersonnel
             {
                 ID = r.ID,
@@ -82,6 +83,9 @@ namespace BloodDonation.Mappers
                 source = r.source,
                 doctorId = r.doctorId,
                 patientCnp = r.patientCnp,
+
+                DonationCenterName = dcto!=null ? dcto.Name:"Request is still pending",
+                DonationCenterLocation = dcto != null ? dcto.Location : "Request is still pending",
 
                 quantity = r.quantity,
                 bloodType = new Models.BloodType
