@@ -12,7 +12,7 @@ namespace BloodDonation.Data.Repositories
 {
     public class HospitalRepository
     {
-
+        
         private FirebaseClient firebaseClient = new FirebaseClient("https://blooddonation-bc0b9.firebaseio.com/");
         private FirebaseToObject FirebaseToObject = new FirebaseToObject();
         private const string CHILD = "hospitals";

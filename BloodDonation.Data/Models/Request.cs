@@ -21,6 +21,7 @@ namespace BloodDonation.Data.Models
 
         public BloodType bloodType { get; set; }
         
+        public DoctorUrgencyLevel urgency { get; set; }
 
     }
 }

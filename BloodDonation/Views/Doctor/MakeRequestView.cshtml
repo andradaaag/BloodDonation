@@ -54,7 +54,7 @@
             <div class="col-75">
 
                 @Html.DropDownListFor(model => model.bloodGroup,
-                         new SelectList(new[] { "A", "AB", "B", "0" }), "Select Group")
+                      new SelectList(new[] { "A", "AB", "B", "0" }), "Select Group")
             </div>
         </div>
         <div class="row">
@@ -63,7 +63,7 @@
             </div>
             <div class="col-75">
                 @Html.DropDownListFor(model => model.bloodRh,
-                         new SelectList(new[] { "positive", "negative" }), "Select RH")
+                      new SelectList(new[] { "positive", "negative" }), "Select RH")
             </div>
         </div>
         <div class="row">
@@ -81,9 +81,20 @@
             </div>
             <div class="col-75">
                 @Html.DropDownListFor(model => model.bloodComponent,
-                 EnumHelper.GetSelectList(typeof(BloodDonation.Data.Models.Component)), "Select Part Of Blood")
+              EnumHelper.GetSelectList(typeof(BloodDonation.Utils.Enums.Component)), "Select Part Of Blood")
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="urgency">Urgency</label>
+            </div>
+            <div class="col-75">
+                @Html.DropDownListFor(model => model.urgency,
+        EnumHelper.GetSelectList(typeof(BloodDonation.Utils.Enums.DoctorUrgencyLevel)), "Select Urgency")
+            </div>
+        </div>
+
 
         <div class="row">
             <input type="submit" value="Send Request">

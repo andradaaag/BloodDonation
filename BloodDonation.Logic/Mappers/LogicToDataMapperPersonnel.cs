@@ -85,6 +85,7 @@ namespace BloodDonation.Logic.Mappers
                 source = r.source,
                 doctorId = r.doctorId,
                 quantity = r.quantity,
+                urgency = r.urgency,
                 bloodType = new Data.Models.BloodType
                 {
                     Group = r.bloodType.Group,
