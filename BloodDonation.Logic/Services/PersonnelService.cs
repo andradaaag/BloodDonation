@@ -133,7 +133,8 @@ namespace BloodDonation.Logic.Services
                 if (donation.RBC == -1)
                 {
                     StoredBlood whole = CompFromDonation(donation, Component.Whole, centerId, 400);
-                    bloodRepo.Add(logicToData.StoredBlood(whole));
+                    for (int i =0; i<whole.Amount; i++)
+                        bloodRepo.Add(logicToData.StoredBlood(whole));
                 }
                 else
                 {
