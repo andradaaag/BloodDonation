@@ -81,7 +81,6 @@
     <Compile Include="Models\Donor.cs" />
     <Compile Include="Models\FirebaseDonationForm.cs" />
     <Compile Include="Models\Hospital.cs" />
-    <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\StoredBlood.cs" />
     <Compile Include="Models\SysAdmin.cs" />
@@ -90,8 +89,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DoctorRepository.cs" />
     <Compile Include="Repositories\DonationRepository.cs" />
-    <Compile Include="Repositories\PatientRepository.cs" />
-    <Compile Include="Repositories\PatientStatus.cs" />
     <Compile Include="Repositories\PersonnelRepository.cs" />
     <Compile Include="Repositories\RequestRepository.cs" />
     <Compile Include="Repositories\StoredBloodRepository.cs" />

@@ -64,12 +64,6 @@ namespace BloodDonation.Data.Mapper
             return h;
         }
 
-        public Patient Patient(FirebaseObject<Patient> patient)
-        {
-            Patient p = patient.Object;
-            p.ID = patient.Key;
-            return p;
-        }
 
         public DonationCenterPersonnel Personnel(FirebaseObject<DonationCenterPersonnel> personnel)
         {

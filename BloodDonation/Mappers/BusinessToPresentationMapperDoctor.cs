@@ -14,19 +14,7 @@ namespace BloodDonation.Mappers
     {
         private DoctorService doctorService = new DoctorService();
 
-        public PatientDtoView MapPatientDtoToPatientDtoView(PatientDto patient)
-        {
-            return new PatientDtoView()
-            {
-                Id = patient.Id,
-                Cnp = patient.Cnp,
-                FirstName = patient.FirstName,
-                LastName = patient.LastName,
-                BloodQuantity = patient.BloodQuantity,
-                PatientStatus = (Utils.Enums.PatientStatus)patient.PatientStatus
-            };
-        }
-
+        
         public Logic.Models.RequestPersonnel MapRequestBloodFormToRequestPersonnel(RequestBloodForm request, String uid)
         {
             Logic.Models.RequestPersonnel newRequest = new Logic.Models.RequestPersonnel();

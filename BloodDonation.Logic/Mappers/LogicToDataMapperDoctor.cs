@@ -10,18 +10,7 @@ namespace BloodDonation.Logic.Mappers
 {
     class LogicToDataMapperDoctor
     {
-        public Patient MapPatientDtoToPatient(PatientDto patientdto)
-        {
-            return new Patient()
-            {
-                ID = patientdto.Id,
-                Cnp = patientdto.Cnp,
-                FirstName = patientdto.FirstName,
-                LastName = patientdto.LastName,
-                BloodQuantity = patientdto.BloodQuantity,
-                PatientStatus = patientdto.PatientStatus  
-            };
-        }
+       
 
     }
 }

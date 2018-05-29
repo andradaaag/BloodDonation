@@ -266,7 +266,6 @@
     <Compile Include="Models\ManageHospitalsModel.cs" />
     <Compile Include="Models\ManageRequestsModel.cs" />
     <Compile Include="Models\NewStatus.cs" />
-    <Compile Include="Models\PatientDtoView.cs" />
     <Compile Include="Models\RequestBloodForm.cs" />
     <Compile Include="Models\RequestList.cs" />
     <Compile Include="Models\RequestPersonnel.cs" />
