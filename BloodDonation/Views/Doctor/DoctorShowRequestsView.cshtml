@@ -35,53 +35,67 @@
         </header>
     </div>
 
+    <style>
+        table tr {
+            border-bottom: 1px solid white;
+            
+        }
+
+        th {
+            font-size:20px;
+            padding-bottom:20px;
+            padding-top:20px;
+        }
+
+    </style>
+
     <div class="indexPage" style="width:75%;margin:auto;padding-top:20px">
         <h1> Requests in progess:</h1>
-                <table style="width:80%; margin:auto; text-align: center">
-                    <tr>
-                        <th>Patient Cnp</th>
-                        <th>Hospital</th>
-                        <th>Blood </th>
-                        <th>Status</th>
-                        <th>Donnation Center</th>
-                        <th>Delete</th>
-                    </tr>
-                    @foreach (var req in Model)
-                    {
-                    <tr>
-                        <td>@req.patientCnp</td>
-                        <td>
-                            <p>
-                                @req.hospitalName,<br> 
-                                @req.hospitalLocation
-                            </p>
+        <table border=1 frame=void rules=rows style="width:80%; margin:auto; text-align: center; ">
+            <tr>
+                <th>Patient Cnp</th>
+                <th>Hospital</th>
+                <th>Blood </th>
+                <th>Status</th>
+                <th>Donnation Center</th>
+                <th>Delete</th>
+            </tr>
+            @foreach (var req in Model)
+            {
+                <tr>
+                    <td>@req.patientCnp</td>
+                    <td>
+                        <p>
+                            @req.hospitalName,<br>
+                            @req.hospitalLocation
+                        </p>
 
-                        </td>
+                    </td>
 
-                        <td>
-                            <div>
-                                <ul style=" list-style-type: none; padding: 0,10,0,0; text-align:left; ">
-                                    <li> Blood Group: @req.bloodType.Group </li>
-                                    @if (req.bloodType.PH == true)
-                {
-                    <li>Blood RH: Positive</li>
-}
-                                    @if (req.bloodType.PH == false)
-                {
-                    <li>Blood RH: Negative</li>
-}
-                                    <li>Blood Quantity:  @req.quantity   </li>
+                    <td>
+                        <div>
+                            <ul style=" list-style-type: none; padding: 0,10,0,0; text-align:left; ">
+                                <li> Blood Group: @req.bloodType.Group </li>
+                                @if (req.bloodType.PH == true)
+                                {
+                                    <li>Blood RH: Positive</li>
+                                 }
+                                @if (req.bloodType.PH == false)
+                                {
+                                    <li>Blood RH: Negative</li>
+                                }
+                                <li>Blood Quantity:  @req.quantity   </li>
 
-                                </ul>
-                            </div>
-                        </td>
-                        <td>
-                            @req.status
-                        </td>
+                            </ul>
+                        </div>
+                    </td>
+                    <td>
+                        @req.status
+                    </td>
 
-                        <td>
-                            @if(@req.DonationCenterName != "Request is still pending")
-                            {
+                    <td>
+                        @if (@req.DonationCenterName != "Request is still pending")
+                        {
                             <p>
                                 @req.DonationCenterName,<br>
                                 @req.DonationCenterLocation
@@ -89,19 +103,19 @@
                             }
                             else
                             {
-                            <p>
-                                @req.DonationCenterName
-                            </p>
+                                    <p>
+                                        @req.DonationCenterName
+                                    </p>
                             }
-                        </td>
+                    </td>
 
-                        <td>
-                            <input type="button" value="Delete" onclick="location.href='@Url.Action("DeleteRequest", "Doctor", req )'" />
-                        </td>
+                    <td>
+                        <input type="button" value="Delete" onclick="location.href='@Url.Action("DeleteRequest", "Doctor", req )'" />
+                    </td>
 
-                    </tr>
-                    }
-                    </table>
+                </tr>
+        }
+        </table>
     </div>
 
 

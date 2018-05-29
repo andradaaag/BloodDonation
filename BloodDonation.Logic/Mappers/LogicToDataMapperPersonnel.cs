@@ -21,6 +21,7 @@ namespace BloodDonation.Logic.Mappers
                     RH = donation.BloodType.RH
                 },
                 DonorCnp = donation.DonorId,
+                PatientCnp = donation.PatientCnp,
                 DonationCenterID = donation.DonationCenterId,
                 HepatitisB = donation.HepatitisB,
                 HepatitisC = donation.HepatitisC,
@@ -87,7 +88,9 @@ namespace BloodDonation.Logic.Mappers
                 bloodType = new Data.Models.BloodType
                 {
                     Group = r.bloodType.Group,
-                    RH = r.bloodType.RH
+                    RH = r.bloodType.RH,
+                    Component = r.bloodType.bloodComponent
+                   
                 }
             };
 

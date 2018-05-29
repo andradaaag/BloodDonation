@@ -88,14 +88,23 @@ namespace BloodDonation.Data.Repositories
 
         public List<Request> FindAll()
         {
-            return firebaseClient
-                .Child("requests")
-                .OrderByKey()
-                .OnceAsync<Request>()
-                .Result
-                .AsEnumerable()
-                .Select(i => FirebaseToObject.Request(i))
-                .ToList();
+            try
+            {
+                return firebaseClient
+                    .Child("requests")
+                    .OrderByKey()
+                    .OnceAsync<Request>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.Request(i))
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+                Console.Out.WriteLine(ex.StackTrace);
+                return new List<Request>();
+            }
         }
 
         public void Save(Request r)
@@ -163,5 +172,26 @@ namespace BloodDonation.Data.Repositories
                 return new List<Request>();
             }
         }
+
+        public List<Request> GetRequestByPatientCnp(string patientCnp)
+        {
+            try
+            {
+                return firebaseClient
+                .Child("requests")
+                .OrderBy("patientCnp")
+                .EqualTo(patientCnp)
+                .OnceAsync<Request>()
+                .Result
+                .AsEnumerable()
+                .Select(i => FirebaseToObject.Request(i))
+                .ToList();
+            }
+            catch (Exception e)
+            {
+                return new List<Request>();
+            }
+        }
+
     }
 }

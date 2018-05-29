@@ -68,7 +68,7 @@ namespace BloodDonation.Controllers
         {
             if (IsNotPersonnel())
                 return errorController.Error();
-
+            /// Cristi - aici ceva nu se-npupa
             DonationSepModel dlm = new DonationSepModel
             {
                 Donations = donationService
