@@ -19,8 +19,7 @@ namespace BloodDonation.Data.Repositories
 
         public List<Donation> FindUnresolved()
         {
-            try
-            {
+           
                 return firebaseClient
                     .Child(CHILD)
                     .OrderBy("Stage")
@@ -31,19 +30,12 @@ namespace BloodDonation.Data.Repositories
                     .AsEnumerable()
                     .Select(i => FirebaseToObject.Donation(i))
                     .ToList();
-            }
-            catch(Exception ex)
-            {
-                Console.Out.WriteLine(ex.Message);
-                Console.Out.WriteLine(ex.StackTrace);
-                return new List<Donation>();
-            }
+
         }
 
         public List<Donation> FindByDonationCenter(string donationCenterID)
         {
-            try
-            {
+            
                 return firebaseClient
                     .Child(CHILD)
                     .OrderBy("DonationCenterID")
@@ -53,13 +45,7 @@ namespace BloodDonation.Data.Repositories
                     .AsEnumerable()
                     .Select(i => FirebaseToObject.Donation(i))
                     .ToList();
-            }
-            catch(Exception ex)
-            {
-                Console.Out.WriteLine(ex.Message);
-                Console.Out.WriteLine(ex.StackTrace);
-                return null;
-            }
+           
         }
 
          public List<Donation> FindByPatientCnp(string patientCnp)
@@ -86,8 +72,7 @@ namespace BloodDonation.Data.Repositories
 
         public int FindDonatedQuantityForPatient(string patientCnp)
         {
-            try
-            {
+           
                 return firebaseClient
                     .Child(CHILD)
                     .OrderBy("PatientCnp")
@@ -97,20 +82,12 @@ namespace BloodDonation.Data.Repositories
                     .AsEnumerable()
                     .Select(i => FirebaseToObject.Donation(i).Quantity)
                     .Sum();
-                    
-            }
-            catch (Exception ex)
-            {
-                Console.Out.WriteLine(ex.Message);
-                Console.Out.WriteLine(ex.StackTrace);
-                return -1;
-            }
+          
         }
 
         public List<Donation> FindAll()
         {
-            try
-            {
+          
                 return firebaseClient
                     .Child(CHILD)
                     .OrderByKey()
@@ -119,13 +96,7 @@ namespace BloodDonation.Data.Repositories
                     .AsEnumerable()
                     .Select(i => FirebaseToObject.Donation(i))
                     .ToList();
-            }
-            catch(Exception ex)
-            {
-                Console.Out.WriteLine(ex.Message);
-                Console.Out.WriteLine(ex.StackTrace);
-                return new List<Donation>();
-            }
+           
         }
 
         public void Add(Donation d)
@@ -143,8 +114,7 @@ namespace BloodDonation.Data.Repositories
         }
         public Donation GetOne(string id)
         {
-            try
-            {
+           
                 return FirebaseToObject.Donation(
                  firebaseClient
                  .Child(CHILD)
@@ -154,12 +124,7 @@ namespace BloodDonation.Data.Repositories
                  .OnceAsync<Donation>()
                  .Result
                  .First());
-            } catch(Exception ex)
-            {
-                Console.Out.WriteLine(ex.Message);
-                Console.Out.WriteLine(ex.StackTrace);
-                return null;
-            }
+            
         }
     }
 }
