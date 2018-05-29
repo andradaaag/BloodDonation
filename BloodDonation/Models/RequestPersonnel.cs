@@ -31,5 +31,7 @@ namespace BloodDonation.Models
         public string quantityString;
         public int quantity;
         public BloodType bloodType;
+        public string DonationCenterName;
+        public string DonationCenterLocation;
     }
 }
