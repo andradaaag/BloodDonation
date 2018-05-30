@@ -40,14 +40,20 @@ namespace BloodDonation.Data.Repositories
 
         public List<Doctor> findAll()
         {
-            return firebaseClient
-                .Child(CHILD)
-                .OrderByKey()
-                .OnceAsync<Doctor>()
-                .Result
-                .AsEnumerable()
-                .Select(i => FirebaseToObject.Doctor(i))
-                .ToList();
+            try
+            {
+                return firebaseClient
+                    .Child(CHILD)
+                    .OrderByKey()
+                    .OnceAsync<Doctor>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.Doctor(i))
+                    .ToList();
+            } catch (Exception ex)
+            {
+                return new List<Doctor>();
+            }
         }
 
         public void deleteForId(string id)
@@ -57,15 +63,23 @@ namespace BloodDonation.Data.Repositories
 
         public Doctor GetOne(string id)
         {
-            return firebaseClient
-                .Child(CHILD)
-                .OrderByKey()
-                .EqualTo(id)
-                .OnceAsync<Doctor>()
-                .Result
-                .AsEnumerable()
-                .Select(i => FirebaseToObject.Doctor(i))
-                .First();
+            try
+            {
+                return firebaseClient
+                    .Child(CHILD)
+                    .OrderByKey()
+                    .EqualTo(id)
+                    .OnceAsync<Doctor>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.Doctor(i))
+                    .First();
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
     }

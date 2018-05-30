@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BloodDonation.Data.Repositories;
 namespace BloodDonation.Logic.Services
 {
     public class PersonnelService
@@ -191,5 +192,57 @@ namespace BloodDonation.Logic.Services
         {
             return dataToLogic.Personnel(Repository.GetOne(id));
         }
+
+        public int[] GetArrayOfBloodQuantity()
+        {
+            int[] listOfBloodTypes = { 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            BloodDonation.Data.Models.BloodType bloodType = new BloodDonation.Data.Models.BloodType();
+            ////// TODO uncomment line & check after component too ?
+
+            for (int i = 0; i < 8; i++)
+            {
+                if(i>3)
+                    bloodType.RH = false;
+                else
+                    bloodType.RH = true;
+
+                if (i==0 || i==4)
+                    bloodType.Group = "A";
+                else if (i==1 || i==5)
+                    bloodType.Group = "B";
+                else if (i==2 || i== 6)
+                    bloodType.Group = "AB";
+                else if (i == 3 || i == 7)
+                    bloodType.Group = "0";
+
+                listOfBloodTypes[i] = bloodRepo.GetQuantityForBloodType(bloodType);
+            }
+
+            return listOfBloodTypes;
+        }
+
+        ///CRISTI LOG EXPIRED BLOOD phase 2 get the expired blood, check the todo below
+        public List<StoredBlood> GetExpiredBlood()
+        {
+            /// TODO please check if i am doing the "get current time in seconds from 1970" okay
+            int daysForWholeBlood = 1, daysForThrombocytes = 1, daysForRedBloodCells = 1, daysForPlasma = 1;
+
+            DateTime date = new DateTime();   
+            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            TimeSpan diff = date.ToUniversalTime() - origin;
+            int seconds =  (int)Math.Floor(diff.TotalSeconds);
+            daysForPlasma           *= 86400;
+            daysForThrombocytes     *= 86400;
+            daysForRedBloodCells    *= 86400;
+            daysForPlasma           *= 86400;
+
+            return bloodRepo.GetExpiredBlood(daysForWholeBlood, daysForPlasma, daysForRedBloodCells, daysForThrombocytes, seconds)
+                            .AsEnumerable()
+                            .Select(el => dataToLogic.StoredBlood(el))
+                            .ToList();
+
+        }
+
     }
 }

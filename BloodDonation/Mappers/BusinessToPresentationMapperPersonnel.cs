@@ -83,6 +83,7 @@ namespace BloodDonation.Mappers
                 source = r.source,
                 doctorId = r.doctorId,
                 patientCnp = r.patientCnp,
+                urgency = r.urgency,
 
                 DonationCenterName = dcto!=null ? dcto.Name:"Request is still pending",
                 DonationCenterLocation = dcto != null ? dcto.Location : "Request is still pending",

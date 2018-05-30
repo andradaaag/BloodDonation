@@ -23,14 +23,20 @@ namespace BloodDonation.Data.Repositories
 
         public List<Hospital> FindAll()
         {
-            return firebaseClient
-                    .Child(CHILD)
-                    .OrderByKey()
-                    .OnceAsync<Hospital>()
-                    .Result
-                    .AsEnumerable()
-                    .Select(i => FirebaseToObject.Hospital(i))
-                    .ToList();
+            try
+            {
+                return firebaseClient
+                        .Child(CHILD)
+                        .OrderByKey()
+                        .OnceAsync<Hospital>()
+                        .Result
+                        .AsEnumerable()
+                        .Select(i => FirebaseToObject.Hospital(i))
+                        .ToList();
+            }catch(Exception ex)
+            {
+                return new List<Hospital>();
+            }
         }
 
         public void Save(Hospital newhospital)
@@ -50,7 +56,9 @@ namespace BloodDonation.Data.Repositories
 
         public List<Hospital> FindByName(String name)
         {
-            return firebaseClient
+            try
+            {
+                return firebaseClient
                     .Child(CHILD)
                     .OrderBy("name")
                     .EqualTo(name)
@@ -59,21 +67,31 @@ namespace BloodDonation.Data.Repositories
                     .AsEnumerable()
                     .Select(i => FirebaseToObject.Hospital(i))
                     .ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public Hospital FindById(String Id)
         {
-
-            return firebaseClient
-                .Child(CHILD)
-                .OrderByKey()
-                .EqualTo(Id)
-                .OnceAsync<Hospital>()
-                .Result
-                .AsEnumerable()
-                .Select(i => FirebaseToObject.Hospital(i))
-                .First();
-
+            try
+            {
+                return firebaseClient
+                    .Child(CHILD)
+                    .OrderByKey()
+                    .EqualTo(Id)
+                    .OnceAsync<Hospital>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.Hospital(i))
+                    .First();
+            }
+            catch(Exception ex)
+            {
+                return new Hospital("none","none");
+            }
         }
 
         public void DeleteById(string id)

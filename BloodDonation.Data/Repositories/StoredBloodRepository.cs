@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BloodDonation.Utils.Enums;
 using System.Threading.Tasks;
 
 namespace BloodDonation.Data.Repositories
@@ -74,5 +75,58 @@ namespace BloodDonation.Data.Repositories
                 .Child(id)
                 .DeleteAsync();
         }
+
+        public int GetQuantityForBloodType(BloodType bloodType)
+        {
+            ////// TODO uncomment line & check after component too ?
+
+            try
+            {
+                return firebaseClient
+                        .Child(CHILD)
+                        .OnceAsync<StoredBlood>()
+                        .Result
+                        .Select(i => FirebaseToObject.StoredBlood(i))
+                        .Where(el =>    el.BloodType.RH     == bloodType.RH 
+                                     && el.BloodType.Group  == bloodType.Group
+                                  // && el.Component    == bloodType.Component
+                                     )
+                        .Select(el => el.Amount)
+                        .Sum();
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
+
+        ///CRISTI LOG EXPIRED BLOOD phase 3 get the list of expired blood "directly" (not rly but w/ever) from the database
+        public List<StoredBlood> GetExpiredBlood(int dWhole, int dPlasma, int dRBC, int dThr, int crtTime)
+        {
+
+            try
+            {
+                return firebaseClient
+                        .Child(CHILD)
+                        .OrderBy("CollectionDate")
+                        .OnceAsync<StoredBlood>()
+                        .Result
+                        .Select(i => FirebaseToObject.StoredBlood(i))
+                        .Where(el => el.Component == Component.Plasma && (crtTime - el.CollectionDate) > dPlasma        ||
+                                     el.Component == Component.RedBloodCells && (crtTime - el.CollectionDate) > dRBC    ||
+                                     el.Component == Component.Thrombocytes && (crtTime - el.CollectionDate) > dThr     ||
+                                     el.Component == Component.Whole && (crtTime - el.CollectionDate) > dWhole
+                                    )
+                        .ToList();
+
+            }
+            catch (Exception ex)
+            {
+                return new List<StoredBlood>();
+            }
+        }
+
+
+
     }
 }

@@ -1,4 +1,6 @@
-﻿@model BloodDonation.Models.RequestList
+﻿@using BloodDonation.Models;
+@using BloodDonation.Utils.Enums;
+@model List<RequestPersonnel>
 
 @{
     ViewBag.Title = "PendingRequestsView";
@@ -37,13 +39,14 @@
                     <th>ID</th>
                     <th>Status</th>
                     <th>Component</th>
-                    <th>Hospital name</th>
-                    <th>Hospital location</th>
+                    <th>Hospital </th>
                     <th>Doctor name</th>
                     <th>Doctor email</th>
                     <th>Quantity</th>
                     <th>Blood group</th>
                     <th>Blood RH</th>
+                    <th>Urgency</th>
+                    <th>Accept</th>
                 </tr>
                 @{
                     var text = "";
@@ -51,36 +54,37 @@
                     var reqID = "1";
                     var reqPH = "";
                 }
-                @foreach (var req in Model.Requests)
+                @foreach (var req in Model)
                 {
-                    switch(Convert.ToString(req.status)){
+                    switch (Convert.ToString(req.status))
+                    {
                         case "BeingProcessed":
                             text = "Accept request";
                             method = "AcceptRequest";
                             break;
                         default:
-                            text = "Edit status";
-                            method = "EditRequest";
+                            text = "Send Blood";
+                            method = "SendRequest";
                             break;
                     }
                     reqID = Convert.ToString(@req.ID);
 
-                <tr>
-                    <td>@req.ID</td>
-                    <td>@req.status</td>
-                    <td>@req.bloodType.component</td>
-                    <td>@req.hospitalName</td>
-                    <td>@req.hospitalLocation</td>
-                    <td>@req.doctorName</td>
-                    <td>@req.doctorEmail</td>
-                    <td>@req.quantity</td>
-                    <td>@req.bloodType.Group</td>
-                    <td>@req.bloodType.PH</td>
-                    
-                    <td>
-                       @Html.ActionLink(@text,@method, "Personnel", new { id = @reqID },null)
-                    </td>
-                </tr>
+                    <tr>
+                        <td>@req.ID</td>
+                        <td>@req.status</td>
+                        <td>@req.bloodType.component</td>
+                        <td>@req.hospitalName <br> @req.hospitalLocation</td>
+                        <td>@req.doctorName</td>
+                        <td>@req.doctorEmail</td>
+                        <td>@req.quantity</td>
+                        <td>@req.bloodType.Group</td>
+                        <td>@req.bloodType.PH</td>
+                        <td>@(((DoctorUrgencyLevel)req.urgency).ToString())</td>
+
+                        <td>
+                            @Html.ActionLink(@text, @method, "Personnel", new { id = @reqID }, null)
+                        </td>
+                    </tr>
                 }
 
             </table>
