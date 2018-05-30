@@ -134,7 +134,7 @@ namespace BloodDonation.Logic.Services
                 if (donation.RBC == -1)
                 {
                     StoredBlood whole = CompFromDonation(donation, Component.Whole, centerId, 400);
-                    for (int i =0; i<whole.Amount; i++)
+                    for (int i =0; i<donation.Quantity; i++)
                         bloodRepo.Add(logicToData.StoredBlood(whole));
                 }
                 else
@@ -193,33 +193,51 @@ namespace BloodDonation.Logic.Services
             return dataToLogic.Personnel(Repository.GetOne(id));
         }
 
-        public int[] GetArrayOfBloodQuantity()
+        public async Task<int[]> GetArrayOfBlood(Component comp, string donCenter)
         {
-            int[] listOfBloodTypes = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
-            BloodDonation.Data.Models.BloodType bloodType = new BloodDonation.Data.Models.BloodType();
-            ////// TODO uncomment line & check after component too ?
-
+            Data.Models.BloodType bt = new Data.Models.BloodType();
+            Task<int>[] paralel = { null, null, null, null, null, null, null, null };
             for (int i = 0; i < 8; i++)
             {
-                if(i>3)
-                    bloodType.RH = false;
+                if (i > 3)
+                    bt.RH = false;
                 else
-                    bloodType.RH = true;
+                    bt.RH = true;
 
-                if (i==0 || i==4)
-                    bloodType.Group = "A";
-                else if (i==1 || i==5)
-                    bloodType.Group = "B";
-                else if (i==2 || i== 6)
-                    bloodType.Group = "AB";
+                if (i == 0 || i == 4)
+                    bt.Group = "A";
+                else if (i == 1 || i == 5)
+                    bt.Group = "B";
+                else if (i == 2 || i == 6)
+                    bt.Group = "AB";
                 else if (i == 3 || i == 7)
-                    bloodType.Group = "0";
+                    bt.Group = "O";
 
-                listOfBloodTypes[i] = bloodRepo.GetQuantityForBloodType(bloodType);
+                paralel[i] = bloodRepo.GetQuantityForBloodType(bt, comp, donCenter);
             }
-
+            int[] listOfBloodTypes = { 0, 0, 0, 0, 0, 0, 0, 0 };
+            for (int i = 0; i < 8; i++)
+                listOfBloodTypes[i] = paralel[i].Result;
             return listOfBloodTypes;
+        }
+
+        public StoredBloodAmounts GetArrayOfBloodQuantity(string UID)
+        {
+           
+            Task<int[]>[] paralel = { null, null, null, null };
+            string donCenter = GetOne(UID).DonationCenterID;
+            Component[] comps = (Component[])Enum.GetValues(typeof(Component));
+            for (int i = 0; i < 4; i++)
+                paralel[i] = GetArrayOfBlood(comps[i], donCenter);
+            return new StoredBloodAmounts
+            {
+                Trombocytes = paralel[0].Result,
+                RBC = paralel[1].Result,
+                Plasma = paralel[2].Result,
+                Whole = paralel[3].Result
+            };
+            
         }
 
         ///CRISTI LOG EXPIRED BLOOD phase 2 get the expired blood, check the todo below

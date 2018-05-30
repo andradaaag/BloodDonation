@@ -68,6 +68,7 @@
     <Compile Include="Models\RequestPersonnel.cs" />
     <Compile Include="Models\SeparateBlood.cs" />
     <Compile Include="Models\StoredBlood.cs" />
+    <Compile Include="Models\StoredBloodAmounts.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\EmailServiceBloodDonation.cs" />
     <Compile Include="Services\PersonnelService.cs" />

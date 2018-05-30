@@ -244,9 +244,8 @@ namespace BloodDonation.Controllers
         
         public ActionResult ViewStoredBlood()
         {
-            int[] arrayOfBlood = personnelService.GetArrayOfBloodQuantity();
-
-            return View("StoredBloodView", arrayOfBlood);
+            BloodAmounts blood = BusinessToPresentation.BloodAmounts(personnelService.GetArrayOfBloodQuantity(GetUid()));
+            return View("StoredBloodView", blood);
         }
         public ActionResult AcceptedRequests()
         {

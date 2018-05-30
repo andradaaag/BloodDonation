@@ -126,5 +126,16 @@ namespace BloodDonation.Mappers
                 HospitalName = doctor.InstituteName,
             };
         }
+
+        public BloodAmounts BloodAmounts(StoredBloodAmounts b)
+        {
+            return new BloodAmounts
+            {
+                Whole = b.Whole,
+                Plasma = b.Plasma,
+                RBC = b.RBC,
+                Trombocytes = b.Trombocytes
+            };
+        }
     }
 }

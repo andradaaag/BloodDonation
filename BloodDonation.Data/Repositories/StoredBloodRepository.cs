@@ -76,21 +76,21 @@ namespace BloodDonation.Data.Repositories
                 .DeleteAsync();
         }
 
-        public int GetQuantityForBloodType(BloodType bloodType)
+        public async Task<int> GetQuantityForBloodType(BloodType bloodType,Component component,string donCenter)
         {
-            ////// TODO uncomment line & check after component too ?
-
+            
             try
             {
                 return firebaseClient
                         .Child(CHILD)
+                        .OrderBy("DonationCenterID")
+                        .EqualTo(donCenter)
                         .OnceAsync<StoredBlood>()
                         .Result
                         .Select(i => FirebaseToObject.StoredBlood(i))
+                        .Where(el=>el.Component == component)
                         .Where(el =>    el.BloodType.RH     == bloodType.RH 
-                                     && el.BloodType.Group  == bloodType.Group
-                                  // && el.Component    == bloodType.Component
-                                     )
+                                     && el.BloodType.Group  == bloodType.Group)
                         .Select(el => el.Amount)
                         .Sum();
             }
