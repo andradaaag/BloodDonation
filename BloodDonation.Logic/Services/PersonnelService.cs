@@ -244,12 +244,9 @@ namespace BloodDonation.Logic.Services
         public List<StoredBlood> GetExpiredBlood()
         {
             /// TODO please check if i am doing the "get current time in seconds from 1970" okay
+            /// TODO: replace the variables with actual real life values
             int daysForWholeBlood = 1, daysForThrombocytes = 1, daysForRedBloodCells = 1, daysForPlasma = 1;
-
-            DateTime date = new DateTime();   
-            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            TimeSpan diff = date.ToUniversalTime() - origin;
-            int seconds =  (int)Math.Floor(diff.TotalSeconds);
+            int seconds = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
             daysForPlasma           *= 86400;
             daysForThrombocytes     *= 86400;
             daysForRedBloodCells    *= 86400;
