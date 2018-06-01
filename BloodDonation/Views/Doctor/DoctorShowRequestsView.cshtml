@@ -11,124 +11,119 @@
     <title>Doctor - Show Requests</title>
     <meta charset="iso-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @Styles.Render("~/Styles/layout_admin_requests.css")
-    @Styles.Render("~/Styles/mediaqueries.css")
-    <script src="scripts/jquery.1.9.0.min.js"></script>
-    <script src="scripts/jquery-mobilemenu.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    @Styles.Render("~/Styles/style.css")
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js">
+    </script>
 </head>
 <body>
 
-    <div class="wrapper row1">
-        <header id="header" class="clear">
-            <div id="hgroup">
-                <h1><a href="#">Showing Your Blood Requests</a></h1>
-                <h2><a href="#">Doctor</a></h2>
+<div id="header">
+    <div class="container">
+        <div class="row">
+            <div id="hgroup" class="col-sm-8 ml-4">
+                <div class="row">
+                    <a href="#" id="page-title">Showing Your Blood Requests</a>
+                </div>
+                <div class="row">
+                    <a href="#" id="page-owner">DOCTOR</a>
+                </div>
             </div>
-            <form action="login.html" method="post">
-                @Html.ActionLink("Log Out", "LogOut", "Login", null, new { @class = "sf_submit" })
+            <form action="login.html" method="post" class="col-sm-1 offset-sm-2">
+                @Html.ActionLink("Log Out", "LogOut", "Login", null, new {@class = "btn logout"})
             </form>
-            <nav>
-                <ul>
-                    <li>@Html.ActionLink("Make Blood Request", "GetMakeBloodRequest", "Doctor", null, new { @class = "header nav li" })</li>
-                </ul>
-            </nav>
-        </header>
+        </div>
+        <nav class="navbar navbar-expand-sm">
+            <ul class="navbar-nav">
+                <li class="nav-item current">
+                    <a href="#" class="nav-link">SHOW BLOOD REQUESTS</a>
+                </li>
+                <li class="nav-item">@Html.ActionLink("MAKE BLOOD REQUEST", "GetMakeBloodRequest", "Doctor", null, new {@class = "nav-link"})</li>
+            </ul>
+        </nav>
+
     </div>
+</div>
 
-    <style>
-        table tr {
-            border-bottom: 1px solid white;
-            
-        }
-
-        th {
-            font-size:20px;
-            padding-bottom:20px;
-            padding-top:20px;
-        }
-
-    </style>
-
-    <div class="indexPage" style="width:100%;margin:auto;padding-top:20px">
-        <h1> Requests in progess:</h1>
-        <table border=1 frame=void rules=rows style="width:90%; margin:auto; text-align: center; ">
-            <tr>
-                <th>Patient Cnp</th>
-                <th>Hospital</th>
-                <th>Blood </th>
-                <th>Status</th>
-                <th>Donnation Center</th>
-                <th>Delete</th>
-                <th>Complete</th>
-            </tr>
-            @foreach (var req in Model)
-            {
-                if (req.status != BloodDonation.Utils.Enums.Status.Completed)
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            Requests in progess:
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Patient CNP</th>
+                    <th scope="col">Hospital</th>
+                    <th scope="col">Blood </th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Donnation Center</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Complete</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var req in Model)
                 {
-            <tr>
-                <td>@req.patientCnp</td>
-                <td>
-                    <p>
-                        @req.hospitalName,<br>
-                        @req.hospitalLocation
-                    </p>
-
-                </td>
-
-                <td>
-                    <div>
-                        <ul style=" list-style-type: none; padding: 0,10,0,0; text-align:left; ">
-                            <li> Blood Group: @req.bloodType.Group </li>
-                            @if (req.bloodType.PH == true)
-                            {
-                    <li>Blood RH: Positive</li>
-                            }
-                            @if (req.bloodType.PH == false)
-                            {
-                    <li>Blood RH: Negative</li>
-                            }
-                            <li>Blood Quantity:  @req.quantity   </li>
-                            
-                        </ul>
-                    </div>
-                </td>
-                <td>
-                    @req.status
-                </td>
-
-                <td>
-                    @if (@req.DonationCenterName != "Request is still pending")
+                    if (req.status != BloodDonation.Utils.Enums.Status.Completed)
                     {
-            <p>
-                @req.DonationCenterName,<br>
-                @req.DonationCenterLocation
-            </p>
-                    }
-                    else
-                    {
-            <p>
-                @req.DonationCenterName
-            </p>
-                    }
-                </td>
+                        <tr>
+                            <td>@req.patientCnp</td>
+                            <td>@req.hospitalName,<br>@req.hospitalLocation</td>
+                            <td>
+                                <ul>
+                                    <li>Group: @req.bloodType.Group </li>
+                                    @if (req.bloodType.PH == true)
+                                    {
+                                        <li>RH: Positive</li>
+                                    }
+                                    else
+                                    {
+                                        <li>RH: Negative</li>
+                                    }
+                                    <li>Quantity: @req.quantity ml </li>
+                                </ul>
+                            </td>
+                            <td>@req.status</td>
+                            <td>
+                                @if (@req.DonationCenterName != "Request is still pending")
+                                {
+                                    @req.DonationCenterName
+                                    <br>
+                                    @req.DonationCenterLocation
+                                }
+                                else
+                                {
+                                    @req.DonationCenterName
+                                }
+                            </td>
 
-                <td>
-                    <input type="button" value="Delete" onclick="location.href='@Url.Action("DeleteRequest", "Doctor", req)'" />
-                </td>
+                            <td>
+                                <input type="button" class="btn btn-danger" value="Delete" onclick="location.href = '@Url.Action("DeleteRequest", "Doctor", req)'"/>
+                            </td>
 
-                <td>
-                    @if (req.status == BloodDonation.Utils.Enums.Status.OnTheWay)
-                    {
-                        <input type="button" value="Complete" onclick="location.href='@Url.Action("CompleteRequest", "Doctor", req)'" />
+                            <td>
+                                @if (req.status == BloodDonation.Utils.Enums.Status.OnTheWay)
+                                {
+                                    <input type="button" class="btn btn-success" value="Complete" onclick="location.href = '@Url.Action("CompleteRequest", "Doctor", req)'"/>
+                                }
+                            </td>
+
+                        </tr>
                     }
-                </td>
-
-            </tr>
                 }
-            }
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
 
+<div class="footer fixed-bottom text-center">
+    © 2018 Copyright: Vitamine
+</div>
 
 </body>
 </html>
