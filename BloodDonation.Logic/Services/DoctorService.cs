@@ -88,6 +88,7 @@ namespace BloodDonation.Logic.Services
                                  .ForEach(el =>
                                  {
                                      el.PatientCnp = "";
+                                     donationRepository.Edit(el);
                                  });
 
         }
