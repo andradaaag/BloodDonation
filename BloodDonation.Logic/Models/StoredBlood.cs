@@ -20,8 +20,11 @@ namespace BloodDonation.Logic.Models
 
         public Component Component;
 
+       
+
         public string DonationCenterID { get; set; }
 
+        public string DonorEmail { get; set; }
 
         /*
          * Default comparer method for .Sort() calls. Will place objects in decreasing order based on their Amount field.

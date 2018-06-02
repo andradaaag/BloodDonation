@@ -18,175 +18,175 @@
 </head>
 <body>
 
-<div id="header">
-    <div class="container">
-        <div class="row">
-            <div id="hgroup" class="col-sm-8 ml-4">
-                <div class="row">
-                    <a href="#" id="page-title">Accept Request</a>
+    <div id="header">
+        <div class="container">
+            <div class="row">
+                <div id="hgroup" class="col-sm-8 ml-4">
+                    <div class="row">
+                        <a href="#" id="page-title">Accept Request</a>
+                    </div>
+                    <div class="row">
+                        <a href="#" id="page-owner">PERSONNEL</a>
+                    </div>
                 </div>
-                <div class="row">
-                    <a href="#" id="page-owner">PERSONNEL</a>
-                </div>
+                <form action="login.html" method="post" class="col-sm-1 offset-sm-2">
+                    @Html.ActionLink("Log Out", "LogOut", "Login", null, new { @class = "btn auth-button" })
+                </form>
             </div>
-            <form action="login.html" method="post" class="col-sm-1 offset-sm-2">
-                @Html.ActionLink("Log Out", "LogOut", "Login", null, new {@class = "btn auth-button"})
-            </form>
+            <nav class="navbar navbar-expand-sm">
+                <ul class="navbar-nav">
+                    <li>@Html.ActionLink("ADD DONATION", "AddDonation", "Personnel", null, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("SEPARATE COMPONENTS", "SeparateComponents", "Personnel", null, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("LAB RESULTS", "LabResults", "Personnel", null, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("ACCOUNT SETTINGS", "PersonalDetails", "Personnel", null, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("PENDING REQUESTS", "PendingRequests", "Personnel", null, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("ACCEPTED REQUESTS", "AcceptedRequests", "Personnel", null, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("VIEW STORED BLOOD", "ViewStoredBlood", "Personnel", null, new { @class = "nav-link" })</li>
+                </ul>
+            </nav>
         </div>
-        <nav class="navbar navbar-expand-sm">
-            <ul class="navbar-nav">
-                <li>@Html.ActionLink("ADD DONATION", "AddDonation", "Personnel", null, new {@class = "nav-link"})</li>
-                <li>@Html.ActionLink("SEPARATE COMPONENTS", "SeparateComponents", "Personnel", null, new {@class = "nav-link"})</li>
-                <li>@Html.ActionLink("LAB RESULTS", "LabResults", "Personnel", null, new {@class = "nav-link"})</li>
-                <li>@Html.ActionLink("ACCOUNT SETTINGS", "PersonalDetails", "Personnel", null, new {@class = "nav-link"})</li>
-                <li>@Html.ActionLink("PENDING REQUESTS", "PendingRequests", "Personnel", null, new {@class = "nav-link"})</li>
-                <li>@Html.ActionLink("ACCEPTED REQUESTS", "AcceptedRequests", "Personnel", null, new {@class = "nav-link"})</li>
-                <li>@Html.ActionLink("VIEW STORED BLOOD", "ViewStoredBlood", "Personnel", null, new {@class = "nav-link"})</li>
-            </ul>
-        </nav>
     </div>
-</div>
 
-<div class="container">
-    <div class="card mb-3">
-        <div class="card-header">Do you wish to accept the following blood request?</div>
-        <div class="card-body">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <label>ID</label>
-                    </div>
-                    <div class="col-sm-10">
-                        @Html.EditorFor(model => model.ID, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <label>Status</label>
-                    </div>
-                    <div class="col-sm-10">
-                        @Html.EditorFor(model => model.status, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <label>Component</label>
-                    </div>
-                    <div class="col-sm-10">
-                        @Html.EditorFor(model => model.bloodType.component, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <label>Hospital Name</label>
-                    </div>
-                    <div class="col-sm-10">
-                        @Html.EditorFor(model => model.hospitalName, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <label>Hospital Location</label>
-                    </div>
-                    <div class="col-sm-10">
-                        @Html.EditorFor(model => model.hospitalLocation, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <label>Doctor Name</label>
-                    </div>
-                    <div class="col-sm-10">
-                        @Html.EditorFor(model => model.doctorName, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <label>Doctor Email</label>
-                    </div>
-                    <div class="col-sm-10">
-                        @Html.EditorFor(model => model.doctorEmail, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <label>Quantity</label>
-                    </div>
-                    <div class="col-sm-10">
-                        @Html.EditorFor(model => model.quantityString, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <label>Blood Group</label>
-                    </div>
-                    <div class="col-sm-10">
-                        @Html.EditorFor(model => model.bloodType.Group, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <label for="col-sm-10">RH Type</label>
-                    </div>
-                    <div class="col-sm-10">
-                        @if (Model.bloodType.PH)
-                        {
-                            <input type="text" id="Foo" name="pos" value="Positive" readonly="readonly" class="form-control"/>
-                        }
-                        else
-                        {
-                            <input type="text" id="Foo" name="neg" value="Negative" readonly="readonly" class="form-control"/>
-                        }
+    <div class="container">
+        <div class="card mb-3">
+            <div class="card-header">Do you wish to accept the following blood request?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>ID</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                        </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @{
-                        var reqID = Model.ID;
-                    }
-                    @Html.ActionLink("Confirm", "ConfirmAcceptRequest", "Personnel", new {id = @reqID}, new {@class = "btn btn-success mt-3 ml-3"})
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Status</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.status, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Component</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.bloodType.component, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Hospital Name</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.hospitalName, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Hospital Location</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.hospitalLocation, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Doctor Name</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.doctorName, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Doctor Email</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.doctorEmail, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Quantity</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.quantityString, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Blood Group</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.bloodType.Group, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="col-sm-10">RH Type</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @if (Model.bloodType.PH)
+                            {
+                                <input type="text" id="Foo" name="pos" value="Positive" readonly="readonly" class="form-control" />
+                            }
+                            else
+                            {
+                                <input type="text" id="Foo" name="neg" value="Negative" readonly="readonly" class="form-control" />
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @{
+                            var reqID = Model.ID;
+                        }
+                        @Html.ActionLink("Confirm", "ConfirmAcceptRequest", "Personnel", new { id = @reqID }, new { @class = "btn btn-success mt-3 ml-3" })
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="footer fixed-bottom text-center">
-    © 2018 Copyright: Vitamine
-</div>
+    <div class="footer fixed-bottom text-center">
+        © 2018 Copyright: Vitamine
+    </div>
 
 </body>
 </html>

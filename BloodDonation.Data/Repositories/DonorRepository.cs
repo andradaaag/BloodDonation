@@ -80,14 +80,33 @@ namespace BloodDonation.Data.Repositories
 
         public List<Donor> GetDonors()
         {
-            return firebaseClient
-               .Child(CHILD)
-               .OrderByKey()
-               .OnceAsync<Donor>()
-               .Result
-               .AsEnumerable()
-               .Select(i => FirebaseToObject.Donor(i))
-               .ToList();
+            try
+            {
+                return firebaseClient
+                   .Child(CHILD)
+                   .OrderByKey()
+                   .OnceAsync<Donor>()
+                   .Result
+                   .AsEnumerable()
+                   .Select(i => FirebaseToObject.Donor(i))
+                   .ToList();
+            }
+            catch (Exception ex)
+            {
+                return new List<Donor>();
+            }
+        }
+
+        public Donor GetDonorByCNP(string CNP)
+        {
+            return FirebaseToObject.Donor(firebaseClient
+                .Child(CHILD)
+                .OrderBy("CNP")
+                .EqualTo(CNP)
+                .OnceAsync<Donor>()
+                .Result
+                .First());
+
         }
 
         public Donor GetOne(string id)

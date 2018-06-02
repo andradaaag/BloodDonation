@@ -10,6 +10,7 @@ namespace BloodDonation.Models
     {
         public string ID { get; set; }
 
+        public string DonorEmail { get; set; }
         public string BloodTypeGroup { get; set; }
         public string BloodTypeRH { get; set; }
 

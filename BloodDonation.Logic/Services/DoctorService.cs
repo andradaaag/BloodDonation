@@ -14,6 +14,7 @@ namespace BloodDonation.Logic.Services
     public class DoctorService
     {
         private readonly DoctorRepository doctorRepository = new DoctorRepository();
+        private readonly DonationRepository donationRepository = new DonationRepository();
         private readonly LogicToDataMapper logicToDataMapper = new LogicToDataMapper();
         private readonly DataToLogicMapper dataToLogicMapper = new DataToLogicMapper();
 
@@ -79,6 +80,17 @@ namespace BloodDonation.Logic.Services
             }
 
             return respone;
+        }
+
+        public void RemoveCnp(String cnp)
+        {
+            donationRepository.FindByPatientCnp(cnp)
+                                 .ForEach(el =>
+                                 {
+                                     el.PatientCnp = "";
+                                     donationRepository.Edit(el);
+                                 });
+
         }
 
         public void ApproveAccount(string id)

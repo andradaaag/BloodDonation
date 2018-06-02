@@ -17,14 +17,13 @@ namespace BloodDonation.Logic.Models
         public string ID { get; set; }
         public BloodType BloodType;
 
-        public string DonorId;
+        public string DonorCNP;
 
         public string PatientCnp;
         
         public Stage Stage;
 
         public int Quantity;
-
         public int Plasma;
         public int RBC;
         public int Thrombocytes;
@@ -38,7 +37,6 @@ namespace BloodDonation.Logic.Models
 
         public string DonationCenterId { get; set; }
         public long DonationTime { get; set; }
-
         public bool IsAccepted() => !(Hiv && HepatitisB && HepatitisC && Syphilis && Htlv && Alt);
 
     }

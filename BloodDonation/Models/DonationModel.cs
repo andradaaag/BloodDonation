@@ -17,9 +17,7 @@ namespace BloodDonation.Models
         public string BloodTypeRH { get; set; }
 
         //  TODO: find a way to get this in the interface
-        public string DonorId { get; set; }
-
-
+        public string DonorCNP { get; set; }
 
         public int Quantity { get; set; }
 

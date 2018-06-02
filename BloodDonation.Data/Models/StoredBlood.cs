@@ -24,5 +24,8 @@ namespace BloodDonation.Data.Models
         public Component Component;
 
         public string DonationCenterID { get; set; }
+
+        public string DonorEmail { get; set; }
+
     }
 }

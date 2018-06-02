@@ -20,7 +20,7 @@ namespace BloodDonation.Logic.Mappers
                     Group = donation.BloodType.Group,
                     RH = donation.BloodType.RH
                 },
-                DonorCnp = donation.DonorId,
+                DonorCnp = donation.DonorCNP,
                 PatientCnp = donation.PatientCnp,
                 DonationCenterID = donation.DonationCenterId,
                 HepatitisB = donation.HepatitisB,
@@ -34,6 +34,7 @@ namespace BloodDonation.Logic.Mappers
                 Syphilis = donation.Syphilis,
                 Thrombocytes = donation.Thrombocytes,
                 DonationTime = donation.DonationTime
+                
             };
         }
 
@@ -50,7 +51,8 @@ namespace BloodDonation.Logic.Mappers
                 Component = storedBlood.Component,
                 CollectionDate = storedBlood.CollectionDate,
                 Amount = storedBlood.Amount,
-                DonationCenterID = storedBlood.DonationCenterID
+                DonationCenterID = storedBlood.DonationCenterID,
+                DonorEmail = storedBlood.DonorEmail
             };
         }
 

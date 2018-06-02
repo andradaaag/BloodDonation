@@ -65,7 +65,7 @@ namespace BloodDonation.Data.Repositories
             {
                 Console.Out.WriteLine(ex.Message);
                 Console.Out.WriteLine(ex.StackTrace);
-                return null;
+                return new List<Donation>();
             }
         }
 

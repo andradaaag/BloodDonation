@@ -19,146 +19,146 @@
 </head>
 <body>
 
-<div id="header">
-    <div class="container">
-        <div class="row">
-            <div id="hgroup" class="col-sm-8 ml-4">
-                <div class="row">
-                    <a href="#" id="page-title">Add Donation</a>
+    <div id="header">
+        <div class="container">
+            <div class="row">
+                <div id="hgroup" class="col-sm-8 ml-4">
+                    <div class="row">
+                        <a href="#" id="page-title">Add Donation</a>
+                    </div>
+                    <div class="row">
+                        <a href="#" id="page-owner">PERSONNEL</a>
+                    </div>
                 </div>
-                <div class="row">
-                    <a href="#" id="page-owner">PERSONNEL</a>
-                </div>
+                <form action="login.html" method="post" class="col-sm-1 offset-sm-2">
+                    @Html.ActionLink("Log Out", "LogOut", "Login", null, new { @class = "btn auth-button" })
+                </form>
             </div>
-            <form action="login.html" method="post" class="col-sm-1 offset-sm-2">
-                @Html.ActionLink("Log Out", "LogOut", "Login", null, new {@class = "btn auth-button"})
-            </form>
-        </div>
-        <nav class="navbar navbar-expand-sm">
-            <ul class="navbar-nav">
-                <li class="nav-item current">
-                    <a href="#" class="nav-link">ADD DONATION</a>
-                </li>
-                <li>@Html.ActionLink("SEPARATE COMPONENTS", "SeparateComponents", "Personnel", null, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("LAB RESULTS", "LabResults", "Personnel", null, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("ACCOUNT SETTINGS", "PersonalDetails", "Personnel", null, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("PENDING REQUESTS", "PendingRequests", "Personnel", null, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("ACCEPTED REQUESTS", "AcceptedRequests", "Personnel", null, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("VIEW STORED BLOOD", "ViewStoredBlood", "Personnel", null, new { @class = "nav-link" })</li>
-            </ul>
-        </nav>
-    </div>
-</div>
-
-<div class="container">
-    <div class="card">
-        <div class="card-header">
-            Add Donation:
-        </div>
-        <div class="card-body">
-            @using (Html.BeginForm("AddDonationInDb", "Personnel", FormMethod.Post))
-            {
-                @Html.ValidationSummary(true)
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <label>Blood Type</label>
-                        </div>
-                        <div class="col-sm-10">
-                            <div class="form-check">
-                                @Html.RadioButtonFor(model => model.BloodTypeGroup, "A", new {id = "A", @class = "form-check-input"})
-                                @Html.Label("A", "A", new {@class = "form-check-label"})
-                            </div>
-                            <div class="form-check">
-                                @Html.RadioButtonFor(model => model.BloodTypeGroup, "AB", new {id = "AB", @class = "form-check-input"})
-                                @Html.Label("AB", "AB", new {@class = "form-check-label"})
-                            </div>
-                            <div class="form-check">
-                                @Html.RadioButtonFor(model => model.BloodTypeGroup, "B", new {id = "B", @class = "form-check-input"})
-                                @Html.Label("B", "B", new {@class = "form-check-label"})
-                            </div>
-                            <div class="form-check">
-                                @Html.RadioButtonFor(model => model.BloodTypeGroup, "O", new {id = "O", @class = "form-check-input"})
-                                @Html.Label("O", "O", new {@class = "form-check-label"})
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <label>RH Type</label>
-                        </div>
-                        <div class="col-sm-10">
-                            <div class="form-check">
-                                @Html.RadioButtonFor(model => model.BloodTypeRH, "Positive", new {id = "positive", @class = "form-check-input"})
-                                @Html.Label("positive", "Positive", new {@class = "form-check-label"})
-                            </div>
-                            <div class="form-check">
-                                @Html.RadioButtonFor(model => model.BloodTypeRH, "Negative", new {id = "negative", @class = "form-check-input"})
-                                @Html.Label("negative", "Negative", new {@class = "form-check-label"})
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <label>Donor ID</label>
-                        </div>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(model => model.DonorId, new {@required = "required", placeholder = "Donor ID", @class = "form-control"})
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <label>Quantity</label>
-                        </div>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(model => model.Quantity, new {@required = "required", placeholder = "Nr. of bags", @class = "form-control"})
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <label>Recipient <br/>(leave empty if N/A)</label>
-                        </div>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(model => model.Cnp, new {placeholder = "CNP", @class = "form-control"})
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <label>Keep blood whole</label>
-                        </div>
-                        <div class="col-sm-10">
-                            <div class="form-check">
-                                @Html.CheckBoxFor(x => x.KeepWhole, new { @class = "form-check-input" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <input type="submit" value="Add donation" class="btn btn-success">
-            }
+            <nav class="navbar navbar-expand-sm">
+                <ul class="navbar-nav">
+                    <li class="nav-item current">
+                        <a href="#" class="nav-link">ADD DONATION</a>
+                    </li>
+                    <li>@Html.ActionLink("SEPARATE COMPONENTS", "SeparateComponents", "Personnel", null, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("LAB RESULTS", "LabResults", "Personnel", null, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("ACCOUNT SETTINGS", "PersonalDetails", "Personnel", null, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("PENDING REQUESTS", "PendingRequests", "Personnel", null, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("ACCEPTED REQUESTS", "AcceptedRequests", "Personnel", null, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("VIEW STORED BLOOD", "ViewStoredBlood", "Personnel", null, new { @class = "nav-link" })</li>
+                </ul>
+            </nav>
         </div>
     </div>
-</div>
 
-<div class="footer fixed-bottom text-center">
-    © 2018 Copyright: Vitamine
-</div>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Add Donation:
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("AddDonationInDb", "Personnel", FormMethod.Post))
+                {
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>Blood Type</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="form-check">
+                                    @Html.RadioButtonFor(model => model.BloodTypeGroup, "A", new { id = "A", @class = "form-check-input" })
+                                    @Html.Label("A", "A", new { @class = "form-check-label" })
+                                </div>
+                                <div class="form-check">
+                                    @Html.RadioButtonFor(model => model.BloodTypeGroup, "AB", new { id = "AB", @class = "form-check-input" })
+                                    @Html.Label("AB", "AB", new { @class = "form-check-label" })
+                                </div>
+                                <div class="form-check">
+                                    @Html.RadioButtonFor(model => model.BloodTypeGroup, "B", new { id = "B", @class = "form-check-input" })
+                                    @Html.Label("B", "B", new { @class = "form-check-label" })
+                                </div>
+                                <div class="form-check">
+                                    @Html.RadioButtonFor(model => model.BloodTypeGroup, "O", new { id = "O", @class = "form-check-input" })
+                                    @Html.Label("O", "O", new { @class = "form-check-label" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>RH Type</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="form-check">
+                                    @Html.RadioButtonFor(model => model.BloodTypeRH, "Positive", new { id = "positive", @class = "form-check-input" })
+                                    @Html.Label("positive", "Positive", new { @class = "form-check-label" })
+                                </div>
+                                <div class="form-check">
+                                    @Html.RadioButtonFor(model => model.BloodTypeRH, "Negative", new { id = "negative", @class = "form-check-input" })
+                                    @Html.Label("negative", "Negative", new { @class = "form-check-label" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>Donor ID</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.DonorId, new { @required = "required", placeholder = "Donor ID", @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>Quantity</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.Quantity, new { @required = "required", placeholder = "Nr. of bags", @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>Recipient <br />(leave empty if N/A)</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.Cnp, new { placeholder = "CNP", @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>Keep blood whole</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="form-check">
+                                    @Html.CheckBoxFor(x => x.KeepWhole, new { @class = "form-check-input" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Add donation" class="btn btn-success">
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="footer fixed-bottom text-center">
+        © 2018 Copyright: Vitamine
+    </div>
 
 </body>
 </html>

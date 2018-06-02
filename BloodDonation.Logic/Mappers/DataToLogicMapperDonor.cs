@@ -29,11 +29,11 @@ namespace BloodDonation.Logic.Mappers
                 Email = donor.emailAddress,
                 Country = donor.Country,
                 Commentaries = donor.additionalCommentaries,
-                Cnp = donor.cnp,
+
+                Cnp = donor.CNP,
                 Residence= donor.Residence,
                 CityTown= donor.CityTown
-        
-               
+
             };
         }
 

@@ -23,7 +23,7 @@ namespace BloodDonation.Logic.Mappers
                 },
                 DonationCenterId = donation.DonationCenterID,
                 PatientCnp = donation.PatientCnp,
-                DonorId = donation.DonorCnp,
+                DonorCNP = donation.DonorCnp,
                 HepatitisB = donation.HepatitisB,
                 HepatitisC = donation.HepatitisC,
                 Hiv = donation.Hiv,
@@ -52,7 +52,9 @@ namespace BloodDonation.Logic.Mappers
                 Component = i.Component,
                 CollectionDate = i.CollectionDate,
                 Amount = i.Amount,
-                DonationCenterID = i.DonationCenterID
+                DonationCenterID = i.DonationCenterID,
+                DonorEmail = i.DonorEmail
+                
             };
             
         }

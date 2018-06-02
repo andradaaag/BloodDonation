@@ -1,6 +1,7 @@
 ﻿using BloodDonation.Logic   .Services;
 using BloodDonation.Mappers;
 using BloodDonation.Models;
+using BloodDonation.Services;
 using BloodDonation.Utils.Enums;
 using Firebase.Auth;
 using System;
@@ -17,7 +18,9 @@ namespace BloodDonation.Controllers
     {
         private DonationService donationService = new DonationService();
         private PersonnelService personnelService = new PersonnelService();
-        private RequestService requestService = new RequestService();
+        private Logic.Services.RequestService requestService = new Logic.Services.RequestService();
+
+        private Services.RequestService requestServicePrez = new Services.RequestService();
         private StoredBloodService storedBloodService = new StoredBloodService();
         private DoctorService doctorService = new DoctorService();
 
@@ -117,7 +120,9 @@ namespace BloodDonation.Controllers
                 DonationCenterID = stored.DonationCenterID,
                 BloodTypeGroup = stored.BloodTypeGroup,
                 BloodTypeRH = stored.BloodTypeRH,
-                CollectionDate = (stored.CollectionDate - new DateTime(1970, 1, 1)).Seconds
+                CollectionDate = (stored.CollectionDate - new DateTime(1970, 1, 1)).Seconds,
+                DonorEmail = stored.DonnorEmail
+                
             };
             return goIfPossible(View("EditBloodSeparation", blood));
         }
@@ -178,20 +183,15 @@ namespace BloodDonation.Controllers
 
         public ActionResult AcceptRequest(string id)
         {
-            RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(id));
-            Personnel loggedPersonnel = BusinessToPresentation.Personnel(personnelService.GetOne(GetUid()));
-            string donationCenterID = loggedPersonnel.DonationCenterID;
-            int missingBlood = requestService.GetMissingBlood(donationCenterID, PresentationToBusiness.Request(r));
-
-            if (missingBlood > 0)
-            {
-                String param = Convert.ToString(missingBlood);
-                return goIfPossible(View("MissingBloodView", model: param));
+            try {
+                return goIfPossible(View("AcceptRequestView",requestServicePrez.AcceptRequest(id,GetUid())));
             }
-
-            r = AddDoctorEmail(r);
-            r.quantityString = Convert.ToString(r.quantity);
-            return goIfPossible(View("AcceptRequestView", r));
+            catch (Exception e)
+            {
+                return goIfPossible(View("MissingBloodView", model: e.Message));
+            }
+            
+            
         }
 
         ///CRISTI LOG EXPIRED BLOOD phase 4 get again all expired blood & delete it by ID
@@ -206,24 +206,28 @@ namespace BloodDonation.Controllers
 
         public ActionResult ConfirmAcceptRequest(string id)
         {
-            requestService.EditStatus(id, Status.Accepted);
+            RequestPersonnel bloodRequest = BusinessToPresentation.Request(requestService.GetOne(id));
             Personnel loggedPersonnel = BusinessToPresentation.Personnel(personnelService.GetOne(GetUid()));
             string donationCenterID = loggedPersonnel.DonationCenterID;
-            requestService.EditSource(id, donationCenterID);
 
-            RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(id));
-            storedBloodService.RemoveBlood(donationCenterID, r.quantity,
-                PresentationToBusiness.BloodType(r.bloodType));
+            requestService.EditStatus(id, Status.Accepted);
+            requestService.BloodRequestCompleteRequest(donationCenterID, requestService.GetOne(id));
+
+            requestService.EditSource(id, donationCenterID);
 
             return Success();
         }
 
         public ActionResult SendRequest(string id)
         {
+            EmailServiceBloodDonation mail = new EmailServiceBloodDonation();
             Logic.Models.RequestPersonnel r = requestService.GetOne(id);
             r.status = Status.OnTheWay;
             requestService.Edit(r);
+            String docMail = doctorService.findById(r.doctorId).emailAddress;
 
+            Thread th = new Thread(() => mail.ComposeDoctorMail(docMail, r.ID, r.source));
+            th.Start();
             
                 
             return goIfPossible(View("PendingRequestsView", GetDonationCenterRequests()));

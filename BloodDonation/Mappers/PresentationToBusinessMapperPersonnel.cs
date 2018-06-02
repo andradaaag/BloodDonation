@@ -21,7 +21,7 @@ namespace BloodDonation.Mappers
                     Group = donation.BloodTypeGroup,
                     RH = donation.BloodTypeRH == "Positive"
                 },
-                DonorId = donation.DonorId,
+                DonorCNP = donation.DonorCNP,
                 PatientCnp = donation.Cnp,
                 HepatitisB = donation.HepatitisB,
                 HepatitisC = donation.HepatitisC,
@@ -49,7 +49,8 @@ namespace BloodDonation.Mappers
                 CollectionDate = (b.CollectionDate - new DateTime(1970, 1, 1)).Seconds,
                 Amount = b.Amount,
                 ID = b.ID,
-                DonationCenterID = b.DonationCenterID
+                DonationCenterID = b.DonationCenterID,
+                DonorEmail = b.DonnorEmail
             };
         }
 
@@ -113,8 +114,8 @@ namespace BloodDonation.Mappers
                 DonationCenterID = blood.DonationCenterID,
                 RBC = blood.RBC,
                 Plasma = blood.Plasma,
-                Thrombocytes = blood.Thrombocytes
-
+                Thrombocytes = blood.Thrombocytes,
+                DonorEmail=blood.DonorEmail
             };
         }
 

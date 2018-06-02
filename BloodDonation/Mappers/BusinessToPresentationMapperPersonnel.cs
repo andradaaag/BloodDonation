@@ -19,7 +19,7 @@ namespace BloodDonation.Mappers
                 Alt = donation.Alt,
                 BloodTypeGroup = donation.BloodType.Group,
                 BloodTypeRH = donation.BloodType.RH ? "Positive" : "Negative",
-                DonorId = donation.DonorId,
+                DonorCNP = donation.DonorCNP,
                 HepatitisB = donation.HepatitisB,
                 HepatitisC = donation.HepatitisC,
                 Hiv = donation.Hiv,
@@ -109,7 +109,8 @@ namespace BloodDonation.Mappers
                 BloodTypeGroup = sb.BloodType.Group,
                 BloodTypeRH = sb.BloodType.RH ? "Positive" : "Negative",
                 CollectionDate = sb.CollectionDate,
-                DonationCenterID = sb.DonationCenterID
+                DonationCenterID = sb.DonationCenterID,
+                DonorEmail = sb.DonorEmail
             };
         }
 
