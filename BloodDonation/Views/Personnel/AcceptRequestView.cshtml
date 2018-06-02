@@ -51,6 +51,16 @@
 
             <div class="row">
                 <div class="col-25">
+                    <label for="fname">Component</label>
+
+                </div>
+                <div class="col-75">
+                    @Html.EditorFor(model => model.bloodType.component, new { htmlAttributes = new { @readonly = "readonly" } })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
                     <label for="fname">Hospital name</label>
 
                 </div>
@@ -71,11 +81,31 @@
 
             <div class="row">
                 <div class="col-25">
+                    <label for="fname">Doctor name</label>
+
+                </div>
+                <div class="col-75">
+                    @Html.EditorFor(model => model.doctorName, new { htmlAttributes = new { @readonly = "readonly" } })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="fname">Doctor email</label>
+
+                </div>
+                <div class="col-75">
+                    @Html.EditorFor(model => model.doctorEmail, new { htmlAttributes = new { @readonly = "readonly" } })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
                     <label for="fname">Quantity</label>
 
                 </div>
                 <div class="col-75">
-                    @Html.EditorFor(model => model.quantity, new { htmlAttributes = new { @readonly = "readonly" } })
+                    @Html.EditorFor(model => model.quantityString, new { htmlAttributes = new { @readonly = "readonly" } })
                 </div>
             </div>
 
@@ -91,11 +121,17 @@
 
             <div class="row">
                 <div class="col-25">
-                    <label for="fname">Blood PH</label>
+                    <label for="fname">Blood RH</label>
 
                 </div>
+
                 <div class="col-75">
-                    @Html.EditorFor(model => model.bloodType.PH, new { htmlAttributes = new { @readonly = "readonly" } })
+                    @if(Model.bloodType.PH){
+                        <input type="text" id="Foo" name="pos" value="Positive" readonly="readonly"/>
+                    }
+                    else{
+                    <input type="text" id="Foo" name="neg" value="Negative" readonly="readonly" />
+                    }
                 </div>
             </div>
             <br />

@@ -66,35 +66,41 @@ namespace BloodDonation.Mappers
                 DonationCenterID = p.DonationCenterID
             };
         }
-       
+
+        HospitalService hospitalService = new HospitalService();
+        DonationCenterService DonationCenterService = new DonationCenterService();
 
         public Models.RequestPersonnel Request(Logic.Models.RequestPersonnel r)
         {
-            HospitalService hs = new HospitalService();
-            HospitalTransferObject h = hs.GetHospitalById(r.ID);
-
+            HospitalTransferObject h = hospitalService.GetHospitalById(r.destination);
+            DonationCenterTransferObject dcto = DonationCenterService.GetDonationCenterById(r.source);
             return new Models.RequestPersonnel
             {
                 ID = r.ID,
-                status = (Models.Status)r.status,
+                status = r.status,
 
                 destination = r.destination,
                 source = r.source,
                 doctorId = r.doctorId,
                 patientCnp = r.patientCnp,
+                urgency = r.urgency,
+
+                DonationCenterName = dcto!=null ? dcto.Name:"Request is still pending",
+                DonationCenterLocation = dcto != null ? dcto.Location : "Request is still pending",
 
                 quantity = r.quantity,
                 bloodType = new Models.BloodType
                 {
                     Group = r.bloodType.Group,
-                    PH = r.bloodType.RH
+                    PH = r.bloodType.RH,
+                    component = r.bloodType.bloodComponent
                 },
-
                 hospitalName = h.Name,
-                hospitalLocation = h.Location,       
+                hospitalLocation = h.Location
                 
             };
         }
+
         public SeparateStoredBloodModel SeparateBlood(Logic.Models.StoredBlood sb)
         {
             return new SeparateStoredBloodModel
@@ -104,6 +110,31 @@ namespace BloodDonation.Mappers
                 BloodTypeRH = sb.BloodType.RH ? "Positive" : "Negative",
                 CollectionDate = sb.CollectionDate,
                 DonationCenterID = sb.DonationCenterID
+            };
+        }
+
+        public DoctorDisplayData MapDoctorDisplayData(DoctorTransferObject doctor)
+        {
+            return new DoctorDisplayData()
+            {
+                ID = doctor.ID,
+                FirstName = doctor.FirstName,
+                LastName = doctor.LastName,
+                EmailAddress = doctor.EmailAddress,
+                City = doctor.City,
+                Country = doctor.Country,
+                HospitalName = doctor.InstituteName,
+            };
+        }
+
+        public BloodAmounts BloodAmounts(StoredBloodAmounts b)
+        {
+            return new BloodAmounts
+            {
+                Whole = b.Whole,
+                Plasma = b.Plasma,
+                RBC = b.RBC,
+                Trombocytes = b.Trombocytes
             };
         }
     }

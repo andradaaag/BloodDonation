@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BloodDonation.Utils.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,16 +9,23 @@ namespace BloodDonation.Logic.Models
 {
     public class RequestPersonnel: BaseEntity
     {
-        public RequestPersonnel() { }
 
-        public Status status;
 
-        public string destination;      //hospitalid
-        public string source;           //donationcenterid
-        public string doctorId;
-        public string patientCnp;
+        public Status status { get; set; }
 
-        public int quantity;
-        public BloodType bloodType;
+        public string destination { get; set; }      //hospitalid
+        public string source { get; set; }           //donationcenterid
+        public string doctorId { get; set; }
+        public string patientCnp { get; set; }
+
+        public int quantity { get; set; }
+        public BloodType bloodType { get; set; }
+
+        public DoctorUrgencyLevel urgency { get; set; }
+
+        public RequestPersonnel()
+        {
+            this.bloodType = new BloodType();
+        }
     }
 }

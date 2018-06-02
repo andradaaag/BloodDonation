@@ -1,14 +1,16 @@
-﻿@model BloodDonation.Models.RequestList
+﻿@using BloodDonation.Models;
+@using BloodDonation.Utils.Enums;
+@model List<BloodDonation.Logic.Models.StoredBlood>
 
 @{
-    ViewBag.Title = "RequestsView";
+    ViewBag.Title = "PendingRequestsView";
 }
 
 
 
 <html lang="en" dir="ltr">
 <head>
-    <title>Requests</title>
+    <title>Stored Blood</title>
     <meta charset="iso-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @Styles.Render("~/Styles/layout_personel_add_blood.css")
@@ -22,23 +24,30 @@
     <div class="wrapper row1">
         <header id="header" class="clear">
             <div id="hgroup">
-                <h1><a href="#">View all requests</a></h1>
+                <h1><a href="#">View Stored Blood</a></h1>
                 <h2><a href="#">Donation center personnel</a></h2>
             </div>
             @Html.Partial("NavigationBannerView", null)
         </header>
     </div>
 
-    <div class="wrapper row1">
-        
-            <header id="header" class="clear">
-                <nav>
-                    <ul>
-                        <li>@Html.ActionLink("Pending Requests", "PendingRequests", "Personnel", null, new { @class = "header nav li" })</li>
-                        <li>@Html.ActionLink("Accepted Requests", "AcceptedRequests", "Personnel", null, new { @class = "header nav li" })</li>
-                    </ul>
-                </nav>
-            </header>   
+    @*TODO: make the top of the table aligned to left for each of the column, somehow*@
+    <div class="wrapper row3">
+        <div class="container">
+            <table style="width:100%">
+                <tr>
+                    <th>Blood info</th>
+                </tr>
+
+                @foreach (var el in Model)
+    {
+            <tr>
+                <td>Blood group : @el.BloodType.Group, Component: @el.BloodType.bloodComponent, Rh: @el.BloodType.RH, Amount: @el.Amount</td>
+            </tr>
+}
+                @Html.ActionLink("DELETE","DeleteExpiredBlood", "Personnel", null, null)
+            </table>
+        </div>
     </div>
     <!-- Footer -->
     <div class="wrapper row4">

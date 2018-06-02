@@ -1,4 +1,5 @@
 
+using BloodDonation.Utils.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,6 @@ namespace BloodDonation.Data.Models
 	public class Request : BaseEntity
 	{
 		public Request(){}
-
 		public Status status { get; set; }
 
         public String source { get; set; }
@@ -20,6 +20,8 @@ namespace BloodDonation.Data.Models
         public int quantity { get; set; }
 
         public BloodType bloodType { get; set; }
+        
+        public DoctorUrgencyLevel urgency { get; set; }
 
     }
 }

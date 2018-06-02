@@ -2,12 +2,13 @@
 using BloodDonation.Data.Repositories;
 using BloodDonation.Logic.Mappers;
 using BloodDonation.Logic.Models;
+using BloodDonation.Utils.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using BloodDonation.Data.Repositories;
 namespace BloodDonation.Logic.Services
 {
     public class PersonnelService
@@ -20,6 +21,8 @@ namespace BloodDonation.Logic.Services
         private readonly DonationCenterPersonnelRepository dcprRepo = new DonationCenterPersonnelRepository();
         private readonly StoredBloodRepository bloodRepo = new StoredBloodRepository();
 
+        
+
         private readonly DateTime epoch = new DateTime(1970, 1, 1);
         public List<AccountRequest> GetPersonnelAccountRequests()
         {
@@ -27,13 +30,17 @@ namespace BloodDonation.Logic.Services
             return null;
         }
 
+        
+
         public void AddDonationInDB(Donation donation, string UID, bool keepWhole)
         {
-            donation.Stage = Data.Models.Stage.Preparation;
+            donation.Stage = keepWhole? Stage.Preparation : Stage.Sampling;
             donation.DonationCenterId = dcprRepo.GetOne(UID).DonationCenterID;
             donation.DonationTime = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
-            donation.RBC = -1;
+            donation.RBC = keepWhole ? -1:0;
             donRepo.Add(logicToData.Donation(donation));
+
+      
 
         }
 
@@ -44,8 +51,8 @@ namespace BloodDonation.Logic.Services
             original.Plasma = donation.Plasma;
             original.RBC = donation.RBC;
             original.Thrombocytes = donation.Thrombocytes;
-            if (original.Stage == Data.Models.Stage.Sampling)
-                original.Stage = Data.Models.Stage.Preparation;
+            if (original.Stage == Stage.Sampling)
+                original.Stage = Stage.Preparation;
             else
             {
                 AddComponentsFromDonation(original);
@@ -74,8 +81,8 @@ namespace BloodDonation.Logic.Services
             original.Hiv = don.Hiv;
             original.Htlv = don.Htlv;
             original.Syphilis = don.Syphilis;
-            if (original.Stage == Data.Models.Stage.Sampling)
-                original.Stage = Data.Models.Stage.BiologicalQualityControl;
+            if (original.Stage == Stage.Sampling)
+                original.Stage = Stage.BiologicalQualityControl;
             else
             {
                 AddComponentsFromDonation(original);
@@ -84,7 +91,7 @@ namespace BloodDonation.Logic.Services
 
         }
 
-        private StoredBlood CompFromDonation(Donation donation, Data.Models.Component comp,string centerId, int amount)
+        private StoredBlood CompFromDonation(Donation donation, Component comp,string centerId, int amount)
         {
 
             return new StoredBlood
@@ -101,7 +108,7 @@ namespace BloodDonation.Logic.Services
             };
         }
 
-        private StoredBlood CompFromBlood(SeparateBlood blood, Data.Models.Component comp, string centerId, int amount)
+        private StoredBlood CompFromBlood(SeparateBlood blood, Component comp, string centerId, int amount)
         {
 
             return new StoredBlood
@@ -123,17 +130,18 @@ namespace BloodDonation.Logic.Services
             if (donation.IsAccepted())
             {
                 string centerId = donation.DonationCenterId;
-                donation.Stage = Data.Models.Stage.Redistribution;
+                donation.Stage =Stage.Redistribution;
                 if (donation.RBC == -1)
                 {
-                    StoredBlood whole = CompFromDonation(donation, Data.Models.Component.Whole, centerId, 400);
-                    bloodRepo.Add(logicToData.StoredBlood(whole));
+                    StoredBlood whole = CompFromDonation(donation, Component.Whole, centerId, 400);
+                    for (int i =0; i<donation.Quantity; i++)
+                        bloodRepo.Add(logicToData.StoredBlood(whole));
                 }
                 else
                 {
-                    StoredBlood RBC = CompFromDonation(donation, Data.Models.Component.RedBloodCells, centerId, donation.RBC);
-                    StoredBlood Plasma = CompFromDonation(donation, Data.Models.Component.Plasma, centerId, donation.Plasma);
-                    StoredBlood Thrombocytes = CompFromDonation(donation, Data.Models.Component.Thrombocytes, centerId, donation.Thrombocytes);
+                    StoredBlood RBC = CompFromDonation(donation, Component.RedBloodCells, centerId, donation.RBC);
+                    StoredBlood Plasma = CompFromDonation(donation, Component.Plasma, centerId, donation.Plasma);
+                    StoredBlood Thrombocytes = CompFromDonation(donation, Component.Thrombocytes, centerId, donation.Thrombocytes);
                     bloodRepo.Add(logicToData.StoredBlood(RBC));
                     bloodRepo.Add(logicToData.StoredBlood(Plasma));
                     bloodRepo.Add(logicToData.StoredBlood(Thrombocytes));
@@ -141,19 +149,20 @@ namespace BloodDonation.Logic.Services
             }
             else
             {
-                donation.Stage = Data.Models.Stage.Failed;
+                donation.Stage = Stage.Failed;
             }
         }
         private void AddComponentsFromBlood(SeparateBlood blood)
         {
             
             string centerId = blood.DonationCenterID;
-            StoredBlood RBC = CompFromBlood(blood, Data.Models.Component.RedBloodCells, centerId, blood.RBC);
-            StoredBlood Plasma = CompFromBlood(blood, Data.Models.Component.Plasma, centerId, blood.Plasma);
-            StoredBlood Thrombocytes = CompFromBlood(blood, Data.Models.Component.Thrombocytes, centerId,  blood.Thrombocytes);
+            StoredBlood RBC = CompFromBlood(blood, Component.RedBloodCells, centerId, blood.RBC);
+            StoredBlood Plasma = CompFromBlood(blood, Component.Plasma, centerId, blood.Plasma);
+            StoredBlood Thrombocytes = CompFromBlood(blood, Component.Thrombocytes, centerId,  blood.Thrombocytes);
             bloodRepo.Add(logicToData.StoredBlood(RBC));
             bloodRepo.Add(logicToData.StoredBlood(Plasma));
             bloodRepo.Add(logicToData.StoredBlood(Thrombocytes));
+            bloodRepo.DeleteById(blood.ID);
             
         }
 
@@ -183,5 +192,72 @@ namespace BloodDonation.Logic.Services
         {
             return dataToLogic.Personnel(Repository.GetOne(id));
         }
+
+        public async Task<int[]> GetArrayOfBlood(Component comp, string donCenter)
+        {
+
+            Data.Models.BloodType bt = new Data.Models.BloodType();
+            Task<int>[] paralel = { null, null, null, null, null, null, null, null };
+            for (int i = 0; i < 8; i++)
+            {
+                if (i > 3)
+                    bt.RH = false;
+                else
+                    bt.RH = true;
+
+                if (i == 0 || i == 4)
+                    bt.Group = "A";
+                else if (i == 1 || i == 5)
+                    bt.Group = "B";
+                else if (i == 2 || i == 6)
+                    bt.Group = "AB";
+                else if (i == 3 || i == 7)
+                    bt.Group = "O";
+
+                paralel[i] = bloodRepo.GetQuantityForBloodType(bt, comp, donCenter);
+            }
+            int[] listOfBloodTypes = { 0, 0, 0, 0, 0, 0, 0, 0 };
+            for (int i = 0; i < 8; i++)
+                listOfBloodTypes[i] = paralel[i].Result;
+            return listOfBloodTypes;
+        }
+
+        public StoredBloodAmounts GetArrayOfBloodQuantity(string UID)
+        {
+           
+            Task<int[]>[] paralel = { null, null, null, null };
+            string donCenter = GetOne(UID).DonationCenterID;
+            Component[] comps = (Component[])Enum.GetValues(typeof(Component));
+            for (int i = 0; i < 4; i++)
+                paralel[i] = GetArrayOfBlood(comps[i], donCenter);
+            return new StoredBloodAmounts
+            {
+                Trombocytes = paralel[0].Result,
+                RBC = paralel[1].Result,
+                Plasma = paralel[2].Result,
+                Whole = paralel[3].Result
+            };
+            
+        }
+
+        ///CRISTI LOG EXPIRED BLOOD phase 2 get the expired blood, check the todo below
+        public List<StoredBlood> GetExpiredBlood()
+        {
+            /// TODO please check if i am doing the "get current time in seconds from 1970" okay
+            /// TODO: replace the variables with actual real life values
+            int daysForWholeBlood = 1, daysForThrombocytes = 1, daysForRedBloodCells = 1, daysForPlasma = 1;
+            int seconds = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
+            daysForPlasma           *= 86400;
+            daysForThrombocytes     *= 86400;
+            daysForRedBloodCells    *= 86400;
+            daysForPlasma           *= 86400;
+
+            return bloodRepo.GetExpiredBlood(daysForWholeBlood, daysForPlasma, daysForRedBloodCells, daysForThrombocytes, seconds)
+                            .AsEnumerable()
+                            .Select(el => dataToLogic.StoredBlood(el))
+                            .ToList();
+
+        }
+
     }
 }

@@ -11,7 +11,6 @@ namespace BloodDonation.Models
 
         [DataType(DataType.Date)]
         public DateTime DOB { get; set; }
-
         public String Address { get; set; }
         public String City { get; set; }
         public String Country { get; set; }

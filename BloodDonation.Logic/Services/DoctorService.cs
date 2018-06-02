@@ -22,6 +22,11 @@ namespace BloodDonation.Logic.Services
             return doctorRepository.IsIDPresent(id);
         }
 
+        public Doctor findById(string id)
+        {
+            return doctorRepository.GetOne(id);
+        }
+
         public void AddDoctorAccount(NewUserTransferObject nuto)
         {
             Doctor newDoctor = logicToDataMapper.MapNewDoctor(nuto);

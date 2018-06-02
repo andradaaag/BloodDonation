@@ -19,6 +19,7 @@ namespace BloodDonation.Data.Repositories
 
         public List<Donation> FindUnresolved()
         {
+
             return firebaseClient
                 .Child(CHILD)
                 .OrderBy("Stage")
@@ -33,27 +34,68 @@ namespace BloodDonation.Data.Repositories
 
         public List<Donation> FindByDonationCenter(string donationCenterID)
         {
-            return firebaseClient
-                .Child(CHILD)
-                .OrderBy("DonationCenterID")
-                .EqualTo(donationCenterID)
-                .OnceAsync<Donation>()
-                .Result
-                .AsEnumerable()
-                .Select(i => FirebaseToObject.Donation(i))
-                .ToList();
+            
+                return firebaseClient
+                    .Child(CHILD)
+                    .OrderBy("DonationCenterID")
+                    .EqualTo(donationCenterID)
+                    .OnceAsync<Donation>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.Donation(i))
+                    .ToList();
+           
+        }
+
+         public List<Donation> FindByPatientCnp(string patientCnp)
+        {
+            try
+            {
+                return firebaseClient
+                    .Child(CHILD)
+                    .OrderBy("PatientCnp")
+                    .EqualTo(patientCnp)
+                    .OnceAsync<Donation>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.Donation(i))
+                    .ToList();
+            }
+            catch(Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+                Console.Out.WriteLine(ex.StackTrace);
+                return null;
+            }
+        }
+
+        public int FindDonatedQuantityForPatient(string patientCnp)
+        {
+           
+                return firebaseClient
+                    .Child(CHILD)
+                    .OrderBy("PatientCnp")
+                    .EqualTo(patientCnp)
+                    .OnceAsync<Donation>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.Donation(i).Quantity)
+                    .Sum();
+          
         }
 
         public List<Donation> FindAll()
         {
-            return firebaseClient
-                .Child(CHILD)
-                .OrderByKey()
-                .OnceAsync<Donation>()
-                .Result
-                .AsEnumerable()
-                .Select(i => FirebaseToObject.Donation(i))
-                .ToList();
+          
+                return firebaseClient
+                    .Child(CHILD)
+                    .OrderByKey()
+                    .OnceAsync<Donation>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.Donation(i))
+                    .ToList();
+           
         }
 
         public void Add(Donation d)
@@ -71,14 +113,17 @@ namespace BloodDonation.Data.Repositories
         }
         public Donation GetOne(string id)
         {
-            return FirebaseToObject.Donation(firebaseClient
-             .Child(CHILD)
-             .OrderByKey()
-             .StartAt(id)
-             .LimitToFirst(1)
-             .OnceAsync<Donation>()
-             .Result
-             .First());
+           
+                return FirebaseToObject.Donation(
+                 firebaseClient
+                 .Child(CHILD)
+                 .OrderByKey()
+                 .StartAt(id)
+                 .LimitToFirst(1)
+                 .OnceAsync<Donation>()
+                 .Result
+                 .First());
+            
         }
 
         public List<String> GetBookedHours(String date)

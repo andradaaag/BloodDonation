@@ -1,4 +1,5 @@
 ﻿using BloodDonation.Data.Models;
+using BloodDonation.Utils.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace BloodDonation.Logic.Models
 
         public string DonorId;
 
+        public string PatientCnp;
+        
         public Stage Stage;
 
         public int Quantity;

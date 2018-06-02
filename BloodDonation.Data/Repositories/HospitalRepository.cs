@@ -12,7 +12,7 @@ namespace BloodDonation.Data.Repositories
 {
     public class HospitalRepository
     {
-
+        
         private FirebaseClient firebaseClient = new FirebaseClient("https://blooddonation-bc0b9.firebaseio.com/");
         private FirebaseToObject FirebaseToObject = new FirebaseToObject();
         private const string CHILD = "hospitals";
@@ -23,14 +23,20 @@ namespace BloodDonation.Data.Repositories
 
         public List<Hospital> FindAll()
         {
-            return firebaseClient
-                    .Child(CHILD)
-                    .OrderByKey()
-                    .OnceAsync<Hospital>()
-                    .Result
-                    .AsEnumerable()
-                    .Select(i => FirebaseToObject.Hospital(i))
-                    .ToList();
+            try
+            {
+                return firebaseClient
+                        .Child(CHILD)
+                        .OrderByKey()
+                        .OnceAsync<Hospital>()
+                        .Result
+                        .AsEnumerable()
+                        .Select(i => FirebaseToObject.Hospital(i))
+                        .ToList();
+            }catch(Exception ex)
+            {
+                return new List<Hospital>();
+            }
         }
 
         public void Save(Hospital newhospital)
@@ -50,7 +56,9 @@ namespace BloodDonation.Data.Repositories
 
         public List<Hospital> FindByName(String name)
         {
-            return firebaseClient
+            try
+            {
+                return firebaseClient
                     .Child(CHILD)
                     .OrderBy("name")
                     .EqualTo(name)
@@ -59,18 +67,31 @@ namespace BloodDonation.Data.Repositories
                     .AsEnumerable()
                     .Select(i => FirebaseToObject.Hospital(i))
                     .ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public Hospital FindById(String Id)
         {
-            return firebaseClient
+            try
+            {
+                return firebaseClient
                     .Child(CHILD)
-                    .Child(Id)
+                    .OrderByKey()
+                    .EqualTo(Id)
                     .OnceAsync<Hospital>()
                     .Result
                     .AsEnumerable()
                     .Select(i => FirebaseToObject.Hospital(i))
                     .First();
+            }
+            catch(Exception ex)
+            {
+                return new Hospital("none","none");
+            }
         }
 
         public void DeleteById(string id)
@@ -80,6 +101,5 @@ namespace BloodDonation.Data.Repositories
                 .Child(id)
                 .DeleteAsync();
         }
-
     }
 }

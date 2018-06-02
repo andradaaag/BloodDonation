@@ -22,6 +22,7 @@ namespace BloodDonation.Logic.Mappers
                     RH = donation.BloodType.RH
                 },
                 DonationCenterId = donation.DonationCenterID,
+                PatientCnp = donation.PatientCnp,
                 DonorId = donation.DonorCnp,
                 HepatitisB = donation.HepatitisB,
                 HepatitisC = donation.HepatitisC,
@@ -83,21 +84,20 @@ namespace BloodDonation.Logic.Mappers
             return new BloodType
             {
                 Group = bt.Group,
-                RH = bt.RH
+                RH = bt.RH,
+                bloodComponent = bt.Component
             };
         }
 
-        public Status Status(Data.Models.Status s)
-        {
-            return (Status)s;
-        }
-
+       
         public RequestPersonnel Request(Data.Models.Request r)
         {
             return new RequestPersonnel
             {
                 ID = r.ID,
-                status = this.Status(r.status),
+                urgency = r.urgency,
+                patientCnp = r.patientCnp,
+                status = r.status,
                 destination = r.destination,
                 source = r.source,
                 doctorId = r.doctorId,

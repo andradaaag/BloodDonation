@@ -1,6 +1,7 @@
 ﻿using BloodDonation.Data.Repositories;
 using BloodDonation.Logic.Mappers;
 using BloodDonation.Logic.Models;
+using BloodDonation.Utils.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,16 @@ namespace BloodDonation.Logic.Services
             return Repository
                 .FindAllByDonationCenter(dcprRepo.GetOne(UID).DonationCenterID)
                 .Select(i => DataToLogic.StoredBlood(i))
-                .Where(i => i.Component == Data.Models.Component.Whole)
+                .Where(i => i.Component == Component.Whole)
+                .ToList();
+        }
+
+        public List<StoredBlood> GetStoredBloodByDonationCenter(string donationCenterID)
+        {
+            return Repository
+                .FindAllByDonationCenter(donationCenterID)
+                .AsEnumerable()
+                .Select(x => DataToLogic.StoredBlood(x))
                 .ToList();
         }
 
@@ -47,5 +57,49 @@ namespace BloodDonation.Logic.Services
             Repository.Add(LogicToData.StoredBlood(storedBlood));
         }
 
+        public void RemoveBloodById(String id)
+        {
+            Repository.DeleteById(id);
+        }
+
+        public void RemoveBlood(string donationCenterID,int quantity, BloodType receiverBloodType)
+        {
+            List<StoredBlood> storedBloodList = GetStoredBloodByDonationCenter(donationCenterID);
+            Component component = receiverBloodType.bloodComponent;
+            //storedBloodList.Sort();
+
+
+            int i = 0;
+            int a = 0;
+            while( i < storedBloodList.Count && quantity > 0)
+            {
+                StoredBlood current = storedBloodList[i];
+                if (current.BloodType.bloodComponent == (Component)component)
+                {
+                    a = 1;
+                    if (current.BloodType.CanDonate(receiverBloodType))
+                    {
+                        a = 2;
+                        if (current.Amount < quantity)
+                        {
+                            quantity = quantity - current.Amount;
+                            current.Amount = 0;
+                        }
+                        else
+                        {
+                            current.Amount = current.Amount - quantity;
+                            quantity = 0;
+                        }
+                        
+                    }
+                }
+                if(current.Amount == 0)
+                    Repository.DeleteById(current.ID);
+                else
+                    Repository.Edit(LogicToData.StoredBlood(current));
+                i++;
+                
+            }
+        }
     }
 }

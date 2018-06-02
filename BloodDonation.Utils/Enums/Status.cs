@@ -1,4 +1,5 @@
-namespace BloodDonation.Data.Models
+
+namespace BloodDonation.Utils.Enums
 {
 	public enum Status
 	{
@@ -6,6 +7,7 @@ namespace BloodDonation.Data.Models
 		Accepted,
 		OnTheWay,
 		Denied,
-		Completed
+		Completed,
+        ReadyToSend
 	}
 }

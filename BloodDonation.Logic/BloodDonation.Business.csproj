@@ -58,6 +58,7 @@
     <Compile Include="Models\AccountRequest.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BloodType.cs" />
+    <Compile Include="Models\RequestComponent.cs" />
     <Compile Include="Models\Donation.cs" />
     <Compile Include="Models\DonationCenter.cs" />
     <Compile Include="Models\DonationForm.cs" />
@@ -65,18 +66,16 @@
     <Compile Include="Models\Hospital.cs" />
     <Compile Include="Models\DonationCenterPersonnel.cs" />
     <Compile Include="Models\NewUserTransferObject.cs" />
-    <Compile Include="Models\PatientDto.cs" />
     <Compile Include="Models\RequestPersonnel.cs" />
     <Compile Include="Models\SeparateBlood.cs" />
-    <Compile Include="Models\Status.cs" />
     <Compile Include="Models\StoredBlood.cs" />
+    <Compile Include="Models\StoredBloodAmounts.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Services\PatientService.cs" />
+    <Compile Include="Services\EmailServiceBloodDonation.cs" />
     <Compile Include="Services\PersonnelService.cs" />
     <Compile Include="Services\DonationService.cs" />
     <Compile Include="Services\RequestService.cs" />
     <Compile Include="Services\StoredBloodService.cs" />
-    <Compile Include="Services\UserService.cs" />
     <Compile Include="Models\DoctorTransferObject.cs" />
     <Compile Include="Models\DonationCenterPersonnelTransferObject.cs" />
     <Compile Include="Models\DonationCenterTransferObject.cs" />
@@ -97,6 +96,10 @@
     <ProjectReference Include="..\BloodDonation.Data\BloodDonation.Data.csproj">
       <Project>{2BE91C7B-1AF7-4DEA-9274-7E9051967385}</Project>
       <Name>BloodDonation.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BloodDonation.Utils\BloodDonation.Utils.csproj">
+      <Project>{B4C4D092-9274-490A-81B6-08155457BA4B}</Project>
+      <Name>BloodDonation.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
