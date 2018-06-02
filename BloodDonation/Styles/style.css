@@ -6,13 +6,13 @@
     margin-bottom: 30px;
 }
 
-.logout {
+.auth-button {
     background-color: #780000;
     text-decoration: none;
     color: #ffffff;
 }
 
-.logout:hover {
+.auth-button:hover {
     color: #ffffff;
     text-shadow: 1px 0 0 #ffffff;
 }
@@ -55,15 +55,28 @@
     background-color: #780000;
 }
 
+
+.card-columns { column-count: 2; }
+
 .card-header {
     background-color: #303030;
     color: #b8b8b8;
     font-size: 20px;
 }
 
-.card .card-header { border-radius: 0; }
+.card { border-radius: 0 !important; }
+
+.card-header { border-radius: 0 !important; }
+
+.card-body { border-radius: 0 !important; }
+
+.card-img { border-radius: 0 !important; }
 
 ul {
     list-style-type: none;
     padding: 0;
 }
+
+.img-blood > img { width: 100%; }
+
+.no-padding { padding: 0; }
