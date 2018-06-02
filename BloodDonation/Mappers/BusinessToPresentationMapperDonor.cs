@@ -27,7 +27,6 @@ namespace BloodDonation.Mappers
                 LastName = donorAccountDetails.LastName,
                 DateOfBirth = donorAccountDetails.DateOfBirth,
                 Address = donorAccountDetails.Address,
-                Weight = donorAccountDetails.Weight,
                 Email = donorAccountDetails.Email,
                 Country = donorAccountDetails.Country,
                 Commentaries = donorAccountDetails.Commentaries

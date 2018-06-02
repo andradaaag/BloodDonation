@@ -15,7 +15,6 @@ namespace BloodDonation.Logic.Mappers
                 lastName = detailsTransferObject.LastName,
                 DOB = detailsTransferObject.DateOfBirth,
                 Address = detailsTransferObject.Address,
-                DonationFormEntity = new DonationFormEntity(detailsTransferObject.Weight),
                 emailAddress = detailsTransferObject.Email,
                 Country = detailsTransferObject.Country,
                 additionalCommentaries = detailsTransferObject.Commentaries,

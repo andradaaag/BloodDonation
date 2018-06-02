@@ -240,6 +240,9 @@
     <Compile Include="Mappers\PresentationToBusinessMapper.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapperDoctor.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapperPersonnel.cs" />
+
+    <Compile Include="Models\AvailableHoursModel.cs" />
+
     <Compile Include="Models\BloodAmounts.cs" />
     <Compile Include="Models\BloodType.cs" />
     <Compile Include="Models\RequestComponent.cs" />
