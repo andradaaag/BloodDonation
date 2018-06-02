@@ -48,6 +48,7 @@ namespace BloodDonation.Data.Models
 		public DonationCenter center;
 
 		public String donationDate;
+        public String donationHour;
 
 		/**
 		 * 

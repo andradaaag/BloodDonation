@@ -69,6 +69,7 @@ namespace BloodDonation.Data.Repositories
             oldDonor.Address = donor.Address;
             oldDonor.emailAddress = donor.emailAddress;
             oldDonor.additionalCommentaries = donor.additionalCommentaries;
+
         }
 
         public List<Donation> GetDonations()
@@ -88,5 +89,19 @@ namespace BloodDonation.Data.Repositories
                .Select(i => FirebaseToObject.Donor(i))
                .ToList();
         }
+
+        public Donor GetOne(string id)
+        {
+            return firebaseClient
+                .Child(CHILD)
+                .OrderByKey()
+                .EqualTo(id)
+                .OnceAsync<Donor>()
+                .Result
+                .AsEnumerable()
+                .Select(i => FirebaseToObject.Donor(i))
+                .First();
+        }
+
     }
 }

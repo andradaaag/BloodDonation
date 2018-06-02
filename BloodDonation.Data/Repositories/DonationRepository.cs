@@ -27,7 +27,7 @@ namespace BloodDonation.Data.Repositories
                 .OnceAsync<Donation>()
                 .Result
                 .AsEnumerable()
-                .Select(i=>FirebaseToObject.Donation(i))
+                .Select(i => FirebaseToObject.Donation(i))
                 .ToList();
         }
 
@@ -80,5 +80,18 @@ namespace BloodDonation.Data.Repositories
              .Result
              .First());
         }
-    }
+
+        public List<String> GetBookedHours(String date)
+        {
+            return firebaseClient
+                .Child(CHILD)
+                .OrderBy("donationDate")
+                .EqualTo(date)
+                .OnceAsync<Donation>()
+                .Result
+                .AsEnumerable()
+                .Select(i => FirebaseToObject.Donation(i).donationHour)
+                .ToList();
+        }
+    }        
 }

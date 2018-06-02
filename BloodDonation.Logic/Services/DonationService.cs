@@ -94,5 +94,15 @@ namespace BloodDonation.Logic.Services
                 .Select(i=>DataToLogic.Donation(i))
                 .ToList();
         }
+
+        public List<String> showAvailableHours(String date)
+        {
+            return null;
+        }
+
+        public List<String> getUnavailableHours(String date)
+        {
+            return Repository.GetBookedHours(date);
+        }
     }
 }
