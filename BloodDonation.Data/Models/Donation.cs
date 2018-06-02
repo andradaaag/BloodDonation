@@ -45,7 +45,7 @@ namespace BloodDonation.Data.Models
         public long DonationTime { get; set; }
 
         public String testResult;
-
+        public String donationHour;
 
         public DonationCenter center;
 

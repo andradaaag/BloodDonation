@@ -10,7 +10,7 @@ namespace BloodDonation.Mappers
             return new DonorDetailsTransferObject()
             {
                 ID = donorForm.ID,
-                Cnp =donorForm.Cnp,
+                Cnp = donorForm.Cnp,
                 FirstName = donorForm.FirstName,
                 LastName = donorForm.LastName,
                 DateOfBirth = donorForm.DateOfBirth,
@@ -20,5 +20,14 @@ namespace BloodDonation.Mappers
                 Commentaries = donorForm.Commentaries
             };
         }
-    }
+
+        public DonorSelectedDate MapSelectedDate(AvailableHoursModel model)
+        {
+            return new DonorSelectedDate()
+            {
+                donationCenter = model.donationCenter,
+                bookingDate = model.bookingDate
+            };
+        }
+    } 
 }

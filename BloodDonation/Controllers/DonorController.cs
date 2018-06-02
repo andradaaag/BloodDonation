@@ -5,6 +5,8 @@ using BloodDonation.Business.Services;
 using BloodDonation.Logic.Models;
 using BloodDonation.Mappers;
 using BloodDonation.Models;
+using Firebase.Auth;
+using System;
 
 namespace BloodDonation.Controllers
 {
@@ -32,7 +34,7 @@ namespace BloodDonation.Controllers
 
         public ActionResult DonorPersonalDetailsView()
         {
-            DonorDetailsTransferObject donorDetailsTransferObject = donorService.GetDonorDetailsById("id");
+            DonorDetailsTransferObject donorDetailsTransferObject = donorService.GetOne(GetUid());
             DonorAccountRequest donorAccountRequest =
                 _businessToPresentationMapper.MapDonorAccountRequest(donorDetailsTransferObject);
             
@@ -46,17 +48,33 @@ namespace BloodDonation.Controllers
 
         public ActionResult BookDonationView()
         {
-            return View("BookDonationView", new DonorAccountRequest());
+            return View("BookDonationView", new AvailableHoursModel());
         }
         
         [HttpPost]
         public ActionResult UpdateDonorPersonalData(DonorAccountRequest formDetails)
         {
-            // TODO - somehow update personal data
-            formDetails.ID = "id";
-            
+           
             donorService.EditDonorDetails(_presentationToBusinessMapperDonor.MapDonorForm(formDetails));
             return DonorPersonalDetailsView();
+        }
+
+        [HttpPost]
+        public ActionResult SeeAvailableHours(AvailableHoursModel formDetails)
+        {
+            return BookDonationView();
+        }
+
+        public String GetUid()
+        {
+            try
+            {
+                return ((FirebaseAuthLink)Session["authlink"]).User.LocalId;
+            }
+            catch (System.Exception e)
+            {
+                return "";
+            }
         }
     }  
 }

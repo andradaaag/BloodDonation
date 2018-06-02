@@ -1,4 +1,4 @@
-﻿@model BloodDonation.Models.DonorAccountRequest
+﻿@model BloodDonation.Models.AvailableHoursModel
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -50,12 +50,16 @@
 
 <div class="wrapper row3">
     <div class="container">
-        <form action="#">
-            <p>Book a donation: <input type="text" id="datepicker"></p>
+       @using (Html.BeginForm("SeeAvailableHours", "Donor", FormMethod.Post))
+       {
+
+            <p>Select a donation center: @Html.TextBoxFor(model => model.donationCenter, new { @required = "required" })</p>
+            <p>Select a date: @Html.TextBoxFor(model => model.bookingDate, new { @type = "datepicker", @required = "required" })</p>
             <div class="row">
-                @Html.ActionLink("Select date", "GetEditDonorPersonalDataPage", "Donor", null, new {@class = "button"})
+                <input type="submit" value="See available hours">
             </div>
-        </form>
+       }
+
 
     </div>
 </div>

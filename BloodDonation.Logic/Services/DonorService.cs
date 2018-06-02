@@ -52,25 +52,17 @@ namespace BloodDonation.Business.Services
             return donorsTransferObject;
         }
 
-        public DonorDetailsTransferObject GetDonorDetailsById(String ID)
-        {
-            List<Donor> donors = donorRepository.GetDonors();
-            foreach (Donor donor in donors)
-            {
-                if (donor.ID == ID)
-                {
-                    return dataToLogicMapper.MapDonorDetailsTransferObject(donor);
-                }
-            }
 
-            return null;
+        public DonorDetailsTransferObject GetOne(string id)
+        {
+            return dataToLogicMapper.MapDonorDetailsTransferObject(donorRepository.GetOne(id));
         }
 
 
 
         public void EditDonorDetails(DonorDetailsTransferObject detailsTransferObject)
         {
-            donorRepository.UpdateDonorDetails(logicToDataMapper.MapDonor(detailsTransferObject));
+            donorRepository.Save(logicToDataMapper.MapDonor(detailsTransferObject));
         }
 
 }

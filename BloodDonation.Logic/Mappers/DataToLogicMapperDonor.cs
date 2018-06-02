@@ -26,12 +26,17 @@ namespace BloodDonation.Logic.Mappers
                 LastName = donor.lastName,
                 DateOfBirth = donor.DOB,
                 Address = donor.Address,
-                Weight = donor.DonationFormEntity.currentWeight,
                 Email = donor.emailAddress,
                 Country = donor.Country,
                 Commentaries = donor.additionalCommentaries,
-                Cnp = donor.CNP
+
+                Cnp = donor.CNP,
+                Residence= donor.Residence,
+                CityTown= donor.CityTown
+
             };
         }
+
+       
     }
 }

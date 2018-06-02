@@ -240,6 +240,9 @@
     <Compile Include="Mappers\PresentationToBusinessMapper.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapperDoctor.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapperPersonnel.cs" />
+
+    <Compile Include="Models\AvailableHoursModel.cs" />
+
     <Compile Include="Models\BloodAmounts.cs" />
     <Compile Include="Models\BloodType.cs" />
     <Compile Include="Models\RequestComponent.cs" />
@@ -330,6 +333,7 @@
     <Content Include="Styles\layout_user_details.css" />
     <Content Include="Styles\mediaqueries.css" />
     <Content Include="Styles\navi.css" />
+    <Content Include="Styles\style.css" />
     <Content Include="Views\Donor\BookDonationView.cshtml" />
     <Content Include="Views\Donor\DonorPersonalDetailsView.cshtml" />
     <Content Include="Views\Donor\EditDonorPersonalDataView.cshtml" />

@@ -19,18 +19,17 @@ namespace BloodDonation.Data.Repositories
 
         public List<Donation> FindUnresolved()
         {
-           
-                return firebaseClient
-                    .Child(CHILD)
-                    .OrderBy("Stage")
-                    .StartAt(0)
-                    .EndAt(2)
-                    .OnceAsync<Donation>()
-                    .Result
-                    .AsEnumerable()
-                    .Select(i => FirebaseToObject.Donation(i))
-                    .ToList();
 
+            return firebaseClient
+                .Child(CHILD)
+                .OrderBy("Stage")
+                .StartAt(0)
+                .EndAt(2)
+                .OnceAsync<Donation>()
+                .Result
+                .AsEnumerable()
+                .Select(i => FirebaseToObject.Donation(i))
+                .ToList();
         }
 
         public List<Donation> FindByDonationCenter(string donationCenterID)
@@ -126,5 +125,18 @@ namespace BloodDonation.Data.Repositories
                  .First());
             
         }
-    }
+
+        public List<String> GetBookedHours(String date)
+        {
+            return firebaseClient
+                .Child(CHILD)
+                .OrderBy("donationDate")
+                .EqualTo(date)
+                .OnceAsync<Donation>()
+                .Result
+                .AsEnumerable()
+                .Select(i => FirebaseToObject.Donation(i).donationHour)
+                .ToList();
+        }
+    }        
 }

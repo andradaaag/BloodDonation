@@ -20,25 +20,21 @@ namespace BloodDonation.Mappers
 
         public DonorAccountRequest MapDonorAccountRequest(DonorDetailsTransferObject donorAccountDetails)
         {
-            try
-            {
+
                 return new DonorAccountRequest()
                 {
-                    ID = donorAccountDetails.ID,
-                    Cnp = donorAccountDetails.Cnp,
-                    FirstName = donorAccountDetails.FirstName,
-                    LastName = donorAccountDetails.LastName,
-                    DateOfBirth = donorAccountDetails.DateOfBirth,
-                    Address = donorAccountDetails.Address,
-                    Weight = donorAccountDetails.Weight,
-                    Email = donorAccountDetails.Email,
-                    Country = donorAccountDetails.Country,
-                    Commentaries = donorAccountDetails.Commentaries
-                };
-            }catch(Exception ex)
-            {
-                return null;
-            }
+
+                ID = donorAccountDetails.ID,
+                Cnp = donorAccountDetails.Cnp,
+                FirstName = donorAccountDetails.FirstName,
+                LastName = donorAccountDetails.LastName,
+                DateOfBirth = donorAccountDetails.DateOfBirth,
+                Address = donorAccountDetails.Address,
+                Email = donorAccountDetails.Email,
+                Country = donorAccountDetails.Country,
+                Commentaries = donorAccountDetails.Commentaries
+            };
+
         }
     }
 }

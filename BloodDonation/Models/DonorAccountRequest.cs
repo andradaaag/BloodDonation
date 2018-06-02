@@ -12,7 +12,6 @@ namespace BloodDonation.Models
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
         public String Address { get; set; }
-        public int Weight { get; set; }
         public String Email { get; set; }
         public String Country { get; set; }
         public String Commentaries { get; set; }
