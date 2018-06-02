@@ -87,12 +87,12 @@
                                 </div>
 
                                 <div class="form-check">
-                                    @Html.RadioButtonFor(model => model.BloodTypeGroup, new {id = "B", @class = "form-check-input"})
+                                    @Html.RadioButtonFor(model => model.BloodTypeGroup, "B" ,new {id = "B", @class = "form-check-input"})
                                     @Html.Label("B", "B", new {@class = "form-check-label"})
                                 </div>
 
                                 <div class="form-check">
-                                    @Html.RadioButtonFor(model => model.BloodTypeGroup, new {id = "O", @class = "form-check-input"})
+                                    @Html.RadioButtonFor(model => model.BloodTypeGroup, "O" ,new {id = "O", @class = "form-check-input"})
                                     @Html.Label("O", "O", new {@class = "form-check-label"})
                                 </div>
                             </div>
