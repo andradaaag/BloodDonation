@@ -256,7 +256,7 @@ namespace BloodDonation.Controllers
             List<RequestPersonnel> listOfAcceptedRequest = GetDonationCenterRequests();
             listOfAcceptedRequest.Sort((el1, el2) =>(-1) *  el1.urgency.CompareTo(el2.urgency));
 
-            return goIfPossible(View("PendingRequestsView", listOfAcceptedRequest));
+            return goIfPossible(View("AcceptedRequestsView", listOfAcceptedRequest));
         }
 
         public ActionResult PendingRequests()

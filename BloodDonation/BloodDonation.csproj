@@ -240,9 +240,7 @@
     <Compile Include="Mappers\PresentationToBusinessMapper.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapperDoctor.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapperPersonnel.cs" />
-
     <Compile Include="Models\AvailableHoursModel.cs" />
-
     <Compile Include="Models\BloodAmounts.cs" />
     <Compile Include="Models\BloodType.cs" />
     <Compile Include="Models\RequestComponent.cs" />
@@ -382,6 +380,7 @@
     <Content Include="Views\Personnel\MissingBloodView.cshtml" />
     <Content Include="Views\Personnel\StoredBloodView.cshtml" />
     <Content Include="Views\Personnel\DeleteExpiredBloodView.cshtml" />
+    <Content Include="Views\Personnel\AcceptedRequestsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
