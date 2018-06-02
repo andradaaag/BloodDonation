@@ -9,116 +9,155 @@
     <title>Account settings</title>
     <meta charset="iso-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @Styles.Render("~/Styles/layout_personel_add_blood.css")
-    @Styles.Render("~/Styles/mediaqueries.css")
-    <script src="@Url.Content(" ~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
-
-    <script src="@Url.Content(" ~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    @Styles.Render("~/Styles/style.css")
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js">
+    </script>
 </head>
 <body>
-    <div class="wrapper row1">
-        <header id="header" class="clear">
-            <div id="hgroup">
-                <h1><a href="#">Personal details</a></h1>
-                <h2><a href="#">Donation center personnel</a></h2>
-            </div>
-            @Html.Partial("NavigationBannerView", null)
-        </header>
-    </div>
 
-    <div class="wrapper row3">
-        <div class="container">
+<div id="header">
+    <div class="container">
+        <div class="row">
+            <div id="hgroup" class="col-sm-8 ml-4">
+                <div class="row">
+                    <a href="#" id="page-title">Account Settings</a>
+                </div>
+                <div class="row">
+                    <a href="#" id="page-owner">PERSONNEL</a>
+                </div>
+            </div>
+            <form action="login.html" method="post" class="col-sm-1 offset-sm-2">
+                @Html.ActionLink("Log Out", "LogOut", "Login", null, new {@class = "btn auth-button"})
+            </form>
+        </div>
+        <nav class="navbar navbar-expand-sm">
+            <ul class="navbar-nav">
+                <li>@Html.ActionLink("ADD DONATION", "AddDonation", "Personnel", null, new {@class = "nav-link"})</li>
+                <li>@Html.ActionLink("SEPARATE COMPONENTS", "SeparateComponents", "Personnel", null, new {@class = "nav-link"})</li>
+                <li>@Html.ActionLink("LAB RESULTS", "LabResults", "Personnel", null, new {@class = "nav-link"})</li>
+                <li class="nav-item current">
+                    <a href="#" class="nav-link">ACCOUNT SETTINGS</a>
+                </li>
+                <li>@Html.ActionLink("PENDING REQUESTS", "PendingRequests", "Personnel", null, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("ACCEPTED REQUESTS", "AcceptedRequests", "Personnel", null, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("VIEW STORED BLOOD", "ViewStoredBlood", "Personnel", null, new {@class = "nav-link"})</li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card mb-3">
+        <div class="card-header">
+            Personal Details:
+        </div>
+        <div class="card-body">
             @using (Html.BeginForm("UpdatePersonnel", "Personnel", FormMethod.Post))
             {
                 @Html.ValidationSummary(true)
-                @Html.Hidden("ID", Model.ID);
+                @Html.Hidden("ID", Model.ID)
+                ;
 
-                <div class="row">
-                    <div class="col-25">
-                        <label for="1">First Name</label>
-                    </div>
-                    <div class="col-75">
-                        @Html.TextBoxFor(model => model.firstName, new { placeholder = Model.firstName })
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>First Name</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(model => model.firstName, new {placeholder = Model.firstName, @class = "form-control"})
+                        </div>
                     </div>
                 </div>
 
-
-                <div class="row">
-                    <div class="col-25">
-                        <label for="2">Last Name</label>
-                    </div>
-                    <div class="col-75">
-                        @Html.TextBoxFor(model => model.lastName, new { placeholder = Model.lastName })
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-25">
-                        <label for="3">Email address</label>
-                    </div>
-                    <div class="col-75">
-                        @Html.TextBoxFor(model => model.emailAddress, new { placeholder = Model.emailAddress })
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Last Name</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(model => model.lastName, new {placeholder = Model.lastName, @class = "form-control"})
+                        </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-25">
-                        <label>Date of Birth</label>
-                    </div>
-                    <div class="col-75">
-                        @Html.TextBoxFor(model => model.DOB, new {  @Value = Model.DOB.ToShortDateString()})
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-25">
-                        <label for="6">Country</label>
-                    </div>
-                    <div class="col-75">
-                        @Html.TextBoxFor(model => model.Country, new {placeholder = Model.Country })
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Email</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(model => model.emailAddress, new {placeholder = Model.emailAddress, @class = "form-control"})
+                        </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-25">
-                        <label for="7">City</label>
-                    </div>
-                    <div class="col-75">
-                        @Html.TextBoxFor(model => model.CityTown, new { placeholder = Model.CityTown })
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-25">
-                        <label for="5">Address</label>
-                    </div>
-                    <div class="col-75">
-                        @Html.TextBoxFor(model => model.Address, new { placeholder = Model.Address })
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Date of Birth</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(model => model.DOB, new {@Value = Model.DOB.ToShortDateString(), @class = "form-control"})
+                        </div>
                     </div>
                 </div>
 
-            <div class="row">
-                <div class="col-25">
-                    <label for="5">Donation center ID</label>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Country</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(model => model.Country, new {placeholder = Model.Country, @class = "form-control"})
+                        </div>
+                    </div>
                 </div>
-                <div class="col-75">
-                    @Html.TextBoxFor(model => model.DonationCenterID, new { placeholder = Model.DonationCenterID })
-                </div>
-            </div>
 
-                <div class="row">
-                    <input type="submit" value="Confirm changes">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>City</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(model => model.CityTown, new {placeholder = Model.CityTown, @class = "form-control"})
+                        </div>
+                    </div>
                 </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Address</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(model => model.Address, new {placeholder = Model.Address, @class = "form-control"})
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Donation Center ID</label>
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(model => model.DonationCenterID, new {placeholder = Model.DonationCenterID, @class = "form-control"})
+                        </div>
+                    </div>
+                </div>
+
+                <input type="submit" value="Save" class="btn btn-success">
             }
         </div>
     </div>
+</div>
 
-    <!-- Footer -->
-    <div class="wrapper row4">
-        <footer id="footer" class="clear">
-            <p class="fl_left">Copyright &copy; 2013 - All Rights Reserved - <a href="#">Domain Name</a></p>
-        </footer>
-    </div>
+<div class="footer fixed-bottom text-center">
+    © 2018 Copyright: Vitamine
+</div>
+
 </body>
 </html>
-
