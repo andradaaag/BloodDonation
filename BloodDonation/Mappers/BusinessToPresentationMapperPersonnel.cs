@@ -19,7 +19,7 @@ namespace BloodDonation.Mappers
                 Alt = donation.Alt,
                 BloodTypeGroup = donation.BloodType.Group,
                 BloodTypeRH = donation.BloodType.RH ? "Positive" : "Negative",
-                DonorId = donation.DonorId,
+                DonorCNP = donation.DonorCNP,
                 HepatitisB = donation.HepatitisB,
                 HepatitisC = donation.HepatitisC,
                 Hiv = donation.Hiv,
@@ -30,8 +30,7 @@ namespace BloodDonation.Mappers
                 Syphilis = donation.Syphilis,
                 Thrombocytes = donation.Thrombocytes,
                 DonationTime = donation.DonationTime,
-                DonationCenterId = donation.DonationCenterId,
-                DonorEmail = donation.DonorEmail
+                DonationCenterId = donation.DonationCenterId
             };
         }
         public StoredBloodModel StoredBlood(Logic.Models.StoredBlood  b)

@@ -90,10 +90,22 @@ namespace BloodDonation.Data.Repositories
                    .Select(i => FirebaseToObject.Donor(i))
                    .ToList();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new List<Donor>();
             }
+        }
+
+        public Donor GetDonorByCNP(string CNP)
+        {
+            return FirebaseToObject.Donor(firebaseClient
+                .Child(CHILD)
+                .OrderBy("CNP")
+                .EqualTo(CNP)
+                .OnceAsync<Donor>()
+                .Result
+                .First());
+
         }
     }
 }

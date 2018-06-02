@@ -29,7 +29,7 @@ namespace BloodDonation.Data.Models
 
 		public String additionalCommentaries;
 
-        public String cnp;
+        public String CNP;
 		/**
 		 * 
 		 */
@@ -41,7 +41,7 @@ namespace BloodDonation.Data.Models
 		{
 			DonationFormEntity = donationFormEntity;
 			additionalCommentaries = comms;
-            this.cnp = cnp;
+            this.CNP = cnp;
 		}
 	}
 }

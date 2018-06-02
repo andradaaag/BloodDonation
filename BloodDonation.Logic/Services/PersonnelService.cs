@@ -20,7 +20,7 @@ namespace BloodDonation.Logic.Services
         private readonly DonationRepository donRepo = new DonationRepository();
         private readonly DonationCenterPersonnelRepository dcprRepo = new DonationCenterPersonnelRepository();
         private readonly StoredBloodRepository bloodRepo = new StoredBloodRepository();
-
+        private readonly DonorRepository donorRepo = new DonorRepository();
         
 
         private readonly DateTime epoch = new DateTime(1970, 1, 1);
@@ -92,12 +92,12 @@ namespace BloodDonation.Logic.Services
         }
 
         // used for whole blood it automatically does noBags*amount
-        private StoredBlood CompFromDonation(Donation donation, Component comp,string centerId, int amount, int noBags)
+        private StoredBlood WholeFromDonation(Donation donation, Component comp,string centerId, int amount, string donorEmail)
         {
 
             return new StoredBlood
             {
-                Amount = amount * noBags,
+                Amount = amount * donation.Quantity,
                 CollectionDate = donation.DonationTime,
                 Component = comp,
                 BloodType = new BloodType
@@ -106,12 +106,12 @@ namespace BloodDonation.Logic.Services
                     RH = donation.BloodType.RH
                 },
                 DonationCenterID = centerId,
-                DonorEmail = donation.DonorEmail
+                DonorEmail = donorEmail
             };
         }
         
         // used for components of  blood it considers amount == the quantity of substance ('cause nicu wouldn't let me use precentages) 
-        private StoredBlood CompFromDonation(Donation donation, Component comp, string centerId, int amount)
+        private StoredBlood CompFromDonation(Donation donation, Component comp, string centerId, int amount, string donorEmail)
         {
 
             return new StoredBlood
@@ -125,7 +125,7 @@ namespace BloodDonation.Logic.Services
                     RH = donation.BloodType.RH
                 },
                 DonationCenterID = centerId,
-                DonorEmail = donation.DonorEmail
+                DonorEmail = donorEmail
             };
         }
 
@@ -152,9 +152,11 @@ namespace BloodDonation.Logic.Services
             {
                 string centerId = donation.DonationCenterId;
                 donation.Stage =Stage.Redistribution;
+                string email = donorRepo.GetDonorByCNP(donation.DonorCNP)
+
                 if (donation.RBC == -1)
                 {
-                    StoredBlood whole = CompFromDonation(donation, Component.Whole, centerId, 400, donation.Quantity);
+                    StoredBlood whole = WholeFromDonation(donation, Component.Whole, centerId, 400);
                     bloodRepo.Add(logicToData.StoredBlood(whole));
                 }
                 else

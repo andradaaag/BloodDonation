@@ -17,14 +17,13 @@ namespace BloodDonation.Logic.Models
         public string ID { get; set; }
         public BloodType BloodType;
 
-        public string DonorId;
+        public string DonorCNP;
 
         public string PatientCnp;
         
         public Stage Stage;
 
         public int Quantity;
-        public string DonorEmail { get;set; }
         public int Plasma;
         public int RBC;
         public int Thrombocytes;

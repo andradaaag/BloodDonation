@@ -19,7 +19,7 @@ namespace BloodDonation.Logic.Mappers
                 emailAddress = detailsTransferObject.Email,
                 Country = detailsTransferObject.Country,
                 additionalCommentaries = detailsTransferObject.Commentaries,
-                cnp = detailsTransferObject.Cnp
+                CNP = detailsTransferObject.Cnp
             };
         }
 

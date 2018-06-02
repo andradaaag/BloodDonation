@@ -23,7 +23,7 @@ namespace BloodDonation.Logic.Mappers
                 },
                 DonationCenterId = donation.DonationCenterID,
                 PatientCnp = donation.PatientCnp,
-                DonorId = donation.DonorCnp,
+                DonorCNP = donation.DonorCnp,
                 HepatitisB = donation.HepatitisB,
                 HepatitisC = donation.HepatitisC,
                 Hiv = donation.Hiv,
@@ -34,8 +34,7 @@ namespace BloodDonation.Logic.Mappers
                 Stage = donation.Stage,
                 Syphilis = donation.Syphilis,
                 Thrombocytes = donation.Thrombocytes,
-                DonationTime = donation.DonationTime,
-                DonorEmail = donation.DonorEmail
+                DonationTime = donation.DonationTime
             };
             
         }
