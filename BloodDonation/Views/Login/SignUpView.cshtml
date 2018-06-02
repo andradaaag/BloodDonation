@@ -9,166 +9,156 @@
     <title>Sign up</title>
     <meta charset="iso-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @Styles.Render("~/Styles/layout_change_pass.css")
-    @Styles.Render("~/Styles/mediaqueries.css")
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    @Styles.Render("~/Styles/style.css")
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="~/Scripts/jquery.1.9.0.min.js"></script>
-    <script src="~/Scripts/jquery-mobilemenu.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="~/Scripts/signUp.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-    <script src="~/Scripts/login-register.js"></script>
 </head>
 <body>
 
-<div class="wrapper row1">
-    <header id="header" class="clear">
-        <div id="hgroup">
-            <h1>
-                <a href="#">Sign up</a>
-            </h1>
-        </div>
-        @Html.ActionLink("Log in", "Index", "Login", null, new {@class = "sf_submit header input"})
-
-    </header>
-</div>
-<!-- content -->
-<div class="wrapper row3">
+<div id="header">
     <div class="container">
-        @using (Html.BeginForm("SignUp", "Login", FormMethod.Post))
-        {
-            <div class="row">
-                <div class="col-25">
-                    <label>Sign up as</label>
+        <div class="row">
+            <div id="hgroup" class="col-sm-8 ml-4">
+                <div class="row">
+                    @Html.ActionLink("Blood Donation", "Index", "Login",new{id="page-title"})
                 </div>
-                @Html.RadioButtonFor(model => model.UserType, 2, new {@onclick = "handleRadioClick1(this);"}) Doctor <br/>
-                @Html.RadioButtonFor(model => model.UserType, 3, new {@onclick = "handleRadioClick1(this);"}) Personnel <br/>
-                @Html.RadioButtonFor(model => model.UserType, 1, new {@checked = "checked", @onclick = "handleRadioClick1(this);"}) Donor <br/>
-            </div>
-            <p></p>
-            <div class="row">
-                <div class="col-25">
-                    <label>First Name*</label>
-                </div>
-                <div class="col-75">
-                    @Html.TextBoxFor(model => model.FirstName, new {@required = "required"})
+                <div class="row">
+                    <a href="#" id="page-owner">SIGN UP</a>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-25">
-                    <label>Last Name*</label>
-                </div>
-                <div class="col-75">
-                    @Html.TextBoxFor(model => model.LastName, new {@required = "required"})
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label>Email Address*</label>
-                </div>
-                <div class="col-75">
-                    @Html.TextBoxFor(model => model.Email, new {@required = "required"})
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label>Password*</label>
-                </div>
-                <div class="col-75">
-                    @Html.PasswordFor(model => model.Password, new {@required = "required"})
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label>Confirm Password*</label>
-                </div>
-                <div class="col-75">
-                    @Html.PasswordFor(model => model.Password, new {@required = "required"})
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label>Date of Birth*</label>
-                </div>
-                <div class="col-75">
-                    @Html.TextBox("DOB", DateTime.Today, new {@type = "date", @required = "required"})
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label>Address* (as in your ID)</label>
-                </div>
-                <div class="col-75">
-                    @Html.TextBoxFor(model => model.Address, new {@required = "required"})
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label>City* (as in your ID)</label>
-                </div>
-                <div class="col-75">
-                    @Html.TextBoxFor(model => model.City, new {@required = "required"})
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label>Country* (as in your ID)</label>
-                </div>
-                <div class="col-75">
-                    @Html.TextBoxFor(model => model.Country, new {@required = "required"})
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label>Current Address (if differs from ID)</label>
-                </div>
-                <div class="col-75">
-                    @Html.TextBoxFor(model => model.OtherAddress)
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label>Current City (if differs from ID)</label>
-                </div>
-                <div class="col-75">
-                    @Html.TextBoxFor(model => model.OtherCity)
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label>Current Country (if differs from ID)</label>
-                </div>
-                <div class="col-75">
-                    @Html.TextBoxFor(model => model.OtherCountry)
-                </div>
-            </div>
-            <div class="row" id="hospital" hidden>
-                <div class="col-25">
-                    <label>Hospital</label>
-                </div>
-                <div class="col-75">
-                    @Html.DropDownListFor(model => model.Hospital, (List<SelectListItem>) ViewData["hospitals"])
-                </div>
-            </div>
-            <div class="row" id="donationCenter" hidden="true">
-                <div class="col-25">
-                    <label>Donation Center</label>
-                </div>
-                <div class="col-75">
-                    @Html.DropDownListFor(model => model.DonationCenter, (List<SelectListItem>) ViewData["centers"])
-                </div>
-            </div>
-
-            <div class="row">
-                <input type="submit" value="Submit"/>
-            </div>
-        }
+        </div>
     </div>
 </div>
-<!-- Footer -->
-<div class="wrapper row4">
-    <footer id="footer" class="clear">
-        <p class="fl_left">Copyright &copy; 2013 - All Rights Reserved - <a href="#">Domain Name</a></p>
-    </footer>
+
+<div class="container mb-5">
+    <div class="card">
+        <div class="card-header">Create account</div>
+        <div class="card-body">
+            @using (Html.BeginForm("SignUp", "Login", FormMethod.Post))
+            {
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Sign up as</label>
+                    <div class="col-sm-9">
+                        <div class="form-check-inline">
+                            @Html.RadioButtonFor(model => model.UserType, 2, new {@onclick = "handleRadioClick1(this);", @class = "form-check-input"}) Doctor <br/>
+                            @Html.RadioButtonFor(model => model.UserType, 3, new {@onclick = "handleRadioClick1(this);", @class = "form-check-input"}) Personnel <br/>
+                            @Html.RadioButtonFor(model => model.UserType, 1, new {@checked = "checked", @onclick = "handleRadioClick1(this);", @class = "form-check-input"}) Donor <br/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">First Name*</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.FirstName, new {@required = "required", @class = "form-control"})
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Last Name*</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.LastName, new {@required = "required", @class = "form-control"})
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Email Address*</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.Email, new {@required = "required", @class = "form-control"})
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Password*</label>
+                    <div class="col-sm-9">
+                        @Html.PasswordFor(model => model.Password, new {@required = "required", @class = "form-control"})
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Confirm Password*</label>
+                    <div class="col-sm-9">
+                        @Html.PasswordFor(model => model.Password, new {@required = "required", @class = "form-control"})
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Date of Birth*</label>
+                    <div class="col-sm-9">
+                        @Html.TextBox("DOB", DateTime.Today.ToString("yyyy-MM-dd"), new {@type = "date", @required = "required", @class = "form-control"})
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Address* (as in your ID)</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.Address, new {@required = "required", @class = "form-control"})
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">City* (as in your ID)</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.City, new {@required = "required", @class = "form-control"})
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Country* (as in your ID)</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.Country, new {@required = "required", @class = "form-control"})
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Current Address (if differs from ID)</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.OtherAddress, new {@class = "form-control"})
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Current City (if differs from ID)</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.OtherCity, new {@class = "form-control"})
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Current Country (if differs from ID)</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.OtherCountry, new {@class = "form-control"})
+                    </div>
+                </div>
+
+                <div class="form-group row" id="hospital" hidden="true">
+                    <label class="col-sm-3 col-form-label">Hospital</label>
+                    <div class="col-sm-9">
+                        @Html.DropDownListFor(model => model.Hospital, (List<SelectListItem>) ViewData["hospitals"], new {@class = "form-control"})
+                    </div>
+                </div>
+
+                <div class="form-group row" id="donationCenter" hidden="true">
+                    <label class="col-sm-3 col-form-label">Donation Center</label>
+                    <div class="col-sm-9">
+                        @Html.DropDownListFor(model => model.DonationCenter, (List<SelectListItem>) ViewData["centers"], new {@class = "form-control"})
+                    </div>
+                </div>
+
+                <input type="submit" value="Submit" class="btn btn-success"/>
+            }
+        </div>
+    </div>
 </div>
+    
+<div class="footer fixed-bottom text-center">
+    © 2018 Copyright: Vitamine
+</div>
+
 </body>
 </html>

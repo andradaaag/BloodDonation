@@ -6,156 +6,187 @@
 
 <html lang="en" dir="ltr">
 <head>
-    <title>Accept request</title>
+    <title>Accept Request - Personnel</title>
     <meta charset="iso-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @Styles.Render("~/Styles/layout_personel_add_blood.css")
-    @Styles.Render("~/Styles/mediaqueries.css")
-    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
-
-    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    @Styles.Render("~/Styles/style.css")
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js">
+    </script>
 </head>
 <body>
-    <div class="wrapper row1">
-        <header id="header" class="clear">
-            <div id="hgroup">
-                <h1><a href="#">Separate components</a></h1>
-                <h2><a href="#">Donation center personnel</a></h2>
+
+<div id="header">
+    <div class="container">
+        <div class="row">
+            <div id="hgroup" class="col-sm-8 ml-4">
+                <div class="row">
+                    <a href="#" id="page-title">Accept Request</a>
+                </div>
+                <div class="row">
+                    <a href="#" id="page-owner">PERSONNEL</a>
+                </div>
             </div>
-            @Html.Partial("NavigationBannerView", null)
-        </header>
+            <form action="login.html" method="post" class="col-sm-1 offset-sm-2">
+                @Html.ActionLink("Log Out", "LogOut", "Login", null, new {@class = "btn auth-button"})
+            </form>
+        </div>
+        <nav class="navbar navbar-expand-sm">
+            <ul class="navbar-nav">
+                <li>@Html.ActionLink("ADD DONATION", "AddDonation", "Personnel", null, new {@class = "nav-link"})</li>
+                <li>@Html.ActionLink("SEPARATE COMPONENTS", "SeparateComponents", "Personnel", null, new {@class = "nav-link"})</li>
+                <li>@Html.ActionLink("LAB RESULTS", "LabResults", "Personnel", null, new {@class = "nav-link"})</li>
+                <li>@Html.ActionLink("ACCOUNT SETTINGS", "PersonalDetails", "Personnel", null, new {@class = "nav-link"})</li>
+                <li>@Html.ActionLink("PENDING REQUESTS", "PendingRequests", "Personnel", null, new {@class = "nav-link"})</li>
+                <li>@Html.ActionLink("ACCEPTED REQUESTS", "AcceptedRequests", "Personnel", null, new {@class = "nav-link"})</li>
+                <li>@Html.ActionLink("VIEW STORED BLOOD", "ViewStoredBlood", "Personnel", null, new {@class = "nav-link"})</li>
+            </ul>
+        </nav>
     </div>
-    <div class="wrapper row3">
-        <div class="container">
-            <h1> Do you wish to accept the following blood request? </h1>
+</div>
 
-            <div class="row">
-                <div class="col-25">
-                    <label for="fname">ID</label>
-
-                </div>
-                <div class="col-75">
-                    @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @readonly = "readonly" } })
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-25">
-                    <label for="fname">Status</label>
-
-                </div>
-                <div class="col-75">
-                    @Html.EditorFor(model => model.status, new { htmlAttributes = new { @readonly = "readonly" } })
+<div class="container">
+    <div class="card mb-3">
+        <div class="card-header">Do you wish to accept the following blood request?</div>
+        <div class="card-body">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>ID</label>
+                    </div>
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.ID, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-25">
-                    <label for="fname">Component</label>
-
-                </div>
-                <div class="col-75">
-                    @Html.EditorFor(model => model.bloodType.component, new { htmlAttributes = new { @readonly = "readonly" } })
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-25">
-                    <label for="fname">Hospital name</label>
-
-                </div>
-                <div class="col-75">
-                    @Html.EditorFor(model => model.hospitalName, new { htmlAttributes = new { @readonly = "readonly" } })
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Status</label>
+                    </div>
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.status, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-25">
-                    <label for="fname">Hospital location</label>
 
-                </div>
-                <div class="col-75">
-                    @Html.EditorFor(model => model.hospitalLocation, new { htmlAttributes = new { @readonly = "readonly" } })
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-25">
-                    <label for="fname">Doctor name</label>
-
-                </div>
-                <div class="col-75">
-                    @Html.EditorFor(model => model.doctorName, new { htmlAttributes = new { @readonly = "readonly" } })
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Component</label>
+                    </div>
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.bloodType.component, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-25">
-                    <label for="fname">Doctor email</label>
 
-                </div>
-                <div class="col-75">
-                    @Html.EditorFor(model => model.doctorEmail, new { htmlAttributes = new { @readonly = "readonly" } })
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-25">
-                    <label for="fname">Quantity</label>
-
-                </div>
-                <div class="col-75">
-                    @Html.EditorFor(model => model.quantityString, new { htmlAttributes = new { @readonly = "readonly" } })
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Hospital Name</label>
+                    </div>
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.hospitalName, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-25">
-                    <label for="fname">Blood group type</label>
 
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Hospital Location</label>
+                    </div>
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.hospitalLocation, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
+                    </div>
                 </div>
-                <div class="col-75">
-                    @Html.EditorFor(model => model.bloodType.Group, new { htmlAttributes = new { @readonly = "readonly" } })
+            </div>
+
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Doctor Name</label>
+                    </div>
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.doctorName, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-25">
-                    <label for="fname">Blood RH</label>
-
-                </div>
-
-                <div class="col-75">
-                    @if(Model.bloodType.PH){
-                        <input type="text" id="Foo" name="pos" value="Positive" readonly="readonly"/>
-                    }
-                    else{
-                    <input type="text" id="Foo" name="neg" value="Negative" readonly="readonly" />
-                    }
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Doctor Email</label>
+                    </div>
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.doctorEmail, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
+                    </div>
                 </div>
             </div>
-            <br />
-            <br />
-            <div class="row">
-                <center>
+
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Quantity</label>
+                    </div>
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.quantityString, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Blood Group</label>
+                    </div>
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.bloodType.Group, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label for="col-sm-10">RH Type</label>
+                    </div>
+                    <div class="col-sm-10">
+                        @if (Model.bloodType.PH)
+                        {
+                            <input type="text" id="Foo" name="pos" value="Positive" readonly="readonly" class="form-control"/>
+                        }
+                        else
+                        {
+                            <input type="text" id="Foo" name="neg" value="Negative" readonly="readonly" class="form-control"/>
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group">
                     @{
-                    var reqID = Model.ID;
-
+                        var reqID = Model.ID;
                     }
-                    @Html.ActionLink("Confirm","ConfirmAcceptRequest", "Personnel", new { id = @reqID },null)
-                </center>
+                    @Html.ActionLink("Confirm", "ConfirmAcceptRequest", "Personnel", new {id = @reqID}, new {@class = "btn btn-success mt-3 ml-3"})
+                </div>
             </div>
-
         </div>
     </div>
-    <!-- Footer -->
-    <div class="wrapper row4">
-        <footer id="footer" class="clear">
-            <p class="fl_left">Copyright &copy; 2013 - All Rights Reserved - <a href="#">Domain Name</a></p>
-        </footer>
-    </div>
+</div>
+
+<div class="footer fixed-bottom text-center">
+    © 2018 Copyright: Vitamine
+</div>
+
 </body>
 </html>
-
-
-

@@ -10,99 +10,108 @@
     <title>Doctor - Show Requests</title>
     <meta charset="iso-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @Styles.Render("~/Styles/layout_admin_requests.css")
-    @Styles.Render("~/Styles/mediaqueries.css")
-    <script src="scripts/jquery.1.9.0.min.js"></script>
-    <script src="scripts/jquery-mobilemenu.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    @Styles.Render("~/Styles/style.css")
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js">
+    </script>
 </head>
 <body>
 
-    <div class="wrapper row1">
-        <header id="header" class="clear">
-            <div id="hgroup">
-                <h1><a href="#">Add Blood Request</a></h1>
-                <h2><a href="#">Doctor</a></h2>
+<div id="header">
+    <div class="container">
+        <div class="row">
+            <div id="hgroup" class="col-sm-8 ml-4">
+                <div class="row">
+                    <a href="#" id="page-title">Make A Blood Request</a>
+                </div>
+                <div class="row">
+                    <a href="#" id="page-owner">DOCTOR</a>
+                </div>
             </div>
-            <form action="login.html" method="post">
-                @Html.ActionLink("Log Out", "LogOut", "Login", null, new { @class = "sf_submit" })
+            <form action="login.html" method="post" class="col-sm-1 offset-sm-2">
+                @Html.ActionLink("Log Out", "LogOut", "Login", null, new {@class = "btn auth-button"})
             </form>
-            <nav>
-                <ul>
-                    <li>@Html.ActionLink("Show Blood Requests", "MainDoctorPage", "Doctor", null, new { @class = "header nav li" })</li>
-                </ul>
-            </nav>
-        </header>
-    </div>
+        </div>
+        <nav class="navbar navbar-expand-sm">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    @Html.ActionLink("SHOW BLOOD REQUESTS", "MainDoctorPage", "Doctor", null, new {@class = "nav-link"})
+                </li>
+                <li class="nav-item current">
+                    <a href="#" class="nav-link">MAKE BLOOD REQUESTS</a>
+                </li>
+            </ul>
+        </nav>
 
-    <div class="wrapper row3">
-        <div class="container">
+    </div>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            Make a blood request:
+        </div>
+        <div class="card-body">
             @using (Html.BeginForm("CreateRequest", "Doctor", FormMethod.Post))
-    {
-        <div class="row">
-            <div class="col-25">
-                <label for="patientCnp">Patient Cnp</label>
-            </div>
-            <div class="col-75">
+            {
+                <div class="form-group">
+                    <label for="patientCnp">Patient CNP</label>
+                    @Html.TextBoxFor(model => model.patientCnp, new {@required = "required", @class = "form-control"})
+                </div>
 
-                @Html.TextBoxFor(model => model.patientCnp, new { @required = "required" })
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-25">
-                <label for="bloodType.Group">Blood Group</label>
-            </div>
-            <div class="col-75">
+                <div class="form-group">
+                    <label for="bloodType.Group">Blood Group</label>
+                    @Html.DropDownListFor(model => model.bloodGroup, new SelectList(new[] {"A", "AB", "B", "0"}), "Select Group", new {@class = "form-control"})
+                </div>
 
-                @Html.DropDownListFor(model => model.bloodGroup,
-                      new SelectList(new[] { "A", "AB", "B", "0" }), "Select Group")
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-25">
-                <label for="bloodType.PH">Blood RH</label>
-            </div>
-            <div class="col-75">
-                @Html.DropDownListFor(model => model.bloodRh,
-                      new SelectList(new[] { "positive", "negative" }), "Select RH")
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-25">
-                <label for="quantity">Quantity</label>
-            </div>
-            <div class="col-75">
-                @Html.TextBoxFor(model => model.quantity, new { @Type = "number", @required = "required" })
-            </div>
-        </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    @Html.TextBoxFor(model => model.quantity, new {@required = "required", @class = "form-control"})
+                </div>
 
-        <div class="row">
-            <div class="col-25">
-                <label for="partOfBlood">PartOfBlood</label>
-            </div>
-            <div class="col-75">
-                @Html.DropDownListFor(model => model.bloodComponent,
-              EnumHelper.GetSelectList(typeof(BloodDonation.Utils.Enums.Component)), "Select Part Of Blood")
-            </div>
-        </div>
+                <div class="form-group">
+                    <div class="form-check form-check-inline">
+                        @Html.RadioButtonFor(model => model.bloodRh, "Positive", new {id = "positive", @class = "form-check-input"})
+                        @Html.Label("positive", "Positive RH", new {@class = "form-check-label"})
+                    </div>
+                    <div class="form-check form-check-inline">
+                        @Html.RadioButtonFor(model => model.bloodRh, "Negative", new {id = "negative", @class = "form-check-input"})
+                        @Html.Label("negative", "Negative RH", new {@class = "form-check-label"})
+                    </div>
+                </div>
 
-        <div class="row">
-            <div class="col-25">
-                <label for="urgency">Urgency</label>
-            </div>
-            <div class="col-75">
-                @Html.DropDownListFor(model => model.urgency,
-        EnumHelper.GetSelectList(typeof(BloodDonation.Utils.Enums.DoctorUrgencyLevel)), "Select Urgency")
-            </div>
-        </div>
+                <div class="form-group">
+                    @foreach (var comp in EnumHelper.GetSelectList(typeof(BloodDonation.Utils.Enums.Component)))
+                    {
+                        <div class="form-check form-check-inline">
+                            @Html.RadioButtonFor(model => model.bloodComponent, comp.Text, new {id = comp.ToString(), @class = "form-check-input"})
+                            @Html.Label(comp.Value, comp.Text, new {@class = "form-check-label"})
+                        </div>
+                    }
+                </div>
 
+                <div class="form-group">
+                    @foreach (var comp in EnumHelper.GetSelectList(typeof(BloodDonation.Utils.Enums.DoctorUrgencyLevel)))
+                    {
+                        <div class="form-check form-check-inline">
+                            @Html.RadioButtonFor(model => model.urgency, comp.Text, new {id = comp.ToString(), @class = "form-check-input"})
+                            @Html.Label(comp.Value, comp.Text + " Urgency", new {@class = "form-check-label"})
+                        </div>
+                    }
+                </div>
 
-        <div class="row">
-            <input type="submit" value="Send Request">
-        </div>
-
-}
+                <input type="submit" value="Send Request" class="btn btn-success">
+            }
 
         </div>
     </div>
+</div>
+
+<div class="footer fixed-bottom text-center">
+    © 2018 Copyright: Vitamine
+</div>
+
 </body>
 </html>

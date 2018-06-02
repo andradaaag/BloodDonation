@@ -6,142 +6,128 @@
     <title>Approve Personnel Requests - Admin</title>
     <meta charset="iso-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @Styles.Render("~/Styles/layout_admin_requests.css")
-    @Styles.Render("~/Styles/mediaqueries.css")
-    <script src="scripts/jquery.1.9.0.min.js"></script>
-    <script src="scripts/jquery-mobilemenu.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    @Styles.Render("~/Styles/style.css")
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js">
+    </script>
 </head>
 <body>
 
-    <div class="wrapper row1">
-        <header id="header" class="clear">
-            <div id="hgroup">
-                <h1><a href="#">Manage Donation Centers</a></h1>
-                <h2><a href="#">Admin</a></h2>
-            </div>
-            <form action="login.html" method="post">
-                @Html.ActionLink("Log Out", "LogOut", "Login", null, new { @class = "sf_submit" })
-            </form>
-            <nav>
-                <ul>
-                    <li>@Html.ActionLink("Requests - Doctor", "GetDoctorAccountRequestsPage", "Admin", null, new { @class = "header nav li" })</li>
-                    <li>@Html.ActionLink("Requests - Donation Center Personnel", "GetPersonnelAccountRequestsPage", "Admin", null, new { @class = "header nav li" })</li>
-                    <li>@Html.ActionLink("Doctors", "GetDoctorsPage", "Admin", null, new { @class = "header nav li" })</li>
-                    <li>@Html.ActionLink("Donation Center Personnel", "GetPersonnelPage", "Admin", null, new { @class = "header nav li" })</li>
-                    <li>@Html.ActionLink("Hospitals", "GetHospitalsPage", "Admin", null, new { @class = "header nav li" })</li>
-                    <li>@Html.ActionLink("Donation Centers", "GetDonationCentersPage", "Admin", null, new { @class = "header nav li" })</li>
-
-                </ul>
-            </nav>
-        </header>
-    </div>
-    <!-- content -->
-    <div class="wrapper row3">
+<div id="header">
+    <div class="container">
         <div class="row">
-
-            <div class="container-small">
-
-                <h2> Add new donation center:</h2>
-
-                @using (Html.BeginForm("AddNewDonationCenter", "Admin", FormMethod.Post))
-        {
-            <div class="row">
-                <div class="col-25">
-                    <label for="fname">Name:  </label>
+            <div id="hgroup" class="col-sm-8 ml-4">
+                <div class="row">
+                    <a href="#" id="page-title">Manage Donation Centers</a>
                 </div>
-                <div class="col-75">
-                    @Html.TextBoxFor(model => model.Name, new { @required = "required" })
+                <div class="row">
+                    <a href="#" id="page-owner">ADMIN</a>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-25">
-                    <label for="fname">Location: </label>
-                </div>
-                <div class="col-75">
-                    @Html.TextBoxFor(model => model.Location, new { @required = "required" })
-                </div>
-            </div>
-
-            <div class="row">
-                <input type="submit" value="Add">
-            </div>
-}
-
-            </div>
-
-
-            <div class="container-small">
-                @using (Html.BeginForm("SearchDonationCenters", "Admin", FormMethod.Post))
-        {
-            <div class="row">
-                <div class="col-25">
-                    <label for="fname">Search by name: </label>
-                </div>
-                <div class="col-75">
-                    @Html.TextBoxFor(model => model.SearchName, new { })
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-25">
-                    <label for="fname">Search by location: </label>
-                </div>
-                <div class="col-75">
-                    @Html.TextBoxFor(model => model.SearchLocation, new { })
-                </div>
-            </div>
-
-            <div class="row">
-
-                <input type="submit" value="Search">
-
-                @if (Model.IsViewingSearchResults)
-        {
-            @Html.ActionLink("Clear", "GetDonationCentersPage", "Admin", null, new { @class = "clear-button" })
-}
-
-
-            </div>
-}
-
-            </div>
-
-
-
-            <div class="container">
-                <table style="width:100%">
-                    <tr>
-                        <th>Name</th>
-                        <th>Location</th>
-                        <th>Action</th>
-                    </tr>
-                    <!-- Add informations in table -->
-
-                    @foreach (var req in Model.GetDonationCenters())
-            {
-                <tr>
-                    <td>@req.Name</td>
-                    <td>@req.Location</td>
-                    <td>
-                        @Html.ActionLink("Delete", "DeleteDonationCenter", "Admin", new { id = req.ID}, new { @class = "button" })
-                    </td>
-                </tr>
-    }
-
-                </table>
-            </div>
+            <form action="login.html" method="post" class="col-sm-1 offset-sm-2">
+                @Html.ActionLink("Log Out", "LogOut", "Login", null, new {@class = "btn auth-button"})
+            </form>
         </div>
+        <nav class="navbar navbar-expand-sm">
+            <ul class="navbar-nav">
+                <li class="nav-item">@Html.ActionLink("DOCTOR REQUESTS", "GetDoctorAccountRequestsPage", "Admin", null, new {@class = "nav-link"})</li>
+                <li class="nav-item">@Html.ActionLink("DONATION CENTER PERSONNEL REQUESTS", "GetPersonnelAccountRequestsPage", "Admin", null, new {@class = "nav-link"})</li>
+                <li class="nav-item">@Html.ActionLink("DOCTORS", "GetDoctorsPage", "Admin", null, new {@class = "nav-link"})</li>
+                <li class="nav-item">@Html.ActionLink("DONATION CENTER PERSONNEL", "GetPersonnelPage", "Admin", null, new {@class = "nav-link"})</li>
+                <li class="nav-item">@Html.ActionLink("HOSPITALS", "GetHospitalsPage", "Admin", null, new {@class = "nav-link"})</li>
+                <li class="nav-item current">
+                    <a href="#" class="nav-link">DONATION CENTERS</a>
+                </li>
+            </ul>
+        </nav>
 
     </div>
+</div>
 
-    <!-- Footer -->
-    <div class="wrapper row4">
-        <footer id="footer" class="clear">
-            <p class="fl_left">Copyright &copy; 2013 - All Rights Reserved - <a href="#">Domain Name</a></p>
-        </footer>
+<div class="container">
+    <div class="card mb-3">
+        <div class="card-header">Add new donation center:</div>
+        <div class="card-body">
+            @using (Html.BeginForm("AddNewDonationCenter", "Admin", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label>Name: </label>
+                    @Html.TextBoxFor(model => model.Name, new {@required = "required", @class = "form-control"})
+                </div>
+
+                <div class="form-group">
+                    <label>Location: </label>
+                    @Html.TextBoxFor(model => model.Location, new {@required = "required", @class = "form-control"})
+                </div>
+
+                <input type="submit" value="Add" class="btn btn-success">
+            }
+
+        </div>
     </div>
+
+
+    <div class="card mb-3">
+        <div class="card-body">
+            @using (Html.BeginForm("SearchDonationCenters", "Admin", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label>Search by name: </label>
+                    @Html.TextBoxFor(model => model.SearchName, new {@class = "form-control"})
+                </div>
+
+                <div class="form-group">
+                    <label>Search by location: </label>
+                    @Html.TextBoxFor(model => model.SearchLocation, new {@class = "form-control"})
+                </div>
+
+                <div>
+                    <input type="submit" value="Search" class="btn btn-success">
+                    @if (Model.IsViewingSearchResults)
+                    {
+                        @Html.ActionLink("Clear", "GetDonationCentersPage", "Admin", null, new {@class = "btn btn-warning"})
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            Donation Centers:
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var req in Model.GetDonationCenters())
+                {
+                    <tr>
+                        <td>@req.Name</td>
+                        <td>@req.Location</td>
+                        <td>
+                            @Html.ActionLink("Delete", "DeleteDonationCenter", "Admin", new {id = req.ID}, new {@class = "btn btn-danger"})
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer fixed-bottom text-center">
+    © 2018 Copyright: Vitamine
+</div>
+
 </body>
 </html>
-
-
