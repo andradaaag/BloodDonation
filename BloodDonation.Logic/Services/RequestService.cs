@@ -18,17 +18,19 @@ namespace BloodDonation.Logic.Services
         private LogicToDataMapperPersonnel LogicToData = new LogicToDataMapperPersonnel();
         private DataToLogicMapperPersonnel DataToLogic = new DataToLogicMapperPersonnel();
         private StoredBloodRepository bloodRepo = new StoredBloodRepository();
+        private RequestRepository reqRepo = new RequestRepository();
+        private DonationCenterPersonnelRepository persRepo = new DonationCenterPersonnelRepository();
 
 
         //Get sorted list of existing stored blood. Only needed blood type. Ordered Ascending by time (oldest blood first)
-        public List<Logic.Models.StoredBlood> BloodRequestGetOrderedListOfStoredBloodForBloodType(string donationCenterID, BloodType requiredBlood)
+        public List<StoredBlood> GetCompatibleBlood(string donationCenterID, BloodType blood,Component component)
         {
             return bloodRepo
                     .FindAllByDonationCenter(donationCenterID)
                     .AsEnumerable()
                     .Select(x => DataToLogic.StoredBlood(x))
-                    .Where(storedBlood => storedBlood.BloodType.Group == requiredBlood.Group &&
-                                          storedBlood.BloodType.RH == requiredBlood.RH)
+                    .Where(storedBlood => blood.bloodComponent == component)
+                    .Where(storedBlood => blood.isCompatible(storedBlood.BloodType))
                     .OrderBy(storedBlood => storedBlood.CollectionDate)
                     .ToList();
         }
@@ -72,21 +74,20 @@ namespace BloodDonation.Logic.Services
                 );
         }
 
-        public void BloodRequestCompleteRequest(string donationCenterID, Models.RequestPersonnel bloodRequest)
+        public void BloodRequestCompleteRequest(string donationCenterID, RequestPersonnel bloodRequest)
         {
             List<Logic.Models.StoredBlood>  usedBlood =
-                 BloodRequestGetOrderedListOfStoredBloodForBloodType(donationCenterID, bloodRequest.bloodType);
+                 GetCompatibleBlood(donationCenterID, bloodRequest.bloodType,bloodRequest.bloodType.bloodComponent);
             BloodRequestUpdateExistingBlood(usedBlood, bloodRequest.quantity);
         }
 
-        //Manages the whole send blood transaction
-        public int BloodRequestGetUsedBlood(string donationCenterID, Models.RequestPersonnel bloodRequest, ref List<Logic.Models.StoredBlood> usedBlood)
-        {
-            usedBlood = 
-                BloodRequestGetOrderedListOfStoredBloodForBloodType(donationCenterID,bloodRequest.bloodType);
 
-            int diff = BloodRequestGetAmountOfBlood(usedBlood) - bloodRequest.quantity;
-            return diff;
+        public List<StoredBlood> AcceptRequest(RequestPersonnel bloodRequest, string UID)
+        {
+            DonationCenterPersonnel loggedPersonnel = DataToLogic.Personnel(persRepo.GetOne(UID));
+            string donationCenterID = loggedPersonnel.DonationCenterID;
+            List<StoredBlood> usedBlood = GetCompatibleBlood(donationCenterID, bloodRequest.bloodType,bloodRequest.bloodType.bloodComponent);
+            return usedBlood;
         }
 
         public List<RequestPersonnel> FindAll()

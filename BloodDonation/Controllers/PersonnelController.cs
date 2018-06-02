@@ -1,6 +1,7 @@
 ﻿using BloodDonation.Logic   .Services;
 using BloodDonation.Mappers;
 using BloodDonation.Models;
+using BloodDonation.Services;
 using BloodDonation.Utils.Enums;
 using Firebase.Auth;
 using System;
@@ -17,7 +18,9 @@ namespace BloodDonation.Controllers
     {
         private DonationService donationService = new DonationService();
         private PersonnelService personnelService = new PersonnelService();
-        private RequestService requestService = new RequestService();
+        private Logic.Services.RequestService requestService = new Logic.Services.RequestService();
+
+        private Services.RequestService requestServicePrez = new Services.RequestService();
         private StoredBloodService storedBloodService = new StoredBloodService();
         private DoctorService doctorService = new DoctorService();
 
@@ -180,23 +183,15 @@ namespace BloodDonation.Controllers
 
         public ActionResult AcceptRequest(string id)
         {
-            List<Logic.Models.StoredBlood> usedBlood = new List<Logic.Models.StoredBlood>();
-
-            RequestPersonnel bloodRequest = BusinessToPresentation.Request(requestService.GetOne(id));
-            Personnel loggedPersonnel = BusinessToPresentation.Personnel(personnelService.GetOne(GetUid()));
-            string donationCenterID = loggedPersonnel.DonationCenterID;
-
-            int missingBlood = requestService.BloodRequestGetUsedBlood(donationCenterID, requestService.GetOne(id), ref usedBlood);
-
-            if (missingBlood <0)
-            {
-                String param = Convert.ToString( -missingBlood);
-                return goIfPossible(View("MissingBloodView", model: param));
+            try {
+                return goIfPossible(View("AcceptRequestView",requestServicePrez.AcceptRequest(id,GetUid())));
             }
-
-            bloodRequest = AddDoctorEmail(bloodRequest);
-            bloodRequest.quantityString = Convert.ToString(bloodRequest.quantity);
-            return goIfPossible( View( "AcceptRequestView", new TransferObjectForAcceptView(usedBlood, bloodRequest) ) );
+            catch (Exception e)
+            {
+                return goIfPossible(View("MissingBloodView", model: e.Message));
+            }
+            
+            
         }
 
         ///CRISTI LOG EXPIRED BLOOD phase 4 get again all expired blood & delete it by ID

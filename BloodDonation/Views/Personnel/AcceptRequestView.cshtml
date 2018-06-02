@@ -18,7 +18,7 @@
 <body>
 
 
-    
+
 
 
     <div class="wrapper row1">
@@ -35,7 +35,7 @@
     <div class="wrapper row3">
         <div class="container">
             <h1> Do you wish to accept the following blood request? </h1>
-            
+
             <div>
                 <table style="width:100%">
                     <tr>
@@ -44,20 +44,15 @@
                         <th>BloodType</th>
                     </tr>
                     @foreach (var req in Model.usedBlood)
-                     {
-                       
-                     <tr>
-                    <td>@req.ID</td>
-                    <td>@req.Amount</td>
-                    <td>Component : @req.Component <br> Blood Group : @req.BloodType.Group <br> Blood RH: @req.BloodType.RH  </td>
-                    <td>
-                        <div class="row">
-                            <input type="submit" value="Edit">
-                        </div>
-                    </td>
-                </tr>
-}
-}
+                    {
+
+                        <tr>
+                            <td>@req.ID</td>
+                            <td>@req.Amount</td>
+                            <td>Component : @req.Component <br> Blood Group : @req.BloodTypeGroup <br> Blood RH: @req.BloodTypeRH  </td>
+                        </tr>
+                    }
+
 
                 </table>
             </div>
@@ -159,11 +154,13 @@
                 </div>
 
                 <div class="col-75">
-                    @if(Model.bloodRequest.bloodType.PH){
-                        <input type="text" id="Foo" name="pos" value="Positive" readonly="readonly"/>
+                    @if (Model.bloodRequest.bloodType.PH)
+                    {
+                        <input type="text" id="Foo" name="pos" value="Positive" readonly="readonly" />
                     }
-                    else{
-                    <input type="text" id="Foo" name="neg" value="Negative" readonly="readonly" />
+                    else
+                    {
+                        <input type="text" id="Foo" name="neg" value="Negative" readonly="readonly" />
                     }
                 </div>
             </div>
@@ -174,7 +171,7 @@
                     @{
                         var reqID = Model;
                     }
-                    @Html.ActionLink("Confirm", "ConfirmAcceptRequest", "Personnel", new { id = Model.bloodRequest.ID },null)
+                    @Html.ActionLink("Confirm", "ConfirmAcceptRequest", "Personnel", new { id = Model.bloodRequest.ID }, null)
                 </center>
             </div>
 

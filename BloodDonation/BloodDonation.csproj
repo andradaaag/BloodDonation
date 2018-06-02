@@ -280,6 +280,7 @@
     <Compile Include="Models\SignUpForm.cs" />
     <Compile Include="Models\StoredBloodModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\RequestService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
