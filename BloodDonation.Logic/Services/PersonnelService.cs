@@ -21,7 +21,7 @@ namespace BloodDonation.Logic.Services
         private readonly DonationCenterPersonnelRepository dcprRepo = new DonationCenterPersonnelRepository();
         private readonly StoredBloodRepository bloodRepo = new StoredBloodRepository();
         private readonly DonorRepository donorRepo = new DonorRepository();
-        
+
 
         private readonly DateTime epoch = new DateTime(1970, 1, 1);
         public List<AccountRequest> GetPersonnelAccountRequests()
@@ -30,23 +30,23 @@ namespace BloodDonation.Logic.Services
             return null;
         }
 
-        
+
 
         public void AddDonationInDB(Donation donation, string UID, bool keepWhole)
         {
-            donation.Stage = keepWhole? Stage.Preparation : Stage.Sampling;
+            donation.Stage = keepWhole ? Stage.Preparation : Stage.Sampling;
             donation.DonationCenterId = dcprRepo.GetOne(UID).DonationCenterID;
             donation.DonationTime = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
-            donation.RBC = keepWhole ? -1:0;
+            donation.RBC = keepWhole ? -1 : 0;
             donRepo.Add(logicToData.Donation(donation));
 
-      
+
 
         }
 
         public void SeparateComponentsFromDonation(Donation donation)
         {
-            
+
             Donation original = dataToLogic.Donation(donRepo.GetOne(donation.ID));
             original.Plasma = donation.Plasma;
             original.RBC = donation.RBC;
@@ -92,7 +92,7 @@ namespace BloodDonation.Logic.Services
         }
 
         // used for whole blood it automatically does noBags*amount
-        private StoredBlood WholeFromDonation(Donation donation, Component comp,string centerId, int amount, string donorEmail)
+        private StoredBlood WholeFromDonation(Donation donation, Component comp, string centerId, int amount, string donorEmail)
         {
 
             return new StoredBlood
@@ -109,7 +109,7 @@ namespace BloodDonation.Logic.Services
                 DonorEmail = donorEmail
             };
         }
-        
+
         // used for components of  blood it considers amount == the quantity of substance ('cause nicu wouldn't let me use precentages) 
         private StoredBlood CompFromDonation(Donation donation, Component comp, string centerId, int amount, string donorEmail)
         {
@@ -151,19 +151,19 @@ namespace BloodDonation.Logic.Services
             if (donation.IsAccepted())
             {
                 string centerId = donation.DonationCenterId;
-                donation.Stage =Stage.Redistribution;
-                string email = donorRepo.GetDonorByCNP(donation.DonorCNP)
+                donation.Stage = Stage.Redistribution;
+                string email = donorRepo.GetDonorByCNP(donation.DonorCNP).emailAddress;
 
                 if (donation.RBC == -1)
                 {
-                    StoredBlood whole = WholeFromDonation(donation, Component.Whole, centerId, 400);
+                    StoredBlood whole = WholeFromDonation(donation, Component.Whole, centerId, 400, email);
                     bloodRepo.Add(logicToData.StoredBlood(whole));
                 }
                 else
                 {
-                    StoredBlood RBC = CompFromDonation(donation, Component.RedBloodCells, centerId, donation.RBC);
-                    StoredBlood Plasma = CompFromDonation(donation, Component.Plasma, centerId, donation.Plasma);
-                    StoredBlood Thrombocytes = CompFromDonation(donation, Component.Thrombocytes, centerId, donation.Thrombocytes);
+                    StoredBlood RBC = CompFromDonation(donation, Component.RedBloodCells, centerId, donation.RBC, email);
+                    StoredBlood Plasma = CompFromDonation(donation, Component.Plasma, centerId, donation.Plasma, email);
+                    StoredBlood Thrombocytes = CompFromDonation(donation, Component.Thrombocytes, centerId, donation.Thrombocytes, email);
                     bloodRepo.Add(logicToData.StoredBlood(RBC));
                     bloodRepo.Add(logicToData.StoredBlood(Plasma));
                     bloodRepo.Add(logicToData.StoredBlood(Thrombocytes));
@@ -176,17 +176,17 @@ namespace BloodDonation.Logic.Services
         }
         private void AddComponentsFromBlood(SeparateBlood blood)
         {
-            
+
             string centerId = blood.DonationCenterID;
             StoredBlood RBC = CompFromBlood(blood, Component.RedBloodCells, centerId, blood.RBC);
             StoredBlood Plasma = CompFromBlood(blood, Component.Plasma, centerId, blood.Plasma);
-            StoredBlood Thrombocytes = CompFromBlood(blood, Component.Thrombocytes, centerId,  blood.Thrombocytes);
+            StoredBlood Thrombocytes = CompFromBlood(blood, Component.Thrombocytes, centerId, blood.Thrombocytes);
             bloodRepo.Add(logicToData.StoredBlood(RBC));
             bloodRepo.Add(logicToData.StoredBlood(Plasma));
             bloodRepo.Add(logicToData.StoredBlood(Thrombocytes));
             bloodRepo.DeleteById(blood.ID);
 
-            
+
         }
 
         public List<DonationCenterPersonnel> FindAll()
@@ -247,7 +247,7 @@ namespace BloodDonation.Logic.Services
 
         public StoredBloodAmounts GetArrayOfBloodQuantity(string UID)
         {
-           
+
             Task<int[]>[] paralel = { null, null, null, null };
             string donCenter = GetOne(UID).DonationCenterID;
             Component[] comps = (Component[])Enum.GetValues(typeof(Component));
@@ -260,7 +260,7 @@ namespace BloodDonation.Logic.Services
                 Plasma = paralel[2].Result,
                 Whole = paralel[3].Result
             };
-            
+
         }
 
         ///CRISTI LOG EXPIRED BLOOD phase 2 get the expired blood, check the todo below
@@ -268,12 +268,12 @@ namespace BloodDonation.Logic.Services
         {
             /// TODO please check if i am doing the "get current time in seconds from 1970" okay
             /// TODO: replace the variables with actual real life values
-            int daysForWholeBlood = 1, daysForThrombocytes = 1, daysForRedBloodCells = 1, daysForPlasma = 1;
+            int daysForWholeBlood = 42, daysForThrombocytes = 5, daysForRedBloodCells = 42, daysForPlasma = 256;
             int seconds = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
-            daysForPlasma           *= 86400;
-            daysForThrombocytes     *= 86400;
-            daysForRedBloodCells    *= 86400;
-            daysForPlasma           *= 86400;
+            daysForPlasma *= 86400;
+            daysForThrombocytes *= 86400;
+            daysForRedBloodCells *= 86400;
+            daysForPlasma *= 86400;
 
             return bloodRepo.GetExpiredBlood(daysForWholeBlood, daysForPlasma, daysForRedBloodCells, daysForThrombocytes, seconds)
                             .AsEnumerable()
