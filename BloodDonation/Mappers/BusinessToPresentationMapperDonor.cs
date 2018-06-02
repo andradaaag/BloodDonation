@@ -1,5 +1,6 @@
 ﻿using BloodDonation.Logic.Models;
 using BloodDonation.Models;
+using System;
 
 namespace BloodDonation.Mappers
 {
@@ -19,19 +20,25 @@ namespace BloodDonation.Mappers
 
         public DonorAccountRequest MapDonorAccountRequest(DonorDetailsTransferObject donorAccountDetails)
         {
-            return new DonorAccountRequest()
+            try
             {
-                ID = donorAccountDetails.ID,
-                Cnp = donorAccountDetails.Cnp,
-                FirstName = donorAccountDetails.FirstName,
-                LastName = donorAccountDetails.LastName,
-                DateOfBirth = donorAccountDetails.DateOfBirth,
-                Address = donorAccountDetails.Address,
-                Weight = donorAccountDetails.Weight,
-                Email = donorAccountDetails.Email,
-                Country = donorAccountDetails.Country,
-                Commentaries = donorAccountDetails.Commentaries
-            };
+                return new DonorAccountRequest()
+                {
+                    ID = donorAccountDetails.ID,
+                    Cnp = donorAccountDetails.Cnp,
+                    FirstName = donorAccountDetails.FirstName,
+                    LastName = donorAccountDetails.LastName,
+                    DateOfBirth = donorAccountDetails.DateOfBirth,
+                    Address = donorAccountDetails.Address,
+                    Weight = donorAccountDetails.Weight,
+                    Email = donorAccountDetails.Email,
+                    Country = donorAccountDetails.Country,
+                    Commentaries = donorAccountDetails.Commentaries
+                };
+            }catch(Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

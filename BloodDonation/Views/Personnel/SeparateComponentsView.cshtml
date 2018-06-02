@@ -78,7 +78,7 @@
                 @foreach (var req in Model.StoredBlood)
                 {
                     using (Html.BeginForm("EditBloodSeparation", "Personnel", req, FormMethod.Post))
-                    {
+                    { 
                         <tr>
                             <td>@req.ID</td>
                             <td>@req.BloodTypeGroup</td>

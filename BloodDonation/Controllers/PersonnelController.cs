@@ -117,7 +117,9 @@ namespace BloodDonation.Controllers
                 DonationCenterID = stored.DonationCenterID,
                 BloodTypeGroup = stored.BloodTypeGroup,
                 BloodTypeRH = stored.BloodTypeRH,
-                CollectionDate = (stored.CollectionDate - new DateTime(1970, 1, 1)).Seconds
+                CollectionDate = (stored.CollectionDate - new DateTime(1970, 1, 1)).Seconds,
+                DonorEmail = stored.DonnorEmail
+                
             };
             return goIfPossible(View("EditBloodSeparation", blood));
         }
@@ -178,20 +180,23 @@ namespace BloodDonation.Controllers
 
         public ActionResult AcceptRequest(string id)
         {
-            RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(id));
+            List<Logic.Models.StoredBlood> usedBlood = new List<Logic.Models.StoredBlood>();
+
+            RequestPersonnel bloodRequest = BusinessToPresentation.Request(requestService.GetOne(id));
             Personnel loggedPersonnel = BusinessToPresentation.Personnel(personnelService.GetOne(GetUid()));
             string donationCenterID = loggedPersonnel.DonationCenterID;
-            int missingBlood = requestService.GetMissingBlood(donationCenterID, PresentationToBusiness.Request(r));
 
-            if (missingBlood > 0)
+            int missingBlood = requestService.BloodRequestGetUsedBlood(donationCenterID, requestService.GetOne(id), ref usedBlood);
+
+            if (missingBlood <0)
             {
-                String param = Convert.ToString(missingBlood);
+                String param = Convert.ToString( -missingBlood);
                 return goIfPossible(View("MissingBloodView", model: param));
             }
 
-            r = AddDoctorEmail(r);
-            r.quantityString = Convert.ToString(r.quantity);
-            return goIfPossible(View("AcceptRequestView", r));
+            bloodRequest = AddDoctorEmail(bloodRequest);
+            bloodRequest.quantityString = Convert.ToString(bloodRequest.quantity);
+            return goIfPossible( View( "AcceptRequestView", new TransferObjectForAcceptView(usedBlood, bloodRequest) ) );
         }
 
         ///CRISTI LOG EXPIRED BLOOD phase 4 get again all expired blood & delete it by ID
@@ -206,24 +211,28 @@ namespace BloodDonation.Controllers
 
         public ActionResult ConfirmAcceptRequest(string id)
         {
-            requestService.EditStatus(id, Status.Accepted);
+            RequestPersonnel bloodRequest = BusinessToPresentation.Request(requestService.GetOne(id));
             Personnel loggedPersonnel = BusinessToPresentation.Personnel(personnelService.GetOne(GetUid()));
             string donationCenterID = loggedPersonnel.DonationCenterID;
-            requestService.EditSource(id, donationCenterID);
 
-            RequestPersonnel r = BusinessToPresentation.Request(requestService.GetOne(id));
-            storedBloodService.RemoveBlood(donationCenterID, r.quantity,
-                PresentationToBusiness.BloodType(r.bloodType));
+            requestService.EditStatus(id, Status.Accepted);
+            requestService.BloodRequestCompleteRequest(donationCenterID, requestService.GetOne(id));
+
+            requestService.EditSource(id, donationCenterID);
 
             return Success();
         }
 
         public ActionResult SendRequest(string id)
         {
+            EmailServiceBloodDonation mail = new EmailServiceBloodDonation();
             Logic.Models.RequestPersonnel r = requestService.GetOne(id);
             r.status = Status.OnTheWay;
             requestService.Edit(r);
+            String docMail = doctorService.findById(r.doctorId).emailAddress;
 
+            Thread th = new Thread(() => mail.ComposeDoctorMail(docMail, r.ID, r.source));
+            th.Start();
             
                 
             return goIfPossible(View("PendingRequestsView", GetDonationCenterRequests()));

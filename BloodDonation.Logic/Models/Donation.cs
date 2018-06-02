@@ -24,7 +24,7 @@ namespace BloodDonation.Logic.Models
         public Stage Stage;
 
         public int Quantity;
-
+        public string DonorEmail { get;set; }
         public int Plasma;
         public int RBC;
         public int Thrombocytes;
@@ -38,7 +38,6 @@ namespace BloodDonation.Logic.Models
 
         public string DonationCenterId { get; set; }
         public long DonationTime { get; set; }
-
         public bool IsAccepted() => !(Hiv && HepatitisB && HepatitisC && Syphilis && Htlv && Alt);
 
     }

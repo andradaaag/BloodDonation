@@ -16,6 +16,28 @@
 
     <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 </head>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $(".mkAccount").hide();
+    });
+
+    $(function () {
+        $("#DonorEmail").bind('input propertychange',function () {
+            if ($(this).val().length > 0) {
+                $(".mkAccount").show();
+            }
+            else {
+                $(".mkAccount").hide();
+            }
+        });
+    });
+</script>
+
+
 <body>
     <div class="wrapper row1">
         <header id="header" class="clear">
@@ -30,91 +52,111 @@
     <div class="wrapper row3">
         <div class="container">
             @using (Html.BeginForm("AddDonationInDb", "Personnel", FormMethod.Post))
-            {
-                @Html.ValidationSummary(true)
-                <div class="row">
-                    <div class="col-25">
-                        <label for="fname">Blood Group</label>
-                    </div>
+    {
+        @Html.ValidationSummary(true)
+        <div class="row">
+            <div class="col-25">
+                <label for="fname">Blood Group</label>
+            </div>
 
-                    <div>
-                        @Html.RadioButtonFor(model => model.BloodTypeGroup, "A", new { id = "A" })
-                        @Html.Label("A", "A")
+            <div>
+                @Html.RadioButtonFor(model => model.BloodTypeGroup, "A", new { id = "A" })
+                @Html.Label("A", "A")
 
-                        @Html.RadioButtonFor(model => model.BloodTypeGroup, "AB", new { id = "AB" })
-                        @Html.Label("AB", "AB")
-                    </div>
-                    <div>
-                        @Html.RadioButtonFor(model => model.BloodTypeGroup, "B", new { id = "B" })
-                        @Html.Label("B", "B")
-                        @Html.RadioButtonFor(model => model.BloodTypeGroup, "O", new { id = "O" })
-                        @Html.Label("O", "O")
-                    </div>
+                @Html.RadioButtonFor(model => model.BloodTypeGroup, "AB", new { id = "AB" })
+                @Html.Label("AB", "AB")
+            </div>
+            <div>
+                @Html.RadioButtonFor(model => model.BloodTypeGroup, "B", new { id = "B" })
+                @Html.Label("B", "B")
+                @Html.RadioButtonFor(model => model.BloodTypeGroup, "O", new { id = "O" })
+                @Html.Label("O", "O")
+            </div>
 
-                </div>
+        </div>
 
-                <div class="row">
-                    <div class="col-25">
-                        <label for="fname">RH Type</label>
-                    </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="fname">RH Type</label>
+            </div>
 
-                    <div>
-                        @Html.RadioButtonFor(model => model.BloodTypeRH, "Positive", new { id = "positive" })
-                        @Html.Label("positive", "Positive")
-                    </div>
-                    <div>
-                        @Html.RadioButtonFor(model => model.BloodTypeRH, "Negative", new { id = "negative" })
-                        @Html.Label("negative", "Negative")
-                    </div>
-
-
-                </div>
-
-                <div class="row">
-                    <div class="col-25">
-                        <label for="fname">Donor Id</label>
-                    </div>
-                    <div class="col-75">
-                        @Html.TextBoxFor(model => model.DonorId, new { @required = "required", placeholder = "Donor id..." })
-                    </div>
-                </div>
+            <div>
+                @Html.RadioButtonFor(model => model.BloodTypeRH, "Positive", new { id = "positive" })
+                @Html.Label("positive", "Positive")
+            </div>
+            <div>
+                @Html.RadioButtonFor(model => model.BloodTypeRH, "Negative", new { id = "negative" })
+                @Html.Label("negative", "Negative")
+            </div>
 
 
-                <div class="row">
-                    <div class="col-25">
-                        <label for="fname">Quantity (in #bags)</label>
-                    </div>
-                    <div class="col-75">
-                        @Html.TextBoxFor(model => model.Quantity, new { @required = "required", placeholder = "# bags" })
-                    </div>
-                </div>
+        </div>
 
-                <div class="row">
-                    <div class="col-25">
-                        <label for="lname">For who is the donation (leave empty if N/A)</label>
-                    </div>
-                    <div class="col-75">
-                        @Html.TextBoxFor(model => model.Cnp, new { placeholder = "CNP..." })
-                    </div>
-                </div>
-
-                
-                <div class="row">
-                    <div class="col-25">
-                        <label for="lname">Keep blood whole</label>
-                    </div>
-                    <div class="col-75">
-                        @Html.CheckBoxFor(x => x.KeepWhole, new { })
-                    </div>
-                </div>
-
-                
+        <div class="row">
+            <div class="col-25">
+                <label for="fname">Donor Id</label>
+            </div>
+            <div class="col-75">
+                @Html.TextBoxFor(model => model.DonorId, new { @required = "required", placeholder = "Donor id..." })
+            </div>
+        </div>
 
 
-                <div class="row">
-                    <input type="submit" value="Add donation">
-                </div>
-            }
+        <div class="row">
+            <div class="col-25">
+                <label for="fname">Quantity (in #bags)</label>
+            </div>
+            <div class="col-75">
+                @Html.TextBoxFor(model => model.Quantity, new { @required = "required", placeholder = "# bags" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="lname">For who is the donation (leave empty if N/A)</label>
+            </div>
+            <div class="col-75">
+                @Html.TextBoxFor(model => model.Cnp, new { placeholder = "CNP..." })
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-25">
+                <label for="lname">The email of the donor (Leave empty if gdpr) </label>
+            </div>
+            <div class="col-75">
+                @Html.TextBoxFor(model => model.DonorEmail, new { placeholder = "Donor Email", @class = "" })
+            </div>
+        </div>
+
+
+        <div class="mkAccount">
+            <div class="col-25">
+                <label for="lname">MK Account</label>
+            </div>
+            <div class="col-75">
+                @Html.CheckBoxFor(x => x.KeepWhole, new { })
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-25">
+                <label for="lname">Keep blood whole</label>
+            </div>
+            <div class="col-75">
+                @Html.CheckBoxFor(x => x.KeepWhole, new { })
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <input type="submit" value="Add donation">
+        </div>
+}
 
         </div>
     </div>

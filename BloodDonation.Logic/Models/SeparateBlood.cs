@@ -16,6 +16,8 @@ namespace BloodDonation.Logic.Models
         public int Plasma { get; set; }
         public int Thrombocytes { get; set; }
 
+        public string DonorEmail { get; set; }
+
         public long CollectionDate { get; set; }
         //  will be chanced to an enum when passed forward
         public string DonationCenterID { get; set; }

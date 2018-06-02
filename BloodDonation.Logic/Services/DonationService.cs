@@ -63,7 +63,7 @@ namespace BloodDonation.Logic.Services
                .FindByDonationCenter(donationCenterID)
                .AsEnumerable()
                .Select(i => DataToLogic.Donation(i))
-               .Where( i=> i.Stage != Stage.Redistribution && i.Stage != Stage.Failed)
+               .Where(i => i.Stage != Stage.Redistribution && i.Stage != Stage.Failed)
                .ToList();
         }
 
@@ -87,12 +87,12 @@ namespace BloodDonation.Logic.Services
             return DataToLogic.Donation(Repository.GetOne(id));
         }
 
-        public  List<Donation> FindUnsolved()
+        public List<Donation> FindUnsolved()
         {
             return Repository
                 .FindUnresolved()
                 .AsEnumerable()
-                .Select(i=>DataToLogic.Donation(i))
+                .Select(i => DataToLogic.Donation(i))
                 .ToList();
         }
     }

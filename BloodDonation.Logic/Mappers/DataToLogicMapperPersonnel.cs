@@ -34,7 +34,8 @@ namespace BloodDonation.Logic.Mappers
                 Stage = donation.Stage,
                 Syphilis = donation.Syphilis,
                 Thrombocytes = donation.Thrombocytes,
-                DonationTime = donation.DonationTime
+                DonationTime = donation.DonationTime,
+                DonorEmail = donation.DonorEmail
             };
             
         }
@@ -52,7 +53,9 @@ namespace BloodDonation.Logic.Mappers
                 Component = i.Component,
                 CollectionDate = i.CollectionDate,
                 Amount = i.Amount,
-                DonationCenterID = i.DonationCenterID
+                DonationCenterID = i.DonationCenterID,
+                DonorEmail = i.DonorEmail
+                
             };
             
         }

@@ -33,7 +33,8 @@ namespace BloodDonation.Mappers
                 Syphilis = donation.Syphilis,
                 Thrombocytes = donation.Thrombocytes,
                 DonationTime = donation.DonationTime,
-                DonationCenterId = donation.DonationCenterId
+                DonationCenterId = donation.DonationCenterId,
+                DonorEmail = donation.DonorEmail == null ? "" : donation.DonorEmail
             };
         }
         public Logic.Models.StoredBlood StoredBlood(StoredBloodModel b)
@@ -49,7 +50,8 @@ namespace BloodDonation.Mappers
                 CollectionDate = (b.CollectionDate - new DateTime(1970, 1, 1)).Seconds,
                 Amount = b.Amount,
                 ID = b.ID,
-                DonationCenterID = b.DonationCenterID
+                DonationCenterID = b.DonationCenterID,
+                DonorEmail = b.DonnorEmail
             };
         }
 
@@ -113,8 +115,8 @@ namespace BloodDonation.Mappers
                 DonationCenterID = blood.DonationCenterID,
                 RBC = blood.RBC,
                 Plasma = blood.Plasma,
-                Thrombocytes = blood.Thrombocytes
-
+                Thrombocytes = blood.Thrombocytes,
+                DonorEmail=blood.DonorEmail
             };
         }
 

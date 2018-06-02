@@ -30,7 +30,8 @@ namespace BloodDonation.Mappers
                 Syphilis = donation.Syphilis,
                 Thrombocytes = donation.Thrombocytes,
                 DonationTime = donation.DonationTime,
-                DonationCenterId = donation.DonationCenterId
+                DonationCenterId = donation.DonationCenterId,
+                DonorEmail = donation.DonorEmail
             };
         }
         public StoredBloodModel StoredBlood(Logic.Models.StoredBlood  b)
@@ -109,7 +110,8 @@ namespace BloodDonation.Mappers
                 BloodTypeGroup = sb.BloodType.Group,
                 BloodTypeRH = sb.BloodType.RH ? "Positive" : "Negative",
                 CollectionDate = sb.CollectionDate,
-                DonationCenterID = sb.DonationCenterID
+                DonationCenterID = sb.DonationCenterID,
+                DonorEmail = sb.DonorEmail
             };
         }
 

@@ -274,6 +274,7 @@
     <Compile Include="Models\Personnel.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\SeparateStoredBloodModel.cs" />
+    <Compile Include="Models\TransferObjectForAcceptView.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\ShowDonorDonations.cs" />
     <Compile Include="Models\SignUpForm.cs" />

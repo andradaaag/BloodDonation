@@ -19,7 +19,7 @@ namespace BloodDonation.Models
         //  will be chanced to an enum when passed forward
         public string Component { get; set; }
         public string DonationCenterID { get; set; }
-        
+        public string DonnorEmail { get; set; }
 
     }
 }

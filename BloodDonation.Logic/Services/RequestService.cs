@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BloodDonation.Logic.Models;
 using BloodDonation.Utils.Enums;
+using System.Threading;
 
 namespace BloodDonation.Logic.Services
 {
@@ -16,35 +17,76 @@ namespace BloodDonation.Logic.Services
         private RequestRepository Repository = new RequestRepository();
         private LogicToDataMapperPersonnel LogicToData = new LogicToDataMapperPersonnel();
         private DataToLogicMapperPersonnel DataToLogic = new DataToLogicMapperPersonnel();
+        private StoredBloodRepository bloodRepo = new StoredBloodRepository();
 
 
-
-        public int GetCompatibleStoredBlood(string donationCenterID, BloodType bloodType)
+        //Get sorted list of existing stored blood. Only needed blood type. Ordered Ascending by time (oldest blood first)
+        public List<Logic.Models.StoredBlood> BloodRequestGetOrderedListOfStoredBloodForBloodType(string donationCenterID, BloodType requiredBlood)
         {
-            Component component = bloodType.bloodComponent;
-            
-            StoredBloodRepository bloodRepo = new StoredBloodRepository();
-            List<StoredBlood> bloodList = bloodRepo
+            return bloodRepo
                     .FindAllByDonationCenter(donationCenterID)
                     .AsEnumerable()
                     .Select(x => DataToLogic.StoredBlood(x))
+                    .Where(storedBlood => storedBlood.BloodType.Group == requiredBlood.Group &&
+                                          storedBlood.BloodType.RH == requiredBlood.RH)
+                    .OrderBy(storedBlood => storedBlood.CollectionDate)
                     .ToList();
-
-            int totalQuantity = 0;
-            foreach (StoredBlood blood in bloodList)
-                if(blood.Component == component && blood.BloodType.CanDonate(bloodType))
-                    totalQuantity += blood.Amount;
-
-            return totalQuantity;
         }
 
-        public int GetMissingBlood(string donationCenterID, RequestPersonnel r)
+        //The existing quantity of blood
+        public int BloodRequestGetAmountOfBlood(List<Logic.Models.StoredBlood> bloodList)
         {
-            int storedBlood = this.GetCompatibleStoredBlood(donationCenterID,r.bloodType);
+            return bloodList
+                    .AsEnumerable()
+                    .Select(storedBlood => storedBlood.Amount)
+                    .Sum();
+        }
 
-            if (storedBlood >= r.quantity)
-                return 0;
-            return r.quantity - storedBlood;
+        //Remove / update blood after the request if fulfiled
+        public void BloodRequestUpdateExistingBlood(List<Logic.Models.StoredBlood> bloodList, int quantity)
+        {
+            EmailServiceBloodDonation emailService = new EmailServiceBloodDonation();
+            int remainingQuantity = quantity;
+            bloodList.ForEach(
+                    storedBlood =>
+                    {
+                        if (remainingQuantity > 0)
+                        {
+                            if (storedBlood.Amount > remainingQuantity)
+                            {
+                                storedBlood.Amount -= remainingQuantity;
+                                bloodRepo.Edit(LogicToData.StoredBlood(storedBlood));
+                                remainingQuantity = 0;
+                                Thread sendMail = new Thread(() => emailService.ComposeGuestMail(storedBlood.DonorEmail, storedBlood.DonationCenterID, storedBlood.ID));
+                                sendMail.Start();
+                            }
+                            else
+                            {
+                                remainingQuantity -= storedBlood.Amount;
+                                bloodRepo.DeleteById(storedBlood.ID);
+                                Thread sendMail = new Thread(() => emailService.ComposeGuestMail(storedBlood.DonorEmail, storedBlood.DonationCenterID, storedBlood.ID));
+                                sendMail.Start();
+                            }
+                        }
+                    }
+                );
+        }
+
+        public void BloodRequestCompleteRequest(string donationCenterID, Models.RequestPersonnel bloodRequest)
+        {
+            List<Logic.Models.StoredBlood>  usedBlood =
+                 BloodRequestGetOrderedListOfStoredBloodForBloodType(donationCenterID, bloodRequest.bloodType);
+            BloodRequestUpdateExistingBlood(usedBlood, bloodRequest.quantity);
+        }
+
+        //Manages the whole send blood transaction
+        public int BloodRequestGetUsedBlood(string donationCenterID, Models.RequestPersonnel bloodRequest, ref List<Logic.Models.StoredBlood> usedBlood)
+        {
+            usedBlood = 
+                BloodRequestGetOrderedListOfStoredBloodForBloodType(donationCenterID,bloodRequest.bloodType);
+
+            int diff = BloodRequestGetAmountOfBlood(usedBlood) - bloodRequest.quantity;
+            return diff;
         }
 
         public List<RequestPersonnel> FindAll()

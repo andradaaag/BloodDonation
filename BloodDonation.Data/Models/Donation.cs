@@ -50,6 +50,7 @@ namespace BloodDonation.Data.Models
         public DonationCenter center;
 
         public String donationDate;
+        public String DonorEmail { get; set; } 
 
         /**
 		 * 

@@ -1,4 +1,4 @@
-﻿@model BloodDonation.Models.RequestPersonnel
+﻿@model  BloodDonation.Models.TransferObjectForAcceptView
 
 @{
     ViewBag.Title = "AcceptRequestView";
@@ -16,6 +16,11 @@
     <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 </head>
 <body>
+
+
+    
+
+
     <div class="wrapper row1">
         <header id="header" class="clear">
             <div id="hgroup">
@@ -25,9 +30,37 @@
             @Html.Partial("NavigationBannerView", null)
         </header>
     </div>
+
+
     <div class="wrapper row3">
         <div class="container">
             <h1> Do you wish to accept the following blood request? </h1>
+            
+            <div>
+                <table style="width:100%">
+                    <tr>
+                        <th>ID</th>
+                        <th>Quantity</th>
+                        <th>BloodType</th>
+                    </tr>
+                    @foreach (var req in Model.usedBlood)
+                     {
+                       
+                     <tr>
+                    <td>@req.ID</td>
+                    <td>@req.Amount</td>
+                    <td>Component : @req.Component <br> Blood Group : @req.BloodType.Group <br> Blood RH: @req.BloodType.RH  </td>
+                    <td>
+                        <div class="row">
+                            <input type="submit" value="Edit">
+                        </div>
+                    </td>
+                </tr>
+}
+}
+
+                </table>
+            </div>
 
             <div class="row">
                 <div class="col-25">
@@ -35,7 +68,7 @@
 
                 </div>
                 <div class="col-75">
-                    @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @readonly = "readonly" } })
+                    @Html.EditorFor(model => model.bloodRequest.ID, new { htmlAttributes = new { @readonly = "readonly" } })
                 </div>
             </div>
 
@@ -45,7 +78,7 @@
 
                 </div>
                 <div class="col-75">
-                    @Html.EditorFor(model => model.status, new { htmlAttributes = new { @readonly = "readonly" } })
+                    @Html.EditorFor(model => model.bloodRequest.status, new { htmlAttributes = new { @readonly = "readonly" } })
                 </div>
             </div>
 
@@ -55,7 +88,7 @@
 
                 </div>
                 <div class="col-75">
-                    @Html.EditorFor(model => model.bloodType.component, new { htmlAttributes = new { @readonly = "readonly" } })
+                    @Html.EditorFor(model => model.bloodRequest.bloodType.component, new { htmlAttributes = new { @readonly = "readonly" } })
                 </div>
             </div>
 
@@ -65,7 +98,7 @@
 
                 </div>
                 <div class="col-75">
-                    @Html.EditorFor(model => model.hospitalName, new { htmlAttributes = new { @readonly = "readonly" } })
+                    @Html.EditorFor(model => model.bloodRequest.hospitalName, new { htmlAttributes = new { @readonly = "readonly" } })
                 </div>
             </div>
 
@@ -75,7 +108,7 @@
 
                 </div>
                 <div class="col-75">
-                    @Html.EditorFor(model => model.hospitalLocation, new { htmlAttributes = new { @readonly = "readonly" } })
+                    @Html.EditorFor(model => model.bloodRequest.hospitalLocation, new { htmlAttributes = new { @readonly = "readonly" } })
                 </div>
             </div>
 
@@ -85,7 +118,7 @@
 
                 </div>
                 <div class="col-75">
-                    @Html.EditorFor(model => model.doctorName, new { htmlAttributes = new { @readonly = "readonly" } })
+                    @Html.EditorFor(model => model.bloodRequest.doctorName, new { htmlAttributes = new { @readonly = "readonly" } })
                 </div>
             </div>
 
@@ -95,7 +128,7 @@
 
                 </div>
                 <div class="col-75">
-                    @Html.EditorFor(model => model.doctorEmail, new { htmlAttributes = new { @readonly = "readonly" } })
+                    @Html.EditorFor(model => model.bloodRequest.doctorEmail, new { htmlAttributes = new { @readonly = "readonly" } })
                 </div>
             </div>
 
@@ -105,7 +138,7 @@
 
                 </div>
                 <div class="col-75">
-                    @Html.EditorFor(model => model.quantityString, new { htmlAttributes = new { @readonly = "readonly" } })
+                    @Html.EditorFor(model => model.bloodRequest.quantityString, new { htmlAttributes = new { @readonly = "readonly" } })
                 </div>
             </div>
 
@@ -115,7 +148,7 @@
 
                 </div>
                 <div class="col-75">
-                    @Html.EditorFor(model => model.bloodType.Group, new { htmlAttributes = new { @readonly = "readonly" } })
+                    @Html.EditorFor(model => model.bloodRequest.bloodType.Group, new { htmlAttributes = new { @readonly = "readonly" } })
                 </div>
             </div>
 
@@ -126,7 +159,7 @@
                 </div>
 
                 <div class="col-75">
-                    @if(Model.bloodType.PH){
+                    @if(Model.bloodRequest.bloodType.PH){
                         <input type="text" id="Foo" name="pos" value="Positive" readonly="readonly"/>
                     }
                     else{
@@ -139,10 +172,9 @@
             <div class="row">
                 <center>
                     @{
-                    var reqID = Model.ID;
-
+                        var reqID = Model;
                     }
-                    @Html.ActionLink("Confirm","ConfirmAcceptRequest", "Personnel", new { id = @reqID },null)
+                    @Html.ActionLink("Confirm", "ConfirmAcceptRequest", "Personnel", new { id = Model.bloodRequest.ID },null)
                 </center>
             </div>
 

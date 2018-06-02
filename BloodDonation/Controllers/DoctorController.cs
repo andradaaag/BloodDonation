@@ -26,6 +26,7 @@ namespace BloodDonation.Controllers
         private PresentationToBusinessMapperPersonnel presentationToBusinessMapperPersonnel = new PresentationToBusinessMapperPersonnel();
 
         private RequestService requestService = new RequestService();
+        private DoctorService doctorService = new DoctorService();
 
         List<Models.RequestPersonnel> requests;
 
@@ -62,6 +63,10 @@ namespace BloodDonation.Controllers
         public ActionResult CompleteRequest(BloodDonation.Models.RequestPersonnel info)
         {
             BloodDonation.Logic.Models.RequestPersonnel request = requestService.GetOne(info.ID);
+
+            String patientCnp = request.patientCnp;
+            doctorService.RemoveCnp(patientCnp);
+
             request.status = Utils.Enums.Status.Completed;
             requestService.Edit(request);
             System.Threading.Thread.Sleep(700);
@@ -72,7 +77,6 @@ namespace BloodDonation.Controllers
         private void SendBloodRequestMail(Logic.Models.RequestPersonnel newrequest, String destinationEmail)
         {
             EmailServiceBloodDonation emailService = new EmailServiceBloodDonation();
-            DoctorService doctorService = new DoctorService();
             HospitalService hospitalService = new HospitalService();
 
             Doctor doctorInfo = doctorService.findById(newrequest.doctorId);
