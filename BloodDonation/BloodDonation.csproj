@@ -382,6 +382,7 @@
     <Content Include="Views\Personnel\MissingBloodView.cshtml" />
     <Content Include="Views\Personnel\StoredBloodView.cshtml" />
     <Content Include="Views\Personnel\DeleteExpiredBloodView.cshtml" />
+    <Content Include="Views\Personnel\AcceptedRequestsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
