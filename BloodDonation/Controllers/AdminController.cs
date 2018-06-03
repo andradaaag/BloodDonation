@@ -300,7 +300,17 @@ namespace BloodDonation.Controllers
             return goIfPossible(GetDonationCentersPage());
         }
 
-       
+       public ActionResult DeleteDoctor(string id)
+        {
+            doctorService.DeleteAccount(id);
+            return goIfPossible(GetDoctorsPage());
+        }
+
+        public ActionResult DeletePersonnel(string id)
+        {
+            donationCenterPersonnelService.DeleteAccount(id);
+            return goIfPossible(GetPersonnelPage());
+        }
 
         [HttpPost]
         public ActionResult CreateAdmin(CreateAdminForm form)
