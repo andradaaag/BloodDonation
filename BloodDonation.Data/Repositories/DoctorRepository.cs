@@ -20,7 +20,7 @@ namespace BloodDonation.Data.Repositories
 
 
 
-        public bool IsIDPresent(string id)
+        public bool exists(string id)
         {
             return firebaseClient
                 .Child(CHILD)

@@ -92,7 +92,7 @@
                         <td>@req.EmailAddress</td>
                         <td>@req.HospitalName</td>
                         <td>
-                            <button class="btn btn-danger">Delete</button>
+                            @Html.ActionLink("Delete", "DeleteDoctor", "Admin", new { id = req.ID }, new { @class = "btn btn-danger" })
                         </td>
                     </tr>
                 }
