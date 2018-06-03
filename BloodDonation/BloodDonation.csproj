@@ -240,9 +240,7 @@
     <Compile Include="Mappers\PresentationToBusinessMapper.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapperDoctor.cs" />
     <Compile Include="Mappers\PresentationToBusinessMapperPersonnel.cs" />
-
     <Compile Include="Models\AvailableHoursModel.cs" />
-
     <Compile Include="Models\BloodAmounts.cs" />
     <Compile Include="Models\BloodType.cs" />
     <Compile Include="Models\RequestComponent.cs" />
@@ -283,6 +281,12 @@
     <Compile Include="Models\SignUpForm.cs" />
     <Compile Include="Models\StoredBloodModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DoctorServicePresentation.cs" />
+    <Compile Include="Services\DonationCenterPersonnelServicePresentation.cs" />
+    <Compile Include="Services\DonationCenterServicePresentation.cs" />
+    <Compile Include="Services\DonationServicePresentation.cs" />
+    <Compile Include="Services\DonorServicePresentation.cs" />
+    <Compile Include="Services\HospitalServicePresentation.cs" />
     <Compile Include="Services\RequestService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -371,10 +375,6 @@
     <Content Include="Views\Admin\ManagePersonnelView.cshtml" />
     <Content Include="Views\Admin\ManageHospitalsView.cshtml" />
     <Content Include="Views\Admin\ManageDonationCentersView.cshtml" />
-    <Content Include="Views\Admin\CreateAdminView.cshtml" />
-    <Content Include="Views\Admin\PersonalDataView.cshtml" />
-    <Content Include="Views\Admin\EditPersonalDataView.cshtml" />
-    <Content Include="Views\Admin\AdminCreatedView.cshtml" />
     <Content Include="Views\Doctor\DoctorShowRequestsView.cshtml" />
     <Content Include="Views\Doctor\MakeRequestView.cshtml" />
     <Content Include="Views\Personnel\EditBloodSeparation.cshtml" />
