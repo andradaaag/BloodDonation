@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Diagnostics;
 using Firebase.Auth;
+using System.Threading;
 
 namespace BloodDonation.Controllers
 {
@@ -28,6 +29,9 @@ namespace BloodDonation.Controllers
 
         private ActionResult goIfPossible(ActionResult actionResultSuccess)
         {
+
+            Thread.Sleep(1000);
+
             if (Session["usertype"] == null)
                 return RedirectToAction("Index", "Login");
             if ((string)Session["usertype"] != "admin")
