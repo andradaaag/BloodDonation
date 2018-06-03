@@ -16,7 +16,7 @@ namespace BloodDonation.Data.Repositories
         private FirebaseToObject FirebaseToObject = new FirebaseToObject();
         private const string CHILD = "personnel";
 
-        public bool IsIDPresent(string id)
+        public bool exists(string id)
         {
             return firebaseClient
                        .Child(CHILD)

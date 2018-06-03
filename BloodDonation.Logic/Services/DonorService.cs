@@ -23,9 +23,9 @@ namespace BloodDonation.Business.Services
             donorRepository.Save(newDonor);
         }
 
-        public bool IsIDPresent(string id)
+        public bool exists(string id)
         {
-            return donorRepository.IsIDPresent(id);
+            return donorRepository.exists(id);
         }
 
         public List<DonationDetails> GetDonationDetails()

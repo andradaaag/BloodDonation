@@ -17,9 +17,15 @@ namespace BloodDonation.Logic.Services
         private readonly LogicToDataMapper logicToDataMapper = new LogicToDataMapper();
         private readonly DataToLogicMapper dataToLogicMapper = new DataToLogicMapper();
 
-        public bool IsIDPresent(string id)
+        public bool exists(string id)
         {
-            return donationCenterPersonnelRepository.IsIDPresent(id);
+            return donationCenterPersonnelRepository.exists(id);
+        }
+
+        public bool isValidAccount(string id)
+        {
+            BloodDonation.Data.Models.DonationCenterPersonnel dcp = donationCenterPersonnelRepository.GetOne(id);
+            return dcp.isValidAccount();
         }
 
         public void AddDonationCenterPersonnelAccount (NewUserTransferObject nuto)

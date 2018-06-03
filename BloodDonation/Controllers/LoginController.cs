@@ -21,8 +21,7 @@ namespace BloodDonation.Controllers
         private readonly HospitalService _hospitalService = new HospitalService();
         private readonly DonationCenterService _donationCenterService = new DonationCenterService();
 
-        private readonly DonationCenterPersonnelService _donationCenterPersonnelService =
-            new DonationCenterPersonnelService();
+        private readonly DonationCenterPersonnelService _donationCenterPersonnelService = new DonationCenterPersonnelService();
 
         static FirebaseConfig config = new FirebaseConfig("AIzaSyBX9u-1P99X08XHfL-rr3DxqJMCVnI4Vbw");
         FirebaseAuthProvider authProvider = new FirebaseAuthProvider(config);
@@ -98,22 +97,38 @@ namespace BloodDonation.Controllers
             return View("SignUpView", new SignUpForm());
         }
 
+
+        // TODO - this is really ugly code, something can definitely be done here
         public ActionResult redirectUser(string id)
         {
-            if (_doctorService.IsIDPresent(id))
+            if (_doctorService.exists(id))
             {
-                Session["usertype"] = "doctor";
-                return RedirectToAction("Index", "Doctor");
+                if( _doctorService.isValidAccount(id))
+                {
+                    Session["usertype"] = "doctor";
+                    return RedirectToAction("Index", "Doctor");
+                } else
+                {
+                    return RedirectToAction("Error", "Error"); // TODO - implement account is invalid
+                }
             }
-            else if (_donorService.IsIDPresent(id))
+            else if (_donorService.exists(id))
             {
                 Session["usertype"] = "donor";
                 return RedirectToAction("Index", "Donor");
             }
-            else if (_donationCenterPersonnelService.IsIDPresent(id))
+            else if (_donationCenterPersonnelService.exists(id))
             {
-                Session["usertype"] = "personnel";
-                return RedirectToAction("Index", "Personnel");
+                if (_donationCenterPersonnelService.isValidAccount(id))
+                {
+                    Session["usertype"] = "personnel";
+                    return RedirectToAction("Index", "Personnel");
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Error"); // TODO - implement account is invalid
+                }
+
             }
             else
             {
@@ -121,6 +136,9 @@ namespace BloodDonation.Controllers
                 return RedirectToAction("Index", "Admin");
             }
         }
+
+
+
 
         [HttpPost]
         public async System.Threading.Tasks.Task<ActionResult> LogIn(LogInForm logInForm)
