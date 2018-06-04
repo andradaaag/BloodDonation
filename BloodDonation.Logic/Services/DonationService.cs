@@ -18,6 +18,15 @@ namespace BloodDonation.Logic.Services
 
         private DonationCenterPersonnelRepository dcprRepo = new DonationCenterPersonnelRepository();
 
+        public int CountDonations(string CNP)
+        {
+            if (CNP == "" || CNP ==null)
+                return 0;
+            return Repository
+                .FindByPatientCnp(CNP)
+                .Sum(i => i.Quantity);
+        }
+
         public List<Donation> FindAll()
         {
             return Repository

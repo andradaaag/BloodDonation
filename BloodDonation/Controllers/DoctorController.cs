@@ -27,12 +27,24 @@ namespace BloodDonation.Controllers
 
         private RequestService requestService = new RequestService();
         private DoctorService doctorService = new DoctorService();
+        private DonationService donationService = new DonationService();
 
         List<Models.RequestPersonnel> requests;
 
         public ActionResult Index()
         {
             return MainDoctorPage();
+        }
+
+        public ActionResult PatientDonations()
+        {
+            return View("PatientDonationsView");
+        }
+        [HttpPost]
+        public ActionResult GetPatientDonations(Patient p)
+        {
+            p.NoDon = donationService.CountDonations(p.CNP).ToString();
+            return View("PatientDonationsView", p);
         }
 
         public ActionResult MainDoctorPage()
