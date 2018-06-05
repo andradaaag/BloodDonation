@@ -58,6 +58,7 @@
     <Compile Include="Models\AccountRequest.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BloodType.cs" />
+    <Compile Include="Models\Booking.cs" />
     <Compile Include="Models\RequestComponent.cs" />
     <Compile Include="Models\Donation.cs" />
     <Compile Include="Models\DonationCenter.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Models\StoredBlood.cs" />
     <Compile Include="Models\StoredBloodAmounts.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Services\BookingService.cs" />
     <Compile Include="Services\EmailServiceBloodDonation.cs" />
     <Compile Include="Services\PersonnelService.cs" />
     <Compile Include="Services\DonationService.cs" />

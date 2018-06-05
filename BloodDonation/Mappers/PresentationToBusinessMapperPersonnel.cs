@@ -54,6 +54,20 @@ namespace BloodDonation.Mappers
             };
         }
 
+        public Logic.Models.Booking Booking(BookingModel b)
+        {
+            return new Logic.Models.Booking
+            {
+                ID = b.ID,
+                Date = b.Date,
+                DonationCenterId = b.DonationCenterId,
+                DonorId = b.DonorId,
+                DonorName = b.DonorName,
+                Hour = b.Hour,
+                UnixTime = (b.FullDate - new DateTime(1970, 1, 1)).Seconds
+            };
+        }
+
         public Logic.Models.DonationCenterPersonnel Personnel(Personnel p)
         {
             return new Logic.Models.DonationCenterPersonnel

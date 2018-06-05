@@ -108,5 +108,18 @@ namespace BloodDonation.Logic.Mappers
             };
 
         }
+        public Booking Booking(Data.Models.Booking b)
+        {
+            return new Booking
+            {
+                ID = b.ID,
+                Date = b.Date,
+                DonationCenterId = b.DonationCenterId,
+                DonorId = b.DonorId,
+                DonorName = b.DonorName,
+                Hour = b.Hour,
+                UnixTime = b.UnixTime
+            };
+        }
     }
 }

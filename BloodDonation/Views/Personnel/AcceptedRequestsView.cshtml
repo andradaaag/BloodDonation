@@ -38,15 +38,16 @@
                 </div>
                 <nav class="navbar navbar-expand-sm">
                     <ul class="navbar-nav">
-                        <li>@Html.ActionLink("ADD DONATION", "AddDonation", "Personnel", null, new {@class = "nav-link"})</li>
-                        <li>@Html.ActionLink("SEPARATE COMPONENTS", "SeparateComponents", "Personnel", null, new {@class = "nav-link"})</li>
-                        <li>@Html.ActionLink("LAB RESULTS", "LabResults", "Personnel", null, new {@class = "nav-link"})</li>
-                        <li>@Html.ActionLink("ACCOUNT SETTINGS", "PersonalDetails", "Personnel", null, new {@class = "nav-link"})</li>
+                        <li>@Html.ActionLink("ADD DONATION", "AddDonation", "Personnel", null, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("SEPARATE COMPONENTS", "SeparateComponents", "Personnel", null, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("LAB RESULTS", "LabResults", "Personnel", null, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("ACCOUNT SETTINGS", "PersonalDetails", "Personnel", null, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("PENDING REQUESTS", "PendingRequests", "Personnel", null, new { @class = "nav-link" })</li>
                         <li class="nav-item current">
                             <a href="#" class="nav-link">ACCEPTED REQUESTS</a>
                         </li>
-                        <li>@Html.ActionLink("VIEW STORED BLOOD", "ViewStoredBlood", "Personnel", null, new {@class = "nav-link"})</li>
+                        <li>@Html.ActionLink("VIEW STORED BLOOD", "ViewStoredBlood", "Personnel", null, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("VIEW BOOKED DONATIONS", "SeeBookings", "Personnel", null, new { @class = "nav-link" })</li>
                     </ul>
                 </nav>
             </div>

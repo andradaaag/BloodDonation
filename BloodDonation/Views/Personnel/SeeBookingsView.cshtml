@@ -1,12 +1,13 @@
-﻿@model String
+﻿@model BloodDonation.Models.BookingList
 
 @{
-    ViewBag.Title = "MissingBloodView";
+    ViewBag.Title = "SeeBookingsView";
 }
+
 
 <html lang="en" dir="ltr">
 <head>
-    <title>Error - Personnel</title>
+    <title>Separate Components - Personnel</title>
     <meta charset="iso-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -23,7 +24,7 @@
             <div class="row">
                 <div id="hgroup" class="col-sm-8 ml-4">
                     <div class="row">
-                        <a href="#" id="page-title">Not Enough Blood</a>
+                        <a href="#" id="page-title">Separate Components</a>
                     </div>
                     <div class="row">
                         <a href="#" id="page-owner">PERSONNEL</a>
@@ -42,20 +43,42 @@
                     <li>@Html.ActionLink("PENDING REQUESTS", "PendingRequests", "Personnel", null, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("ACCEPTED REQUESTS", "AcceptedRequests", "Personnel", null, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("VIEW STORED BLOOD", "ViewStoredBlood", "Personnel", null, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("VIEW BOOKED DONATIONS", "SeeBookings", "Personnel", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item current">
+                        <a href="#" class="nav-link">VIEW BOOKED DONATIONS</a>
+                    </li>
                 </ul>
             </nav>
         </div>
     </div>
 
     <div class="container">
-        <div class="card">
-            <div class="text-center p-5">
-                <p class="h5" style="font-size: 30px;"> Could not accept the request. You are missing 
-                <p class="h5" style="display:inline; font-size: 30px;"> @Model </p>
-                <p class="h5" style="display:inline; font-size: 30px;"> ml of blood. </p>
+        <div class="card mb-3">
+            <div class="card-header">
+                Booked donations:
+            </div>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var req in Model.Bookings)
+                        {
+
+                            <tr>
+                                <td>@req.DonorName</td>
+                                <td>@req.FullDate</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
+
+
     </div>
 
     <div class="footer fixed-bottom text-center">
@@ -64,5 +87,3 @@
 
 </body>
 </html>
-
-
