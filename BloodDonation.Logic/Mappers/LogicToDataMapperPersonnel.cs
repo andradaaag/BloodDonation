@@ -33,7 +33,10 @@ namespace BloodDonation.Logic.Mappers
                 Stage = donation.Stage,
                 Syphilis = donation.Syphilis,
                 Thrombocytes = donation.Thrombocytes,
-                DonationTime = donation.DonationTime
+                DonationTime = donation.DonationTime,
+                donationDate= donation.donationDate,
+                donationHour= donation.donationHour
+              
                 
             };
         }

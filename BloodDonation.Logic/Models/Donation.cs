@@ -23,6 +23,9 @@ namespace BloodDonation.Logic.Models
         
         public Stage Stage;
 
+        public String donationHour { get; set; }
+        public String donationDate { get; set; }
+
         public int Quantity;
         public int Plasma;
         public int RBC;

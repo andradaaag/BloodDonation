@@ -1,0 +1,88 @@
+﻿@model BloodDonation.Models.BookDonationDetails
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <title>Personal Data</title>
+    <meta charset="iso-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Styles/layout_admin_requests.css")
+    @Styles.Render("~/Styles/mediaqueries.css")
+    <script src="scripts/jquery.1.9.0.min.js"></script>
+    <script src="scripts/jquery-mobilemenu.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.datefield').datepicker({
+                dateFormat: "dd-mm-yy",
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+    <div class="wrapper row1">
+        <header id="header" class="clear">
+            <div id="hgroup">
+                <h1>
+                    <a href="#">Personal Data</a>
+                </h1>
+                <h2>
+                    <a href="#">Donor</a>
+                </h2>
+            </div>
+            <form action="login.html" method="post">
+                @Html.ActionLink("Log Out", "LogOut", "Login", null, new { @class = "sf_submit" })
+            </form>
+            <nav>
+                <ul>
+                    <li>@Html.ActionLink("Personal Details", "DonorPersonalDetailsView", "Donor", null, new { @class = "header nav li" })</li>
+                    <li>@Html.ActionLink("My Donations", "DonorPersonalDetailsView", "Donor", null, new { @class = "header nav li" })</li>
+                    <li>@Html.ActionLink("Book Donation", "Index", "Donor", null, new { @class = "header nav li" })</li>
+                    <li>@Html.ActionLink("Account Settings", "DonorPersonalDetailsView", "Donor", null, new { @class = "header nav li" })</li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <!-- content -->
+
+    <div class="wrapper row3">
+        <div class="container">
+            <p>Selected date : @Model.donationDate</p>
+
+            
+                <table style="width: 100%">
+                    <tr>
+                        <th>Hour</th>
+                        <th>Book hour</th>
+                    </tr>
+                    <!-- Add information in taable -->
+
+                    @foreach (var req in Model.availableHours)
+                    {
+                        <tr>
+                            <td>@req</td>
+                            <td>
+                                @Html.ActionLink("Select", "BookDonation", "Donor", new { selectedHour = req, selectedDate = Model.donationDate} , new { @class = "btn btn-danger" })
+                            </td>
+
+                        </tr>
+                    }
+
+                </table>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="footer fixed-bottom text-center">
+        © 2018 Copyright: Vitamine
+    </div>
+
+
+</body>
+</html>

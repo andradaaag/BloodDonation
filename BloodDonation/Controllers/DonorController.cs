@@ -7,6 +7,8 @@ using BloodDonation.Mappers;
 using BloodDonation.Models;
 using Firebase.Auth;
 using System;
+using BloodDonation.Logic.Services;
+using BloodDonation.Services;
 
 namespace BloodDonation.Controllers
 {
@@ -16,12 +18,16 @@ namespace BloodDonation.Controllers
             _businessToPresentationMapper = new BusinessToPresentationMapperDonor();
         
         private readonly PresentationToBusinessMapperDonor _presentationToBusinessMapperDonor = new PresentationToBusinessMapperDonor();
+        private readonly DonationCenterServicePresentation donationCenterServicePresentation = new DonationCenterServicePresentation();
 
         private readonly DonorService donorService = new DonorService();
+        private readonly DonationService donationService = new DonationService();
 
         public ActionResult Index()
         {
-            List<DonationDetails> donationDetails = donorService.GetDonationDetails();
+            DonorDetailsTransferObject currentDonor = donorService.GetOne(GetUid());
+
+            List<DonationDetails> donationDetails = donationService.FindDonationsByDonorCNP(currentDonor.Cnp);
             
             ShowDonorDonations details = new ShowDonorDonations();
             foreach (DonationDetails detail in donationDetails)
@@ -46,9 +52,17 @@ namespace BloodDonation.Controllers
             return View("EditDonorPersonalDataView", new DonorAccountRequest());
         }
 
+        public ActionResult SelectDonationHourView(BookDonationDetails details)
+        {
+            return View("SelectDonationHourView", details);
+        }
+
         public ActionResult BookDonationView()
         {
-            return View("BookDonationView", new AvailableHoursModel());
+            AvailableHoursModel model = new AvailableHoursModel();
+            ManageDonationCentersModel manageDonationCentersModel = donationCenterServicePresentation.GetAllDonationCenters();
+            model.donationsCenterList = manageDonationCentersModel.GetDonationsCenterName();
+            return View("BookDonationView", model);
         }
         
         [HttpPost]
@@ -62,7 +76,19 @@ namespace BloodDonation.Controllers
         [HttpPost]
         public ActionResult SeeAvailableHours(AvailableHoursModel formDetails)
         {
-            return BookDonationView();
+            BookDonationDetails details = new BookDonationDetails();
+            details.availableHours = donationService.showAvailableHours(formDetails.bookingDate);
+            details.center = formDetails.donationCenter;
+            details.donationDate = formDetails.bookingDate;
+            return SelectDonationHourView(details);
+        }
+
+        
+        public ActionResult BookDonation(String selectedHour, String selectedDate)
+        {
+            
+            return DonorPersonalDetailsView();
+           
         }
 
         public String GetUid()
