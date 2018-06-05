@@ -59,7 +59,7 @@
 
              @Html.DropDownListFor(model => model.donationCenter, new SelectList(Model.donationsCenterList), new { @class = "form-control" })
 
-            <p>Select a date: @Html.TextBoxFor(model => model.bookingDate, new { @class = "date-picker" })</p>
+            <p>Select a date: @Html.TextBoxFor( model => model.bookingDate, new { @type = "date" , @class = "date-picker" })</p>
             <div class="row">
                 <input type="submit" value="See available hours">
             </div>
