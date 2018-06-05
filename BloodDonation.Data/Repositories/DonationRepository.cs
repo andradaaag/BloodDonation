@@ -65,6 +65,31 @@ namespace BloodDonation.Data.Repositories
             {
                 Console.Out.WriteLine(ex.Message);
                 Console.Out.WriteLine(ex.StackTrace);
+
+
+                return new List<Donation>();
+            }
+        }
+
+
+        public List<Donation> FindByDonorCNP(string DonorCnp)
+        {
+            try
+            {   
+                return firebaseClient
+                    .Child(CHILD)
+                    .OrderBy("DonorCnp")
+                    .EqualTo(DonorCnp)
+                    .OnceAsync<Donation>()
+                    .Result
+                    .AsEnumerable()
+                    .Select(i => FirebaseToObject.Donation(i))
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+                Console.Out.WriteLine(ex.StackTrace);
                 return new List<Donation>();
             }
         }
@@ -130,7 +155,7 @@ namespace BloodDonation.Data.Repositories
         {
             return firebaseClient
                 .Child(CHILD)
-                .OrderBy("donationDate")
+                .OrderByKey()
                 .EqualTo(date)
                 .OnceAsync<Donation>()
                 .Result

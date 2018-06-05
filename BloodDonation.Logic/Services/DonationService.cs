@@ -15,6 +15,7 @@ namespace BloodDonation.Logic.Services
         private DonationRepository Repository = new DonationRepository();
         private LogicToDataMapperPersonnel LogicToData = new LogicToDataMapperPersonnel();
         private DataToLogicMapperPersonnel DataToLogic = new DataToLogicMapperPersonnel();
+        private DataToLogicMapperDonor DataToLogicDonor = new DataToLogicMapperDonor();
 
         private DonationCenterPersonnelRepository dcprRepo = new DonationCenterPersonnelRepository();
 
@@ -55,6 +56,15 @@ namespace BloodDonation.Logic.Services
                .Where(i => i.Stage == Stage.Sampling || i.Stage == Stage.Preparation)
                .ToList();
 
+        }
+
+        public List<DonationDetails> FindDonationsByDonorCNP(string donorCNP)
+        {
+            return Repository
+               .FindByDonorCNP(donorCNP)
+               .AsEnumerable()
+               .Select(i => DataToLogicDonor.MapDonationToDonationDetails(i))
+               .ToList();
         }
 
         public List<Donation> FindUnsolvedByDonationCenter(string donationCenterID)
@@ -98,12 +108,24 @@ namespace BloodDonation.Logic.Services
 
         public List<String> showAvailableHours(String date)
         {
-            return null;
+            List<String> mylist = new List<string>(new String[] { "07:00"});
+            DateTime myDate = DateTime.ParseExact("07:00", "HH:mm",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+            for(int i = 1; i < 7; i++)
+            {
+                DateTime d = myDate.AddHours(i);
+                if (isAvailable(d.ToString("HH:mm"), date))
+                {
+                    mylist.Add(d.ToString("HH:mm"));
+                }
+            }
+            return mylist;
         }
 
-        public List<String> getUnavailableHours(String date)
+
+        private bool isAvailable(String hour, String date)
         {
-            return Repository.GetBookedHours(date);
+            return ! Repository.GetBookedHours(date).Contains(hour);
         }
     }
 }
