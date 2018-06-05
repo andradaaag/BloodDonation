@@ -46,10 +46,10 @@ namespace BloodDonation.Data.Models
 
         public String testResult;
         public String donationHour;
+        public String donationDate;
 
         public DonationCenter center;
 
-        public String donationDate;
 
         /**
 		 * 

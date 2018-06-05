@@ -15,8 +15,10 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-        $(function() {
-            $("#datepicker").datepicker();
+        $(document).ready(function () {
+            $('.datefield').datepicker({
+                dateFormat: "dd-mm-yy",
+            });
         });
     </script>
 
@@ -53,8 +55,11 @@
        @using (Html.BeginForm("SeeAvailableHours", "Donor", FormMethod.Post))
        {
 
-            <p>Select a donation center: @Html.TextBoxFor(model => model.donationCenter, new { @required = "required" })</p>
-            <p>Select a date: @Html.TextBoxFor(model => model.bookingDate, new { @type = "datepicker", @required = "required" })</p>
+            <p>Select a donation center:</p>
+
+             @Html.DropDownListFor(model => model.donationCenter, new SelectList(Model.donationsCenterList), new { @class = "form-control" })
+
+            <p>Select a date: @Html.TextBoxFor(model => model.bookingDate, new { @class = "date-picker" })</p>
             <div class="row">
                 <input type="submit" value="See available hours">
             </div>
@@ -63,11 +68,12 @@
 
     </div>
 </div>
-<!-- Footer -->
-<div class="wrapper row4">
-    <footer id="footer" class="clear">
-        <p class="fl_left">Copyright &copy; 2013 - All Rights Reserved - <a href="#">Domain Name</a></p>
-    </footer>
-</div>
+
+   
+    <div class="footer fixed-bottom text-center">
+        © 2018 Copyright: Vitamine
+    </div>
+
+
 </body>
 </html>

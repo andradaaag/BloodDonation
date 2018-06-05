@@ -243,6 +243,7 @@
     <Compile Include="Models\AvailableHoursModel.cs" />
     <Compile Include="Models\BloodAmounts.cs" />
     <Compile Include="Models\BloodType.cs" />
+    <Compile Include="Models\BookDonationDetails.cs" />
     <Compile Include="Models\RequestComponent.cs" />
     <Compile Include="Models\DoctorAccountRequest.cs" />
     <Compile Include="Models\DonationCenter.cs" />
@@ -383,6 +384,7 @@
     <Content Include="Views\Personnel\StoredBloodView.cshtml" />
     <Content Include="Views\Personnel\DeleteExpiredBloodView.cshtml" />
     <Content Include="Views\Personnel\AcceptedRequestsView.cshtml" />
+    <Content Include="Views\Donor\SelectDonationHourView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

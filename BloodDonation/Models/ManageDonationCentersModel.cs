@@ -37,6 +37,15 @@ namespace BloodDonation.Models
             return this.donationCenterDisplayDatas;
         }
 
+        public List<string> GetDonationsCenterName()
+        {
+            return donationCenterDisplayDatas
+                                   .Distinct()
+                                   .AsEnumerable()
+                                   .Select(center =>center.Name)
+                                   .ToList();
+        }
+
         public void ResetDonationCenters()
         {
 
