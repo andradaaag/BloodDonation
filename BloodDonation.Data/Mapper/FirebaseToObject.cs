@@ -38,6 +38,13 @@ namespace BloodDonation.Data.Mapper
             return d;
         }
 
+        public Booking Booking(FirebaseObject<Booking> i)
+        {
+            Booking b = i.Object;
+            b.ID = i.Key;
+            return b;
+        }
+
         public StoredBlood StoredBlood(FirebaseObject<StoredBlood> stored)
         {
             StoredBlood b = stored.Object;

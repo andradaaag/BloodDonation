@@ -23,6 +23,7 @@ namespace BloodDonation.Controllers
         private Services.RequestService requestServicePrez = new Services.RequestService();
         private StoredBloodService storedBloodService = new StoredBloodService();
         private DoctorService doctorService = new DoctorService();
+        private BookingService bookingService = new BookingService();
 
         private ErrorController errorController = new ErrorController();
 
@@ -57,6 +58,18 @@ namespace BloodDonation.Controllers
         public ActionResult Success()
         {
             return goIfPossible(View("SuccessView"));
+        }
+
+        public ActionResult SeeBookings()
+        {
+            BookingList bookings = new BookingList
+            {
+                Bookings = bookingService
+                .GetActiveBookings(GetUid())
+                .Select(i => BusinessToPresentation.Booking(i))
+                .ToList()
+            };
+            return goIfPossible(View("SeeBookingsView",bookings));
         }
 
         public ActionResult AddDonation()
