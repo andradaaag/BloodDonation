@@ -22,6 +22,8 @@ namespace BloodDonation.Controllers
 
         private readonly DonorService donorService = new DonorService();
         private readonly DonationService donationService = new DonationService();
+        private readonly BookingService bookingService = new BookingService();
+        private readonly DonationCenterService donationCenterService = new DonationCenterService();
 
         public ActionResult Index()
         {
@@ -57,6 +59,19 @@ namespace BloodDonation.Controllers
             return View("SelectDonationHourView", details);
         }
 
+        public ActionResult ShowBookedDatesDonorPage()
+        {
+            ShowBookingDate model = new ShowBookingDate();
+            model.donorBookedDates= new List<BookedDates>();
+            foreach (BookedHoursTransferObject btho in bookingService.GetDonorBookedHours(GetUid())){
+                DonationCenterTransferObject dcto = donationCenterService.GetDonationCenterById(btho.center);
+                model.AddDate(_businessToPresentationMapper.MapBookedDates(btho, dcto.Name));
+
+            }
+
+            return View("ShowDonorBookedDatesView", model); 
+        }
+
         public ActionResult BookDonationView()
         {
             AvailableHoursModel model = new AvailableHoursModel();
@@ -77,18 +92,33 @@ namespace BloodDonation.Controllers
         public ActionResult SeeAvailableHours(AvailableHoursModel formDetails)
         {
             BookDonationDetails details = new BookDonationDetails();
-            details.availableHours = donationService.showAvailableHours(formDetails.bookingDate);
             details.center = formDetails.donationCenter;
             details.donationDate = formDetails.bookingDate;
+
+            DonationCenterTransferObject dcto = donationCenterService.FindByName(details.center);
+
+            details.availableHours = bookingService.GetAvailableHours(dcto.ID, formDetails.bookingDate);
             return SelectDonationHourView(details);
         }
 
         
-        public ActionResult BookDonation(String selectedHour, String selectedDate)
+        public ActionResult BookDonation(String selectedHour, String selectedDate, String center)
         {
-            
-            return DonorPersonalDetailsView();
-           
+            DonationCenterTransferObject dcto = donationCenterService.FindByName(center);
+
+
+            Booking newBooking = new Booking();
+
+            newBooking.Date = selectedDate;
+            newBooking.Hour = selectedHour;
+            newBooking.DonorId = GetUid();
+            newBooking.DonorName = donorService.GetOne(newBooking.DonorId).LastName + " " + donorService.GetOne(newBooking.DonorId).FirstName;
+            newBooking.DonationCenterId = dcto.ID;
+
+            bookingService.saveBooking(newBooking);
+
+            return ShowBookedDatesDonorPage();
+
         }
 
         public String GetUid()

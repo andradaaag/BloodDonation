@@ -47,7 +47,7 @@ namespace BloodDonation.Data.Repositories
                 .PutAsync(dc);
         }
 
-        public List<DonationCenter> FindByName(String name)
+        public DonationCenter FindByName(String name)
         {
             return firebaseClient
                     .Child(CHILD)
@@ -57,7 +57,7 @@ namespace BloodDonation.Data.Repositories
                     .Result
                     .AsEnumerable()
                     .Select(i => FirebaseToObject.DonationCenter(i))
-                    .ToList();
+                    .First();
         }
 
         public DonationCenter FindById(String Id)

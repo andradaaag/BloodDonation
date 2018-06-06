@@ -26,5 +26,18 @@ namespace BloodDonation.Logic.Mappers
         {
             return new FirebaseDonationForm();
         }
+
+        public BloodDonation.Data.Models.Booking MapBooking(BloodDonation.Logic.Models.Booking newBooking)
+        {
+            return new BloodDonation.Data.Models.Booking()
+            {
+                Date = newBooking.Date,
+                Hour = newBooking.Hour,
+                DonationCenterId = newBooking.DonationCenterId,
+                DonorId = newBooking.DonorId,
+                DonorName = newBooking.DonorName,
+                UnixTime = newBooking.UnixTime
+            };
+        }
     }
 }

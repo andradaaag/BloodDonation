@@ -20,6 +20,8 @@ namespace BloodDonation.Models
         public String Email { get; set; }
         public String Password { get; set; }
         public int UserType { get; set; }
+        public String CNP { get; set; }
+
 
         public String Hospital { get; set; }
         public String DonationCenter { get; set; }

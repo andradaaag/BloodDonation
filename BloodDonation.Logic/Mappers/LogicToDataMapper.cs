@@ -60,6 +60,7 @@ namespace BloodDonation.Business.Mappers
                 ResCityTown = nuto.OtherAddress,
                 ResCountry = nuto.OtherCountry,
                 emailAddress = nuto.Email,
+                CNP = nuto.CNP
             };
         }
 

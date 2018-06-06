@@ -37,6 +37,16 @@ namespace BloodDonation.Logic.Mappers
             };
         }
 
+        public BookedHoursTransferObject MapBooking(Data.Models.Booking b)
+        {
+            return new BookedHoursTransferObject()
+            {
+                bookingDate = b.Date,
+                bookingHour = b.Hour,
+                bookingId = b.ID,
+                center = b.DonationCenterId
+            };
+        }
        
     }
 }

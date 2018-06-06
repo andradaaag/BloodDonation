@@ -36,5 +36,16 @@ namespace BloodDonation.Mappers
             };
 
         }
+
+        public BookedDates MapBookedDates( BookedHoursTransferObject bhto, String center)
+        {
+            return new BookedDates()
+            {
+                bookingDate = bhto.bookingDate,
+                bookingHour = bhto.bookingHour,
+                bookingId = bhto.bookingId,
+                center = center
+            };
+        }
     }
 }

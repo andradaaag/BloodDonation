@@ -115,26 +115,9 @@ namespace BloodDonation.Logic.Services
                 .ToList();
         }
 
-        public List<String> showAvailableHours(String date)
-        {
-            List<String> mylist = new List<string>(new String[] { "07:00"});
-            DateTime myDate = DateTime.ParseExact("07:00", "HH:mm",
-                                       System.Globalization.CultureInfo.InvariantCulture);
-            for(int i = 1; i < 7; i++)
-            {
-                DateTime d = myDate.AddHours(i);
-                if (isAvailable(d.ToString("HH:mm"), date))
-                {
-                    mylist.Add(d.ToString("HH:mm"));
-                }
-            }
-            return mylist;
-        }
 
 
-        private bool isAvailable(String hour, String date)
-        {
-            return ! Repository.GetBookedHours(date).Contains(hour);
-        }
+
+       
     }
 }

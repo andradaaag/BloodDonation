@@ -43,7 +43,7 @@
                     <li>@Html.ActionLink("Personal Details", "DonorPersonalDetailsView", "Donor", null, new { @class = "header nav li" })</li>
                     <li>@Html.ActionLink("My Donations", "DonorPersonalDetailsView", "Donor", null, new { @class = "header nav li" })</li>
                     <li>@Html.ActionLink("Book Donation", "Index", "Donor", null, new { @class = "header nav li" })</li>
-                    <li>@Html.ActionLink("Account Settings", "DonorPersonalDetailsView", "Donor", null, new { @class = "header nav li" })</li>
+                    <li>@Html.ActionLink("Booked Dates", "ShowBookedDatesDonorPage", "Donor", null, new { @class = "header nav li" })</li>
                 </ul>
             </nav>
         </header>
@@ -67,7 +67,7 @@
                         <tr>
                             <td>@req</td>
                             <td>
-                                @Html.ActionLink("Select", "BookDonation", "Donor", new { selectedHour = req, selectedDate = Model.donationDate} , new { @class = "btn btn-danger" })
+                                @Html.ActionLink("Select", "BookDonation", "Donor", new { selectedHour = req, selectedDate = Model.donationDate, center = Model.center} , new { @class = "btn btn-danger" })
                             </td>
 
                         </tr>

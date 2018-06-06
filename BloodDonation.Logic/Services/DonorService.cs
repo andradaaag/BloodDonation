@@ -67,5 +67,6 @@ namespace BloodDonation.Business.Services
             donorRepository.Save(logicToDataMapper.MapDonor(detailsTransferObject));
         }
 
-}
+
+    }
 }

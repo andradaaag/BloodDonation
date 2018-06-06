@@ -16,6 +16,7 @@ namespace BloodDonation.Logic.Models
         public String OtherCity { get; set; }
         public String OtherCountry { get; set; }
         public String Email { get; set; }
+        public String CNP { get; set; }
 
         public String Hospital { get; set; }
         public String DonationCenter { get; set; }
