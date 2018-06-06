@@ -19,7 +19,7 @@ namespace BloodDonation.Logic.Services
 
         private int DateTimeToUnix(DateTime dt)
         {
-            return dt.Subtract(new DateTime(1970, 1, 1)).Seconds;
+            return (int)(dt - new DateTime(1970, 1, 1)).TotalSeconds;
         }
 
         public List<Booking> GetActiveBookings(string uid)
