@@ -1,12 +1,9 @@
 ﻿using BloodDonation.Logic.Services;
 using BloodDonation.Mappers;
 using BloodDonation.Logic.Models;
-
 using System;
 using System.Web.Mvc;
-
 using System.Collections.Generic;
-
 using System.Linq;
 using BloodDonation.Models;
 using Firebase.Auth;
@@ -14,20 +11,29 @@ using System.Text.RegularExpressions;
 using BloodDonation.Data.Models;
 using System.Net.Mail;
 using System.Threading;
+using BloodDonation.Services;
+using RequestService = BloodDonation.Logic.Services.RequestService;
 
 namespace BloodDonation.Controllers
 {
     public class DoctorController : Controller
     {
-        private BusinessToPresentationMapperDoctor businessToPresentationMapperDoctor = new BusinessToPresentationMapperDoctor();
-        private BusinessToPresentationMapperPersonnel businessToPresentationMapperPersonnel = new BusinessToPresentationMapperPersonnel();
+        private BusinessToPresentationMapperDoctor businessToPresentationMapperDoctor =
+            new BusinessToPresentationMapperDoctor();
 
-        private PresentationToBusinessMapperDoctor presentationToBusinessMapperDoctor = new PresentationToBusinessMapperDoctor();
-        private PresentationToBusinessMapperPersonnel presentationToBusinessMapperPersonnel = new PresentationToBusinessMapperPersonnel();
+        private BusinessToPresentationMapperPersonnel businessToPresentationMapperPersonnel =
+            new BusinessToPresentationMapperPersonnel();
+
+        private PresentationToBusinessMapperDoctor presentationToBusinessMapperDoctor =
+            new PresentationToBusinessMapperDoctor();
+
+        private PresentationToBusinessMapperPersonnel presentationToBusinessMapperPersonnel =
+            new PresentationToBusinessMapperPersonnel();
 
         private RequestService requestService = new RequestService();
         private DoctorService doctorService = new DoctorService();
         private DonationService donationService = new DonationService();
+        private DoctorServicePresentation doctorServicePresentation = new DoctorServicePresentation();
 
         List<Models.RequestPersonnel> requests;
 
@@ -38,23 +44,17 @@ namespace BloodDonation.Controllers
 
         public ActionResult PatientDonations()
         {
-            return View("PatientDonationsView");
-        }
-        [HttpPost]
-        public ActionResult GetPatientDonations(Patient p)
-        {
-            p.NoDon = donationService.CountDonations(p.CNP).ToString();
-            return View("PatientDonationsView", p);
+            var statuses = doctorServicePresentation.GetDonationStatusesForDoctor(GetUid());
+            return View("PatientDonationsView", statuses);
         }
 
         public ActionResult MainDoctorPage()
         {
-
             requests = requestService
-                        .FindByDoctorId(GetUid())
-                        .AsEnumerable()
-                        .Select(el => businessToPresentationMapperPersonnel.Request(el))
-                        .ToList();
+                .FindByDoctorId(GetUid())
+                .AsEnumerable()
+                .Select(el => businessToPresentationMapperPersonnel.Request(el))
+                .ToList();
 
             return View("DoctorShowRequestsView", requests);
         }
@@ -95,9 +95,13 @@ namespace BloodDonation.Controllers
             HospitalTransferObject hospital = hospitalService.GetHospitalById(newrequest.destination);
             if (doctorInfo != null)
             {
-                String text = "A blood request has been made by " + "Dr. " + doctorInfo.firstName + " " + doctorInfo.lastName + "\n";
-                text += "The required blood is :\n\tGroup:\t" + newrequest.bloodType.Group + "\n\tRh:\t" + (newrequest.bloodType.RH == true ? "POSITIVE" : "NEGATIVE") + "\n\tQuantity:\t" + newrequest.quantity + "\n";
-                text += "The hospital where the blood is needed:\n\tName:\t" + hospital.Name + "\n\tLocation:\t" + hospital.Location + "\n";
+                String text = "A blood request has been made by " + "Dr. " + doctorInfo.firstName + " " +
+                              doctorInfo.lastName + "\n";
+                text += "The required blood is :\n\tGroup:\t" + newrequest.bloodType.Group + "\n\tRh:\t" +
+                        (newrequest.bloodType.RH == true ? "POSITIVE" : "NEGATIVE") + "\n\tQuantity:\t" +
+                        newrequest.quantity + "\n";
+                text += "The hospital where the blood is needed:\n\tName:\t" + hospital.Name + "\n\tLocation:\t" +
+                        hospital.Location + "\n";
                 text += "Please check the 'BloodDonation' application";
 
                 String title = "Blood Request At " + hospital.Name + " Hospital In " + hospital.Location;
@@ -105,17 +109,13 @@ namespace BloodDonation.Controllers
 
                 emailService.SendEmail(text, title, doctorInfo.firstName + " " + doctorInfo.lastName, destinationEmail);
             }
-
-
         }
-        
+
         private void sendEmailToAllPersonnel(Logic.Models.RequestPersonnel newrequest)
         {
             PersonnelService personnelService = new PersonnelService();
             personnelService.FindAll()
-                            .ForEach(staff => SendBloodRequestMail(newrequest, staff.emailAddress));
-
-
+                .ForEach(staff => SendBloodRequestMail(newrequest, staff.emailAddress));
         }
 
 
@@ -123,13 +123,13 @@ namespace BloodDonation.Controllers
         public ActionResult CreateRequest(RequestBloodForm request)
         {
             Regex regex = new Regex("^[0-9]{13}$");
-            if(!regex.IsMatch(request.patientCnp))
+            if (!regex.IsMatch(request.patientCnp))
             {
                 //// TODO mesaj de eroare somehow
                 return GetMakeBloodRequest();
             }
 
-            Logic.Models.RequestPersonnel newRequest = 
+            Logic.Models.RequestPersonnel newRequest =
                 businessToPresentationMapperDoctor.MapRequestBloodFormToRequestPersonnel(request, GetUid());
             requestService.AddRequest(newRequest);
 
@@ -144,8 +144,7 @@ namespace BloodDonation.Controllers
         {
             try
             {
-                return ((FirebaseAuthLink)Session["authlink"]).User.LocalId;
-
+                return ((FirebaseAuthLink) Session["authlink"]).User.LocalId;
             }
             catch (Exception e)
             {

@@ -1,12 +1,12 @@
-﻿@model BloodDonation.Models.Patient
-
+﻿@using BloodDonation.Models
+@model List<DonationStatusModel>
 @{
     ViewBag.Title = "PatientDonationsView";
 }
 
 <html lang="en" dir="ltr">
 <head>
-    <title>Add Donation - Personnel</title>
+    <title>Patients Blood Stock</title>
     <meta charset="iso-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -19,84 +19,83 @@
 
 <body>
 
-    <div id="header">
-        <div class="container">
-            <div class="row">
-                <div id="hgroup" class="col-sm-8 ml-4">
-                    <div class="row">
-                        <a href="#" id="page-title">Check donations for patient</a>
-                    </div>
-                    <div class="row">
-                        <a href="#" id="page-owner">DOCTOR</a>
-                    </div>
+<div id="header">
+    <div class="container">
+        <div class="row">
+            <div id="hgroup" class="col-sm-8 ml-4">
+                <div class="row">
+                    <a href="#" id="page-title">Donations for Patients</a>
                 </div>
-                <form action="login.html" method="post" class="col-sm-1 offset-sm-2">
-                    @Html.ActionLink("Log Out", "LogOut", "Login", null, new { @class = "btn auth-button" })
-                </form>
+                <div class="row">
+                    <a href="#" id="page-owner">DOCTOR</a>
+                </div>
             </div>
-            <nav class="navbar navbar-expand-sm">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        @Html.ActionLink("SHOW BLOOD REQUESTS", "MainDoctorPage", "Doctor", null, new { @class = "nav-link" })
-                    </li>
-                    <li class="nav-item current">
-                        <a href="#" class="nav-link">SEE DONATIONS FOR PATIENT</a>
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("MAKE BLOOD REQUEST", "GetMakeBloodRequest", "Doctor", null, new { @class = "nav-link" })
-                    </li>
+            <form action="login.html" method="post" class="col-sm-1 offset-sm-2">
+                @Html.ActionLink("Log Out", "LogOut", "Login", null, new {@class = "btn auth-button"})
+            </form>
+        </div>
+        <nav class="navbar navbar-expand-sm">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    @Html.ActionLink("SHOW BLOOD REQUESTS", "MainDoctorPage", "Doctor", null, new {@class = "nav-link"})
+                </li>
+                <li class="nav-item current">
+                    <a href="#" class="nav-link">SEE DONATIONS FOR PATIENTS</a>
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("MAKE BLOOD REQUEST", "GetMakeBloodRequest", "Doctor", null, new {@class = "nav-link"})
+                </li>
 
+            </ul>
+        </nav>
+    </div>
+</div>
 
-                </ul>
-            </nav>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            Requests:
+        </div>
+
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Patient CNP</th>
+                    <th scope="col">Blood</th>
+                    <th scope="col">Requested Quantity </th>
+                    <th scope="col">Donated Quantity</th>
+                    <th scope="col">Component</th>
+                    <th scope="col">Completed</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                @foreach (var status in Model)
+                {
+                    var p = @status.DonatedQuantity / @status.RequestedQuantity * 100 + "%";
+                    <tr>
+                        <td>@status.RecipientCNP</td>
+                        <td>
+                            <ul>
+                                <li>Group: @status.BloodTypeGroup </li>
+                                <li>RH: @status.BloodTypeRH</li>
+                            </ul>
+                        </td>
+                        <td>@status.RequestedQuantity</td>
+                        <td>@status.DonatedQuantity</td>
+                        <td>@status.Component.ToString()</td>
+                        <td>@p</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                Add Donation:
-            </div>
-            <div class="card-body">
-                @using (Html.BeginForm("GetPatientDonations", "Doctor", FormMethod.Post))
-                {
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <label>Patient CNP </label>
-                            </div>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(model => model.CNP, new { placeholder = "CNP", @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <input type="submit" value="Check donations" class="btn btn-success">
-                }
-            </div>
-            </div>
-            @if (Model != null)
-            {
-                <div class="card">
-                    <div class="card-body">
-
-                        <div class="form-group">
-                            <div class="row">
-
-                                <h4 class="ml-5">Number of blood bags donated for patient: @Model.NoDon </h4>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            }
-
-        <div class="footer fixed-bottom text-center">
-            © 2018 Copyright: Vitamine
-        </div>
+<div class="footer fixed-bottom text-center">
+    © 2018 Copyright: Vitamine
+</div>
 
 </body>
