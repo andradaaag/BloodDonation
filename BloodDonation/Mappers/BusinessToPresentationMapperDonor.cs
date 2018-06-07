@@ -32,7 +32,12 @@ namespace BloodDonation.Mappers
                 Address = donorAccountDetails.Address,
                 Email = donorAccountDetails.Email,
                 Country = donorAccountDetails.Country,
-                Commentaries = donorAccountDetails.Commentaries
+                Commentaries = donorAccountDetails.Commentaries,
+                Residence = donorAccountDetails.Residence,
+                ResCityTown = donorAccountDetails.ResCityTown,
+                ResCountry = donorAccountDetails.ResCountry,
+                CityTown= donorAccountDetails.CityTown
+                
             };
 
         }

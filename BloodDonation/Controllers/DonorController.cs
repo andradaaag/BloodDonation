@@ -83,7 +83,7 @@ namespace BloodDonation.Controllers
         [HttpPost]
         public ActionResult UpdateDonorPersonalData(DonorAccountRequest formDetails)
         {
-           
+            formDetails.ID = GetUid();
             donorService.EditDonorDetails(_presentationToBusinessMapperDonor.MapDonorForm(formDetails));
             return DonorPersonalDetailsView();
         }

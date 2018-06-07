@@ -29,7 +29,8 @@ namespace BloodDonation.Logic.Mappers
                 Email = donor.emailAddress,
                 Country = donor.Country,
                 Commentaries = donor.additionalCommentaries,
-
+                ResCityTown = donor.ResCityTown,
+                ResCountry = donor.ResCountry,
                 Cnp = donor.CNP,
                 Residence= donor.Residence,
                 CityTown= donor.CityTown

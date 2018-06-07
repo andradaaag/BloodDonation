@@ -63,7 +63,15 @@
                     <label for="fname">Date of birth</label>
                 </div>
                 <div class="col-75">
-                    @Html.TextBox("DOB", DateTime.Today, new {@type = "date", @required = "required"})
+                    <h5>@Model.DateOfBirth</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="email">Email</label>
+                </div>
+                <div class="col-75">
+                    @Html.TextBoxFor(model => model.Email, new { @required = "required" })
                 </div>
             </div>
             <div class="row">
@@ -84,10 +92,26 @@
             </div>
             <div class="row">
                 <div class="col-25">
-                    <label for="email">Email</label>
+                    <label for="country">Residence</label>
                 </div>
                 <div class="col-75">
-                    @Html.TextBoxFor(model => model.Email, new {@required = "required"})
+                    @Html.TextBoxFor(model => model.Residence, new { @required = "required" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="country">City Town</label>
+                </div>
+                <div class="col-75">
+                    @Html.TextBoxFor(model => model.CityTown, new { @required = "required" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="country">CNP</label>
+                </div>
+                <div class="col-75">
+                    <h5>@Model.Cnp</h5>
                 </div>
             </div>
             <div class="row">

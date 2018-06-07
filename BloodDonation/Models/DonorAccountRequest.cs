@@ -15,5 +15,11 @@ namespace BloodDonation.Models
         public String Email { get; set; }
         public String Country { get; set; }
         public String Commentaries { get; set; }
+        public string ResCityTown { get; set; }
+        public string ResCountry { get; set; }
+        public String Residence { get; set; }
+        public String CityTown { get; set; }
+
+
     }
 }
