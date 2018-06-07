@@ -58,7 +58,7 @@
                 @Html.ValidationSummary(true)
                 //TODO: add a measuring unit to all components
 
-                <div class="form-group">
+                <div class="form-group" hidden="hidden">
                     <label>Donation ID</label>
                     @Html.EditorFor(model => model.ID, new {htmlAttributes = new {@readonly = "readonly", @class = "form-control"}})
                 </div>
