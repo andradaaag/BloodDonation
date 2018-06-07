@@ -246,6 +246,7 @@
     <Compile Include="Models\BookedDates.cs" />
     <Compile Include="Models\BookingList.cs" />
     <Compile Include="Models\BookingModel.cs" />
+    <Compile Include="Models\DonationStatusModel.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\BookDonationDetails.cs" />
     <Compile Include="Models\RequestComponent.cs" />
