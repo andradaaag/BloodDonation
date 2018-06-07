@@ -28,8 +28,6 @@ namespace BloodDonation.Business.Services
             return donorRepository.exists(id);
         }
 
-
-
         public List<DonationDetails> GetDonationDetails()
         {
             List<Data.Models.Donation> myDonations = donorRepository.GetDonations();
@@ -68,5 +66,9 @@ namespace BloodDonation.Business.Services
         }
 
 
+        public DonorDetailsTransferObject FindByCnp(string cnp)
+        {
+            return dataToLogicMapper.MapDonorDetailsTransferObject(donorRepository.GetDonorByCNP(cnp));
+        }
     }
 }

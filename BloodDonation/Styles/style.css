@@ -95,3 +95,12 @@ ul {
 .img-blood > img { width: 100%; }
 
 .no-padding { padding: 0; }
+
+.donor { background-color: #f09df0; }
+
+.fulfilled { background-color: #b2fece; }
+
+.square {
+    width: 20px;
+    height: 20px;
+}

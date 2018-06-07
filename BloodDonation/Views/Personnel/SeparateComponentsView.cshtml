@@ -60,7 +60,6 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Donor CNP</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Edit</th>
@@ -72,7 +71,6 @@
                     using (Html.BeginForm("EditDonationSeparation", "Personnel", req, FormMethod.Post))
                     {
                         <tr>
-                            <td>@req.ID</td>
                             <td>@req.DonorCNP</td>
                             <td>@req.Quantity</td>
                             <td>
@@ -94,7 +92,6 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Blood Group</th>
                     <th scope="col">Blood RH</th>
                     <th scope="col">Collection Date</th>
@@ -108,7 +105,6 @@
                     using (Html.BeginForm("EditBloodSeparation", "Personnel", req, FormMethod.Post))
                     { 
                         <tr>
-                            <td>@req.ID</td>
                             <td>@req.BloodTypeGroup</td>
                             <td>@req.BloodTypeRH</td>
                             <td>@req.CollectionDate.ToLongDateString()</td>

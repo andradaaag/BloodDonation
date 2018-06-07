@@ -1,4 +1,4 @@
-﻿using BloodDonation.Logic   .Services;
+﻿using BloodDonation.Logic.Services;
 using BloodDonation.Mappers;
 using BloodDonation.Models;
 using BloodDonation.Services;
@@ -11,12 +11,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using BloodDonation.Business.Services;
 
 namespace BloodDonation.Controllers
 {
     public class PersonnelController : Controller
     {
         private DonationService donationService = new DonationService();
+        private DonorService donorService = new DonorService();
         private PersonnelService personnelService = new PersonnelService();
         private Logic.Services.RequestService requestService = new Logic.Services.RequestService();
 
@@ -27,16 +29,19 @@ namespace BloodDonation.Controllers
 
         private ErrorController errorController = new ErrorController();
 
-        private BusinessToPresentationMapperPersonnel BusinessToPresentation = new BusinessToPresentationMapperPersonnel();
-        private PresentationToBusinessMapperPersonnel PresentationToBusiness = new PresentationToBusinessMapperPersonnel();
+        private BusinessToPresentationMapperPersonnel BusinessToPresentation =
+            new BusinessToPresentationMapperPersonnel();
+
+        private PresentationToBusinessMapperPersonnel PresentationToBusiness =
+            new PresentationToBusinessMapperPersonnel();
 
         private ActionResult goIfPossible(ActionResult actionResultSuccess)
         {
             if (Session["usertype"] == null)
                 return RedirectToAction("Index", "Login");
-            if ((string)Session["usertype"] != "personnel")
+            if ((string) Session["usertype"] != "personnel")
                 return RedirectToAction("Error", "Error");
-            if (Session["authlink"] != null && ((FirebaseAuthLink)Session["authlink"]).IsExpired())
+            if (Session["authlink"] != null && ((FirebaseAuthLink) Session["authlink"]).IsExpired())
                 return RedirectToAction("Index", "Login");
 
             return actionResultSuccess;
@@ -44,12 +49,11 @@ namespace BloodDonation.Controllers
 
         public ActionResult Index()
         {
-            
             ///CRISTI LOG EXPIRED BLOOD phase 1 at init check if there is expired blood
             List<BloodDonation.Logic.Models.StoredBlood> expiredBlood = personnelService.GetExpiredBlood();
-            if(expiredBlood.Count() > 0)
+            if (expiredBlood.Count() > 0)
             {
-                return goIfPossible(View("DeleteExpiredBloodView",expiredBlood));
+                return goIfPossible(View("DeleteExpiredBloodView", expiredBlood));
             }
 
             return goIfPossible(View("AddDonationView"));
@@ -65,16 +69,15 @@ namespace BloodDonation.Controllers
             BookingList bookings = new BookingList
             {
                 Bookings = bookingService
-                .GetActiveBookings(GetUid())
-                .Select(i => BusinessToPresentation.Booking(i))
-                .ToList()
+                    .GetActiveBookings(GetUid())
+                    .Select(i => BusinessToPresentation.Booking(i))
+                    .ToList()
             };
-            return goIfPossible(View("SeeBookingsView",bookings));
+            return goIfPossible(View("SeeBookingsView", bookings));
         }
 
         public ActionResult AddDonation()
         {
-
             return goIfPossible(View("AddDonationView"));
         }
 
@@ -85,29 +88,27 @@ namespace BloodDonation.Controllers
 
         public ActionResult PersonalDetails()
         {
-            return goIfPossible(View("PersonalDetailsView", BusinessToPresentation.Personnel( personnelService.GetOne(GetUid()))));
+            return goIfPossible(View("PersonalDetailsView",
+                BusinessToPresentation.Personnel(personnelService.GetOne(GetUid()))));
         }
-        
+
 
         [HttpPost]
         public ActionResult AddDonationInDb(DonationModel donation)
         {
-         
-            personnelService.AddDonationInDB(PresentationToBusiness.Donation(donation), GetUid(),donation.KeepWhole);
+            personnelService.AddDonationInDB(PresentationToBusiness.Donation(donation), GetUid(), donation.KeepWhole);
             return Success();
         }
 
         //START SEPARATE COMPONENTS
         public ActionResult SeparateComponents()
         {
-            
             DonationSepModel dlm = new DonationSepModel
             {
                 Donations = donationService
                     .FindByDonCenterForCompSep(GetUid())
-                    .Select(i=>BusinessToPresentation.Donation(i))
-                    .ToList()
-                ,
+                    .Select(i => BusinessToPresentation.Donation(i))
+                    .ToList(),
                 StoredBlood = storedBloodService
                     .GetWholeStoredBloodByDonCent(GetUid())
                     .Select(i => BusinessToPresentation.StoredBlood(i))
@@ -119,14 +120,12 @@ namespace BloodDonation.Controllers
         [HttpPost]
         public ActionResult EditDonationSeparation(DonationModel donation)
         {
-          
             return goIfPossible(View("EditDonationSeparation", donation));
         }
 
         [HttpPost]
         public ActionResult EditBloodSeparation(StoredBloodModel stored)
         {
-           
             SeparateStoredBloodModel blood = new SeparateStoredBloodModel
             {
                 ID = stored.ID,
@@ -135,7 +134,6 @@ namespace BloodDonation.Controllers
                 BloodTypeRH = stored.BloodTypeRH,
                 CollectionDate = (stored.CollectionDate - new DateTime(1970, 1, 1)).Seconds,
                 DonorEmail = stored.DonnorEmail
-                
             };
             return goIfPossible(View("EditBloodSeparation", blood));
         }
@@ -143,7 +141,6 @@ namespace BloodDonation.Controllers
         [HttpPost]
         public ActionResult SeparateComponentsToDB(DonationModel donation)
         {
-         
             personnelService.SeparateComponentsFromDonation(PresentationToBusiness.Donation(donation));
             Thread.Sleep(1000);
             return SeparateComponents();
@@ -152,41 +149,36 @@ namespace BloodDonation.Controllers
         [HttpPost]
         public ActionResult SeparateBloodComponentsToDB(SeparateStoredBloodModel storedBlood)
         {
-           
             personnelService.SeparateComponentsFromBlood(PresentationToBusiness.SeparateBlood(storedBlood));
             Thread.Sleep(1000);
             return SeparateComponents();
         }
         //END SEPARATE COMPONENTS
 
-       
 
         //START LAB RESULTS
         public ActionResult LabResults()
         {
-           
             DonationListModel dlm = new DonationListModel
             {
                 Donations = donationService
-                .FindByDonCenterForLabRes(GetUid())
-                .AsEnumerable()
-                .Select(i=>BusinessToPresentation.Donation(i))
-                .ToList()
+                    .FindByDonCenterForLabRes(GetUid())
+                    .AsEnumerable()
+                    .Select(i => BusinessToPresentation.Donation(i))
+                    .ToList()
             };
             return goIfPossible(View("LabResultsView", dlm));
         }
-       
+
         [HttpPost]
         public ActionResult EditDonationLab(DonationModel donation)
         {
-           
             return goIfPossible(View("EditDonationLabView", donation));
         }
 
         [HttpPost]
         public ActionResult LabResultsToDB(DonationModel donation)
         {
-          
             personnelService.CommitLabResults(PresentationToBusiness.Donation(donation));
 
             Thread.Sleep(1000);
@@ -196,24 +188,22 @@ namespace BloodDonation.Controllers
 
         public ActionResult AcceptRequest(string id)
         {
-            try {
-                return goIfPossible(View("AcceptRequestView",requestServicePrez.AcceptRequest(id,GetUid())));
+            try
+            {
+                return goIfPossible(View("AcceptRequestView", requestServicePrez.AcceptRequest(id, GetUid())));
             }
             catch (Exception e)
             {
                 return goIfPossible(View("MissingBloodView", model: e.Message));
             }
-            
-            
         }
 
         ///CRISTI LOG EXPIRED BLOOD phase 4 get again all expired blood & delete it by ID
         public ActionResult DeleteExpiredBlood()
         {
             personnelService.GetExpiredBlood()
-                           .ForEach(el => storedBloodService.RemoveBloodById(el.ID));
+                .ForEach(el => storedBloodService.RemoveBloodById(el.ID));
             return Index();
-            
         }
 
 
@@ -241,8 +231,8 @@ namespace BloodDonation.Controllers
 
             Thread th = new Thread(() => mail.ComposeDoctorMail(docMail, r.ID, r.source));
             th.Start();
-            
-                
+
+
             return goIfPossible(View("PendingRequestsView", GetDonationCenterRequests()));
         }
 
@@ -250,24 +240,25 @@ namespace BloodDonation.Controllers
         [HttpPost]
         public ActionResult RequestToDb(NewStatus ns)
         {
-            Status s = (Status)Enum.Parse(typeof(Status), ns.status);
+            Status s = (Status) Enum.Parse(typeof(Status), ns.status);
             RequestPersonnel previousRequest = BusinessToPresentation.Request(requestService.GetOne(ns.ID));
 
             previousRequest.status = s;
             requestService.Edit(PresentationToBusiness.Request(previousRequest));
             return Success();
-
         }
-        
+
         public ActionResult ViewStoredBlood()
         {
-            BloodAmounts blood = BusinessToPresentation.BloodAmounts(personnelService.GetArrayOfBloodQuantity(GetUid()));
+            BloodAmounts blood =
+                BusinessToPresentation.BloodAmounts(personnelService.GetArrayOfBloodQuantity(GetUid()));
             return goIfPossible(View("StoredBloodView", blood));
         }
+
         public ActionResult AcceptedRequests()
         {
             List<RequestPersonnel> listOfAcceptedRequest = GetDonationCenterRequests();
-            listOfAcceptedRequest.Sort((el1, el2) =>(-1) *  el1.urgency.CompareTo(el2.urgency));
+            listOfAcceptedRequest.Sort((el1, el2) => (-1) * el1.urgency.CompareTo(el2.urgency));
 
             return goIfPossible(View("AcceptedRequestsView", listOfAcceptedRequest));
         }
@@ -306,12 +297,36 @@ namespace BloodDonation.Controllers
 
         public List<RequestPersonnel> GetUnsolvedRequests()
         {
-            return requestService
+            var req = requestService
                 .FindUnsolved()
                 .AsEnumerable()
                 .Select(i => BusinessToPresentation.Request(i))
                 .Select(x => AddDoctorEmail(x))
                 .ToList();
+
+            foreach (var r in req)
+            {
+                if (donorService.FindByCnp(r.patientCnp) != null)
+                {
+                    r.isDonor = true;
+                }
+
+                var donations = donationService.FindAll();
+
+                var sum = 0;
+                foreach (var donation in donations)
+                {
+                    if (donation.PatientCnp != null && donation.PatientCnp == r.patientCnp)
+                        sum = sum + donation.Quantity;
+                }
+
+                if (sum >= r.quantity)
+                {
+                    r.isFulfilled = true;
+                }
+            }
+
+            return req;
         }
 
         public List<RequestPersonnel> GetDonationCenterRequests()

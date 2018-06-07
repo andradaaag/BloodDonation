@@ -82,12 +82,11 @@ namespace BloodDonation.Data.Repositories
         {
             return FirebaseToObject.Donor(firebaseClient
                 .Child(CHILD)
-                .OrderBy("CNP")
-                .EqualTo(CNP)
+                .OrderByKey()
                 .OnceAsync<Donor>()
                 .Result
-                .First());
-
+                .ToList()
+                .Find(d=>FirebaseToObject.Donor(d).CNP==CNP));
         }
 
         public Donor GetOne(string id)

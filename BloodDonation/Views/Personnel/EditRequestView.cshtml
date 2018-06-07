@@ -30,7 +30,7 @@
             @using (Html.BeginForm("RequestToDB", "Personnel", FormMethod.Post))
             {
                 @Html.ValidationSummary(true)
-            <div class="row">
+            <div class="row" hidden="hidden">
                 <div class="col-25">
                     <label for="fname">Request ID</label>
                 </div>
