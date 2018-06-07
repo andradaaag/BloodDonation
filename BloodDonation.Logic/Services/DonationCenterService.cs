@@ -81,5 +81,14 @@ namespace BloodDonation.Logic.Services
             donationCenterRepository.DeleteById(id);
         }
 
+        public DonationCenterTransferObject FindByName(String name)
+        {
+            return donationCenterRepository
+                .FindAll()
+                .Where(i => i.name == name)
+                .Select(el => dataToLogicMapper.MapDonationCenterTransferObject(el))
+                .First();
+        }
+
     }
 }

@@ -18,13 +18,31 @@ namespace BloodDonation.Logic.Mappers
                 emailAddress = detailsTransferObject.Email,
                 Country = detailsTransferObject.Country,
                 additionalCommentaries = detailsTransferObject.Commentaries,
-                CNP = detailsTransferObject.Cnp
+                CNP = detailsTransferObject.Cnp,
+                ResCityTown = detailsTransferObject.ResCityTown,
+                Residence = detailsTransferObject.Residence,
+                CityTown= detailsTransferObject.CityTown,
+                ResCountry = detailsTransferObject.ResCountry
+                                
             };
         }
 
         public FirebaseDonationForm MapDonationForm(DonationForm form)
         {
             return new FirebaseDonationForm();
+        }
+
+        public BloodDonation.Data.Models.Booking MapBooking(BloodDonation.Logic.Models.Booking newBooking)
+        {
+            return new BloodDonation.Data.Models.Booking()
+            {
+                Date = newBooking.Date,
+                Hour = newBooking.Hour,
+                DonationCenterId = newBooking.DonationCenterId,
+                DonorId = newBooking.DonorId,
+                DonorName = newBooking.DonorName,
+                UnixTime = newBooking.UnixTime
+            };
         }
     }
 }

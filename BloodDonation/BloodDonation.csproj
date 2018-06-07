@@ -243,6 +243,7 @@
     <Compile Include="Models\AvailableHoursModel.cs" />
     <Compile Include="Models\BloodAmounts.cs" />
     <Compile Include="Models\BloodType.cs" />
+    <Compile Include="Models\BookedDates.cs" />
     <Compile Include="Models\BookingList.cs" />
     <Compile Include="Models\BookingModel.cs" />
     <Compile Include="Models\Patient.cs" />
@@ -279,6 +280,7 @@
     <Compile Include="Models\Personnel.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\SeparateStoredBloodModel.cs" />
+    <Compile Include="Models\ShowBookingDate.cs" />
     <Compile Include="Models\TransferObjectForAcceptView.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\ShowDonorDonations.cs" />
@@ -390,6 +392,7 @@
     <Content Include="Views\Doctor\PatientDonationsView.cshtml" />
     <Content Include="Views\Donor\SelectDonationHourView.cshtml" />
     <Content Include="Views\Personnel\SeeBookingsView.cshtml" />
+    <Content Include="Views\Donor\ShowDonorBookedDatesView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

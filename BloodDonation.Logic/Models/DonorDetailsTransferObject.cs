@@ -16,5 +16,7 @@ namespace BloodDonation.Logic.Models
         public String Residence { get; set; }
         public String Commentaries { get; set; }
         public String Cnp { get; set; }
+        public string ResCityTown { get; set; }
+        public string ResCountry { get; set; }
     }
 }

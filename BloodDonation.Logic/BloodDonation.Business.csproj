@@ -58,6 +58,7 @@
     <Compile Include="Models\AccountRequest.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BloodType.cs" />
+    <Compile Include="Models\BookedHoursTransferObject.cs" />
     <Compile Include="Models\Booking.cs" />
     <Compile Include="Models\RequestComponent.cs" />
     <Compile Include="Models\Donation.cs" />

@@ -17,7 +17,11 @@ namespace BloodDonation.Mappers
                 Address = donorForm.Address,
                 Email = donorForm.Email,
                 Country = donorForm.Country,
-                Commentaries = donorForm.Commentaries
+                Commentaries = donorForm.Commentaries,
+                Residence = donorForm.Residence,
+                ResCityTown = donorForm.ResCityTown,
+                CityTown = donorForm.CityTown,
+                ResCountry = donorForm.ResCountry
             };
         }
 

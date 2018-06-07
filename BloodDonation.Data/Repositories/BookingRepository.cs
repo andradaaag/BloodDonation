@@ -99,6 +99,8 @@ namespace BloodDonation.Data.Repositories
         }
         public List<Booking> FindByDate(String date)
         {
+            List<Booking> list = FindAll();
+
             return firebaseClient
                 .Child(CHILD)
                 .OrderBy("Date")

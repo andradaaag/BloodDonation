@@ -53,25 +53,6 @@ namespace BloodDonation.Data.Repositories
                 .PutAsync(newDonor);
         }
 
-        public void UpdateDonorDetails(Donor donor)
-        {
-            Donor oldDonor = new Donor();
-            foreach (Donor d in GetDonors())
-            {
-                if (d.ID == donor.ID)
-                {
-                    oldDonor = d;
-                }
-            }
-            oldDonor.firstName = donor.firstName;
-            oldDonor.lastName = donor.lastName;
-            oldDonor.Country = donor.Country;
-            oldDonor.Address = donor.Address;
-            oldDonor.emailAddress = donor.emailAddress;
-            oldDonor.additionalCommentaries = donor.additionalCommentaries;
-
-        }
-
         public List<Donation> GetDonations()
         {
             return myDonations;

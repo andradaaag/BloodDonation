@@ -22,7 +22,9 @@ namespace BloodDonation.Mappers
                 OtherCountry = signUpForm.OtherCountry,
                 Email = signUpForm.Email,
                 Hospital = signUpForm.Hospital,
-                DonationCenter = signUpForm.DonationCenter
+                DonationCenter = signUpForm.DonationCenter,
+                CNP= signUpForm.CNP
+                
             };
         }
     }

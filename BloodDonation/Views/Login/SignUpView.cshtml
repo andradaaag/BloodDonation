@@ -136,14 +136,22 @@
                     </div>
                 </div>
 
-                <div class="form-group row" id="hospital" hidden="true">
+                <div class="form-group row" id="hospital" hidden="hidden">
                     <label class="col-sm-3 col-form-label">Hospital</label>
                     <div class="col-sm-9">
                         @Html.DropDownListFor(model => model.Hospital, (List<SelectListItem>) ViewData["hospitals"], new {@class = "form-control"})
                     </div>
                 </div>
 
-                <div class="form-group row" id="donationCenter" hidden="true">
+                <div class="form-group row" id="donor">
+                    <label class="col-sm-3 col-form-label">CNP</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.CNP, new { @required = "required", @class = "form-control" })
+                    </div>
+                </div>
+
+
+                <div class="form-group row" id="donationCenter" hidden="hidden">
                     <label class="col-sm-3 col-form-label">Donation Center</label>
                     <div class="col-sm-9">
                         @Html.DropDownListFor(model => model.DonationCenter, (List<SelectListItem>) ViewData["centers"], new {@class = "form-control"})

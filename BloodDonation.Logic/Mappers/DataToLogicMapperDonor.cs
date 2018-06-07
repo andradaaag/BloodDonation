@@ -29,7 +29,8 @@ namespace BloodDonation.Logic.Mappers
                 Email = donor.emailAddress,
                 Country = donor.Country,
                 Commentaries = donor.additionalCommentaries,
-
+                ResCityTown = donor.ResCityTown,
+                ResCountry = donor.ResCountry,
                 Cnp = donor.CNP,
                 Residence= donor.Residence,
                 CityTown= donor.CityTown
@@ -37,6 +38,16 @@ namespace BloodDonation.Logic.Mappers
             };
         }
 
+        public BookedHoursTransferObject MapBooking(Data.Models.Booking b)
+        {
+            return new BookedHoursTransferObject()
+            {
+                bookingDate = b.Date,
+                bookingHour = b.Hour,
+                bookingId = b.ID,
+                center = b.DonationCenterId
+            };
+        }
        
     }
 }

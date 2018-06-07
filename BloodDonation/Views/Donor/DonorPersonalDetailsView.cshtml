@@ -27,7 +27,7 @@
                     <li>@Html.ActionLink("Personal Details", "DonorPersonalDetailsView", "Donor", null, new { @class = "header nav li" })</li>
                     <li>@Html.ActionLink("My Donations", "Index", "Donor", null, new { @class = "header nav li" })</li>
                     <li>@Html.ActionLink("Book Donation", "BookDonationView", "Donor", null, new { @class = "header nav li" })</li>
-                    <li>@Html.ActionLink("Account Settings", "DonorPersonalDetailsView", "Donor", null, new { @class = "header nav li" })</li>
+                    <li>@Html.ActionLink("Booked Dates", "ShowBookedDatesDonorPage", "Donor", null, new { @class = "header nav li" })</li>
                 </ul> 
             </nav>
         </header>
@@ -63,6 +63,14 @@
                 </div>
                 <div class="row">
                     <div class="col-25">
+                        <label for="address">Email</label>
+                    </div>
+                    <div class="col-75">
+                        <h5>@Model.Email</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
                         <label for="address">Address</label>
                     </div>
                     <div class="col-75">
@@ -79,13 +87,29 @@
                 </div>
                 <div class="row">
                     <div class="col-25">
-                        <label for="address">Email</label>
+                        <label for="address">Residence</label>
                     </div>
                     <div class="col-75">
-                        <h5>@Model.Email</h5>
+                        <h5>@Model.Residence</h5>
                     </div>
                 </div>
-                
+                <div class="row">
+                    <div class="col-25">
+                        <label for="address">City Town</label>
+                    </div>
+                    <div class="col-75">
+                        <h5>@Model.CityTown</h5>
+                    </div>
+                </div>
+              
+                <div class="row">
+                    <div class="col-25">
+                        <label for="address">CNP</label>
+                    </div>
+                    <div class="col-75">
+                        <h5>@Model.Cnp</h5>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-25">
                         <label for="address">Additional Commentaries</label>

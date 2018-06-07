@@ -32,9 +32,25 @@ namespace BloodDonation.Mappers
                 Address = donorAccountDetails.Address,
                 Email = donorAccountDetails.Email,
                 Country = donorAccountDetails.Country,
-                Commentaries = donorAccountDetails.Commentaries
+                Commentaries = donorAccountDetails.Commentaries,
+                Residence = donorAccountDetails.Residence,
+                ResCityTown = donorAccountDetails.ResCityTown,
+                ResCountry = donorAccountDetails.ResCountry,
+                CityTown= donorAccountDetails.CityTown
+                
             };
 
+        }
+
+        public BookedDates MapBookedDates( BookedHoursTransferObject bhto, String center)
+        {
+            return new BookedDates()
+            {
+                bookingDate = bhto.bookingDate,
+                bookingHour = bhto.bookingHour,
+                bookingId = bhto.bookingId,
+                center = center
+            };
         }
     }
 }

@@ -1,0 +1,77 @@
+﻿@model BloodDonation.Models.ShowBookingDate
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <title>See donations </title>
+    <meta charset="iso-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Styles/layout_doctor_my_requests.css")
+    @Styles.Render("~/Styles/mediaqueries.css")
+    <script src="scripts/jquery.1.9.0.min.js"></script>
+    <script src="scripts/jquery-mobilemenu.min.js"></script>
+</head>
+<body>
+
+    <div class="wrapper row1">
+        <header id="header" class="clear">
+            <div id="hgroup">
+                <h1>
+                    <a href="#">See donations</a>
+                </h1>
+                <h2>
+                    <a href="#">Donor</a>
+                </h2>
+            </div>
+            <form action="login.html" method="post">
+                @Html.ActionLink("Log Out", "LogOut", "Login", null, new { @class = "sf_submit" })
+            </form>
+            <nav>
+                <ul>
+                    <li>@Html.ActionLink("Personal Details", "DonorPersonalDetailsView", "Donor", null, new { @class = "header nav li" })</li>
+                    <li>@Html.ActionLink("My Donations", "Index", "Donor", null, new { @class = "header nav li" })</li>
+                    <li>@Html.ActionLink("Book Donation", "BookDonationView", "Donor", null, new { @class = "header nav li" })</li>
+                    <li>@Html.ActionLink("Booked Dates", "ShowBookedDatesDonorPage", "Donor", null, new { @class = "header nav li" })</li>
+
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <!-- content -->
+
+    <div class="wrapper row3">
+        <div class="row">
+         
+            <div class="container">
+                <form action="#">
+                    <table style="width: 100%">
+                        <tr>
+                            <th>Date</th>
+                            <th>Hour</th>
+                            <th>Center Location</th>
+                        </tr>
+                        <!-- Add information in taable -->
+
+                        @foreach (var req in Model.getAllDates())
+                        {
+                            <tr>
+                                <td>@req.bookingDate</td>
+                                <td>@req.bookingHour</td>
+                                <td>@req.center</td>
+
+                            </tr>
+                        }
+
+                    </table>
+                </form>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="wrapper row4">
+            <footer id="footer" class="clear">
+                <p class="fl_left">Copyright &copy; 2013 - All Rights Reserved - <a href="#">Domain Name</a></p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

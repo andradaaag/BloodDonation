@@ -14,10 +14,12 @@ namespace BloodDonation.Logic.Services
         private readonly BookingRepository repo = new BookingRepository();
         private readonly DataToLogicMapperPersonnel dataToLogic = new DataToLogicMapperPersonnel();
         private readonly DonationCenterPersonnelRepository persRepo = new DonationCenterPersonnelRepository();
+        private readonly LogicToDataMapperDonor logicToDataDonor = new LogicToDataMapperDonor();
+        private readonly DataToLogicMapperDonor dataToLogicDonor = new DataToLogicMapperDonor();
 
         private int DateTimeToUnix(DateTime dt)
         {
-            return dt.Subtract(new DateTime(1970, 1, 1)).Seconds;
+            return (int)(dt - new DateTime(1970, 1, 1)).TotalSeconds;
         }
 
         public List<Booking> GetActiveBookings(string uid)
@@ -33,6 +35,50 @@ namespace BloodDonation.Logic.Services
                 .ToList();
         }
 
+        public List<String> GetAvailableHours(String centerId, String date)
+        {
+            List<String> mylist = new List<string>();
+            DateTime myDate = DateTime.ParseExact("07:00", "HH:mm",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+            for (int i = 0; i < 7; i++)
+            {
+                DateTime d = myDate.AddHours(i);
+                if (isAvailable(centerId, d.ToString("HH:mm"), date))
+                {
+                    mylist.Add(d.ToString("HH:mm"));
+                }
+            }
+            return mylist;
+        }
+
+        private bool isAvailable(String centerId, String hour, String date)
+        {
+            List < String > hours= GetUnavailableHours(centerId, date);
+            return !hours.Contains(hour);
+        }
+
+        public List<String> GetUnavailableHours(String centerId, String date)
+        {
+            return repo
+                .FindByDate(date)
+                .Where(i => i.DonationCenterId == centerId)
+                .Select(i => dataToLogic.Booking(i).Hour)
+                .ToList();
+
+        }
+
+        public void saveBooking(Booking newBooking)
+        {
+            newBooking.UnixTime = DateTimeToUnix(DateTime.Parse(newBooking.Date + " " + newBooking.Hour));
+            repo.Save(logicToDataDonor.MapBooking(newBooking));
+        }
+
+        public List<BookedHoursTransferObject> GetDonorBookedHours(String donorId)
+        {
+            return repo.FindByDonorId(donorId)
+                .Select(i => dataToLogicDonor.MapBooking(i))
+                .ToList();
+        }
 
     }
 }
