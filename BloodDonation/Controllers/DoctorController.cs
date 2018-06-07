@@ -37,15 +37,29 @@ namespace BloodDonation.Controllers
 
         List<Models.RequestPersonnel> requests;
 
+        private ActionResult goIfPossible(ActionResult actionResultSuccess)
+        {
+            Thread.Sleep(1000);
+
+            if (Session["usertype"] == null)
+                return RedirectToAction("Index", "Login");
+            if ((string)Session["usertype"] != "doctor")
+                return RedirectToAction("Error", "Error");
+            if (Session["authlink"] != null && ((FirebaseAuthLink)Session["authlink"]).IsExpired())
+                return RedirectToAction("Index", "Login");
+
+            return actionResultSuccess;
+        }
+
         public ActionResult Index()
         {
-            return MainDoctorPage();
+            return goIfPossible(MainDoctorPage());
         }
 
         public ActionResult PatientDonations()
         {
             var statuses = doctorServicePresentation.GetDonationStatusesForDoctor(GetUid());
-            return View("PatientDonationsView", statuses);
+            return goIfPossible(View("PatientDonationsView", statuses));
         }
 
         public ActionResult MainDoctorPage()
@@ -56,12 +70,12 @@ namespace BloodDonation.Controllers
                 .Select(el => businessToPresentationMapperPersonnel.Request(el))
                 .ToList();
 
-            return View("DoctorShowRequestsView", requests);
+            return goIfPossible(View("DoctorShowRequestsView", requests));
         }
 
         public ActionResult GetMakeBloodRequest()
         {
-            return View("MakeRequestView");
+            return goIfPossible(View("MakeRequestView"));
         }
 
 
@@ -69,7 +83,7 @@ namespace BloodDonation.Controllers
         {
             requestService.DeleteById(info.ID);
             System.Threading.Thread.Sleep(700);
-            return MainDoctorPage();
+            return goIfPossible(MainDoctorPage());
         }
 
         public ActionResult CompleteRequest(BloodDonation.Models.RequestPersonnel info)
@@ -82,7 +96,7 @@ namespace BloodDonation.Controllers
             request.status = Utils.Enums.Status.Completed;
             requestService.Edit(request);
             System.Threading.Thread.Sleep(700);
-            return MainDoctorPage();
+            return goIfPossible(MainDoctorPage());
         }
 
 
@@ -137,7 +151,7 @@ namespace BloodDonation.Controllers
             mailThread.Start();
 
             System.Threading.Thread.Sleep(700);
-            return MainDoctorPage();
+            return goIfPossible(MainDoctorPage());
         }
 
         public String GetUid()
