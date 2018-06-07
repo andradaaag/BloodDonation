@@ -38,16 +38,16 @@
         </div>
         <nav class="navbar navbar-expand-sm">
             <ul class="navbar-nav">
-                <li>@Html.ActionLink("ADD DONATION", "AddDonation", "Personnel", null, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("SEPARATE COMPONENTS", "SeparateComponents", "Personnel", null, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("LAB RESULTS", "LabResults", "Personnel", null, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("ACCOUNT SETTINGS", "PersonalDetails", "Personnel", null, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("ADD DONATION", "AddDonation", "Personnel", null, new {@class = "nav-link"})</li>
+                <li>@Html.ActionLink("SEPARATE COMPONENTS", "SeparateComponents", "Personnel", null, new {@class = "nav-link"})</li>
+                <li>@Html.ActionLink("LAB RESULTS", "LabResults", "Personnel", null, new {@class = "nav-link"})</li>
+                <li>@Html.ActionLink("ACCOUNT SETTINGS", "PersonalDetails", "Personnel", null, new {@class = "nav-link"})</li>
                 <li class="nav-item current">
                     <a href="#" class="nav-link">PENDING REQUESTS</a>
                 </li>
-                <li>@Html.ActionLink("ACCEPTED REQUESTS", "AcceptedRequests", "Personnel", null, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("VIEW STORED BLOOD", "ViewStoredBlood", "Personnel", null, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("VIEW BOOKED DONATIONS", "SeeBookings", "Personnel", null, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("ACCEPTED REQUESTS", "AcceptedRequests", "Personnel", null, new {@class = "nav-link"})</li>
+                <li>@Html.ActionLink("VIEW STORED BLOOD", "ViewStoredBlood", "Personnel", null, new {@class = "nav-link"})</li>
+                <li>@Html.ActionLink("VIEW BOOKED DONATIONS", "SeeBookings", "Personnel", null, new {@class = "nav-link"})</li>
             </ul>
         </nav>
     </div>
@@ -59,10 +59,15 @@
             Pending Requests:
         </div>
         <div class="card-body">
+            <div class="row pl-4 mb-3">
+                <div class="square fulfilled m-2"></div>
+                <div class="m-2">- Fulfilled</div>
+                <div class="square donor m-2"></div>
+                <div class="m-2">- Donor</div>
+            </div>
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">Status</th>
                     <th scope="col">Component</th>
                     <th scope="col">Hospital</th>
                     <th scope="col">Doctor Name</th>
@@ -96,8 +101,17 @@
                     }
                     reqID = Convert.ToString(@req.ID);
 
-                    <tr>
-                        <td>@req.status</td>
+                    var clazz = "";
+                    if (req.isDonor)
+                    {
+                        clazz = "donor";
+                    }
+                    if (req.isFulfilled)
+                    {
+                        clazz = "fulfilled";
+                    }
+
+                    <tr class="@clazz">
                         <td>@req.bloodType.component</td>
                         <td>
                             @req.hospitalName <br> @req.hospitalLocation</td>
@@ -108,7 +122,7 @@
                         <td>@req.bloodType.PH</td>
                         <td>@(((DoctorUrgencyLevel) req.urgency).ToString())</td>
                         <td>
-                            @Html.ActionLink(@text, @method, "Personnel", new {id = @reqID}, new{@class = "btn btn-success"})
+                            @Html.ActionLink(@text, @method, "Personnel", new {id = @reqID}, new {@class = "btn btn-success"})
                         </td>
                     </tr>
                 }

@@ -12,6 +12,7 @@ namespace BloodDonation.Data.Mapper
     {
         public Donor Donor(FirebaseObject<Donor> donor)
         {
+            if (donor == null) return null;
             Donor d = donor.Object;
             d.ID = donor.Key;
             return d;

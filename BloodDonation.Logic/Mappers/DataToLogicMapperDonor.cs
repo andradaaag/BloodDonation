@@ -19,6 +19,7 @@ namespace BloodDonation.Logic.Mappers
 
         public DonorDetailsTransferObject MapDonorDetailsTransferObject(Donor donor)
         {
+            if (donor == null) return null;
             return new DonorDetailsTransferObject()
             {
                 ID = donor.ID,
@@ -32,9 +33,8 @@ namespace BloodDonation.Logic.Mappers
                 ResCityTown = donor.ResCityTown,
                 ResCountry = donor.ResCountry,
                 Cnp = donor.CNP,
-                Residence= donor.Residence,
-                CityTown= donor.CityTown
-
+                Residence = donor.Residence,
+                CityTown = donor.CityTown
             };
         }
 
@@ -48,6 +48,5 @@ namespace BloodDonation.Logic.Mappers
                 center = b.DonationCenterId
             };
         }
-       
     }
 }
