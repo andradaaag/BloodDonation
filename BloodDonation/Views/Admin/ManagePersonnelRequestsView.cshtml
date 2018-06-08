@@ -64,20 +64,21 @@
                 </thead>
                 <tbody>
 
-                @foreach (var req in Model.GetDonationCenterPersonnelAccountRequests())
-                {
-                    <tr>
-                        <td>@req.FirstName @req.LastName</td>
-                        <td>@req.EmailAddress</td>
-                        <td>@req.HospitalName</td>
-                        <td>
-                            @Html.ActionLink("Approve", "ApproveAccountRequest", "Admin", new {id = req.ID, requestType = req.RequestType}, new {@class = "btn btn-success"})
-                        </td>
-                        <td>
-                            @Html.ActionLink("Decline", "DenyAccountRequest", "Admin", new {id = req.ID, requestType = req.RequestType}, new {@class = "btn btn-danger"})
-                        </td>
-                    </tr>
-                }
+
+                    @foreach (var req in Model.GetDonationCenterPersonnelAccountRequests())
+    {
+                <tr>
+                    <td>@req.FirstName @req.LastName</td>
+                    <td>@req.EmailAddress</td>
+                    <td>@req.HospitalName</td>
+                    <td>
+                        @Html.ActionLink("Approve", "ApproveAccountRequest", "Admin", new { id = req.ID, requestType = req.RequestType }, new { @class = "btn btn-success" })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Decline", "DenyAccountRequest", "Admin", new { id = req.ID, requestType = req.RequestType }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+}
 
                 </tbody>
             </table>

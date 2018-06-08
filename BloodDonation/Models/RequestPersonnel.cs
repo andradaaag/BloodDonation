@@ -36,6 +36,9 @@ namespace BloodDonation.Models
         public int quantity;
         public BloodType bloodType;
 
+        public Double Lat;
+        public Double Lon;
+
         public DoctorUrgencyLevel urgency;
         
     }

@@ -29,10 +29,16 @@ namespace BloodDonation.Services
 
         public void AddNewHospital(ManageHospitalsModel model)
         {
+            LocationService ls = new LocationService();
+
+            List<Double> locations = ls.getCoordinates(model.Location);
+
             HospitalTransferObject newHospital = new HospitalTransferObject
             {
                 Location = model.Location,
-                Name = model.Name
+                Name = model.Name,
+                Lat = locations[0],
+                Lon = locations[1]
             };
 
             hospitalService.AddNewHospital(newHospital);

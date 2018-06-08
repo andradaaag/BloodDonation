@@ -90,7 +90,7 @@ namespace BloodDonation.Data.Repositories
             }
             catch(Exception ex)
             {
-                return new Hospital("none","none");
+                return new Hospital("none","none",-1,-1);
             }
         }
 

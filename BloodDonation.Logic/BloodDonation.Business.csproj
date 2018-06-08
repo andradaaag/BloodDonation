@@ -75,6 +75,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\BookingService.cs" />
     <Compile Include="Services\EmailServiceBloodDonation.cs" />
+    <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\PersonnelService.cs" />
     <Compile Include="Services\DonationService.cs" />
     <Compile Include="Services\RequestService.cs" />

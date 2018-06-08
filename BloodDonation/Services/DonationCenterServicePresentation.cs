@@ -29,10 +29,15 @@ namespace BloodDonation.Services
 
         public void AddNewDonationCenter(ManageDonationCentersModel model)
         {
+            LocationService ls = new LocationService();
+            List<Double> coordinates = ls.getCoordinates(model.Location);
+
             DonationCenterTransferObject newDC = new DonationCenterTransferObject
             {
                 Location = model.Location,
-                Name = model.Name
+                Name = model.Name,
+                Lat = coordinates[0],
+                Lon = coordinates[1]
             };
 
             donationCenterService.AddNewDonationCenter(newDC);
