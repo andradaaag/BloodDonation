@@ -67,13 +67,16 @@ namespace BloodDonation.Logic.Services
 
         }
 
-        public List<DonationDetails> FindDonationsByDonorCNP(string donorCNP)
+        public List<Donation> FindDonationsByDonorCNP(string donorCNP)
         {
-            return Repository
-               .FindByDonorCNP(donorCNP)
-               .AsEnumerable()
-               .Select(i => DataToLogicDonor.MapDonationToDonationDetails(i))
-               .ToList();
+            //return Repository
+            //   .FindByDonorCNP(donorCNP)
+            //   .AsEnumerable()
+            //   .Select(i => DataToLogicDonor.MapDonationToDonationDetails(i))
+            //   .ToList();
+            return FindAll()
+                .Where(i => i.DonorCNP == donorCNP)
+                .ToList();
         }
 
         public List<Donation> FindUnsolvedByDonationCenter(string donationCenterID)

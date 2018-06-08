@@ -66,7 +66,7 @@
                             <label>First Name</label>
                         </div>
                         <div class="col-sm-10">
-                            @Html.TextBoxFor(model => model.FirstName, new {@required = "required", @class="form-control"})
+                            @Html.TextBoxFor(model => model.FirstName, new { placeholder = Model.FirstName,@required = "required", @class="form-control"})
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                             <label >Last Name</label>
                         </div>
                         <div class="col-sm-10">
-                            @Html.TextBoxFor(model => model.LastName, new {@required = "required", @class="form-control"})
+                            @Html.TextBoxFor(model => model.LastName, new { placeholder = Model.LastName, @required = "required", @class="form-control"})
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                             <label>Date of birth</label>
                         </div>
                         <div class="col-sm-10">
-                            @Model.DateOfBirth.ToLongDateString()
+                            @Html.TextBoxFor(model => model.DateOfBirth, new { @type = "date", @class = "form-control", @Value = @DateTime.Today.ToString("yyyy-MM-dd") })
                         </div>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
                             <label>Email</label>
                         </div>
                         <div class="col-sm-10">
-                            @Html.TextBoxFor(model => model.Email, new {@required = "required", @class="form-control"})
+                            @Html.TextBoxFor(model => model.Email, new { placeholder = Model.Email, @required = "required", @class="form-control"})
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                             <label>Address</label>
                         </div>
                         <div class="col-sm-10">
-                            @Html.TextBoxFor(model => model.Address, new {@required = "required", @class="form-control"})
+                            @Html.TextBoxFor(model => model.Address, new { placeholder = Model.Address,  @required = "required", @class="form-control"})
                         </div>
                     </div>
                 </div>
@@ -121,18 +121,7 @@
                             <label>Country</label>
                         </div>
                         <div class="col-sm-10">
-                            @Html.TextBoxFor(model => model.Country, new {@required = "required", @class="form-control"})
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <label >Residence</label>
-                        </div>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(model => model.Residence, new {@required = "required", @class="form-control"})
+                            @Html.TextBoxFor(model => model.Country, new { placeholder = Model.Country, @required = "required", @class="form-control"})
                         </div>
                     </div>
                 </div>
@@ -143,7 +132,7 @@
                             <label>City Town</label>
                         </div>
                         <div class="col-sm-10">
-                            @Html.TextBoxFor(model => model.CityTown, new {@required = "required", @class="form-control"})
+                            @Html.TextBoxFor(model => model.CityTown, new { placeholder = Model.CityTown,  @required = "required", @class="form-control"})
                         </div>
                     </div>
                 </div>
@@ -154,7 +143,7 @@
                             <label >CNP</label>
                         </div>
                         <div class="col-sm-10">
-                            <h5>@Model.Cnp</h5>
+                            @Html.TextBoxFor(model => model.Cnp, new { placeholder = Model.Cnp, @required = "required", @class = "form-control" })
                         </div>
                     </div>
                 </div>
@@ -165,7 +154,7 @@
                             <label >Additional Commentaries</label>
                         </div>
                         <div class="col-sm-10">
-                            @Html.TextBoxFor(model => model.Commentaries, new {@required = "required", @class="form-control"})
+                            @Html.TextBoxFor(model => model.Commentaries, new { placeholder = Model.Commentaries, @class="form-control"})
                         </div>
                     </div>
                 </div>

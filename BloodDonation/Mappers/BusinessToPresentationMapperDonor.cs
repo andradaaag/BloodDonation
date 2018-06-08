@@ -6,15 +6,16 @@ namespace BloodDonation.Mappers
 {
     public class BusinessToPresentationMapperDonor
     {
-        public DonorDonationDetails MapDonorDonationDetails(DonationDetails donationDetails)
+        public DonorDonationDetails MapDonorDonationDetails(Donation donationDetails)
         {
             return new DonorDonationDetails()
             {
+
                 ID = donationDetails.ID,
-                CenterLocation = donationDetails.CenterLocation,
+                CenterLocation = donationDetails.DonationCenterId,
                 Quantity = donationDetails.Quantity,
-                TestResult = donationDetails.TestResult,
-                DonationDate = donationDetails.DonationDate
+                TestResult = donationDetails.IsAccepted(),
+                DonationDate = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(donationDetails.DonationTime).ToString()
             };
         }
 
