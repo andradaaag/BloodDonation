@@ -64,15 +64,6 @@ namespace BloodDonation.Controllers
                 return goIfPossible(View("DeleteExpiredBloodView", expiredBlood));
             }
 
-            if(LatDonCenter == -1 || LonDonCenter == -1)
-            {
-                DonationCenterService donationCenterService = new DonationCenterService();
-                BloodDonation.Logic.Models.DonationCenterTransferObject dcto = 
-                    donationCenterService.GetDonationCenterById(personnelService.GetOne(GetUid()).DonationCenterID);
-                LatDonCenter = dcto.Lat;
-                LonDonCenter = dcto.Lon;
-            }
-
 
             return goIfPossible(View("AddDonationView"));
         }
@@ -293,6 +284,14 @@ namespace BloodDonation.Controllers
             listOfUnresolvedRequest.Sort((el1, el2) => { return (int)(-100*(el1.urgency-el2.urgency) * Math.Exp(1/(1+(-1)*( Distance(LatDonCenter, LonDonCenter, el1.Lat, el1.Lon) - Distance(LatDonCenter, LonDonCenter, el2.Lat, el2.Lon)))));  });
             PersonelRequestTransferObject prto = new PersonelRequestTransferObject();
             prto.listRequests = listOfUnresolvedRequest;
+            if (LatDonCenter == -1 || LonDonCenter == -1)
+            {
+                DonationCenterService donationCenterService = new DonationCenterService();
+                BloodDonation.Logic.Models.DonationCenterTransferObject dcto =
+                    donationCenterService.GetDonationCenterById(personnelService.GetOne(GetUid()).DonationCenterID);
+                LatDonCenter = dcto.Lat;
+                LonDonCenter = dcto.Lon;
+            }
             prto.LatDonationCenter = LatDonCenter;
             prto.LonDonationCenter = LonDonCenter;
 
