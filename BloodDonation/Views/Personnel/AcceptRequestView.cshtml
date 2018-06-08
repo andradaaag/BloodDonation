@@ -1,4 +1,4 @@
-﻿@model BloodDonation.Models.RequestPersonnel
+﻿@model BloodDonation.Models.TransferObjectForAcceptView
 
 @{
     ViewBag.Title = "AcceptRequestView";
@@ -58,7 +58,7 @@
                             <label>ID</label>
                         </div>
                         <div class="col-sm-10">
-                            @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                            @Html.EditorFor(model => model.bloodRequest.ID, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                             <label>Status</label>
                         </div>
                         <div class="col-sm-10">
-                            @Html.EditorFor(model => model.status, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                            @Html.EditorFor(model => model.bloodRequest.status, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                             <label>Component</label>
                         </div>
                         <div class="col-sm-10">
-                            @Html.EditorFor(model => model.bloodType.component, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                            @Html.EditorFor(model => model.bloodRequest.bloodType.component, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                             <label>Hospital Name</label>
                         </div>
                         <div class="col-sm-10">
-                            @Html.EditorFor(model => model.hospitalName, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                            @Html.EditorFor(model => model.bloodRequest.hospitalName, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                             <label>Hospital Location</label>
                         </div>
                         <div class="col-sm-10">
-                            @Html.EditorFor(model => model.hospitalLocation, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                            @Html.EditorFor(model => model.bloodRequest.hospitalLocation, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
                         </div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                             <label>Doctor Name</label>
                         </div>
                         <div class="col-sm-10">
-                            @Html.EditorFor(model => model.doctorName, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                            @Html.EditorFor(model => model.bloodRequest.doctorName, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
                         </div>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                             <label>Doctor Email</label>
                         </div>
                         <div class="col-sm-10">
-                            @Html.EditorFor(model => model.doctorEmail, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                            @Html.EditorFor(model => model.bloodRequest.doctorEmail, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
                         </div>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
                             <label>Quantity</label>
                         </div>
                         <div class="col-sm-10">
-                            @Html.EditorFor(model => model.quantityString, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                            @Html.EditorFor(model => model.bloodRequest.quantityString, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
                         </div>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
                             <label>Blood Group</label>
                         </div>
                         <div class="col-sm-10">
-                            @Html.EditorFor(model => model.bloodType.Group, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                            @Html.EditorFor(model => model.bloodRequest.bloodType.Group, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
                         </div>
                     </div>
                 </div>
@@ -163,7 +163,7 @@
                             <label for="col-sm-10">RH Type</label>
                         </div>
                         <div class="col-sm-10">
-                            @if (Model.bloodType.PH)
+                            @if (Model.bloodRequest.bloodType.PH)
                             {
                                 <input type="text" id="Foo" name="pos" value="Positive" readonly="readonly" class="form-control" />
                             }
@@ -176,7 +176,7 @@
 
                     <div class="form-group">
                         @{
-                            var reqID = Model.ID;
+                            var reqID = Model.bloodRequest.ID;
                         }
                         @Html.ActionLink("Confirm", "ConfirmAcceptRequest", "Personnel", new { id = @reqID }, new { @class = "btn btn-success mt-3 ml-3" })
                     </div>
