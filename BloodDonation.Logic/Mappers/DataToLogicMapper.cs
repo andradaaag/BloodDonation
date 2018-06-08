@@ -74,7 +74,9 @@ namespace BloodDonation.Logic.Mappers
             {
                 ID = hospital.ID,
                 Name = hospital.name,
-                Location = hospital.location
+                Location = hospital.location,
+                Lat = hospital.lat,
+                Lon = hospital.lon
             };
         }
 

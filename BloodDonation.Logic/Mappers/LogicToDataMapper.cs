@@ -10,12 +10,12 @@ namespace BloodDonation.Business.Mappers
 
         public Data.Models.Hospital MapHospital(HospitalTransferObject hto)
         {
-            return new Data.Models.Hospital(hto.Location, hto.Name);
+            return new Data.Models.Hospital(hto.Location, hto.Name, hto.Lat, hto.Lon);
         }
 
         public Data.Models.DonationCenter MapDonationCenter(DonationCenterTransferObject dcto)
         {
-            return new Data.Models.DonationCenter(dcto.Location, dcto.Name);
+            return new Data.Models.DonationCenter(dcto.Location, dcto.Name, dcto.Lat, dcto.Lon);
         }
 
         // end todo

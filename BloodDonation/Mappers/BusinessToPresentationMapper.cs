@@ -76,7 +76,9 @@ namespace BloodDonation.Mappers
             {
                 ID = hto.ID,
                 Location = hto.Location,
-                Name = hto.Name
+                Name = hto.Name,
+                Lat = hto.Lat,
+                Lon = hto.Lon
             };
         }
 

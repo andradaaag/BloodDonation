@@ -36,8 +36,13 @@ namespace BloodDonation.Models
         public int quantity;
         public BloodType bloodType;
 
+
+        public Double Lat;
+        public Double Lon;
+
         public bool isFulfilled;
         public bool isDonor;
+
 
         public DoctorUrgencyLevel urgency;
         

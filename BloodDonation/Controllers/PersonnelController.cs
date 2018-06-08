@@ -35,6 +35,11 @@ namespace BloodDonation.Controllers
         private PresentationToBusinessMapperPersonnel PresentationToBusiness =
             new PresentationToBusinessMapperPersonnel();
 
+        private List<Logic.Models.HospitalTransferObject> hospitals = null;
+        private Double LatDonCenter = -1;
+        private Double LonDonCenter = -1;
+      
+
         private ActionResult goIfPossible(ActionResult actionResultSuccess)
         {
             if (Session["usertype"] == null)
@@ -47,14 +52,27 @@ namespace BloodDonation.Controllers
             return actionResultSuccess;
         }
 
+        
+
         public ActionResult Index()
         {
+
             ///CRISTI LOG EXPIRED BLOOD phase 1 at init check if there is expired blood
             List<BloodDonation.Logic.Models.StoredBlood> expiredBlood = personnelService.GetExpiredBlood();
             if (expiredBlood.Count() > 0)
             {
                 return goIfPossible(View("DeleteExpiredBloodView", expiredBlood));
             }
+
+            if(LatDonCenter == -1 || LonDonCenter == -1)
+            {
+                DonationCenterService donationCenterService = new DonationCenterService();
+                BloodDonation.Logic.Models.DonationCenterTransferObject dcto = 
+                    donationCenterService.GetDonationCenterById(personnelService.GetOne(GetUid()).DonationCenterID);
+                LatDonCenter = dcto.Lat;
+                LonDonCenter = dcto.Lon;
+            }
+
 
             return goIfPossible(View("AddDonationView"));
         }
@@ -263,12 +281,22 @@ namespace BloodDonation.Controllers
             return goIfPossible(View("AcceptedRequestsView", listOfAcceptedRequest));
         }
 
+        public Double Distance(Double ax, Double ay, Double bx, Double by)
+        {
+            return Math.Sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by));
+        }
+
         public ActionResult PendingRequests()
         {
+            
             List<RequestPersonnel> listOfUnresolvedRequest = GetUnsolvedRequests();
-            listOfUnresolvedRequest.Sort((el1, el2) => (-1) * el1.urgency.CompareTo(el2.urgency));
+            listOfUnresolvedRequest.Sort((el1, el2) => { return (int)(-100*(el1.urgency-el2.urgency) * Math.Exp(1/(1+(-1)*( Distance(LatDonCenter, LonDonCenter, el1.Lat, el1.Lon) - Distance(LatDonCenter, LonDonCenter, el2.Lat, el2.Lon)))));  });
+            PersonelRequestTransferObject prto = new PersonelRequestTransferObject();
+            prto.listRequests = listOfUnresolvedRequest;
+            prto.LatDonationCenter = LatDonCenter;
+            prto.LonDonationCenter = LonDonCenter;
 
-            return goIfPossible(View("PendingRequestsView", listOfUnresolvedRequest));
+            return goIfPossible(View("PendingRequestsView", prto));
         }
 
         public ActionResult Requests()
@@ -287,46 +315,77 @@ namespace BloodDonation.Controllers
         //UTIL
         public List<RequestPersonnel> GetAllRequests()
         {
+            if (hospitals == null)
+            {
+                HospitalService hospitalService = new HospitalService();
+                hospitals = hospitalService.GetAllHospitals();
+            }
+
             return requestService
                 .FindAll()
                 .AsEnumerable()
                 .Select(i => BusinessToPresentation.Request(i))
                 .Select(x => AddDoctorEmail(x))
+                .Select(x => {
+                    foreach(var hosp in hospitals)
+                    {
+                        if(hosp.ID == x.destination)
+                        {
+                            x.Lat = hosp.Lat;
+                            x.Lon = hosp.Lon;
+                            break;
+                        }
+                    }
+                    return x;
+                })
                 .ToList();
         }
-
+        List<Logic.Models.Donation> donations = null;
         public List<RequestPersonnel> GetUnsolvedRequests()
         {
-            var req = requestService
+            if (donations == null)
+            {
+                donations = donationService.FindAll();
+            }
+            if (hospitals == null)
+            {
+                HospitalService hospitalService = new HospitalService();
+                hospitals = hospitalService.GetAllHospitals();
+            }
+
+             return requestService
                 .FindUnsolved()
                 .AsEnumerable()
                 .Select(i => BusinessToPresentation.Request(i))
                 .Select(x => AddDoctorEmail(x))
+                .Select(x => {
+                     foreach (var hosp in hospitals)
+                     {
+                         if (hosp.ID == x.destination)
+                         {
+                             x.Lat = hosp.Lat;
+                             x.Lon = hosp.Lon;
+                             break;
+                         }
+                     }
+                     if (donorService.FindByCnp(x.patientCnp) == null)
+                         {
+                             x.isDonor = true;
+                         }
+
+                     var sum = 0;
+                         foreach (var donation in donations)
+                         {
+                             if (donation.PatientCnp != null && donation.PatientCnp == x.patientCnp)
+                                 sum = sum + donation.Quantity;
+                         }
+                     if (sum >= x.quantity)
+                     {
+                         x.isFulfilled = true;
+                     }
+                     return x;
+                 })
                 .ToList();
-
-            foreach (var r in req)
-            {
-                if (donorService.FindByCnp(r.patientCnp) != null)
-                {
-                    r.isDonor = true;
-                }
-
-                var donations = donationService.FindAll();
-
-                var sum = 0;
-                foreach (var donation in donations)
-                {
-                    if (donation.PatientCnp != null && donation.PatientCnp == r.patientCnp)
-                        sum = sum + donation.Quantity;
-                }
-
-                if (sum >= r.quantity)
-                {
-                    r.isFulfilled = true;
-                }
-            }
-
-            return req;
         }
 
         public List<RequestPersonnel> GetDonationCenterRequests()

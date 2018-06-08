@@ -21,18 +21,7 @@ namespace BloodDonation.Data.Repositories
 
         public DonorRepository()
         {
-            myDonations = new List<Donation>();
-
-            Donation donation = new Donation();
-            DonationCenter center = new DonationCenter("cluj", "test");
-            donation.center = center;
-            donation.donationDate = "11/2/2011";
-            donation.quantity = 120;
-            donation.testResult = "positive";
-            myDonations.Add(donation);
-            myDonations.Add(donation);
-            myDonations.Add(donation);
-
+         
         }
 
         public bool exists(string id)

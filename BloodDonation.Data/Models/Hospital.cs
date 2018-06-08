@@ -13,23 +13,23 @@ namespace BloodDonation.Data.Models
 	{
 
 		public Hospital(){}
-		
-		public HashSet<string> Doctors;
 
-		public HashSet<string> Patients;
+        public String location { get; set; }
+        public String name { get; set; }
+        public Double lat { get; set; }
+        public Double lon { get; set; }
 
-
-		/**
+        /**
 		 * 
 		 */
-		public Hospital(string location, string name)
+        public Hospital(string location, string name, Double lat, Double lon)
 		{
             this.location = location;
             this.name = name;
+            this.lat = lat;
+            this.lon = lon;
 		}
 
-        public String location { get; set; }
 
-		public String name {get;set;}
 	}
 }

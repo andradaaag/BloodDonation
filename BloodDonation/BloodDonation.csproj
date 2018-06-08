@@ -249,6 +249,7 @@
     <Compile Include="Models\DonationStatusModel.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\BookDonationDetails.cs" />
+    <Compile Include="Models\PersonelRequestTransferObject.cs" />
     <Compile Include="Models\RequestComponent.cs" />
     <Compile Include="Models\DoctorAccountRequest.cs" />
     <Compile Include="Models\DonationCenter.cs" />
