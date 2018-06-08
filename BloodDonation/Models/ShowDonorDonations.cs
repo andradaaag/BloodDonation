@@ -5,6 +5,8 @@ namespace BloodDonation.Models
     public class ShowDonorDonations
     {
         private List<DonorDonationDetails> donorDonationDetails;
+        public string LastDonationDate { get; set; }
+        public string NextPossibleDonation { get; set; }
 
         public ShowDonorDonations()
         {

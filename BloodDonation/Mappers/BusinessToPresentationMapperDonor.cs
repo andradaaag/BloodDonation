@@ -15,7 +15,7 @@ namespace BloodDonation.Mappers
                 CenterLocation = donationDetails.DonationCenterId,
                 Quantity = donationDetails.Quantity,
                 TestResult = donationDetails.IsAccepted(),
-                DonationDate = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(donationDetails.DonationTime).ToString()
+                DonationDate = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(donationDetails.DonationTime).ToString("dd-MM-yyyy")
             };
         }
 

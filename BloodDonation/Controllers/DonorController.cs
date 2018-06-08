@@ -47,8 +47,21 @@ namespace BloodDonation.Controllers
             DonorDetailsTransferObject currentDonor = donorService.GetOne(GetUid());
 
             List<Donation> donationDetails = donationService.FindDonationsByDonorCNP(currentDonor.Cnp);
+            Donation lastDonation = donationService.DonorLastDonation(currentDonor.Cnp);
 
             ShowDonorDonations details = new ShowDonorDonations();
+            if(lastDonation == null)
+            {
+                details.LastDonationDate = "No donations";
+                details.NextPossibleDonation = "You can donate right now";
+            }
+            else
+            {
+                DateTime lastTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).ToLocalTime().AddSeconds(lastDonation.DonationTime);
+                details.LastDonationDate = lastTime.ToString("dd-MM-yyyy");
+                details.NextPossibleDonation = lastTime.AddMonths(6).ToString("dd-MM-yyyy");
+            }
+
             foreach (Donation detail in donationDetails)
             {
                 DonationCenterTransferObject dcto = donationCenterService.GetDonationCenterById(detail.DonationCenterId);
