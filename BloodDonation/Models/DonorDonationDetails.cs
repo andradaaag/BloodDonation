@@ -8,6 +8,6 @@ namespace BloodDonation.Models
         public String DonationDate { get; set; }
         public String CenterLocation { get; set; }
         public int Quantity { get; set; }
-        public String TestResult { get; set; }
+        public bool TestResult { get; set; }
     }
 }

@@ -46,11 +46,14 @@ namespace BloodDonation.Controllers
         {
             DonorDetailsTransferObject currentDonor = donorService.GetOne(GetUid());
 
-            List<DonationDetails> donationDetails = donationService.FindDonationsByDonorCNP(currentDonor.Cnp);
+            List<Donation> donationDetails = donationService.FindDonationsByDonorCNP(currentDonor.Cnp);
 
             ShowDonorDonations details = new ShowDonorDonations();
-            foreach (DonationDetails detail in donationDetails)
+            foreach (Donation detail in donationDetails)
             {
+                DonationCenterTransferObject dcto = donationCenterService.GetDonationCenterById(detail.DonationCenterId);
+                if(dcto != null)
+                    detail.DonationCenterId = dcto.Name;
                 details.AddDonationDetails(_businessToPresentationMapper.MapDonorDonationDetails(detail));
             }
 
@@ -66,9 +69,9 @@ namespace BloodDonation.Controllers
             return goIfPossible(View("DonorPersonalDetailsView", donorAccountRequest));
         }
 
-        public ActionResult GetEditDonorPersonalDataPage()
+        public ActionResult GetEditDonorPersonalDataPage(DonorAccountRequest details)
         {
-            return goIfPossible(View("EditDonorPersonalDataView", new DonorAccountRequest()));
+            return goIfPossible(View("EditDonorPersonalDataView", details));
         }
 
         public ActionResult SelectDonationHourView(BookDonationDetails details)
