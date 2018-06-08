@@ -57,12 +57,16 @@
             Donations
         </div>
         <div class="card-body">
+
+            <p>Last donation : @Model.LastDonationDate</p>
+            <p>Next time you can donate : @Model.NextPossibleDonation</p>
+
             <table class="table table-hover">
                 <thead>
                 <tr>
                     <th scope="col">Date</th>
                     <th scope="col">Center Location</th>
-                    <th scope="col">Quantity</th>
+                    <th scope="col">Quantity(Bags)</th>
                     <th scope="col">Is Accepted</th>
                 </tr>
                 </thead>

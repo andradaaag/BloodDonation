@@ -45,6 +45,35 @@ namespace BloodDonation.Logic.Services
                 .ToList();
         }
 
+        public Donation DonorLastDonation(String DonorCnp)
+        {
+            if (Repository.FindByDonorCNP(DonorCnp) == null)
+            {
+                return null;
+            }
+
+            List<Donation> donorDonations = Repository
+                .FindAll()
+                .Where(i => i.DonorCnp == DonorCnp)
+                .Select(i => DataToLogic.Donation(i))
+                .ToList();
+
+            long lastDonationTime = 0;
+            Donation latestDonation = null;
+
+            foreach(Donation d in donorDonations)
+            {
+                if(d.DonationTime > lastDonationTime)
+                {
+                    lastDonationTime = d.DonationTime;
+                    latestDonation = d;
+                }
+            }
+
+            return latestDonation;
+
+        }
+
         public List<Donation> FindByDonCenterForCompSep(string UID)
         {
             return Repository
@@ -69,11 +98,7 @@ namespace BloodDonation.Logic.Services
 
         public List<Donation> FindDonationsByDonorCNP(string donorCNP)
         {
-            //return Repository
-            //   .FindByDonorCNP(donorCNP)
-            //   .AsEnumerable()
-            //   .Select(i => DataToLogicDonor.MapDonationToDonationDetails(i))
-            //   .ToList();
+            
             return FindAll()
                 .Where(i => i.DonorCNP == donorCNP)
                 .ToList();
@@ -117,10 +142,5 @@ namespace BloodDonation.Logic.Services
                 .Select(i => DataToLogic.Donation(i))
                 .ToList();
         }
-
-
-
-
-       
     }
 }
