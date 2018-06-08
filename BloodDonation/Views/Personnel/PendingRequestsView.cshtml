@@ -42,16 +42,16 @@
         </div>
         <nav class="navbar navbar-expand-sm">
             <ul class="navbar-nav">
-                <li>@Html.ActionLink("ADD DONATION", "AddDonation", "Personnel", null, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("SEPARATE COMPONENTS", "SeparateComponents", "Personnel", null, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("LAB RESULTS", "LabResults", "Personnel", null, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("ACCOUNT SETTINGS", "PersonalDetails", "Personnel", null, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("ADD DONATION", "AddDonation", "Personnel", null, new {@class = "nav-link"})</li>
+                <li>@Html.ActionLink("SEPARATE COMPONENTS", "SeparateComponents", "Personnel", null, new {@class = "nav-link"})</li>
+                <li>@Html.ActionLink("LAB RESULTS", "LabResults", "Personnel", null, new {@class = "nav-link"})</li>
+                <li>@Html.ActionLink("ACCOUNT SETTINGS", "PersonalDetails", "Personnel", null, new {@class = "nav-link"})</li>
                 <li class="nav-item current">
                     <a href="#" class="nav-link">PENDING REQUESTS</a>
                 </li>
-                <li>@Html.ActionLink("ACCEPTED REQUESTS", "AcceptedRequests", "Personnel", null, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("VIEW STORED BLOOD", "ViewStoredBlood", "Personnel", null, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("VIEW BOOKED DONATIONS", "SeeBookings", "Personnel", null, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("ACCEPTED REQUESTS", "AcceptedRequests", "Personnel", null, new {@class = "nav-link"})</li>
+                <li>@Html.ActionLink("VIEW STORED BLOOD", "ViewStoredBlood", "Personnel", null, new {@class = "nav-link"})</li>
+                <li>@Html.ActionLink("VIEW BOOKED DONATIONS", "SeeBookings", "Personnel", null, new {@class = "nav-link"})</li>
             </ul>
         </nav>
     </div>
@@ -66,25 +66,17 @@
         <div id="map" class="map" style="width:100%;height:50%;margin:auto;"></div>
 
         <div class="card-body">
+            <div class="row pl-4 mb-3">
+                <div class="square fulfilled m-2"></div>
+                <div class="m-2">- Fulfilled</div>
+                <div class="square donor m-2"></div>
+                <div class="m-2">- Donor</div>
+            </div>
             <table class="table table-hover">
                 <thead>
-                    <tr>
-                        <th scope="col">Status</th>
-                        <th scope="col">Component</th>
-                        <th scope="col">Hospital</th>
-                        <th scope="col">Doctor Name</th>
-                        <th scope="col">Doctor Email</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Blood Group</th>
-                        <th scope="col">RH Type</th>
-                        <th scope="col">Urgency</th>
-                        <th scope="col">Accept</th>
-                    </tr>
-                </thead>
-                <tbody>
 
 
-                    <script>
+                         <script>
                         var vectorSource = new ol.source.Vector({});
                     </script>
 
@@ -111,12 +103,26 @@
                     </script>
 
 
-                    @{
-        var text = "";
-        var method = "";
-        var reqID = "1";
-        var reqPH = "";
-                    }
+                <tr>
+                    <th scope="col">Component</th>
+                    <th scope="col">Hospital</th>
+                    <th scope="col">Doctor Name</th>
+                    <th scope="col">Doctor Email</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Blood Group</th>
+                    <th scope="col">RH Type</th>
+                    <th scope="col">Urgency</th>
+                    <th scope="col">Accept</th>
+                </tr>
+                </thead>
+                <tbody>
+                @{
+                    var text = "";
+                    var method = "";
+                    var reqID = "1";
+                    var reqPH = "";
+                }
+                
                     @foreach (var req in Model.listRequests)
     {
                 @*!!!!!WATCHOUT THIS IS PENDING REQUESTS AND ACCEPTED REQUESTS 2 in 1 ca nesu'!!!!!*@
@@ -132,13 +138,12 @@ switch (Convert.ToString(req.status))
         break;
 }
 reqID = Convert.ToString(@req.ID);
-                <script>
+                    <script>
                               var iconFeature = new ol.Feature({
                                  geometry: new ol.geom.Point(ol.proj.fromLonLat([@req.Lon,@req.Lat])),
                                  name: 'Null Island',
                                 });
-
-                                     var iconStyle = new ol.style.Style({
+                                    var iconStyle = new ol.style.Style({
                         image: new ol.style.Icon(
                                                 {
                                                   anchor: [1, 1],
@@ -152,26 +157,33 @@ reqID = Convert.ToString(@req.ID);
                                               iconFeature.setStyle(iconStyle);
                                             vectorSource.addFeature(iconFeature);
 
-                </script>
+                    </script>
 
+                    var clazz = "";
+                    if (req.isDonor)
+                    {
+                        clazz = "donor";
+                    }
+                    if (req.isFulfilled)
+                    {
+                        clazz = "fulfilled";
+                    }
 
-                <tr>
-                    <td>@req.status</td>
-                    <td>@req.bloodType.component</td>
-                    <td>
-                        @req.hospitalName <br> @req.hospitalLocation
-                    </td>
-                    <td>@req.doctorName</td>
-                    <td>@req.doctorEmail</td>
-                    <td>@req.quantity</td>
-                    <td>@req.bloodType.Group</td>
-                    <td>@req.bloodType.PH</td>
-                    <td>@(((DoctorUrgencyLevel)req.urgency).ToString())</td>
-                    <td>
-                        @Html.ActionLink(@text, @method, "Personnel", new { id = @reqID }, new { @class = "btn btn-success" })
-                    </td>
-                </tr>
-}
+                    <tr class="@clazz">
+                        <td>@req.bloodType.component</td>
+                        <td>
+                            @req.hospitalName <br> @req.hospitalLocation</td>
+                        <td>@req.doctorName</td>
+                        <td>@req.doctorEmail</td>
+                        <td>@req.quantity</td>
+                        <td>@req.bloodType.Group</td>
+                        <td>@req.bloodType.PH</td>
+                        <td>@(((DoctorUrgencyLevel) req.urgency).ToString())</td>
+                        <td>
+                            @Html.ActionLink(@text, @method, "Personnel", new {id = @reqID}, new {@class = "btn btn-success"})
+                        </td>
+                    </tr>
+                }
                 </tbody>
             </table>
         </div>

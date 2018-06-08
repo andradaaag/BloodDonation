@@ -69,6 +69,7 @@ namespace BloodDonation.Logic.Mappers
                 lastName = p.lastName,
                 emailAddress = p.emailAddress,
                 DOB = p.DOB,
+                isValid = p.isApproved,
                 Address = p.Address,
                 CityTown = p.CityTown,
                 Country = p.Country,

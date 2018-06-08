@@ -345,7 +345,7 @@
     <Content Include="Styles\layout_user_details.css" />
     <Content Include="Styles\mediaqueries.css" />
     <Content Include="Styles\navi.css" />
-    <Content Include="Styles\style.css" />
+    <Resource Include="Styles\style.css" />
     <Content Include="Views\Donor\BookDonationView.cshtml" />
     <Content Include="Views\Donor\DonorPersonalDetailsView.cshtml" />
     <Content Include="Views\Donor\EditDonorPersonalDataView.cshtml" />

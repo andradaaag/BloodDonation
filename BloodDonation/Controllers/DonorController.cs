@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using BloodDonation.Business.Services;
 using BloodDonation.Logic.Models;
@@ -7,6 +6,7 @@ using BloodDonation.Mappers;
 using BloodDonation.Models;
 using Firebase.Auth;
 using System;
+using System.Threading;
 using BloodDonation.Logic.Services;
 using BloodDonation.Services;
 
@@ -16,28 +16,45 @@ namespace BloodDonation.Controllers
     {
         private readonly BusinessToPresentationMapperDonor
             _businessToPresentationMapper = new BusinessToPresentationMapperDonor();
-        
-        private readonly PresentationToBusinessMapperDonor _presentationToBusinessMapperDonor = new PresentationToBusinessMapperDonor();
-        private readonly DonationCenterServicePresentation donationCenterServicePresentation = new DonationCenterServicePresentation();
+
+        private readonly PresentationToBusinessMapperDonor _presentationToBusinessMapperDonor =
+            new PresentationToBusinessMapperDonor();
+
+        private readonly DonationCenterServicePresentation donationCenterServicePresentation =
+            new DonationCenterServicePresentation();
 
         private readonly DonorService donorService = new DonorService();
         private readonly DonationService donationService = new DonationService();
         private readonly BookingService bookingService = new BookingService();
         private readonly DonationCenterService donationCenterService = new DonationCenterService();
 
+        private ActionResult goIfPossible(ActionResult actionResultSuccess)
+        {
+            Thread.Sleep(1000);
+
+            if (Session["usertype"] == null)
+                return RedirectToAction("Index", "Login");
+            if ((string) Session["usertype"] != "donor")
+                return RedirectToAction("Error", "Error");
+            if (Session["authlink"] != null && ((FirebaseAuthLink) Session["authlink"]).IsExpired())
+                return RedirectToAction("Index", "Login");
+
+            return actionResultSuccess;
+        }
+
         public ActionResult Index()
         {
             DonorDetailsTransferObject currentDonor = donorService.GetOne(GetUid());
 
             List<DonationDetails> donationDetails = donationService.FindDonationsByDonorCNP(currentDonor.Cnp);
-            
+
             ShowDonorDonations details = new ShowDonorDonations();
             foreach (DonationDetails detail in donationDetails)
             {
                 details.AddDonationDetails(_businessToPresentationMapper.MapDonorDonationDetails(detail));
             }
 
-            return View("ShowDonorDonationsView", details);   
+            return goIfPossible(View("ShowDonorDonationsView", details));
         }
 
         public ActionResult DonorPersonalDetailsView()
@@ -45,47 +62,48 @@ namespace BloodDonation.Controllers
             DonorDetailsTransferObject donorDetailsTransferObject = donorService.GetOne(GetUid());
             DonorAccountRequest donorAccountRequest =
                 _businessToPresentationMapper.MapDonorAccountRequest(donorDetailsTransferObject);
-            
-            return View("DonorPersonalDetailsView", donorAccountRequest);
+
+            return goIfPossible(View("DonorPersonalDetailsView", donorAccountRequest));
         }
-        
+
         public ActionResult GetEditDonorPersonalDataPage()
         {
-            return View("EditDonorPersonalDataView", new DonorAccountRequest());
+            return goIfPossible(View("EditDonorPersonalDataView", new DonorAccountRequest()));
         }
 
         public ActionResult SelectDonationHourView(BookDonationDetails details)
         {
-            return View("SelectDonationHourView", details);
+            return goIfPossible(View("SelectDonationHourView", details));
         }
 
         public ActionResult ShowBookedDatesDonorPage()
         {
             ShowBookingDate model = new ShowBookingDate();
-            model.donorBookedDates= new List<BookedDates>();
-            foreach (BookedHoursTransferObject btho in bookingService.GetDonorBookedHours(GetUid())){
+            model.donorBookedDates = new List<BookedDates>();
+            foreach (BookedHoursTransferObject btho in bookingService.GetDonorBookedHours(GetUid()))
+            {
                 DonationCenterTransferObject dcto = donationCenterService.GetDonationCenterById(btho.center);
                 model.AddDate(_businessToPresentationMapper.MapBookedDates(btho, dcto.Name));
-
             }
 
-            return View("ShowDonorBookedDatesView", model); 
+            return goIfPossible(View("ShowDonorBookedDatesView", model));
         }
 
         public ActionResult BookDonationView()
         {
             AvailableHoursModel model = new AvailableHoursModel();
-            ManageDonationCentersModel manageDonationCentersModel = donationCenterServicePresentation.GetAllDonationCenters();
+            ManageDonationCentersModel manageDonationCentersModel =
+                donationCenterServicePresentation.GetAllDonationCenters();
             model.donationsCenterList = manageDonationCentersModel.GetDonationsCenterName();
-            return View("BookDonationView", model);
+            return goIfPossible(View("BookDonationView", model));
         }
-        
+
         [HttpPost]
         public ActionResult UpdateDonorPersonalData(DonorAccountRequest formDetails)
         {
             formDetails.ID = GetUid();
             donorService.EditDonorDetails(_presentationToBusinessMapperDonor.MapDonorForm(formDetails));
-            return DonorPersonalDetailsView();
+            return goIfPossible(DonorPersonalDetailsView());
         }
 
         [HttpPost]
@@ -98,10 +116,10 @@ namespace BloodDonation.Controllers
             DonationCenterTransferObject dcto = donationCenterService.FindByName(details.center);
 
             details.availableHours = bookingService.GetAvailableHours(dcto.ID, formDetails.bookingDate);
-            return SelectDonationHourView(details);
+            return goIfPossible(SelectDonationHourView(details));
         }
 
-        
+
         public ActionResult BookDonation(String selectedHour, String selectedDate, String center)
         {
             DonationCenterTransferObject dcto = donationCenterService.FindByName(center);
@@ -112,25 +130,25 @@ namespace BloodDonation.Controllers
             newBooking.Date = selectedDate;
             newBooking.Hour = selectedHour;
             newBooking.DonorId = GetUid();
-            newBooking.DonorName = donorService.GetOne(newBooking.DonorId).LastName + " " + donorService.GetOne(newBooking.DonorId).FirstName;
+            newBooking.DonorName = donorService.GetOne(newBooking.DonorId).LastName + " " +
+                                   donorService.GetOne(newBooking.DonorId).FirstName;
             newBooking.DonationCenterId = dcto.ID;
 
             bookingService.saveBooking(newBooking);
 
-            return ShowBookedDatesDonorPage();
-
+            return goIfPossible(ShowBookedDatesDonorPage());
         }
 
         public String GetUid()
         {
             try
             {
-                return ((FirebaseAuthLink)Session["authlink"]).User.LocalId;
+                return ((FirebaseAuthLink) Session["authlink"]).User.LocalId;
             }
             catch (System.Exception e)
             {
                 return "";
             }
         }
-    }  
+    }
 }
